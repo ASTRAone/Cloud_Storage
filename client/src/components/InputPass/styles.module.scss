@@ -1,0 +1,13 @@
+.container {
+  position: relative;
+}
+
+.icon {
+  width: 24px;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: 0;
+  line-height: 3;
+  cursor: pointer;
+}

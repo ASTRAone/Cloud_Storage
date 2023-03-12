@@ -1,0 +1,23 @@
+@import "../../utility/colors.scss";
+
+.btn {
+  outline: none;
+  border: none;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  background-color: transparent;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 26px;
+  padding: 2px 30px 4px;
+  border-radius: 12px;
+  border: 1px solid $font-color;
+
+  &.ligth {
+    background-color: $font-color;
+    color: white;
+  }
+}

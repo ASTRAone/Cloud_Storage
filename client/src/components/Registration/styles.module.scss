@@ -1,0 +1,29 @@
+@import '../../utility/colors.scss';
+
+.container {
+  margin-top: 40px;
+
+  width: 573px;
+  padding: 25px 33px 20px;
+  background-color: white;
+  border-radius: 27px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 33px;
+  color: $font-color;
+  margin-bottom: 27px;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.footer {
+  margin-top: 23px;
+}

@@ -1,0 +1,23 @@
+@import './utility/colors.scss';
+
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: $background-color;
+}
+
+h1, h2, h3, h3, h5, h6, p {
+  margin: 0;
+}
+
+ul, li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
