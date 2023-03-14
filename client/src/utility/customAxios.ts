@@ -1,25 +1,25 @@
-import axios from 'axios'
-import qs from 'qs'
-import R from '../redux/resources/R';
-
+import axios from "axios";
+import qs from "qs";
+import R from "../redux/resources/R";
 
 /**
  * Задание базового URL и сериализация параметров
  * @type {AxiosInstance}
  */
 export const customAxios = axios.create({
-    baseURL: R.server.cloud,
-    paramsSerializer: {
-      encode: params => qs.stringify(params, { 'indices': false, arrayFormat: 'repeat' }),
-    } 
+  baseURL: R.server.cloud,
+  paramsSerializer: {
+    encode: (params) =>
+      qs.stringify(params, { indices: false, arrayFormat: "repeat" }),
+  },
 });
 
 /**
  * Добавление параметров конфигурации для запросов по умолчанию
  */
 customAxios.interceptors.request.use((config) => {
-    config.params = config.params || {};
-    return config;
+  config.params = config.params || {};
+  return config;
 });
 
 // customAxios.interceptors.request.use(request => {
@@ -33,6 +33,8 @@ customAxios.interceptors.request.use((config) => {
 // })
 
 export const setAccessToken = (token: string) => {
-    token && (customAxios.defaults.headers.common.Authorization = `Bearer ${token}`);
-    !token && (delete customAxios.defaults.headers.common.Authorization);
+  const defaultToken = localStorage.getItem("token") || token;
+  defaultToken &&
+    (customAxios.defaults.headers.Authorization = `Bearer ${defaultToken}`);
+  !defaultToken && delete customAxios.defaults.headers.common.Authorization;
 };

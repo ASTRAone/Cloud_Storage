@@ -22,13 +22,13 @@ const iconSizesDictionary: Record<Size, string> = {
   xxxl: styles.icon_xxxl,
 };
 
-export const Icon: React.FC<Props> = ({ type, size = 'xxl', ...rest }) => {
+export const Icon: React.FC<Props> = ({ type, size = 'lg', className, ...rest }) => {
   const Icon = dictionary[type]
 
   if (!Icon) return null;
 
   const classNameBySize = iconSizesDictionary[size];
-  const classnames = cn(styles.icon, classNameBySize);
+  const classnames = cn(styles.icon, className, classNameBySize);
 
   return (
     <div className={classnames} {...rest}>

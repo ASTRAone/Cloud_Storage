@@ -11,6 +11,7 @@ import { AppRouter } from "./components/AppRouter";
 export const App: React.FC = () => {
   const cx = useStyles(styles);
 
+
   return (
     <BrowserRouter>
       <Provider store={store}>

@@ -2,6 +2,10 @@
 
 .container {
   border-bottom: 3px solid $font-color;
+
+  &.error {
+    border-bottom: 3px solid red;
+  }
 }
 
 .input {
@@ -16,6 +20,8 @@
   font-weight: 700;
   font-size: 18px;
   line-height: 21px;
+
+  
 }
 
 .input::-webkit-input-placeholder {

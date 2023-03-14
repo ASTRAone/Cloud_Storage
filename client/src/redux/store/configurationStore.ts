@@ -9,7 +9,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist/es/constants";
-import { UserRegistrationReducer } from "../reducers/user.reducer";
+import { UserLoginReducer } from "../reducers/user.reducer";
 import { persistStore } from "redux-persist";
 import {
   TypedUseSelectorHook,
@@ -19,7 +19,7 @@ import {
 import { TRootState } from "../types/TRootState";
 
 const reducer = combineReducers({
-  user: UserRegistrationReducer.reducer,
+  user: UserLoginReducer.reducer,
 });
 
 const store = configureStore({

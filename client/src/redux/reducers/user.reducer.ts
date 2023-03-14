@@ -5,28 +5,65 @@ import {
 } from "@reduxjs/toolkit";
 import initialState from "../store/initialState";
 import { TUser } from "../types/TUser";
-import { registration } from "../actions/user.action";
+import { login } from "../actions/user.action";
 
-export const UserRegistrationReducer = createSlice({
-  name: "UserRegistrationReducer",
+export const UserLoginReducer = createSlice({
+  name: "UserLoginReducer",
   initialState: initialState.user,
-  reducers: {},
+  reducers: {
+    dropState: () => initialState.user,
+  },
 
   extraReducers: (builder: ActionReducerMapBuilder<TUser>) => {
-    builder.addCase(registration.pending, (state) => {
+    builder.addCase(login.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(
-      registration.fulfilled,
+      login.fulfilled,
       (state: TUser, action: PayloadAction<any>) => {
-        console.log("UserRegistrationReducer", action.payload);
-        // Добавить все поля
-        state.id = action.payload.data;
+        console.log("UserLoginReducer", action.payload);
+        state.id = action.payload?.user.id;
+        state.email = action.payload?.user.email;
+        state.diskSpace = action.payload?.user.diskSpace;
+        state.usedSpace = action.payload?.user.usedSpace;
+        state.isAuth = true;
         state.loading = false;
       }
     );
-    builder.addCase(registration.rejected, (state) => {
+    builder.addCase(login.rejected, (state) => {
       state.loading = false;
     });
   },
 });
+
+// TODO доработать
+// export const UserAuthReducer = createSlice({
+//   name: "UserAuthReducer",
+//   initialState: initialState.user,
+//   reducers: {
+//     dropState: () => initialState.user,
+//   },
+
+//   extraReducers: (builder: ActionReducerMapBuilder<TUser>) => {
+//     builder.addCase(auth.pending, (state) => {
+//       state.loading = true;
+//     });
+//     builder.addCase(
+//       auth.fulfilled,
+//       (state: TUser, action: PayloadAction<any>) => {
+//         console.log("UserAuthReducer", action.payload);
+//         state.id = action.payload?.user.id;
+//         state.email = action.payload?.user.email;
+//         state.diskSpace = action.payload?.user.diskSpace;
+//         state.usedSpace = action.payload?.user.usedSpace;
+//         state.isAuth = true;
+//         state.loading = false;
+//       }
+//     );
+//     builder.addCase(auth.rejected, (state) => {
+//       state.loading = false;
+//     });
+//   },
+// });
+
+export const { dropState } = UserLoginReducer.actions;

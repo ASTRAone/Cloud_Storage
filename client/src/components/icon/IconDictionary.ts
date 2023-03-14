@@ -1,8 +1,9 @@
-import { HideIcon, ShowIcon } from "../../assets/icons";
+import { HideIcon, ShowIcon, Spinner } from "../../assets/icons";
 
 const dictionary = {
   hide: HideIcon,
   show: ShowIcon,
+  spinner: Spinner,
 };
 
 type IconTypes = keyof typeof dictionary;

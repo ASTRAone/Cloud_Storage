@@ -4,6 +4,6 @@ export type TUser = {
   diskSpace?: number;
   usedSpace?: number;
   isAuth?: boolean;
-  loading?: Boolean;
+  loading?: boolean;
 };
 

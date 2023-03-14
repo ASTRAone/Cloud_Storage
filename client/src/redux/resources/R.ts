@@ -1,6 +1,6 @@
 export default class R {
   static server = {
-    cloud: "http://localhost:5000/api/",
+    cloud: "http://localhost:3000/api/",
   };
 
   static fonts = {};
@@ -9,6 +9,7 @@ export default class R {
     user: {
       login: "auth/login",
       registration: "auth/registration",
+      auth: "auth/auth",
     },
   };
 

@@ -6,12 +6,14 @@ import { Size } from "../../utility/common";
 import { IconTypes } from "../icon/IconDictionary";
 
 import styles from "./styles.module.scss";
+import { Loader } from "../Loader";
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: "ligth" | "painted" | "empty";
   isIcon?: boolean;
   typeIcon?: IconTypes;
   sizeIcon?: Size;
+  isLoading?: boolean;
   text?: string;
   className?: string;
 };
@@ -22,6 +24,7 @@ export const Button: React.FC<Props> = ({
   typeIcon,
   sizeIcon,
   className,
+  isLoading = false,
   text,
   ...restProps
 }) => {
@@ -29,7 +32,7 @@ export const Button: React.FC<Props> = ({
 
   return (
     <button className={cx("btn", variant)} {...restProps}>
-      {text}
+      {isLoading ? <Loader /> : text}
       {isIcon && typeIcon && <Icon type={typeIcon} size={sizeIcon} />}
     </button>
   );
