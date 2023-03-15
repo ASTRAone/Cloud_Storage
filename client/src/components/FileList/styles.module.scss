@@ -1,0 +1,24 @@
+.container {
+  margin: 20px 0;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr 4fr repeat(4, 1fr);
+
+  & .sort-name {
+    grid-column-start: 2;
+  }
+
+  & .sort-date {
+    grid-column-start: 5;
+    justify-content: center;
+    text-align: center;
+  }
+
+  & .sort-size {
+    grid-column-start: 6;
+    justify-content: center;
+    text-align: center;
+  }
+}

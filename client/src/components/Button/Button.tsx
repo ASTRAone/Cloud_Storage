@@ -9,7 +9,7 @@ import styles from "./styles.module.scss";
 import { Loader } from "../Loader";
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "ligth" | "painted" | "empty";
+  variant?: "ligth" | "outline" | "empty";
   isIcon?: boolean;
   typeIcon?: IconTypes;
   sizeIcon?: Size;
@@ -31,7 +31,7 @@ export const Button: React.FC<Props> = ({
   const cx = useStyles(styles);
 
   return (
-    <button className={cx("btn", variant)} {...restProps}>
+    <button className={cx("btn", className, variant)} {...restProps}>
       {isLoading ? <Loader /> : text}
       {isIcon && typeIcon && <Icon type={typeIcon} size={sizeIcon} />}
     </button>

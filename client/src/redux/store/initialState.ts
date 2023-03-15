@@ -9,7 +9,15 @@ const initialState: TRootState = {
     isAuth: false,
     loading: false,
   },
-  file: {},
+  files: {
+    data: [],
+    currentDir: "",
+    loading: false,
+  },
+  file: {
+    currentDir: "",
+    loading: false,
+  },
 };
 
 export default initialState;

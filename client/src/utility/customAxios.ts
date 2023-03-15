@@ -2,6 +2,7 @@ import axios from "axios";
 import qs from "qs";
 import R from "../redux/resources/R";
 
+// TODO переделать
 /**
  * Задание базового URL и сериализация параметров
  * @type {AxiosInstance}

@@ -17,9 +17,12 @@ import {
   useSelector as useReduxSelector,
 } from "react-redux";
 import { TRootState } from "../types/TRootState";
+import { UserAllFilesReducer, UserFileReducer } from "../reducers/file.reduce";
 
 const reducer = combineReducers({
   user: UserLoginReducer.reducer,
+  files: UserAllFilesReducer.reducer,
+  file: UserFileReducer.reducer,
 });
 
 const store = configureStore({

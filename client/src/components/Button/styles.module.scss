@@ -20,4 +20,10 @@
     background-color: $font-color;
     color: white;
   }
+
+  &.outline {
+    background-color: transparent;
+    color: $font-color;
+    border: 1px solid $font-color;
+  }
 }

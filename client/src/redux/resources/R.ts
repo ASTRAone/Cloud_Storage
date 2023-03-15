@@ -10,6 +10,7 @@ export default class R {
       login: "auth/login",
       registration: "auth/registration",
       auth: "auth/auth",
+      files: '/files',
     },
   };
 
