@@ -2,5 +2,5 @@
   "serverPort": 3000,
   "dbUrl": "mongodb+srv://vladius:vladwaylvl99@cloud.tvt46u8.mongodb.net/cloud?retryWrites=true&w=majority",
   "secretKey": "mern-secret-key",
-  "filePath": "C:\\Users\\1Desktop\\cloud-storage\\server\\files"
+  "filePath": "C:\\Users\\1\\Desktop\\Cloud_Storage\\server\\files"
 }
