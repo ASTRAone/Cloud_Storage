@@ -17,7 +17,7 @@ import styles from "./styles.module.scss";
 export const Disk: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
-  const { currentDir, data } = useSelector((store) => store.files);
+  const { currentDir } = useSelector((store) => store.files);
   const { isOpened, openPopup, closePopup } = usePopupControls();
 
   useEffect(() => {
