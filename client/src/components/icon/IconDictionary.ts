@@ -4,6 +4,7 @@ import {
   Spinner,
   FolderIcon,
   FileIcon,
+  CloseIcon,
 } from "../../assets/icons";
 
 const dictionary = {
@@ -12,6 +13,7 @@ const dictionary = {
   spinner: Spinner,
   folder: FolderIcon,
   file: FileIcon,
+  close: CloseIcon,
 };
 
 type IconTypes = keyof typeof dictionary;

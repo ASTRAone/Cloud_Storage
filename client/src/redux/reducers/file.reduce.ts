@@ -22,7 +22,7 @@ export const UserAllFilesReducer = createSlice({
       (state: TFIles, action: PayloadAction<any>) => {
         console.log("UserAllFilesReducer", action.payload);
         state.data = action.payload;
-
+        state.currentDir = "";
         state.loading = false;
       }
     );

@@ -21,6 +21,28 @@ export const files = createAsyncThunk("user/files", async (dirId?: string) => {
   }
 });
 
+export const createFile = createAsyncThunk(
+  "user/createFile",
+  async ({ name, dirId }: any, { rejectWithValue }) => {
+    try {
+      const response = await customAxios.post(R.url.user.files, {
+        name,
+        parent: dirId,
+        type: "dir",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      console.log("createFile", response.data);
+      return response.data;
+    } catch (error) {
+      // logTheEvent('Error', 'fetchCities', error.response || error);
+      console.log(error);
+      return error;
+    }
+  }
+);
+
 // TODO скорее всего не нужно
 export const file = createAsyncThunk(
   "user/file",

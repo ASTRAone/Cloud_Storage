@@ -30,7 +30,6 @@ export const Auth: React.FC = () => {
   const dispatch = useAppDispatch();
   const [errorRes, setErrorRes] = useState(false);
   const { loading } = useSelector((store) => store.user);
-
   const {
     control,
     handleSubmit,
@@ -38,7 +37,6 @@ export const Auth: React.FC = () => {
     watch,
     formState: { errors },
   } = useForm();
-
   const [email, pass] = watch(["email", "password"]);
 
   useEffect(() => {
