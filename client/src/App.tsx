@@ -7,20 +7,22 @@ import { BrowserRouter } from "react-router-dom";
 
 import styles from "./styles.module.scss";
 import { AppRouter } from "./components/AppRouter";
+import { EnvProvider } from "./EnvProvider/EnvProvider";
 
 export const App: React.FC = () => {
   const cx = useStyles(styles);
 
-
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <div className={cx("app")}>
-          <NavBar />
-          <div className={cx("container")}>
-            <AppRouter />
+        <EnvProvider baseURL={process.env.REACT_APP_API_URL}>
+          <div className={cx("app")}>
+            <NavBar />
+            <div className={cx("container")}>
+              <AppRouter />
+            </div>
           </div>
-        </div>
+        </EnvProvider>
       </Provider>
     </BrowserRouter>
   );

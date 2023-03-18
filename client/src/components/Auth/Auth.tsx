@@ -19,6 +19,8 @@ import styles from "./styles.module.scss";
 import { ErrorComponent } from "../ErrorComponent";
 import { setAccessToken } from "../../utility/customAxios";
 import { REGEXP_DICTIONARY } from "../../utility/regexp";
+import { userLogin } from "../../store/auth/data";
+import { AuthDTO } from "../../api/AuthApi/models";
 
 type PropsLoginUser = {
   email: string;
@@ -48,13 +50,13 @@ export const Auth: React.FC = () => {
   const loginUser = async (data: unknown) => {
     try {
       setErrorRes(false);
-      const res = await dispatch(login(data as PropsLoginUser)).unwrap();
-      if (res?.response?.status === 400) {
-        setErrorRes(true)
-        return;
-      }
-      setAccessToken(res.token);
-      localStorage.setItem('token', res.token)
+      await dispatch(userLogin(data as AuthDTO)).unwrap();
+      // if (res?.response?.status === 400) {
+      //   setErrorRes(true)
+      //   return;
+      // // }
+      // setAccessToken(res.token);
+      // localStorage.setItem('token', res.token)
       reset();
     } catch (error) {
       setErrorRes(true);
@@ -96,7 +98,11 @@ export const Auth: React.FC = () => {
       {errorRes && <ErrorComponent text="Неверный логин или пароль" />}
       <div className={cx("footer")}>
         <ButtonLink to={REGISTRATION_ROUTE} text="Нет аккаунта?" />
-        <Button onClick={handleSubmit(loginUser)} isLoading={loading} text="Войти" />
+        <Button
+          onClick={handleSubmit(loginUser)}
+          isLoading={loading}
+          text="Войти"
+        />
       </div>
     </div>
   );
