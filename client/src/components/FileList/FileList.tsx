@@ -1,6 +1,7 @@
 import React from "react";
 import { useStyles } from "../../hooks/useStyles";
-import { useSelector } from "../../redux/store/configurationStore";
+import { getFilesData } from "../../store/file/data";
+import { useAppSelector } from "../../store/hooks";
 
 import { File } from "../File/File";
 
@@ -8,7 +9,7 @@ import styles from "./styles.module.scss";
 
 export const FileList: React.FC = () => {
   const cx = useStyles(styles);
-  const { data } = useSelector((store) => store.files);
+  const { file } = useAppSelector(getFilesData);
 
   return (
     <div className={cx("container")}>
@@ -17,9 +18,9 @@ export const FileList: React.FC = () => {
         <div className={cx("sort-date")}>Дата</div>
         <div className={cx("sort-size")}>Размер</div>
       </div>
-      {data?.map((item) => (
+      {file ? file?.map((item) => (
         <File file={item} key={item._id} />
-      ))}
+      )) : null}
     </div>
   );
 };

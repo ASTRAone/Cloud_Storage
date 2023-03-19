@@ -1,24 +1,41 @@
 import React, { useEffect } from "react";
 import { useStyles } from "../../hooks/useStyles";
 import Logo from "../../assets/images/cloud-logo.png";
-import {
-  useAppDispatch,
-  useSelector,
-} from "../../redux/store/configurationStore";
+
+import { getUserData, userAuth, userLogout } from "../../store/auth/data";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+
+import { StorageService } from "../../services/StorageService";
+
+import { AUTH_HEADER } from "../../utility/headers";
+import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../../utility/contants";
+
+import { useAuth } from "../../hooks/useAuth";
+
+import { ButtonLink } from "../ButtonLink";
+import { Button } from "../Button";
 
 import styles from "./styles.module.scss";
-import { ButtonLink } from "../ButtonLink";
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../../utility/contants";
-import { Button } from "../Button";
-import { dropState } from "../../redux/reducers/user.reducer";
+
+const storageService = StorageService.getInstance();
 
 export const NavBar: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
-  const { isAuth } = useSelector((store) => store.user);
+  const { user } = useAppSelector(getUserData);
 
-  const outUser = async () => {
-    await dispatch(dropState());
+  useAuth();
+  useEffect(() => {
+    dispatch(userAuth()).unwrap();
+  }, []);
+
+  const logout = async () => {
+    try {
+      storageService.removeItem(AUTH_HEADER);
+      await dispatch(userLogout()).unwrap();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -28,17 +45,17 @@ export const NavBar: React.FC = () => {
         <div className={cx("logo__title")}>mern cloud</div>
       </div>
       <div className={cx("btns")}>
-        {!isAuth && (
+        {!user?.isAuth && (
           <ButtonLink className={cx("login")} to={LOGIN_ROUTE} text="Войти" />
         )}
-        {!isAuth && (
+        {!user?.isAuth && (
           <ButtonLink
             className={cx("registration")}
             to={REGISTRATION_ROUTE}
             text="Регистрация"
           />
         )}
-        {isAuth && <Button text="Выйти" onClick={outUser} />}
+        {user?.isAuth && <Button text="Выйти" onClick={logout} />}
       </div>
     </div>
   );

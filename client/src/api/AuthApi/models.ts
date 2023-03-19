@@ -1,4 +1,16 @@
 type AuthResponse = {
+  token: string;
+  user: {
+    id?: number;
+    email?: string;
+    diskSpace?: number;
+    usedSpace?: number;
+    isAuth?: boolean;
+    loading?: boolean;
+  };
+};
+
+type AuthViewDTO = {
   id?: number;
   email?: string;
   diskSpace?: number;
@@ -12,4 +24,11 @@ type AuthDTO = {
   password: string;
 };
 
-export type { AuthResponse, AuthDTO };
+type AuthRegDTO = {
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+}
+
+export type { AuthResponse, AuthDTO, AuthViewDTO, AuthRegDTO };

@@ -2,11 +2,8 @@ import React, { useEffect } from "react";
 import { usePopupControls } from "../../hooks/usePopupControls";
 import { useStyles } from "../../hooks/useStyles";
 
-import { files } from "../../redux/actions/file.action";
-import {
-  useAppDispatch,
-  useSelector,
-} from "../../redux/store/configurationStore";
+import { fetchFiles, getCurrentDir } from "../../store/file/data";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 import { Button } from "../Button";
 import { FileList } from "../FileList";
@@ -17,11 +14,11 @@ import styles from "./styles.module.scss";
 export const Disk: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
-  const { currentDir } = useSelector((store) => store.files);
+  const currentDir = useAppSelector(getCurrentDir)
   const { isOpened, openPopup, closePopup } = usePopupControls();
 
   useEffect(() => {
-    dispatch(files(currentDir));
+    dispatch(fetchFiles(currentDir));
   }, [currentDir]);
 
   return (
@@ -36,7 +33,7 @@ export const Disk: React.FC = () => {
             text="Создать папку"
           />
         </div>
-        <FileList />
+        {/* <FileList /> */}
       </div>
       {isOpened && (
         <ModalCreateFile

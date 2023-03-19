@@ -1,7 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { NavBar } from "./components/NavBar";
-import store from "./redux/store/configurationStore";
+import { store } from "./store/root";
 import { useStyles } from "./hooks/useStyles";
 import { BrowserRouter } from "react-router-dom";
 

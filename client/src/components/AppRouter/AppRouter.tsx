@@ -1,14 +1,16 @@
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { privateRoutes, publicRoutes } from "../../routes";
+import { getUserData } from "../../store/auth/data";
 
-import { useSelector } from "../../redux/store/configurationStore";
+import { useAppSelector } from "../../store/hooks";
+
 import { DISK_ROUTE, LOGIN_ROUTE } from "../../utility/contants";
 
 export const AppRouter: React.FC = () => {
-  const { isAuth } = useSelector((store) => store.user);
+  const { user } = useAppSelector(getUserData);
 
-  if (isAuth) {
+  if (user?.isAuth) {
     return (
       <Routes>
         {privateRoutes.map(({ path, Element }) => (

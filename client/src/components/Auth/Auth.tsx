@@ -1,41 +1,44 @@
 import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 
-import {
-  useAppDispatch,
-  useSelector,
-} from "../../redux/store/configurationStore";
-import { login } from "../../redux/actions/user.action";
-
 import { useStyles } from "../../hooks/useStyles";
 
-import { REGISTRATION_ROUTE } from "../../utility/contants";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { getUserData, userLogin } from "../../store/auth/data";
+
 import { Button } from "../Button";
 import { ButtonLink } from "../ButtonLink";
 import { Input } from "../Input";
 import { InputPass } from "../InputPass";
+import { ErrorComponent } from "../ErrorComponent";
+
+import { REGEXP_DICTIONARY } from "../../utility/regexp";
+import { AuthDTO } from "../../api/AuthApi/models";
+
+import { RestService } from "../../services/RestService";
+import { StorageService } from "../../services/StorageService";
+
+import { AUTH_HEADER } from "../../utility/headers";
+import { REGISTRATION_ROUTE } from "../../utility/contants";
 
 import styles from "./styles.module.scss";
-import { ErrorComponent } from "../ErrorComponent";
-import { setAccessToken } from "../../utility/customAxios";
-import { REGEXP_DICTIONARY } from "../../utility/regexp";
-import { userLogin } from "../../store/auth/data";
-import { AuthDTO } from "../../api/AuthApi/models";
 
 type PropsLoginUser = {
   email: string;
   password: string;
 };
 
+const restService = RestService.getInstance();
+const storageService = StorageService.getInstance();
+
 export const Auth: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
   const [errorRes, setErrorRes] = useState(false);
-  const { loading } = useSelector((store) => store.user);
+  const { status } = useAppSelector(getUserData);
   const {
     control,
     handleSubmit,
-    reset,
     watch,
     formState: { errors },
   } = useForm();
@@ -50,14 +53,9 @@ export const Auth: React.FC = () => {
   const loginUser = async (data: unknown) => {
     try {
       setErrorRes(false);
-      await dispatch(userLogin(data as AuthDTO)).unwrap();
-      // if (res?.response?.status === 400) {
-      //   setErrorRes(true)
-      //   return;
-      // // }
-      // setAccessToken(res.token);
-      // localStorage.setItem('token', res.token)
-      reset();
+      const { token } = await dispatch(userLogin(data as AuthDTO)).unwrap();
+      restService.addDefaultHeader(AUTH_HEADER, `Bearer ${token}`);
+      storageService.setItem(AUTH_HEADER, `Bearer ${token}`);
     } catch (error) {
       setErrorRes(true);
       console.log(error);
@@ -100,7 +98,7 @@ export const Auth: React.FC = () => {
         <ButtonLink to={REGISTRATION_ROUTE} text="Нет аккаунта?" />
         <Button
           onClick={handleSubmit(loginUser)}
-          isLoading={loading}
+          isLoading={status === "loading"}
           text="Войти"
         />
       </div>

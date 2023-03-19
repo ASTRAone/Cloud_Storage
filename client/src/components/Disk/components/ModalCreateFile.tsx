@@ -1,19 +1,21 @@
 import React, { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
 import { useStyles } from "../../../hooks/useStyles";
-
-import { useAppDispatch } from "../../../redux/store/configurationStore";
 
 import { PopupComponent } from "../../PopupComponent";
 import { Input } from "../../Input";
-import { useForm, Controller } from "react-hook-form";
-import { createFile, files } from "../../../redux/actions/file.action";
+
+import { FileCreateDTO } from "../../../api/FileApi/models";
+
+import { createFile, getFilesData, fetchFiles } from "../../../store/file/data";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 
 import styles from "./styles.module.scss";
 
 type Props = {
   isOpen?: boolean;
   closeModal?: () => void;
-  currentDir?: string;
+  currentDir: string;
 };
 
 type PropsForm = {
@@ -25,45 +27,40 @@ export const ModalCreateFile: React.FC<Props> = ({
   closeModal = () => {},
   currentDir,
 }) => {
+  const cx = useStyles(styles);
   const dispatch = useAppDispatch();
+  const {status, statusCreate} = useAppSelector(getFilesData)
+
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  
-  const [loading, setLoading] = useState(false);
+
   const [error, setError] = useState(false);
+
+  const isLoading = status === 'loading' || statusCreate === 'loading'
 
   const handleCreateFile = async (data: unknown) => {
     const { name } = data as PropsForm;
-    const payload = {
+    const payload: FileCreateDTO = {
       name,
       parent: currentDir,
     };
     try {
-      setLoading(true);
-      setError(false);
-      const res = await dispatch(createFile(payload)).unwrap();
-      if (res?.response?.status === 400) {
-        setError(true);
-        setLoading(false);
-        return;
-      }
-      await dispatch(files(currentDir)).unwrap();
-      setLoading(false);
+      await dispatch(createFile(payload)).unwrap();
+      await dispatch(fetchFiles(currentDir)).unwrap();
       closeModal();
     } catch (error) {
-      setLoading(false);
+      setError(true);
       console.log(error);
     }
   };
 
-  const cx = useStyles(styles);
   return (
     <PopupComponent
       open={isOpen}
-      loading={loading}
+      loading={isLoading}
       close={closeModal}
       title="Создание папки"
       error={error}

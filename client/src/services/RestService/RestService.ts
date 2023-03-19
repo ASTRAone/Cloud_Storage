@@ -10,7 +10,7 @@ class RestService implements IRestService {
   private constructor() {
     this.httpClient = axios.create({
       timeout: 25_000,
-      withCredentials: true,
+      // withCredentials: true,
     });
   }
 

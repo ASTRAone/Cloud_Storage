@@ -1,13 +1,13 @@
 import React from "react";
+import { FileResponse } from "../../api/FileApi/models";
 import { useStyles } from "../../hooks/useStyles";
-import { TFilesData } from "../../redux/types/TFIles";
 import { customDate } from "../../utility/customDate";
 import { Icon } from "../icon";
 
 import styles from "./styles.module.scss";
 
 type Props = {
-  file: TFilesData;
+  file: FileResponse;
 };
 
 export const File: React.FC<Props> = ({ file }) => {
