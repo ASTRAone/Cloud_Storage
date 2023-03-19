@@ -9,6 +9,7 @@ const router = require("./routes/index")
 const app = express();
 const PORT = config.get("serverPort");
 const corsMiddleware = require("./middleware/cors.middleware");
+const errorMiddleware = require("./middleware/error.middleware");
 
 app.use(corsMiddleware);
 app.use(express.json());
@@ -17,6 +18,7 @@ app.use(cookieParser())
 // app.use("/api/auth", authRouter);
 // app.use("/api/files", fileRouter);
 app.use("/api", router);
+app.use(errorMiddleware);
 
 const start = async () => {
   try {

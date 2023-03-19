@@ -8,5 +8,6 @@
   "smtp_port": 587,
   "smtp_user": "voidstein@gmail.com",
   "smtp_pass": "agcthqokpuokzgtx",
-  "api_url": "http://localhost:3000"
+  "api_url": "http://localhost:3000",
+  "client_url": "https://ya.ru"
 }
