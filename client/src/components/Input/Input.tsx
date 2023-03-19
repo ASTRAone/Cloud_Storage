@@ -7,7 +7,6 @@ type Props = Partial<React.ComponentPropsWithRef<"input">> & {
   error?: any;
 };
 
-
 export const Input: React.FC<Props> = ({
   type = "text",
   placeholder = "",

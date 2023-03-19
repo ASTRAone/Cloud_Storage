@@ -1,27 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useStyles } from "../../hooks/useStyles";
-import { LOGIN_ROUTE } from "../../utility/contants";
 import { useNavigate } from "react-router-dom";
-
-import { useAppDispatch } from "../../redux/store/configurationStore";
-import { registration } from "../../redux/actions/user.action";
 
 import { Button } from "../Button";
 import { ButtonLink } from "../ButtonLink";
 import { Input } from "../Input";
 import { InputPass } from "../InputPass";
-
-import styles from "./styles.module.scss";
-import { REGEXP_DICTIONARY } from "../../utility/regexp";
 import { ErrorComponent } from "../ErrorComponent";
 
-type PropsCreateUser = {
-  name: string;
-  surname: string;
-  email: string;
-  password: string;
-};
+import { LOGIN_ROUTE } from "../../utility/contants";
+import { REGEXP_DICTIONARY } from "../../utility/regexp";
+
+import { userRegistration } from "../../store/auth/data";
+import { useAppDispatch } from "../../store/hooks";
+
+import { AuthRegDTO } from "../../api/AuthApi/models";
+
+import styles from "./styles.module.scss";
 
 export const Registration: React.FC = () => {
   const cx = useStyles(styles);
@@ -32,7 +28,6 @@ export const Registration: React.FC = () => {
   const {
     control,
     handleSubmit,
-    reset,
     watch,
     formState: { errors },
   } = useForm();
@@ -47,13 +42,7 @@ export const Registration: React.FC = () => {
 
   const createUser = async (data: unknown) => {
     try {
-      setErrorRes(false);
-      const res = await dispatch(registration(data as PropsCreateUser)).unwrap();
-      if (res?.response?.status === 400) {
-        setErrorRes(true)
-        return;
-      }
-      reset();
+      await dispatch(userRegistration(data as AuthRegDTO)).unwrap();
       navigate(LOGIN_ROUTE);
     } catch (error) {
       setErrorRes(true);
@@ -68,7 +57,7 @@ export const Registration: React.FC = () => {
         <Controller
           control={control}
           rules={{ required: true }}
-          render={({ field: { onChange, onBlur, value } }) => (
+          render={({ field: { onChange, value } }) => (
             <Input
               onChange={onChange}
               value={value}
@@ -82,7 +71,7 @@ export const Registration: React.FC = () => {
         <Controller
           control={control}
           rules={{ required: true }}
-          render={({ field: { onChange, onBlur, value } }) => (
+          render={({ field: { onChange, value } }) => (
             <Input
               onChange={onChange}
               value={value}
@@ -96,7 +85,7 @@ export const Registration: React.FC = () => {
         <Controller
           control={control}
           rules={{ required: true, pattern: REGEXP_DICTIONARY.email }}
-          render={({ field: { onChange, onBlur, value } }) => (
+          render={({ field: { onChange, value } }) => (
             <Input
               onChange={onChange}
               value={value}
@@ -110,8 +99,7 @@ export const Registration: React.FC = () => {
         <Controller
           control={control}
           rules={{ required: true, minLength: 3 }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            
+          render={({ field: { onChange, value } }) => (
             <InputPass
               onChange={onChange}
               value={value}
@@ -130,5 +118,3 @@ export const Registration: React.FC = () => {
     </div>
   );
 };
-
-export type { PropsCreateUser };
