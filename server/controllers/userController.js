@@ -1,5 +1,4 @@
 const userService = require('../services/userService');
-const conig = require('../config/default.json');
 const {validationResult} = require('express-validator');
 const ApiError = require('../exceptions/apiError');
 class UserController {
@@ -47,7 +46,7 @@ class UserController {
         try {
             const activationLink = req.params.link;
             await userService.activate(activationLink);
-            return res.redirect(conig.client_url);
+            return res.redirect(process.env.CLIENT_URL);
         }
         catch (error) {
             next(error)

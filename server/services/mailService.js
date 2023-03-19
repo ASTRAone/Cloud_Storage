@@ -1,21 +1,20 @@
 const nodemailer=require('nodemailer');
-const config=require('../config/default.json');
 
 class MailService {
     constructor() {
         this.transporter = nodemailer.createTransport({
-            host: config.smtp_host,
-            port: config.smtp_port,
+            host: process.env.SMTP_HOST,
+            port: process.env.SMTP_PORT,
             secure: false,
             auth: {
-                user: config.smtp_user,
-                pass: config.smtp_pass,
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
             }
         });
     }
     async sendActivationMail(to, link) {
         await this.transporter.sendMail({
-            from: config.smtp_user,
+            from: process.env.SMTP_USER,
             to,
             subject: 'Activate your account',
             text: 'hello ebat',
