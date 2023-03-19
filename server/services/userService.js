@@ -18,7 +18,7 @@ class UserService {
         const activationLink = uuid.v4();
 
         const user = await UserModel.create({ email, password: hashPassword, activationLink });
-        await MailService.sendActivationMail( email, `${config.api_url}/api/active/${activationLink}`);
+        await MailService.sendActivationMail( email, `${config.api_url}/api/activate/${activationLink}`);
 
         const userDto = new UserDto(user);
         const tokens = await TokenService.generateTokens({...userDto});
@@ -64,6 +64,33 @@ class UserService {
         async logout(refreshToken) {
             const token = await TokenService.removeToken(refreshToken);
             return token;
+        }
+
+        async refresh(refreshToken) {
+            if (!refreshToken) {
+                throw ApiError.UnathorizedError('Invalid refresh token');
+            }
+            const userData = TokenService.validateRefreshToken(refreshToken);
+            const tokenFromDb = await TokenService.findToken(refreshToken);
+            if(!userData || !tokenFromDb) {
+                throw ApiError.UnathorizedError('Invalid refresh token');
+            }
+
+            const user = await UserModel.findById(userData.id)
+            const userDto = new UserDto(user);
+            const tokens = TokenService.generateTokens({...userDto});
+
+            await TokenService.saveToken(userDto.id, tokens.refreshToken);
+
+            return {
+                ...tokens,
+                user: userDto
+            }
+        }
+
+        async getAllUsers() {
+            const users = await UserModel.find();
+            return users;
         }
 }
 

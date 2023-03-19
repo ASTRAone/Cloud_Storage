@@ -1,21 +1,56 @@
-const jwt = require("jsonwebtoken");
-const config = require("config");
+const ApiError = require('../exceptions/apiError');
+const tokenService = require('../services/tokenService');
 
-module.exports = (req, res, next) => {
-  if (req.methods === "OPTIONS") {
-    return next();
-  }
-
+module.exports = function (req,res,next) {
   try {
+<<<<<<< HEAD
     const token = req.headers.authorization.split(" ")[1];
     if (!token) {
       return res.status(401).json({ message: "Auth error" });
+=======
+    const authorizationHeader = req.headers.authorization;
+    if (!authorizationHeader) {
+      return next(ApiError.UnathorizedError());
+>>>>>>> c73417a (added middleware checker token)
     }
 
-    const decoded = jwt.verify(token, config.get("secretKey"));
-    req.user = decoded;
+    const accessToken = authorizationHeader.split(' ')[1];
+    if (!accessToken) {
+      return next(ApiError.UnathorizedError());
+    }
+
+    const userData = tokenService.validateAccessToken(accessToken);
+    if(!userData) {
+      return next(ApiError.UnathorizedError());
+    }
+
+    req.user = userData;
     next();
-  } catch (error) {
-    return res.status(401).json({ message: "Auth error" });
+  } catch (e) {
+    return next(ApiError.UnathorizedError())
   }
-};
+}
+
+// const jwt = require("jsonwebtoken");
+// const config = require("config");
+
+// module.exports = (req, res, next) => {
+//   if (req.methods === "OPTIONS") {
+//     return next();
+//   }
+
+//   try {
+//     const token = req.headers.authorization.split(" ")[1];
+//     console.log("token", token);
+//     if (!token) {
+//       return res.status(401).json({ message: "Auth error" });
+//     }
+
+//     const decoded = jwt.verify(token, config.get("secretKey"));
+//     req.user = decoded;
+//     next();
+//   } catch (error) {
+//     return res.status(401).json({ message: "Auth error" });
+//   }
+// };
+

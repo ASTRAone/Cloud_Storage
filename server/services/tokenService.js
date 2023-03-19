@@ -12,6 +12,24 @@ class TokenService {
         }
     }
 
+    validateAccessToken(token) {
+        try {
+            const userData = jwt.verify(token, config.secretKey);
+            return userData;
+        } catch (error) {
+
+        }
+    }
+
+    validateRefreshToken(token) {
+        try {
+            const userData = jwt.verify(token, config.secretRefreshKey);
+            return userData;
+        } catch (error) {
+            
+        }
+    }
+
     async saveToken(userId, refreshToken) {
         const tokenData = await tokenModel.findOne({user: userId})
         if (tokenData) {
@@ -24,6 +42,11 @@ class TokenService {
 
     async removeToken(refreshToken) {
         const tokenData = await tokenModel.deleteOne({refreshToken});
+        return tokenData;
+    }
+
+    async findToken(refreshToken) {
+        const tokenData = await tokenModel.findOne({refreshToken});
         return tokenData;
     }
 }
