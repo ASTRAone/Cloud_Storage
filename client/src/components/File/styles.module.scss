@@ -1,0 +1,33 @@
+@import "../../utility/colors.scss";
+
+.container {
+  margin: 10px 0;
+  border-bottom: 2px solid $font-color;
+  display: grid;
+  grid-template-columns: 1fr 4fr repeat(4, 1fr);
+  align-items: center;
+  transition: all 0.3 ease;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+}
+
+.img {
+  justify-content: center;
+}
+
+.file-name {
+}
+
+.file-date {
+  grid-column-start: 5;
+  text-align: center;
+  justify-content: center;
+}
+
+.file-size {
+  grid-column-start: 6;
+  text-align: center;
+  justify-content: center;
+}

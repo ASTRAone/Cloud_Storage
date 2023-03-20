@@ -3,10 +3,15 @@ import { Input } from "../Input/Input";
 import { useStyles } from "../../hooks/useStyles";
 
 import { InputProps } from "../Input/Input";
-import styles from "./styles.module.scss";
 import { Icon } from "../icon";
 
-export const InputPass: React.FC<InputProps> = ({ placeholder }) => {
+import styles from "./styles.module.scss";
+
+export const InputPass: React.FC<InputProps> = ({
+  placeholder,
+  error,
+  ...rest
+}) => {
   const cx = useStyles(styles);
   const [show, setShow] = useState(false);
 
@@ -15,7 +20,12 @@ export const InputPass: React.FC<InputProps> = ({ placeholder }) => {
 
   return (
     <div className={cx("container")}>
-      <Input type={show ? "text" : "password"} placeholder={placeholder} />
+      <Input
+        error={error}
+        type={show ? "text" : "password"}
+        placeholder={placeholder}
+        {...rest}
+      />
       <Icon
         className={cx("icon")}
         size="lg"
