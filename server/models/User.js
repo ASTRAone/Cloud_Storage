@@ -7,6 +7,8 @@ const User = new Schema({
   usedSpace: { type: Number, required: true, default: 0 },
   avatar: { type: String },
   files: [{ type: ObjectId, ref: "File" }],
+  isActivated: { type: Boolean, default: false },
+  activationLink: { type: String },
 });
 
 module.exports = model("User", User);
