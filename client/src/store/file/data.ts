@@ -57,14 +57,12 @@ const createFile = createAsyncThunk(
 
 const uploadFile = createAsyncThunk(
   "file/upload",
-  async (payload: any, { rejectWithValue }) => {
-    console.log(payload)
+  async (payload: FileUploadDTO, { rejectWithValue }) => {
     const formData = new FormData();
     formData.append("file", payload.file);
     if (payload.parent) {
       formData.append("parent", payload.parent);
     }
-    console.log('formData', formData)
     try {
       const response = await FileApi.uploadFile(formData);
       return response.data;

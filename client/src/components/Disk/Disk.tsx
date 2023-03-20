@@ -41,7 +41,6 @@ export const Disk: React.FC = () => {
   const submitUploadFile = (data: any) => {
     const files = [...data]
     files.forEach((file: any) => {
-      // dispatch(fetchFiles(currentDir));
       dispatch(uploadFile({file, parent: currentDir}))
     })
     

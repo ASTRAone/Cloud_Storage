@@ -18,7 +18,7 @@ type FileCreateDTO = {
 };
 
 type FileUploadDTO = {
-  dirId?: UUID;
+  parent?: UUID;
   file: any;
 };
 
