@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 
+import React, { useState, useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
+
 import { useStyles } from "../../hooks/useStyles";
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
@@ -101,3 +104,5 @@ export const Auth: React.FC = () => {
     </div>
   );
 };
+
+export type { PropsLoginUser };
