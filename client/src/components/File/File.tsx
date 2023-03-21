@@ -1,7 +1,6 @@
 import React from "react";
 import { FileResponse } from "../../api/FileApi/models";
 import { useStyles } from "../../hooks/useStyles";
-
 import { customDate } from "../../utility/customDate";
 import { Icon } from "../icon";
 
@@ -9,13 +8,14 @@ import styles from "./styles.module.scss";
 
 type Props = {
   file: FileResponse;
+  onClick?: () => void;
 };
 
-export const File: React.FC<Props> = ({ file }) => {
+export const File: React.FC<Props> = ({ file, onClick = () => {} }) => {
   const { name, size, type, date } = file;
   const cx = useStyles(styles);
   return (
-    <div className={cx("container")}>
+    <div className={cx("container")} onClick={onClick}>
       <Icon
         size="xl"
         type={type === "dir" ? "folder" : "file"}

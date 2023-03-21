@@ -13,8 +13,13 @@ type FileResponse = {
 
 type FileCreateDTO = {
   name: string;
-  parent: UUID;
+  parent?: UUID;
   type?: TypeFile;
 };
 
-export type { FileResponse, FileCreateDTO };
+type FileUploadDTO = {
+  parent?: UUID;
+  file: any;
+};
+
+export type { FileResponse, FileCreateDTO, FileUploadDTO };

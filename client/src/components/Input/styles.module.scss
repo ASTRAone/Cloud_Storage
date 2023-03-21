@@ -1,7 +1,10 @@
 @import "../../utility/colors.scss";
 
 .container {
-  border-bottom: 3px solid $font-color;
+  
+  &.border {
+    border-bottom: 3px solid $font-color;
+  }
 
   &.error {
     border-bottom: 3px solid red;

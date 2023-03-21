@@ -16,6 +16,7 @@ type State = {
   status: RequestStatus;
   statusReg: RequestStatus;
   statusLogout: RequestStatus;
+  statusAuth: RequestStatus;
 };
 
 const initialState: State = {
@@ -23,6 +24,7 @@ const initialState: State = {
   status: "idle",
   statusReg: "idle",
   statusLogout: "idle",
+  statusAuth: "idle",
 };
 
 const userLogin = createAsyncThunk(
@@ -101,6 +103,18 @@ const userDataSlice = createSlice({
         state.statusReg = "failed";
       })
 
+      .addCase(userAuth.pending, (state) => {
+        state.statusAuth = "loading";
+      })
+      .addCase(userAuth.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.user.isAuth = true;
+        state.statusAuth = "idle";
+      })
+      .addCase(userAuth.rejected, (state) => {
+        state.statusAuth = "failed";
+      })
+
       .addCase(userLogout.pending, (state) => {
         state.statusLogout = "loading";
       })
@@ -112,6 +126,9 @@ const userDataSlice = createSlice({
       })
       .addCase(userLogout.rejected, (state) => {
         state.statusLogout = "failed";
+        if (state.user?.isAuth) {
+          state.user.isAuth = false;
+        }
       });
   },
 });

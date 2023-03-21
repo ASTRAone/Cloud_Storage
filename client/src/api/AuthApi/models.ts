@@ -1,12 +1,12 @@
 type AuthResponse = {
-  token: string;
+  accessToken: string;
+  refreshToken: string;
   user: {
     id?: number;
     email?: string;
     diskSpace?: number;
     usedSpace?: number;
     isAuth?: boolean;
-    loading?: boolean;
   };
 };
 
@@ -16,7 +16,6 @@ type AuthViewDTO = {
   diskSpace?: number;
   usedSpace?: number;
   isAuth?: boolean;
-  loading?: boolean;
 };
 
 type AuthDTO = {

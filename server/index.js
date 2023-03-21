@@ -1,13 +1,15 @@
 require('dotenv').config();
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const cors = require("cors");
+const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
 const router = require("./routes/index")
 const app = express();
 const corsMiddleware = require("./middleware/cors.middleware");
 const errorMiddleware = require("./middleware/error.middleware");
 
+
+app.use(fileUpload({}));
 app.use(corsMiddleware);
 app.use(express.json());
 app.use(cookieParser())

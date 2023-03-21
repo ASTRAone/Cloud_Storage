@@ -3,8 +3,9 @@ import { Input } from "../Input/Input";
 import { useStyles } from "../../hooks/useStyles";
 
 import { InputProps } from "../Input/Input";
-import styles from "./styles.module.scss";
 import { Icon } from "../icon";
+
+import styles from "./styles.module.scss";
 
 export const InputPass: React.FC<InputProps> = ({
   placeholder,

@@ -1,3 +1,5 @@
+@import '../../utility/colors.scss';
+
 .container {
   margin-top: 20px;
   padding-left: 200px;
@@ -16,4 +18,17 @@
 
 .create {
 
+}
+
+.upload {
+
+  & .label {
+    border: 2px solid $font-color;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  & .input {
+    display: none;
+  } 
 }

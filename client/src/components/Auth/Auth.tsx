@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
-
 import { useStyles } from "../../hooks/useStyles";
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
@@ -22,11 +21,6 @@ import { AUTH_HEADER } from "../../utility/headers";
 import { REGISTRATION_ROUTE } from "../../utility/contants";
 
 import styles from "./styles.module.scss";
-
-type PropsLoginUser = {
-  email: string;
-  password: string;
-};
 
 const restService = RestService.getInstance();
 const storageService = StorageService.getInstance();
@@ -52,10 +46,9 @@ export const Auth: React.FC = () => {
 
   const loginUser = async (data: unknown) => {
     try {
-      setErrorRes(false);
-      const { token } = await dispatch(userLogin(data as AuthDTO)).unwrap();
-      restService.addDefaultHeader(AUTH_HEADER, `Bearer ${token}`);
-      storageService.setItem(AUTH_HEADER, `Bearer ${token}`);
+      const { accessToken } = await dispatch(userLogin(data as AuthDTO)).unwrap();
+      restService.addDefaultHeader(AUTH_HEADER, `Bearer ${accessToken}`);
+      storageService.setItem(AUTH_HEADER, `Bearer ${accessToken}`);
     } catch (error) {
       setErrorRes(true);
       console.log(error);
@@ -69,10 +62,11 @@ export const Auth: React.FC = () => {
         <Controller
           control={control}
           rules={{ required: true, pattern: REGEXP_DICTIONARY.email }}
-          render={({ field: { onChange, onBlur, value } }) => (
+          render={({ field: { onChange, value } }) => (
             <Input
               onChange={onChange}
               value={value}
+              isBorder
               placeholder="Введите адрес электронной почты..."
               error={errors.email || errorRes}
             />
@@ -82,10 +76,11 @@ export const Auth: React.FC = () => {
         <Controller
           control={control}
           rules={{ required: true, minLength: 3 }}
-          render={({ field: { onChange, onBlur, value } }) => (
+          render={({ field: { onChange, value } }) => (
             <InputPass
               onChange={onChange}
               value={value}
+              isBorder
               placeholder="Введите пароль..."
               error={errors.password || errorRes}
             />
@@ -105,5 +100,3 @@ export const Auth: React.FC = () => {
     </div>
   );
 };
-
-export type { PropsLoginUser };

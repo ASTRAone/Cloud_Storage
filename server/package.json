@@ -19,6 +19,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.9.25",
     "nodemailer": "^6.9.1",
+    "express-fileupload": "^1.4.0",
     "nodemon": "^2.0.21",
     "uuid": "^9.0.0"
   }

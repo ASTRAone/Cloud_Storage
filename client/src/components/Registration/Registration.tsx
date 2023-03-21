@@ -61,6 +61,7 @@ export const Registration: React.FC = () => {
             <Input
               onChange={onChange}
               value={value}
+              isBorder
               placeholder="Введите имя..."
               error={errors.name}
             />
@@ -75,6 +76,7 @@ export const Registration: React.FC = () => {
             <Input
               onChange={onChange}
               value={value}
+              isBorder
               placeholder="Введите фамилию..."
               error={errors.surname}
             />
@@ -89,6 +91,7 @@ export const Registration: React.FC = () => {
             <Input
               onChange={onChange}
               value={value}
+              isBorder
               placeholder="Введите адрес электронной почты..."
               error={errors.email}
             />
@@ -103,6 +106,7 @@ export const Registration: React.FC = () => {
             <InputPass
               onChange={onChange}
               value={value}
+              isBorder
               placeholder="Введите пароль..."
               error={errors.password}
             />
@@ -110,7 +114,9 @@ export const Registration: React.FC = () => {
           name="password"
         />
       </div>
-      {errorRes && <ErrorComponent text="Пользователь с таким email уже зарегистрирован" />}
+      {errorRes && (
+        <ErrorComponent text="Пользователь с таким email уже зарегистрирован" />
+      )}
       <div className={cx("footer")}>
         <ButtonLink to={LOGIN_ROUTE} text="Есть аккаунт?" />
         <Button onClick={handleSubmit(createUser)} text="Зарегистрироваться" />

@@ -5,6 +5,7 @@ import styles from "./styles.module.scss";
 
 type Props = Partial<React.ComponentPropsWithRef<"input">> & {
   error?: any;
+  isBorder?: boolean;
 };
 
 export const Input: React.FC<Props> = ({
@@ -12,6 +13,7 @@ export const Input: React.FC<Props> = ({
   placeholder = "",
   value,
   error,
+  isBorder = false,
   onChange,
   ...rest
 }) => {
@@ -19,7 +21,7 @@ export const Input: React.FC<Props> = ({
   const isError = !!error;
 
   return (
-    <div className={cx("container", isError && 'error')}>
+    <div className={cx("container", isError && 'error', isBorder && 'border')}>
       <input
         type={type}
         className={cx("input")}

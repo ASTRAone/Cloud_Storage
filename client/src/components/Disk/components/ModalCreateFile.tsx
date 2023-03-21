@@ -15,7 +15,7 @@ import styles from "./styles.module.scss";
 type Props = {
   isOpen?: boolean;
   closeModal?: () => void;
-  currentDir: string;
+  currentDir?: string;
 };
 
 type PropsForm = {
@@ -29,7 +29,7 @@ export const ModalCreateFile: React.FC<Props> = ({
 }) => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
-  const {status, statusCreate} = useAppSelector(getFilesData)
+  const { status, statusCreate } = useAppSelector(getFilesData);
 
   const {
     control,
@@ -39,14 +39,19 @@ export const ModalCreateFile: React.FC<Props> = ({
 
   const [error, setError] = useState(false);
 
-  const isLoading = status === 'loading' || statusCreate === 'loading'
+  const isLoading = status === "loading" || statusCreate === "loading";
 
   const handleCreateFile = async (data: unknown) => {
     const { name } = data as PropsForm;
+    console.log('currentDir', currentDir)
     const payload: FileCreateDTO = {
       name,
-      parent: currentDir,
+      type: "dir",
     };
+
+    if (currentDir) {
+      payload.parent = currentDir
+    }
     try {
       await dispatch(createFile(payload)).unwrap();
       await dispatch(fetchFiles(currentDir)).unwrap();
@@ -73,6 +78,7 @@ export const ModalCreateFile: React.FC<Props> = ({
           <Input
             onChange={onChange}
             value={value}
+            isBorder
             placeholder="Введите название папки"
             error={errors.name}
           />
