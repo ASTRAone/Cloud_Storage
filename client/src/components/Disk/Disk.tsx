@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
-import { FileUploadDTO } from "../../api/FileApi/models";
 import { usePopupControls } from "../../hooks/usePopupControls";
 import { useStyles } from "../../hooks/useStyles";
 
 import {
   fetchFiles,
-  getCurrentDir,
   getFilesData,
-  getStackDir,
   popToStack,
   selectedDir,
   uploadFile,
@@ -24,7 +21,7 @@ import styles from "./styles.module.scss";
 export const Disk: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
-  const {currentDir, dirStack, needUpdate} = useAppSelector(getFilesData);
+  const { currentDir, dirStack, needUpdate } = useAppSelector(getFilesData);
   const { isOpened, openPopup, closePopup } = usePopupControls();
 
   useEffect(() => {
@@ -39,11 +36,10 @@ export const Disk: React.FC = () => {
   };
 
   const submitUploadFile = (data: any) => {
-    const files = [...data]
-    files.forEach((file: any) => {
-      dispatch(uploadFile({file, parent: currentDir}))
-    })
-    
+    const files = [...data];
+    files.forEach((file: unknown) => {
+      dispatch(uploadFile({ file, parent: currentDir }));
+    });
   };
 
   return (
@@ -63,7 +59,13 @@ export const Disk: React.FC = () => {
             <label htmlFor="upload" className={cx("label")}>
               Загрузить файл
             </label>
-            <Input multiple={true} onChange={(e) => submitUploadFile(e.target.files)} type="file" id="upload" className={cx("input")} />
+            <Input
+              multiple={true}
+              onChange={(e) => submitUploadFile(e.target.files)}
+              type="file"
+              id="upload"
+              className={cx("input")}
+            />
           </div>
         </div>
         <FileList />

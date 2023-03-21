@@ -43,14 +43,13 @@ export const ModalCreateFile: React.FC<Props> = ({
 
   const handleCreateFile = async (data: unknown) => {
     const { name } = data as PropsForm;
-    console.log('currentDir', currentDir)
     const payload: FileCreateDTO = {
       name,
       type: "dir",
     };
 
     if (currentDir) {
-      payload.parent = currentDir
+      payload.parent = currentDir;
     }
     try {
       await dispatch(createFile(payload)).unwrap();

@@ -3,6 +3,7 @@ import { useStyles } from "../../hooks/useStyles";
 
 import { getFilesData, pushToStack, selectedDir } from "../../store/file/data";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { EmptyComponent } from "../EmptyComponent";
 
 import { File } from "../File/File";
 
@@ -25,7 +26,7 @@ export const FileList: React.FC = () => {
         <div className={cx("sort-date")}>Дата</div>
         <div className={cx("sort-size")}>Размер</div>
       </div>
-      {file
+      {file.length > 0
         ? file?.map((item) => (
             <File
               file={item}
@@ -35,7 +36,7 @@ export const FileList: React.FC = () => {
               }
             />
           ))
-        : null}
+        : <EmptyComponent />}
     </div>
   );
 };

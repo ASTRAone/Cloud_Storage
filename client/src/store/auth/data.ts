@@ -2,7 +2,6 @@ import {
   createAsyncThunk,
   createSelector,
   createSlice,
-  PayloadAction,
 } from "@reduxjs/toolkit";
 import { AuthApi } from "../../api/AuthApi";
 import { AuthDTO, AuthRegDTO, AuthViewDTO } from "../../api/AuthApi/models";
