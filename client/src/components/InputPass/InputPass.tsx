@@ -26,12 +26,6 @@ export const InputPass: React.FC<InputProps> = ({
         placeholder={placeholder}
         {...rest}
       />
-      <Input
-        error={error}
-        type={show ? "text" : "password"}
-        placeholder={placeholder}
-        {...rest}
-      />
       <Icon
         className={cx("icon")}
         size="lg"

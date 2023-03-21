@@ -10,12 +10,12 @@ class FileApi {
   }
 
   static createFile(data: FileCreateDTO) {
-    const url = "files";
+    const url = "file";
     return this.restService.POST<FileCreateDTO, any>(url, { data });
   }
 
   static uploadFile(data: FormData) {
-    const url = "files/upload";
+    const url = "upload";
     return this.restService.POST<FormData, any>(url, { data });
   }
 }

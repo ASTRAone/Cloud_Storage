@@ -5,12 +5,12 @@ class AuthApi {
   static restService: IRestService = RestService.getInstance();
 
   static autorization(data: AuthDTO) {
-    const url = "auth/login";
+    const url = "login";
     return this.restService.POST<AuthDTO, AuthResponse>(url, { data });
   }
 
   static registration(data: AuthRegDTO) {
-    const url = "auth/registration";
+    const url = "registration";
     return this.restService.POST(url, { data });
   }
 
@@ -20,8 +20,8 @@ class AuthApi {
   }
 
   static logout() {
-    const url = "auth/logout";
-    return this.restService.GET(url);
+    const url = "logout";
+    return this.restService.POST(url);
   }
 }
 

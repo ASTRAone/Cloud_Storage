@@ -78,6 +78,7 @@ export const ModalCreateFile: React.FC<Props> = ({
           <Input
             onChange={onChange}
             value={value}
+            isBorder
             placeholder="Введите название папки"
             error={errors.name}
           />

@@ -1,5 +1,4 @@
 import React from "react";
-import React from "react";
 import { useStyles } from "../../hooks/useStyles";
 
 import styles from "./styles.module.scss";
@@ -19,7 +18,6 @@ export const Input: React.FC<Props> = ({
   ...rest
 }) => {
   const cx = useStyles(styles);
-  const isError = !!error;
   const isError = !!error;
 
   return (
