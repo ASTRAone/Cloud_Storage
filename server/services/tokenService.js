@@ -16,7 +16,7 @@ class TokenService {
             const userData = jwt.verify(token, process.env.SECRET_KEY);
             return userData;
         } catch (error) {
-
+            return null;
         }
     }
 
@@ -25,7 +25,7 @@ class TokenService {
             const userData = jwt.verify(token, process.env.SECRET_REFRESH_KEY);
             return userData;
         } catch (error) {
-            
+            return null;
         }
     }
 
