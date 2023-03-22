@@ -12,8 +12,8 @@ import { ErrorComponent } from "../ErrorComponent";
 import { LOGIN_ROUTE } from "../../utility/contants";
 import { REGEXP_DICTIONARY } from "../../utility/regexp";
 
-import { userRegistration } from "../../store/auth/data";
-import { useAppDispatch } from "../../store/hooks";
+import { getUserData, userRegistration } from "../../store/auth/data";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 import { AuthRegDTO } from "../../api/AuthApi/models";
 
@@ -23,6 +23,7 @@ export const Registration: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { statusReg } = useAppSelector(getUserData);
   const [errorRes, setErrorRes] = useState(false);
 
   const {
@@ -119,7 +120,11 @@ export const Registration: React.FC = () => {
       )}
       <div className={cx("footer")}>
         <ButtonLink to={LOGIN_ROUTE} text="Есть аккаунт?" />
-        <Button onClick={handleSubmit(createUser)} text="Зарегистрироваться" />
+        <Button
+          onClick={handleSubmit(createUser)}
+          isLoading={statusReg === "loading"}
+          text="Зарегистрироваться"
+        />
       </div>
     </div>
   );

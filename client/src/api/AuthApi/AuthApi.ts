@@ -15,7 +15,7 @@ class AuthApi {
   }
 
   static auth() {
-    const url = "auth/auth";
+    const url = "refresh";
     return this.restService.GET<AuthResponse>(url);
   }
 

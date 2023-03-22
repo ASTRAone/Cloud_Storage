@@ -2,7 +2,6 @@ import {
   createAsyncThunk,
   createSelector,
   createSlice,
-  PayloadAction,
 } from "@reduxjs/toolkit";
 import { AuthApi } from "../../api/AuthApi";
 import { AuthDTO, AuthRegDTO, AuthViewDTO } from "../../api/AuthApi/models";
@@ -112,6 +111,9 @@ const userDataSlice = createSlice({
         state.statusAuth = "idle";
       })
       .addCase(userAuth.rejected, (state) => {
+        if (state.user?.isAuth) {
+          state.user.isAuth = false;
+        }
         state.statusAuth = "failed";
       })
 
