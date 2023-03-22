@@ -16,6 +16,7 @@ import { ButtonLink } from "../ButtonLink";
 import { Button } from "../Button";
 
 import styles from "./styles.module.scss";
+import { Avatar } from "../Avatar";
 
 const storageService = StorageService.getInstance();
 
@@ -56,6 +57,7 @@ export const NavBar: React.FC = () => {
           />
         )}
         {user?.isAuth && <Button text="Выйти" onClick={logout} />}
+        {user?.isAuth && <Avatar fullName="Смирнов В.В." />}
       </div>
     </div>
   );

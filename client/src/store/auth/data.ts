@@ -111,6 +111,9 @@ const userDataSlice = createSlice({
         state.statusAuth = "idle";
       })
       .addCase(userAuth.rejected, (state) => {
+        if (state.user?.isAuth) {
+          state.user.isAuth = false;
+        }
         state.statusAuth = "failed";
       })
 
