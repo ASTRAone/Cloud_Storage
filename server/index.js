@@ -7,8 +7,12 @@ const router = require("./routes/index")
 const app = express();
 const corsMiddleware = require("./middleware/cors.middleware");
 const errorMiddleware = require("./middleware/error.middleware");
+const cors = require('cors');   
 
-
+app.use(cors({
+  credentials: true,
+  origin: 'http://localhost:3000'
+}));
 app.use(fileUpload({}));
 app.use(corsMiddleware);
 app.use(express.json());

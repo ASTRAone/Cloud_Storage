@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useStyles } from "../../hooks/useStyles";
 import Logo from "../../assets/images/cloud-logo.png";
 
-import { getUserData, userAuth, userLogout } from "../../store/auth/data";
+import { getUserData, userLogout } from "../../store/auth/data";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-
-import { StorageService } from "../../services/StorageService";
 
 import { AUTH_HEADER } from "../../utility/headers";
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../../utility/contants";
@@ -18,21 +16,19 @@ import { Button } from "../Button";
 import styles from "./styles.module.scss";
 import { Avatar } from "../Avatar";
 
-const storageService = StorageService.getInstance();
-
 export const NavBar: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(getUserData);
 
   useAuth();
-  useEffect(() => {
-    dispatch(userAuth()).unwrap();
-  }, []);
+  // useEffect(() => {
+  //   dispatch(userAuth()).unwrap();
+  // }, []);
 
   const logout = async () => {
     try {
-      storageService.removeItem(AUTH_HEADER);
+      localStorage.removeItem(AUTH_HEADER);
       await dispatch(userLogout()).unwrap();
     } catch (error) {
       console.log(error);

@@ -1,16 +1,13 @@
-import axios, { AxiosResponse } from 'axios';
-import qs from "qs";
-
-import { IRestService, HttpClient, RequestOptions } from './IRestService';
-
+import axios, { AxiosResponse } from "axios";
+import { IRestService, HttpClient, RequestOptions } from "./IRestService";
 class RestService implements IRestService {
   private readonly httpClient: HttpClient;
   private static instance: RestService;
 
   private constructor() {
     this.httpClient = axios.create({
+      withCredentials: true,
       timeout: 25_000,
-      // withCredentials: true,
     });
   }
 
@@ -22,7 +19,10 @@ class RestService implements IRestService {
     return RestService.instance;
   }
 
-  private async request<TRequest, TResponse>(url: string, options: RequestOptions<TRequest>) {
+  private async request<TRequest, TResponse>(
+    url: string,
+    options: RequestOptions<TRequest>
+  ) {
     return this.httpClient.request<TResponse>({ url, ...options });
   }
 
@@ -31,7 +31,9 @@ class RestService implements IRestService {
   }
 
   addInterceptors(interceptor: (response: AxiosResponse) => void) {
-    this.httpClient.interceptors.response.use(undefined, function (error) {
+    this.httpClient.interceptors.response.use((config => {
+      return config;
+    }), function (error) {
       interceptor(error.response);
       return Promise.reject(error);
     });
@@ -46,19 +48,31 @@ class RestService implements IRestService {
   }
 
   GET<TRequest, TResponse>(url: string, options?: RequestOptions<TRequest>) {
-    return this.request<TRequest, TResponse>(url, { ...options, method: 'GET' });
+    return this.request<TRequest, TResponse>(url, {
+      ...options,
+      method: "GET",
+    });
   }
 
   POST<TRequest, TResponse>(url: string, options?: RequestOptions<TRequest>) {
-    return this.request<TRequest, TResponse>(url, { ...options, method: 'post' });
+    return this.request<TRequest, TResponse>(url, {
+      ...options,
+      method: "post",
+    });
   }
 
   PUT<TRequest, TResponse>(url: string, options?: RequestOptions<TRequest>) {
-    return this.request<TRequest, TResponse>(url, { ...options, method: 'PUT' });
+    return this.request<TRequest, TResponse>(url, {
+      ...options,
+      method: "PUT",
+    });
   }
 
   DELETE<TRequest, TResponse>(url: string, options?: RequestOptions<TRequest>) {
-    return this.request<TRequest, TResponse>(url, { ...options, method: 'DELETE' });
+    return this.request<TRequest, TResponse>(url, {
+      ...options,
+      method: "DELETE",
+    });
   }
 }
 

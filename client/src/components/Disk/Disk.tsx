@@ -25,8 +25,14 @@ export const Disk: React.FC = () => {
   const { isOpened, openPopup, closePopup } = usePopupControls();
 
   useEffect(() => {
-    dispatch(fetchFiles(currentDir));
-  }, [currentDir, needUpdate]);
+    dispatch(fetchFiles());
+  }, []);
+
+  useEffect(() => {
+    if (currentDir || needUpdate) {
+      dispatch(fetchFiles(currentDir));
+    }
+  }, [needUpdate, currentDir]);
 
   const goBack = () => {
     const newStackDir = [...dirStack];

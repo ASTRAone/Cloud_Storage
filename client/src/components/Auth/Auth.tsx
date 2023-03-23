@@ -47,8 +47,9 @@ export const Auth: React.FC = () => {
   const loginUser = async (data: unknown) => {
     try {
       const { accessToken } = await dispatch(userLogin(data as AuthDTO)).unwrap();
-      restService.addDefaultHeader(AUTH_HEADER, `Bearer ${accessToken}`);
-      storageService.setItem(AUTH_HEADER, `Bearer ${accessToken}`);
+      // restService.addDefaultHeader(AUTH_HEADER, `Bearer ${accessToken}`);
+      // storageService.setItem(AUTH_HEADER, `Bearer ${accessToken}`);
+      localStorage.setItem(AUTH_HEADER, `Bearer ${accessToken}`)
     } catch (error) {
       setErrorRes(true);
       console.log(error);
