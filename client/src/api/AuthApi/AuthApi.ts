@@ -1,4 +1,6 @@
+import $api from "../../hooks/useAuth";
 import { IRestService, RestService } from "../../services/RestService";
+import { ApiResultResponse } from "../../utility/common";
 
 import { AuthResponse, AuthDTO, AuthRegDTO } from "./models";
 class AuthApi {
@@ -6,22 +8,22 @@ class AuthApi {
 
   static autorization(data: AuthDTO) {
     const url = "login";
-    return this.restService.POST<AuthDTO, AuthResponse>(url, { data });
+    return $api.post<AuthDTO, ApiResultResponse<AuthResponse>>(url, { ...data });
   }
 
   static registration(data: AuthRegDTO) {
     const url = "registration";
-    return this.restService.POST(url, { data });
+    return $api.post<AuthRegDTO>(url, { ...data });
   }
 
-  static auth() {
+  static refresh() {
     const url = "refresh";
-    return this.restService.GET<AuthResponse>(url);
+    return $api.get<AuthResponse>(url);
   }
 
   static logout() {
     const url = "logout";
-    return this.restService.POST(url);
+    return $api.post(url);
   }
 }
 

@@ -1,36 +1,79 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { AxiosResponse } from 'axios';
-import { RestService } from '../services/RestService';
-import { StorageService } from '../services/StorageService';
+import axios from "axios";
+import { AuthApi } from "../api/AuthApi";
 
-import { AUTH_HEADER } from '../utility/headers';
-import { LOGIN_ROUTE } from '../utility/contants';
+import { AUTH_HEADER } from "../utility/headers";
+import { LOGIN_ROUTE } from "../utility/contants";
+import { useAppDispatch } from "../store/hooks";
+import { userLogout } from "../store/auth/data";
 
-const storageService = StorageService.getInstance();
-const restService = RestService.getInstance();
+const $api = axios.create({
+  withCredentials: true,
+  baseURL: process.env.REACT_APP_API_URL,
+});
 
 const useAuth = () => {
-  const authToken = storageService.getItem(AUTH_HEADER);
+  const token = localStorage.getItem(AUTH_HEADER);
   const navigate = useNavigate();
-
-  const unauthorisedHandler = (response: AxiosResponse) => {
-    if (response.status === 401 && window.location.pathname !== LOGIN_ROUTE) {
-      navigate(LOGIN_ROUTE);
-      storageService.removeItem(AUTH_HEADER);
-    }
-  };
-
-  restService.addInterceptors(unauthorisedHandler);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (authToken !== null) {
-      restService.addDefaultHeader(AUTH_HEADER, authToken);
-    } else {
-      navigate(LOGIN_ROUTE);
+    if (token !== null) {
+      $api.defaults.headers.common[AUTH_HEADER] = token;
     }
-  }, [authToken]);
+  }, [token]);
+
+  $api.interceptors.request.use((config) => {
+    config.headers.Authorization = localStorage.getItem(AUTH_HEADER);
+    return config;
+  });
+
+  $api.interceptors.response.use(
+    (config) => {
+      return config;
+    },
+    async (error) => {
+      const originalRequest = error.config;
+      if (error.response.status === 403) {
+        // TODO реализовать всплывающие сообщения
+        console.log("ERROR 403");
+      }
+
+      if (error.response.status === 400) {
+        // TODO реализовать всплывающие сообщения
+        console.log("ERROR 400");
+      }
+
+      if (error.response.status === 401 && !originalRequest._isRetry) {
+        originalRequest._isRetry = true;
+        try {
+          const response = await AuthApi.refresh();
+          localStorage.setItem(
+            AUTH_HEADER,
+            `Bearer ${response.data.accessToken}`
+          );
+          return $api.request(originalRequest);
+        } catch (error) {
+          console.log({ error });
+        }
+      }
+
+      if (
+        error.response.status === 401 &&
+        originalRequest &&
+        originalRequest._isRetry
+      ) {
+        try {
+          localStorage.removeItem(AUTH_HEADER);
+        } catch (error) {
+          console.log({ error });
+        }
+      }
+    }
+  );
 };
 
+export default $api;
 export { useAuth };

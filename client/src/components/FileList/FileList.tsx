@@ -21,22 +21,25 @@ export const FileList: React.FC = () => {
 
   return (
     <div className={cx("container")}>
-      <div className={cx("header")}>
-        <div className={cx("sort-name")}>Название</div>
-        <div className={cx("sort-date")}>Дата</div>
-        <div className={cx("sort-size")}>Размер</div>
-      </div>
-      {file.length > 0
-        ? file?.map((item) => (
-            <File
-              file={item}
-              key={item._id}
-              onClick={
-                item.type === "dir" ? () => openFile(item._id) : undefined
-              }
-            />
-          ))
-        : <EmptyComponent />}
+      {file.length > 0 && (
+        <div className={cx("header")}>
+          <div className={cx("sort-name")}>Название</div>
+          <div className={cx("sort-date")}>Дата</div>
+          <div className={cx("sort-size")}>Размер</div>
+        </div>
+      )}
+
+      {file.length > 0 ? (
+        file?.map((item) => (
+          <File
+            file={item}
+            key={item._id}
+            onClick={item.type === "dir" ? () => openFile(item._id) : undefined}
+          />
+        ))
+      ) : (
+        <EmptyComponent />
+      )}
     </div>
   );
 };

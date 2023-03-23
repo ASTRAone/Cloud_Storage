@@ -31,6 +31,7 @@ const userLogin = createAsyncThunk(
   async (payload: AuthDTO, { rejectWithValue }) => {
     try {
       const response = await AuthApi.autorization(payload);
+      console.log("response", response);
       return response.data;
     } catch (e) {
       return rejectWithValue(e);
@@ -50,11 +51,11 @@ const userRegistration = createAsyncThunk(
   }
 );
 
-const userAuth = createAsyncThunk(
-  "user/auth",
+const userRefresh = createAsyncThunk(
+  "user/refresh",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await AuthApi.auth();
+      const response = await AuthApi.refresh();
       return response.data;
     } catch (e) {
       return rejectWithValue(e);
@@ -85,7 +86,9 @@ const userDataSlice = createSlice({
       })
       .addCase(userLogin.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.user.isAuth = true;
+        if (state.user) {
+          state.user.isAuth = true;
+        }
         state.status = "idle";
       })
       .addCase(userLogin.rejected, (state) => {
@@ -102,15 +105,17 @@ const userDataSlice = createSlice({
         state.statusReg = "failed";
       })
 
-      .addCase(userAuth.pending, (state) => {
+      .addCase(userRefresh.pending, (state) => {
         state.statusAuth = "loading";
       })
-      .addCase(userAuth.fulfilled, (state, action) => {
+      .addCase(userRefresh.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.user.isAuth = true;
+        if (state.user) {
+          state.user.isAuth = true;
+        }
         state.statusAuth = "idle";
       })
-      .addCase(userAuth.rejected, (state) => {
+      .addCase(userRefresh.rejected, (state) => {
         if (state.user?.isAuth) {
           state.user.isAuth = false;
         }
@@ -122,9 +127,7 @@ const userDataSlice = createSlice({
       })
       .addCase(userLogout.fulfilled, (state) => {
         state.statusLogout = "idle";
-        if (state.user?.isAuth) {
-          state.user.isAuth = false;
-        }
+        state.user = null;
       })
       .addCase(userLogout.rejected, (state) => {
         state.statusLogout = "failed";
@@ -145,7 +148,7 @@ export {
   getUserData,
   userLogin,
   getStatus,
-  userAuth,
+  userRefresh,
   userRegistration,
   userLogout,
 };
