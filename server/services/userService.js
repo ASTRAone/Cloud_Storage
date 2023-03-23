@@ -5,6 +5,8 @@ const MailService = require("../services/mailService");
 const TokenService = require("../services/tokenService");
 const UserDto = require("../dtos/userDto");
 const ApiError = require("../exceptions/apiError");
+const File = require("../models/File");
+const FileService = require("../services/fileService");
 
 class UserService {
   async registration(email, password) {
@@ -20,12 +22,14 @@ class UserService {
       password: hashPassword,
       activationLink,
     });
+    user.save();
     await MailService.sendActivationMail(
       email,
       `${process.env.API_URL}/api/activate/${activationLink}`
     );
 
     const userDto = new UserDto(user);
+    await FileService.createDir(new File({user: user.id, name: ''}));
     const tokens = await TokenService.generateTokens({ ...userDto });
     await TokenService.saveToken(userDto.id, tokens.refreshToken);
 
