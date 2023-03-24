@@ -17,6 +17,7 @@ router.post("/file", authMiddleware, fileController.createDir);
 router.get("/activate/:link", UserController.activate);
 router.get("/refresh", UserController.refresh);
 router.get("/users", authMiddleware, UserController.getUsers);
+router.get("/user", authMiddleware, UserController.getUser);
 router.get("/files", authMiddleware, fileController.getFiles);
 router.post("/files/upload", authMiddleware, fileController.uploadFile);
 

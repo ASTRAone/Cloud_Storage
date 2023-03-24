@@ -1,6 +1,7 @@
 const userService = require("../services/userService");
 const { validationResult } = require("express-validator");
 const ApiError = require("../exceptions/apiError");
+const User = require("../models/User");
 class UserController {
   async registration(req, res, next) {
     try {
@@ -65,7 +66,16 @@ class UserController {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
-      return res.json(userData);
+      return res.json({accessToken :userData.accessToken, refreshToken: userData.refreshToken});
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getUser(req, res, next) {
+    try {
+      const user = await User.findOne({ _id: req.user.id });
+      return res.json(user);
     } catch (error) {
       next(error);
     }
