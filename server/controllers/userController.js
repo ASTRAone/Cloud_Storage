@@ -2,6 +2,7 @@ const userService = require("../services/userService");
 const { validationResult } = require("express-validator");
 const ApiError = require("../exceptions/apiError");
 const User = require("../models/User");
+const omit = require("lodash/omit");
 class UserController {
   async registration(req, res, next) {
     try {
@@ -75,7 +76,9 @@ class UserController {
   async getUser(req, res, next) {
     try {
       const user = await User.findOne({ _id: req.user.id });
-      return res.json(user);
+      const omittedUser = omit( user.toObject(), ["password", "activationLink", "files"]);
+      console.log('omitted user', omittedUser);
+      return res.json(omittedUser);
     } catch (error) {
       next(error);
     }
