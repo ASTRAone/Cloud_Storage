@@ -1,13 +1,10 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
 import axios from "axios";
+import { useEffect } from "react";
 import { AuthApi } from "../api/AuthApi";
+import { dropState } from "../store/auth/data";
+import { useAppDispatch } from "../store/hooks";
 
 import { AUTH_HEADER } from "../utility/headers";
-import { LOGIN_ROUTE } from "../utility/contants";
-import { useAppDispatch } from "../store/hooks";
-import { userLogout } from "../store/auth/data";
 
 const $api = axios.create({
   withCredentials: true,
@@ -16,7 +13,6 @@ const $api = axios.create({
 
 const useAuth = () => {
   const token = localStorage.getItem(AUTH_HEADER);
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -25,54 +21,48 @@ const useAuth = () => {
     }
   }, [token]);
 
-  $api.interceptors.request.use((config) => {
-    config.headers.Authorization = localStorage.getItem(AUTH_HEADER);
-    return config;
-  });
-
-  $api.interceptors.response.use(
+  $api.interceptors.request.use(
     (config) => {
+      const token = localStorage.getItem(AUTH_HEADER);
+      if (token) {
+        config.headers[AUTH_HEADER] = token;
+      }
       return config;
     },
-    async (error) => {
-      const originalRequest = error.config;
-      if (error.response.status === 403) {
-        // TODO реализовать всплывающие сообщения
-        console.log("ERROR 403");
-      }
-
-      if (error.response.status === 400) {
-        // TODO реализовать всплывающие сообщения
-        console.log("ERROR 400");
-      }
-
-      if (error.response.status === 401 && !originalRequest._isRetry) {
-        originalRequest._isRetry = true;
-        try {
-          const response = await AuthApi.refresh();
-          localStorage.setItem(
-            AUTH_HEADER,
-            `Bearer ${response.data.accessToken}`
-          );
-          return $api.request(originalRequest);
-        } catch (error) {
-          console.log({ error });
-        }
-      }
-
-      if (
-        error.response.status === 401 &&
-        originalRequest &&
-        originalRequest._isRetry
-      ) {
-        try {
-          localStorage.removeItem(AUTH_HEADER);
-        } catch (error) {
-          console.log({ error });
-        }
-      }
+    (error) => {
+      return Promise.reject(error);
     }
   );
+
+  function createAxiosResponseInterceptor() {
+    const interceptor = $api.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response.status !== 401) {
+          return Promise.reject(error);
+        }
+        $api.interceptors.response.eject(interceptor);
+
+        return AuthApi.refresh()
+          .then((response) => {
+            localStorage.setItem(
+              AUTH_HEADER,
+              `Bearer ${response.data.accessToken}`
+            );
+            error.response.config.headers[AUTH_HEADER] =
+              "Bearer " + response.data.accessToken;
+            return $api(error.response.config);
+          })
+          .catch((error2) => {
+            dispatch(dropState());
+            localStorage.removeItem(AUTH_HEADER);
+            return Promise.reject(error2);
+          })
+          .finally(createAxiosResponseInterceptor);
+      }
+    );
+  }
+  createAxiosResponseInterceptor();
 };
 
 export default $api;

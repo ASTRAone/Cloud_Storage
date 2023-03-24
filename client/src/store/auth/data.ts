@@ -31,7 +31,6 @@ const userLogin = createAsyncThunk(
   async (payload: AuthDTO, { rejectWithValue }) => {
     try {
       const response = await AuthApi.autorization(payload);
-      console.log("response", response);
       return response.data;
     } catch (e) {
       return rejectWithValue(e);
@@ -78,7 +77,9 @@ const userLogout = createAsyncThunk(
 const userDataSlice = createSlice({
   name: "userDataSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    dropState: () => initialState,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(userLogin.pending, (state) => {
@@ -142,6 +143,8 @@ const selectSelf = (state: RootState) => state.user.data;
 
 const getUserData = createSelector(selectSelf, ({ ...userData }) => userData);
 const getStatus = createSelector(selectSelf, statusFlags);
+
+export const { dropState } = userDataSlice.actions;
 
 export {
   userDataSlice,
