@@ -17,7 +17,7 @@ class MailService {
             from: process.env.SMTP_USER,
             to,
             subject: 'Activate your account',
-            text: 'hello ebat',
+            text: 'hello ebat, doroy',
             html: `
                 <h1>Activate your account</h1>
                 <a href="${link}">Click here to activate your account</a>
