@@ -1,6 +1,7 @@
 const fileService = require("../services/fileService");
 const User = require("../models/User");
 const File = require("../models/File");
+const fs = require("fs");
 
 class FileController {
   async createDir(req, res) {
@@ -12,7 +13,9 @@ class FileController {
         file.path = name;
         await fileService.createDir(file);
       } else {
-        file.path = `${parentFile.path}\\${file.name}`;
+        // change to windows
+        // file.path = `${parentFile.path}//${file.name}`;
+        file.path = `${parentFile.path}\/${file.name}`;
         await fileService.createDir(file);
         parentFile.childs.push(file._id);
         await parentFile.save();
@@ -55,11 +58,17 @@ class FileController {
       let path;
 
       if (parent) {
-        path = `${config.get("filePath")}\\${user._id}\\${parent.path}\\${
+        // change to windows
+        // path = `${process.env.FILE_PATH}\\${user._id}\\${parent.path}\\${
+        //   file.name
+        // }`;
+        path = `${process.env.FILE_PATH}\/${user._id}\/${parent.path}\/${
           file.name
         }`;
       } else {
-        path = `${config.get("filePath")}\\${user._id}\\${file.name}`;
+        // change to windows
+        // path = `${process.env.FILE_PATH}}\\${user._id}\\${file.name}`;
+        path = `${process.env.FILE_PATH}\/${user._id}\/${file.name}`;
       }
 
       if (fs.existsSync(path)) {
