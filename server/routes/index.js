@@ -19,5 +19,6 @@ router.get("/refresh", UserController.refresh);
 router.get("/users", authMiddleware, UserController.getUsers);
 router.get("/files", authMiddleware, fileController.getFiles);
 router.post("/files/upload", authMiddleware, fileController.uploadFile);
+router.post('/files/avatar', authMiddleware, fileController.uploadAvatar)
 
 module.exports = router;

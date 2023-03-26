@@ -16,6 +16,7 @@ app.use(cors({
 app.use(fileUpload({}));
 app.use(corsMiddleware);
 app.use(express.json());
+app.use(express.static(process.env.STATIC_PATH))
 app.use(cookieParser())
 
 app.use("/api", router);

@@ -28,6 +28,6 @@ type AuthRegDTO = {
   surname: string;
   email: string;
   password: string;
-}
+};
 
 export type { AuthResponse, AuthDTO, AuthViewDTO, AuthRegDTO };
