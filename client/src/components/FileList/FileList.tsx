@@ -1,13 +1,14 @@
-import React from "react";
-import { useStyles } from "../../hooks/useStyles";
+import React from 'react';
 
-import { getFilesData, pushToStack, selectedDir } from "../../store/file/data";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { EmptyComponent } from "../EmptyComponent";
+import { getFilesData, pushToStack, selectedDir } from '@store/file/data';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
 
-import { File } from "../File/File";
+import { useStyles } from '@hooks/useStyles';
 
-import styles from "./styles.module.scss";
+import { File } from '@components/File/File';
+import { EmptyComponent } from '@components/EmptyComponent';
+
+import styles from './styles.module.scss';
 
 export const FileList: React.FC = () => {
   const cx = useStyles(styles);
@@ -20,12 +21,12 @@ export const FileList: React.FC = () => {
   };
 
   return (
-    <div className={cx("container")}>
+    <div className={cx('container')}>
       {file.length > 0 && (
-        <div className={cx("header")}>
-          <div className={cx("sort-name")}>Название</div>
-          <div className={cx("sort-date")}>Дата</div>
-          <div className={cx("sort-size")}>Размер</div>
+        <div className={cx('header')}>
+          <div className={cx('sort-name')}>Название</div>
+          <div className={cx('sort-date')}>Дата</div>
+          <div className={cx('sort-size')}>Размер</div>
         </div>
       )}
 
@@ -34,7 +35,7 @@ export const FileList: React.FC = () => {
           <File
             file={item}
             key={item._id}
-            onClick={item.type === "dir" ? () => openFile(item._id) : undefined}
+            onClick={item.type === 'dir' ? () => openFile(item._id) : undefined}
           />
         ))
       ) : (

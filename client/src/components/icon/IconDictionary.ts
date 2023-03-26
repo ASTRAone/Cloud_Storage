@@ -1,11 +1,4 @@
-import {
-  HideIcon,
-  ShowIcon,
-  Spinner,
-  FolderIcon,
-  FileIcon,
-  CloseIcon,
-} from "../../assets/icons";
+import { HideIcon, ShowIcon, Spinner, FolderIcon, FileIcon, CloseIcon } from '@assets/icons';
 
 const dictionary = {
   hide: HideIcon,

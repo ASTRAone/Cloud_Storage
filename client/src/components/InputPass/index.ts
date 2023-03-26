@@ -1,1 +1,1 @@
-export { InputPass } from "./InputPass";
+export { InputPass } from './InputPass';

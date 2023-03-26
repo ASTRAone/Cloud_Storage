@@ -1,7 +1,8 @@
-import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
-import { RequestStatus } from "../utility/common";
-import user from "./auth";
-import file from "./file";
+import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
+
+import { RequestStatus } from '../utility/common';
+import user from './auth';
+import file from './file';
 
 export const store = configureStore({
   reducer: {

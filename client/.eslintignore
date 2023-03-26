@@ -1,0 +1,6 @@
+/node_modules
+/public
+/build
+react-app-env.d.ts
+react-table-config.d.ts
+/*.js

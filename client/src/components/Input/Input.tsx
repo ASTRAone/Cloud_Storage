@@ -1,16 +1,17 @@
-import React from "react";
-import { useStyles } from "../../hooks/useStyles";
+import React from 'react';
 
-import styles from "./styles.module.scss";
+import { useStyles } from '@hooks/useStyles';
 
-type Props = Partial<React.ComponentPropsWithRef<"input">> & {
+import styles from './styles.module.scss';
+
+type Props = Partial<React.ComponentPropsWithRef<'input'>> & {
   error?: any;
   isBorder?: boolean;
 };
 
 export const Input: React.FC<Props> = ({
-  type = "text",
-  placeholder = "",
+  type = 'text',
+  placeholder = '',
   value,
   error,
   isBorder = false,
@@ -21,10 +22,10 @@ export const Input: React.FC<Props> = ({
   const isError = !!error;
 
   return (
-    <div className={cx("container", isError && 'error', isBorder && 'border')}>
+    <div className={cx('container', isError && 'error', isBorder && 'border')}>
       <input
         type={type}
-        className={cx("input")}
+        className={cx('input')}
         value={value}
         onChange={onChange}
         placeholder={placeholder}

@@ -1,22 +1,17 @@
-import React, { useEffect } from "react";
-import { usePopupControls } from "../../hooks/usePopupControls";
-import { useStyles } from "../../hooks/useStyles";
+import React, { useEffect } from 'react';
 
-import {
-  fetchFiles,
-  getFilesData,
-  popToStack,
-  selectedDir,
-  uploadFile,
-} from "../../store/file/data";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { fetchFiles, getFilesData, popToStack, selectedDir, uploadFile } from '@store/file/data';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
 
-import { Button } from "../Button";
-import { FileList } from "../FileList";
-import { Input } from "../Input";
-import { ModalCreateFile } from "./components";
+import { usePopupControls } from '@hooks/usePopupControls';
+import { useStyles } from '@hooks/useStyles';
 
-import styles from "./styles.module.scss";
+import { Button } from '@components/Button';
+import { Input } from '@components/Input';
+import { FileList } from '@components/FileList';
+
+import styles from './styles.module.scss';
+import { ModalCreateFile } from './components';
 
 export const Disk: React.FC = () => {
   const cx = useStyles(styles);
@@ -51,27 +46,34 @@ export const Disk: React.FC = () => {
 
   return (
     <>
-      <div className={cx("container")}>
-        <div className={cx("btns")}>
+      <div className={cx('container')}>
+        <div className={cx('btns')}>
           {!!dirStack.length && (
-            <Button className={cx("back")} text="Назад" onClick={goBack} />
+            <Button
+              className={cx('back')}
+              text="Назад"
+              onClick={goBack}
+            />
           )}
           <Button
             variant="outline"
             onClick={openPopup}
-            className={cx("create")}
+            className={cx('create')}
             text="Создать папку"
           />
-          <div className={cx("upload")}>
-            <label htmlFor="upload" className={cx("label")}>
+          <div className={cx('upload')}>
+            <label
+              htmlFor="upload"
+              className={cx('label')}
+            >
               Загрузить файл
             </label>
             <Input
-              multiple={true}
+              multiple
               onChange={(e) => submitUploadFile(e.target.files)}
               type="file"
               id="upload"
-              className={cx("input")}
+              className={cx('input')}
             />
           </div>
         </div>

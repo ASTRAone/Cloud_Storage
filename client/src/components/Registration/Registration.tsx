@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { useStyles } from "../../hooks/useStyles";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
-import { Button } from "../Button";
-import { ButtonLink } from "../ButtonLink";
-import { Input } from "../Input";
-import { InputPass } from "../InputPass";
-import { ErrorComponent } from "../ErrorComponent";
+import { getUserData, userRegistration } from '@store/auth/data';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
 
-import { LOGIN_ROUTE } from "../../utility/contants";
-import { REGEXP_DICTIONARY } from "../../utility/regexp";
+import { LOGIN_ROUTE } from '@src/utility/contants';
+import { REGEXP_DICTIONARY } from '@src/utility/regexp';
 
-import { getUserData, userRegistration } from "../../store/auth/data";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { AuthRegDTO } from '@api/AuthApi/models';
 
-import { AuthRegDTO } from "../../api/AuthApi/models";
+import { useStyles } from '@hooks/useStyles';
 
-import styles from "./styles.module.scss";
+import { Button } from '@components/Button';
+import { ButtonLink } from '@components/ButtonLink';
+import { ErrorComponent } from '@components/ErrorComponent';
+import { Input } from '@components/Input';
+import { InputPass } from '@components/InputPass';
+
+import styles from './styles.module.scss';
 
 export const Registration: React.FC = () => {
   const cx = useStyles(styles);
@@ -33,7 +34,7 @@ export const Registration: React.FC = () => {
     formState: { errors },
   } = useForm();
 
-  const [email, pass] = watch(["email", "password"]);
+  const [email, pass] = watch(['email', 'password']);
 
   useEffect(() => {
     if (errorRes) {
@@ -52,9 +53,9 @@ export const Registration: React.FC = () => {
   };
 
   return (
-    <div className={cx("container")}>
-      <h2 className={cx("title")}>Регистрация</h2>
-      <div className={cx("content")}>
+    <div className={cx('container')}>
+      <h2 className={cx('title')}>Регистрация</h2>
+      <div className={cx('content')}>
         <Controller
           control={control}
           rules={{ required: true }}
@@ -115,14 +116,15 @@ export const Registration: React.FC = () => {
           name="password"
         />
       </div>
-      {errorRes && (
-        <ErrorComponent text="Пользователь с таким email уже зарегистрирован" />
-      )}
-      <div className={cx("footer")}>
-        <ButtonLink to={LOGIN_ROUTE} text="Есть аккаунт?" />
+      {errorRes && <ErrorComponent text="Пользователь с таким email уже зарегистрирован" />}
+      <div className={cx('footer')}>
+        <ButtonLink
+          to={LOGIN_ROUTE}
+          text="Есть аккаунт?"
+        />
         <Button
           onClick={handleSubmit(createUser)}
-          isLoading={statusReg === "loading"}
+          isLoading={statusReg === 'loading'}
           text="Зарегистрироваться"
         />
       </div>

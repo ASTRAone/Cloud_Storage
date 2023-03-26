@@ -1,2 +1,2 @@
-export { StorageService } from "./StorageService";
-export type { IStorageService } from "./IStorageService";
+export { StorageService } from './StorageService';
+export type { IStorageService } from './IStorageService';

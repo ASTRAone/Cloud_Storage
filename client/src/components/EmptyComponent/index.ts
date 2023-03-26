@@ -1,1 +1,1 @@
-export { EmptyComponent } from "./EmptyComponent";
+export { EmptyComponent } from './EmptyComponent';

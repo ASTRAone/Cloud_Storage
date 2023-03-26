@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { useStyles } from "../../hooks/useStyles";
+import React, { useState, useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { getUserData, userLogin } from "../../store/auth/data";
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { getUserData, userLogin } from '@store/auth/data';
 
-import { Button } from "../Button";
-import { ButtonLink } from "../ButtonLink";
-import { Input } from "../Input";
-import { InputPass } from "../InputPass";
-import { ErrorComponent } from "../ErrorComponent";
+import { REGEXP_DICTIONARY } from '@src/utility/regexp';
+import { AUTH_HEADER } from '@src/utility/headers';
+import { REGISTRATION_ROUTE } from '@src/utility/contants';
 
-import { REGEXP_DICTIONARY } from "../../utility/regexp";
-import { AuthDTO } from "../../api/AuthApi/models";
+import { AuthDTO } from '@api/AuthApi/models';
 
-import { AUTH_HEADER } from "../../utility/headers";
-import { REGISTRATION_ROUTE } from "../../utility/contants";
+import { useStyles } from '@hooks/useStyles';
 
-import styles from "./styles.module.scss";
+import { Button } from '@components/Button';
+import { ButtonLink } from '@components/ButtonLink';
+import { Input } from '@components/Input';
+import { InputPass } from '@components/InputPass';
+import { ErrorComponent } from '@components/ErrorComponent';
+
+import styles from './styles.module.scss';
 
 export const Auth: React.FC = () => {
   const cx = useStyles(styles);
@@ -30,7 +31,7 @@ export const Auth: React.FC = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const [email, pass] = watch(["email", "password"]);
+  const [email, pass] = watch(['email', 'password']);
 
   useEffect(() => {
     if (errorRes) {
@@ -41,7 +42,7 @@ export const Auth: React.FC = () => {
   const loginUser = async (data: unknown) => {
     try {
       const { accessToken } = await dispatch(userLogin(data as AuthDTO)).unwrap();
-      localStorage.setItem(AUTH_HEADER, `Bearer ${accessToken}`)
+      localStorage.setItem(AUTH_HEADER, `Bearer ${accessToken}`);
     } catch (error) {
       setErrorRes(true);
       console.log(error);
@@ -49,9 +50,9 @@ export const Auth: React.FC = () => {
   };
 
   return (
-    <div className={cx("container")}>
-      <h2 className={cx("title")}>Авторизация</h2>
-      <div className={cx("content")}>
+    <div className={cx('container')}>
+      <h2 className={cx('title')}>Авторизация</h2>
+      <div className={cx('content')}>
         <Controller
           control={control}
           rules={{ required: true, pattern: REGEXP_DICTIONARY.email }}
@@ -66,6 +67,7 @@ export const Auth: React.FC = () => {
           )}
           name="email"
         />
+
         <Controller
           control={control}
           rules={{ required: true, minLength: 3 }}
@@ -82,11 +84,14 @@ export const Auth: React.FC = () => {
         />
       </div>
       {errorRes && <ErrorComponent text="Неверный логин или пароль" />}
-      <div className={cx("footer")}>
-        <ButtonLink to={REGISTRATION_ROUTE} text="Нет аккаунта?" />
+      <div className={cx('footer')}>
+        <ButtonLink
+          to={REGISTRATION_ROUTE}
+          text="Нет аккаунта?"
+        />
         <Button
           onClick={handleSubmit(loginUser)}
-          isLoading={status === "loading"}
+          isLoading={status === 'loading'}
           text="Войти"
         />
       </div>

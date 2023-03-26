@@ -1,10 +1,17 @@
-import React from 'react'
-import { useStyles } from '../../hooks/useStyles'
+import React from 'react';
 
-import styles from './styles.module.scss'
-import { Icon } from '../icon'
+import { useStyles } from '@hooks/useStyles';
+
+import { Icon } from '@components/icon';
+
+import styles from './styles.module.scss';
 
 export const Loader: React.FC = () => {
-  const cx = useStyles(styles)
-  return <Icon type="spinner" className={cx('loader')} />
-}
+  const cx = useStyles(styles);
+  return (
+    <Icon
+      type="spinner"
+      className={cx('loader')}
+    />
+  );
+};

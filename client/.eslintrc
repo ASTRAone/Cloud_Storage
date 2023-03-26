@@ -1,0 +1,74 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "plugin:react/jsx-runtime",
+    "prettier"
+  ],
+  "plugins": ["prettier", "eslint-plugin-import-helpers"],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prop-types.md
+    "react/prop-types": 0,
+
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md
+    "react/self-closing-comp": ["error", { "component": true, "html": true }],
+
+    // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-max-props-per-line.md
+    "react/jsx-max-props-per-line": [2, { "maximum": 1, "when": "always" }],
+
+    // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-first-prop-new-line.md
+    "react/jsx-first-prop-new-line": [2, "multiline-multiprop"],
+
+    // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-indent-props.md
+    "react/jsx-indent-props": [2, 2],
+
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-curly-brace-presence.md
+    "react/jsx-curly-brace-presence": ["error", { "props": "never", "children": "never" }],
+
+    //https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md
+    "react/jsx-boolean-value": "error",
+
+    // https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/no-empty-function.md
+    "@typescript-eslint/no-empty-function": "off",
+
+    //https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/no-unused-vars.md
+    "@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": true }],
+
+    // https://github.com/Tibfib/eslint-plugin-import-helpers/blob/master/docs/rules/order-imports.md
+    "import-helpers/order-imports": [
+      "error",
+      {
+        "newlinesBetween": "always",
+        "groups": [
+          "/^react/",
+          "module",
+          "/^@src/",
+          "/^@api/",
+          "/^@services/",
+          "/^@hooks/",
+          "/^@components/",
+          "/^@utility/",
+          "/^@assets/"
+        ]
+      }
+    ],
+
+    // https://eslint.org/docs/rules/func-style
+    "func-style": ["error", "expression"]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "ignorePatterns": ["config-overrides.js", "index.html"]
+}

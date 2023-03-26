@@ -1,10 +1,12 @@
-import axios from "axios";
-import { useEffect } from "react";
-import { AuthApi } from "../api/AuthApi";
-import { dropState } from "../store/auth/data";
-import { useAppDispatch } from "../store/hooks";
+import { useEffect } from 'react';
 
-import { AUTH_HEADER } from "../utility/headers";
+import axios from 'axios';
+import { useAppDispatch } from '@store/hooks';
+import { dropState } from '@store/file/data';
+
+import { AUTH_HEADER } from '@src/utility/headers';
+
+import { AuthApi } from '@api/AuthApi';
 
 const $api = axios.create({
   withCredentials: true,
@@ -31,9 +33,10 @@ const useAuth = () => {
     },
     (error) => {
       return Promise.reject(error);
-    }
+    },
   );
 
+  // eslint-disable-next-line func-style
   function createAxiosResponseInterceptor() {
     const interceptor = $api.interceptors.response.use(
       (response) => response,
@@ -45,12 +48,8 @@ const useAuth = () => {
 
         return AuthApi.refresh()
           .then((response) => {
-            localStorage.setItem(
-              AUTH_HEADER,
-              `Bearer ${response.data.accessToken}`
-            );
-            error.response.config.headers[AUTH_HEADER] =
-              "Bearer " + response.data.accessToken;
+            localStorage.setItem(AUTH_HEADER, `Bearer ${response.data.accessToken}`);
+            error.response.config.headers[AUTH_HEADER] = 'Bearer ' + response.data.accessToken;
             return $api(error.response.config);
           })
           .catch((error2) => {
@@ -59,7 +58,7 @@ const useAuth = () => {
             return Promise.reject(error2);
           })
           .finally(createAxiosResponseInterceptor);
-      }
+      },
     );
   }
   createAxiosResponseInterceptor();

@@ -1,7 +1,8 @@
-import React from "react";
-import { useStyles } from "../../hooks/useStyles";
+import React from 'react';
 
-import styles from "./styles.module.scss";
+import { useStyles } from '@hooks/useStyles';
+
+import styles from './styles.module.scss';
 
 type Props = {
   text: string;
