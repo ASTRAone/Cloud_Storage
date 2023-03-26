@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { getFilesData, pushToStack, selectedDir } from '@store/file/data';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-
 import { useStyles } from '@hooks/useStyles';
 
 import { File } from '@components/File/File';
 import { EmptyComponent } from '@components/EmptyComponent';
+
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { getFilesData, pushToStack, selectedDir } from '@store/file/data';
 
 import styles from './styles.module.scss';
 

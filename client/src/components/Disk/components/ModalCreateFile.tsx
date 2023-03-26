@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
-import { createFile, fetchFiles, getFilesData } from '@store/file/data';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-
 import { FileCreateDTO } from '@api/FileApi/models';
 
 import { Input } from '@components/Input';
 import { PopupComponent } from '@components/PopupComponent';
+
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { createFile, fetchFiles, getFilesData } from '@store/file/data';
 
 type Props = {
   isOpen?: boolean;

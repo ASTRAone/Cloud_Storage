@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 
-import { getUserData } from '@store/auth/data';
-import { useAppSelector } from '@store/hooks';
-
 import { privateRoutes, publicRoutes } from '@src/routes';
 import { DISK_ROUTE, LOGIN_ROUTE } from '@src/utility/contants';
+
+import { getUserData } from '@store/auth/data';
+import { useAppSelector } from '@store/hooks';
 
 export const AppRouter: React.FC = () => {
   const { user } = useAppSelector(getUserData);

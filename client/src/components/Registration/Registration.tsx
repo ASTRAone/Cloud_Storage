@@ -2,9 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { getUserData, userRegistration } from '@store/auth/data';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-
 import { LOGIN_ROUTE } from '@src/utility/contants';
 import { REGEXP_DICTIONARY } from '@src/utility/regexp';
 
@@ -17,6 +14,9 @@ import { ButtonLink } from '@components/ButtonLink';
 import { ErrorComponent } from '@components/ErrorComponent';
 import { Input } from '@components/Input';
 import { InputPass } from '@components/InputPass';
+
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { getUserData, userRegistration } from '@store/auth/data';
 
 import styles from './styles.module.scss';
 

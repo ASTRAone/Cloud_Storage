@@ -3,4 +3,6 @@
 /build
 react-app-env.d.ts
 react-table-config.d.ts
+craco.config
+resolve-tsconfig-path-to-webpack-alias
 /*.js

@@ -1,8 +1,5 @@
 import React from 'react';
 
-import { useAppDispatch } from '@store/hooks';
-import { userLogout } from '@store/auth/data';
-
 import { AUTH_HEADER } from '@src/utility/headers';
 
 import { usePopupControls } from '@hooks/usePopupControls';
@@ -11,6 +8,9 @@ import { useStyles } from '@hooks/useStyles';
 import { Button } from '@components/Button';
 
 import AvatarDefault from '@assets/images/user-avatar.png';
+
+import { userLogout } from '@store/auth/data';
+import { useAppDispatch } from '@store/hooks';
 
 import styles from './styles.module.scss';
 

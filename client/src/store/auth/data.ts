@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '@store/root';
-import { statusFlags } from '@store/selectors';
 
 import { RequestStatus } from '@src/utility/common';
 
 import { AuthDTO, AuthRegDTO, AuthViewDTO } from '@api/AuthApi/models';
 import { AuthApi } from '@api/AuthApi';
+
+import { statusFlags } from '@store/selectors';
+import { RootState } from '@store/root';
 
 type State = {
   user: AuthViewDTO | null;
