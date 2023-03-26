@@ -1,4 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
+
 import { StateWithStatus } from './root';
 
 const statusFlags = createSelector(

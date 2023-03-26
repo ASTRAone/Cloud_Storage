@@ -1,4 +1,4 @@
-import { TypeFile, UUID } from "../../utility/common";
+import { TypeFile, UUID } from '../../utility/common';
 
 type FileResponse = {
   path: string;

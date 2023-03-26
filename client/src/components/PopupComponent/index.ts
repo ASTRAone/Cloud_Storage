@@ -1,1 +1,1 @@
-export { PopupComponent } from "./PopupComponent";
+export { PopupComponent } from './PopupComponent';

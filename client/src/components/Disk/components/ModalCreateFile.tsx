@@ -1,16 +1,13 @@
-import React, { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { useStyles } from "../../../hooks/useStyles";
+import React, { useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 
-import { PopupComponent } from "../../PopupComponent";
-import { Input } from "../../Input";
+import { createFile, fetchFiles, getFilesData } from '@store/file/data';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
 
-import { FileCreateDTO } from "../../../api/FileApi/models";
+import { FileCreateDTO } from '@api/FileApi/models';
 
-import { createFile, getFilesData, fetchFiles } from "../../../store/file/data";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-
-import styles from "./styles.module.scss";
+import { Input } from '@components/Input';
+import { PopupComponent } from '@components/PopupComponent';
 
 type Props = {
   isOpen?: boolean;
@@ -22,12 +19,7 @@ type PropsForm = {
   name: string;
 };
 
-export const ModalCreateFile: React.FC<Props> = ({
-  isOpen,
-  closeModal = () => {},
-  currentDir,
-}) => {
-  const cx = useStyles(styles);
+export const ModalCreateFile: React.FC<Props> = ({ isOpen, closeModal = () => {}, currentDir }) => {
   const dispatch = useAppDispatch();
   const { status, statusCreate } = useAppSelector(getFilesData);
 
@@ -39,13 +31,13 @@ export const ModalCreateFile: React.FC<Props> = ({
 
   const [error, setError] = useState(false);
 
-  const isLoading = status === "loading" || statusCreate === "loading";
+  const isLoading = status === 'loading' || statusCreate === 'loading';
 
   const handleCreateFile = async (data: unknown) => {
     const { name } = data as PropsForm;
     const payload: FileCreateDTO = {
       name,
-      type: "dir",
+      type: 'dir',
     };
 
     if (currentDir) {

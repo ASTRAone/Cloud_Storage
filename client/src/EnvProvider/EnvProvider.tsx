@@ -1,7 +1,5 @@
 import React, { ReactNode, useLayoutEffect } from 'react';
 
-import { RestService } from '../services/RestService';
-
 type Props = {
   baseURL?: string;
   children?: ReactNode;
@@ -9,7 +7,10 @@ type Props = {
 
 const EnvProvider: React.FC<Props> = ({ baseURL, children }) => {
   useLayoutEffect(() => {
-    if (baseURL) RestService.getInstance().addBaseURL(baseURL);
+    if (baseURL) {
+      // RestService.getInstance().addBaseURL(baseURL);
+      // localStorage.setItem(AUTH_HEADER,)
+    }
   }, []);
 
   return <>{children}</>;

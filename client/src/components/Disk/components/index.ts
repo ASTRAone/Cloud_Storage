@@ -1,1 +1,1 @@
-export { ModalCreateFile } from "./ModalCreateFile";
+export { ModalCreateFile } from './ModalCreateFile';

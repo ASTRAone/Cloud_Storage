@@ -1,11 +1,11 @@
 import React from 'react';
 
-import cn from 'classnames';  
+import cn from 'classnames';
 
-import { dictionary, IconTypes } from './IconDictionary';
-import { Size } from '../../utility/common';
+import { Size } from '@src/utility/common';
 
 import styles from './Icon.module.scss';
+import { dictionary, IconTypes } from './IconDictionary';
 
 type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
   type: IconTypes;
@@ -23,7 +23,7 @@ const iconSizesDictionary: Record<Size, string> = {
 };
 
 export const Icon: React.FC<Props> = ({ type, size = 'lg', className, ...rest }) => {
-  const Icon = dictionary[type]
+  const Icon = dictionary[type];
 
   if (!Icon) return null;
 
@@ -31,8 +31,11 @@ export const Icon: React.FC<Props> = ({ type, size = 'lg', className, ...rest })
   const classnames = cn(styles.icon, className, classNameBySize);
 
   return (
-    <div className={classnames} {...rest}>
+    <div
+      className={classnames}
+      {...rest}
+    >
       <Icon />
     </div>
-  )
+  );
 };

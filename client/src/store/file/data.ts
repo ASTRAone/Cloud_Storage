@@ -1,15 +1,11 @@
-import {
-  createAsyncThunk,
-  createSelector,
-  createSlice,
-  PayloadAction,
-} from "@reduxjs/toolkit";
-import { FileApi } from "../../api/FileApi";
-import { FileCreateDTO, FileResponse, FileUploadDTO } from "../../api/FileApi/models";
-import { RequestStatus, UUID } from "../../utility/common";
-import { RootState } from "../root";
+import { createAsyncThunk, createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '@store/root';
+import { statusFlags } from '@store/selectors';
 
-import { statusFlags } from "../selectors";
+import { RequestStatus, UUID } from '@src/utility/common';
+
+import { FileCreateDTO, FileResponse, FileUploadDTO } from '@api/FileApi/models';
+import { FileApi } from '@api/FileApi';
 
 type State = {
   file: FileResponse[] | [];
@@ -25,14 +21,14 @@ const initialState: State = {
   file: [],
   dirStack: [],
   needUpdate: false,
-  currentDir: "",
-  status: "idle",
-  statusCreate: "idle",
-  statusUpload: "idle",
+  currentDir: '',
+  status: 'idle',
+  statusCreate: 'idle',
+  statusUpload: 'idle',
 };
 
 const fetchFiles = createAsyncThunk(
-  "file/fetch",
+  'file/fetch',
   async (dirId: UUID | undefined, { rejectWithValue }) => {
     try {
       const response = await FileApi.fetchFiles(dirId);
@@ -40,11 +36,11 @@ const fetchFiles = createAsyncThunk(
     } catch (e) {
       return rejectWithValue(e);
     }
-  }
+  },
 );
 
 const createFile = createAsyncThunk(
-  "file/create",
+  'file/create',
   async (payload: FileCreateDTO, { rejectWithValue }) => {
     try {
       const response = await FileApi.createFile(payload);
@@ -52,16 +48,16 @@ const createFile = createAsyncThunk(
     } catch (e) {
       return rejectWithValue(e);
     }
-  }
+  },
 );
 
 const uploadFile = createAsyncThunk(
-  "file/upload",
+  'file/upload',
   async (payload: FileUploadDTO, { rejectWithValue }) => {
     const formData = new FormData();
-    formData.append("file", payload.file);
+    formData.append('file', payload.file);
     if (payload.parent) {
-      formData.append("parent", payload.parent);
+      formData.append('parent', payload.parent);
     }
     try {
       const response = await FileApi.uploadFile(formData);
@@ -69,11 +65,11 @@ const uploadFile = createAsyncThunk(
     } catch (e) {
       return rejectWithValue(e);
     }
-  }
+  },
 );
 
 const fileDataSlice = createSlice({
-  name: "fileDataSlice",
+  name: 'fileDataSlice',
   initialState,
   reducers: {
     dropState: () => initialState,
@@ -90,40 +86,40 @@ const fileDataSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchFiles.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(fetchFiles.fulfilled, (state, action) => {
         state.file = action.payload;
-        state.status = "idle";
+        state.status = 'idle';
       })
       .addCase(fetchFiles.rejected, (state) => {
-        state.status = "failed";
+        state.status = 'failed';
       })
 
       .addCase(createFile.pending, (state) => {
-        state.statusCreate = "loading";
-        state.needUpdate = true
+        state.statusCreate = 'loading';
+        state.needUpdate = true;
       })
       .addCase(createFile.fulfilled, (state) => {
-        state.statusCreate = "idle";
-        state.needUpdate = false
+        state.statusCreate = 'idle';
+        state.needUpdate = false;
       })
       .addCase(createFile.rejected, (state) => {
-        state.statusCreate = "failed";
-        state.needUpdate = false
+        state.statusCreate = 'failed';
+        state.needUpdate = false;
       })
 
       .addCase(uploadFile.pending, (state) => {
-        state.statusUpload = "loading";
-        state.needUpdate = true
+        state.statusUpload = 'loading';
+        state.needUpdate = true;
       })
       .addCase(uploadFile.fulfilled, (state) => {
-        state.statusUpload = "idle";
-        state.needUpdate = false
+        state.statusUpload = 'idle';
+        state.needUpdate = false;
       })
       .addCase(uploadFile.rejected, (state) => {
-        state.statusUpload = "failed";
-        state.needUpdate = false
+        state.statusUpload = 'failed';
+        state.needUpdate = false;
       });
   },
 });
@@ -131,19 +127,12 @@ const fileDataSlice = createSlice({
 const selectSelf = (state: RootState) => state.file.data;
 
 const getFilesData = createSelector(selectSelf, ({ ...fileData }) => fileData);
-const statusCreate = createSelector(
-  selectSelf,
-  ({ statusCreate }) => statusCreate
-);
-const getCurrentDir = createSelector(
-  selectSelf,
-  ({ currentDir }) => currentDir
-);
+const statusCreate = createSelector(selectSelf, ({ statusCreate }) => statusCreate);
+const getCurrentDir = createSelector(selectSelf, ({ currentDir }) => currentDir);
 const getStackDir = createSelector(selectSelf, ({ dirStack }) => dirStack);
 const getStatus = createSelector(selectSelf, statusFlags);
 
-export const { selectedDir, pushToStack, dropState, popToStack } =
-  fileDataSlice.actions;
+export const { selectedDir, pushToStack, dropState, popToStack } = fileDataSlice.actions;
 
 export {
   getFilesData,

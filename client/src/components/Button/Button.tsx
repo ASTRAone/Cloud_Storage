@@ -1,15 +1,17 @@
-import React from "react";
-import { useStyles } from "../../hooks/useStyles";
+import React from 'react';
 
-import { Icon } from "../icon";
-import { Size } from "../../utility/common";
-import { IconTypes } from "../icon/IconDictionary";
+import { Size } from '@src/utility/common';
 
-import styles from "./styles.module.scss";
-import { Loader } from "../Loader";
+import { useStyles } from '@hooks/useStyles';
+
+import { IconTypes } from '@components/icon/IconDictionary';
+import { Loader } from '@components/Loader';
+import { Icon } from '@components/icon';
+
+import styles from './styles.module.scss';
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "ligth" | "outline" | "empty";
+  variant?: 'ligth' | 'outline' | 'empty';
   isIcon?: boolean;
   typeIcon?: IconTypes;
   sizeIcon?: Size;
@@ -19,7 +21,7 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 export const Button: React.FC<Props> = ({
-  variant = "ligth",
+  variant = 'ligth',
   isIcon,
   typeIcon,
   sizeIcon,
@@ -31,9 +33,17 @@ export const Button: React.FC<Props> = ({
   const cx = useStyles(styles);
 
   return (
-    <button className={cx("btn", className, variant)} {...restProps}>
+    <button
+      className={cx('btn', className, variant)}
+      {...restProps}
+    >
       {isLoading ? <Loader /> : text}
-      {isIcon && typeIcon && <Icon type={typeIcon} size={sizeIcon} />}
+      {isIcon && typeIcon && (
+        <Icon
+          type={typeIcon}
+          size={sizeIcon}
+        />
+      )}
     </button>
   );
 };

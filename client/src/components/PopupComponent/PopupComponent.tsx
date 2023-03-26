@@ -1,11 +1,12 @@
-import React from "react";
-import { useStyles } from "../../hooks/useStyles";
-import { Button } from "../Button";
-import { ErrorComponent } from "../ErrorComponent";
-import { Icon } from "../icon";
-import { Input } from "../Input";
+import React from 'react';
 
-import styles from "./styles.module.scss";
+import { useStyles } from '@hooks/useStyles';
+
+import { Button } from '@components/Button';
+import { ErrorComponent } from '@components/ErrorComponent';
+import { Icon } from '@components/icon';
+
+import styles from './styles.module.scss';
 
 type Props = {
   open?: boolean;
@@ -24,28 +25,32 @@ export const PopupComponent: React.FC<Props> = ({
   submit = () => {},
   loading = false,
   error = false,
-  title = "",
-  textBtn = "Создать",
+  title = '',
+  textBtn = 'Создать',
   children,
 }) => {
   const cx = useStyles(styles);
 
   return open ? (
-    <div className={cx("container")}>
-      <div className={cx("content")}>
-        <div className={cx("header")}>
-          <div className={cx("title")}>{title}</div>
-          <Icon onClick={close} className={cx("icon")} type="close" />
+    <div className={cx('container')}>
+      <div className={cx('content')}>
+        <div className={cx('header')}>
+          <div className={cx('title')}>{title}</div>
+          <Icon
+            onClick={close}
+            className={cx('icon')}
+            type="close"
+          />
         </div>
         {children}
         {error && (
           <ErrorComponent
-            className={cx("error")}
+            className={cx('error')}
             text="Ошибка создания файла"
           />
         )}
         <Button
-          className={cx("btn")}
+          className={cx('btn')}
           isLoading={loading}
           text={textBtn}
           onClick={submit}
