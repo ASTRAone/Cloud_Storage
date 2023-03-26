@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useStyles } from "../../hooks/useStyles";
 import Logo from "../../assets/images/cloud-logo.png";
 
-import { getUserData, userLogout } from "../../store/auth/data";
+import { getUserData, userLogout, userReload } from "../../store/auth/data";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 import { AUTH_HEADER } from "../../utility/headers";
@@ -22,9 +22,9 @@ export const NavBar: React.FC = () => {
   const { user } = useAppSelector(getUserData);
 
   useAuth();
-  // useEffect(() => {
-  //   dispatch(userAuth()).unwrap();
-  // }, []);
+  useEffect(() => {
+    dispatch(userReload()).unwrap();
+  }, []);
 
   const logout = async () => {
     try {
@@ -52,7 +52,7 @@ export const NavBar: React.FC = () => {
             text="Регистрация"
           />
         )}
-        {user?.isAuth && <Button text="Выйти" onClick={logout} />}
+        {/* {user?.isAuth && <Button text="Выйти" onClick={logout} />} */}
         {user?.isAuth && <Avatar fullName="Смирнов В.В." />}
       </div>
     </div>

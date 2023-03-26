@@ -14,16 +14,10 @@ import { ErrorComponent } from "../ErrorComponent";
 import { REGEXP_DICTIONARY } from "../../utility/regexp";
 import { AuthDTO } from "../../api/AuthApi/models";
 
-import { RestService } from "../../services/RestService";
-import { StorageService } from "../../services/StorageService";
-
 import { AUTH_HEADER } from "../../utility/headers";
 import { REGISTRATION_ROUTE } from "../../utility/contants";
 
 import styles from "./styles.module.scss";
-
-const restService = RestService.getInstance();
-const storageService = StorageService.getInstance();
 
 export const Auth: React.FC = () => {
   const cx = useStyles(styles);
@@ -47,8 +41,6 @@ export const Auth: React.FC = () => {
   const loginUser = async (data: unknown) => {
     try {
       const { accessToken } = await dispatch(userLogin(data as AuthDTO)).unwrap();
-      // restService.addDefaultHeader(AUTH_HEADER, `Bearer ${accessToken}`);
-      // storageService.setItem(AUTH_HEADER, `Bearer ${accessToken}`);
       localStorage.setItem(AUTH_HEADER, `Bearer ${accessToken}`)
     } catch (error) {
       setErrorRes(true);

@@ -50,11 +50,11 @@ const userRegistration = createAsyncThunk(
   }
 );
 
-const userRefresh = createAsyncThunk(
+const userReload = createAsyncThunk(
   "user/refresh",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await AuthApi.refresh();
+      const response = await AuthApi.reload();
       return response.data;
     } catch (e) {
       return rejectWithValue(e);
@@ -106,17 +106,17 @@ const userDataSlice = createSlice({
         state.statusReg = "failed";
       })
 
-      .addCase(userRefresh.pending, (state) => {
+      .addCase(userReload.pending, (state) => {
         state.statusAuth = "loading";
       })
-      .addCase(userRefresh.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+      .addCase(userReload.fulfilled, (state, action) => {
+        state.user = action.payload;
         if (state.user) {
           state.user.isAuth = true;
         }
         state.statusAuth = "idle";
       })
-      .addCase(userRefresh.rejected, (state) => {
+      .addCase(userReload.rejected, (state) => {
         if (state.user?.isAuth) {
           state.user.isAuth = false;
         }
@@ -149,9 +149,9 @@ export const { dropState } = userDataSlice.actions;
 export {
   userDataSlice,
   getUserData,
-  userLogin,
   getStatus,
-  userRefresh,
+  userLogin,
+  userReload,
   userRegistration,
   userLogout,
 };

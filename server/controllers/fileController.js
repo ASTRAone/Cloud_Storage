@@ -2,6 +2,7 @@ const fileService = require("../services/fileService");
 const User = require("../models/User");
 const File = require("../models/File");
 const fs = require("fs");
+const uuid = require("uuid");
 
 class FileController {
   async createDir(req, res) {
@@ -59,16 +60,14 @@ class FileController {
 
       if (parent) {
         // change to windows
-        // path = `${process.env.FILE_PATH}\\${user._id}\\${parent.path}\\${
+        path = `${process.env.FILE_PATH}\\${user._id}\\${parent.path}\\${file.name}`;
+        // path = `${process.env.FILE_PATH}\/${user._id}\/${parent.path}\/${
         //   file.name
         // }`;
-        path = `${process.env.FILE_PATH}\/${user._id}\/${parent.path}\/${
-          file.name
-        }`;
       } else {
         // change to windows
-        // path = `${process.env.FILE_PATH}}\\${user._id}\\${file.name}`;
-        path = `${process.env.FILE_PATH}\/${user._id}\/${file.name}`;
+        path = `${process.env.FILE_PATH}}\\${user._id}\\${file.name}`;
+        // path = `${process.env.FILE_PATH}\/${user._id}\/${file.name}`;
       }
 
       if (fs.existsSync(path)) {
@@ -89,10 +88,26 @@ class FileController {
       await dbFile.save();
       await user.save();
 
-      res.json(dbFile)
+      res.json(dbFile);
     } catch (error) {
       console.log(error);
       return res.status(500).json({ message: "Upload error" });
+    }
+  }
+
+  async uploadAvatar(req, res) {
+    try {
+      const file = req.files.file;
+      const user = await User.findById(req.user.id);
+      const fileType = file.name.split(".").pop();
+      const avatarName = `${uuid.v4()}.${fileType}`;
+      file.mv(process.env.STATIC_PATH + "\\" + avatarName);
+      user.avatar = avatarName;
+      await user.save();
+      return res.json({ message: "Avatar was uploaded" });
+    } catch (e) {
+      console.log(e);
+      return res.status(400).json({ message: "Upload avatar error" });
     }
   }
 }

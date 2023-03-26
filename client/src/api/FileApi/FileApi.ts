@@ -16,7 +16,7 @@ class FileApi {
   }
 
   static uploadFile(data: FormData) {
-    const url = "upload";
+    const url = "files/upload";
     return $api.post<FormData, any>(url, { ...data });
   }
 }
