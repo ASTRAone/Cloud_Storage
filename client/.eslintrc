@@ -57,7 +57,8 @@
           "/^@hooks/",
           "/^@components/",
           "/^@utility/",
-          "/^@assets/"
+          "/^@assets/",
+          "/^@store/"
         ]
       }
     ],

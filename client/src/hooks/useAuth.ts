@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 
 import axios from 'axios';
-import { useAppDispatch } from '@store/hooks';
-import { dropState } from '@store/file/data';
 
 import { AUTH_HEADER } from '@src/utility/headers';
 
 import { AuthApi } from '@api/AuthApi';
+
+import { useAppDispatch } from '@store/hooks';
+import { dropState } from '@store/file/data';
 
 const $api = axios.create({
   withCredentials: true,

@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '@store/root';
-import { statusFlags } from '@store/selectors';
 
 import { RequestStatus, UUID } from '@src/utility/common';
 
 import { FileCreateDTO, FileResponse, FileUploadDTO } from '@api/FileApi/models';
 import { FileApi } from '@api/FileApi';
+
+import { statusFlags } from '@store/selectors';
+import { RootState } from '@store/root';
 
 type State = {
   file: FileResponse[] | [];

@@ -15,7 +15,6 @@ export const Input: React.FC<Props> = ({
   value,
   error,
   isBorder = false,
-  onChange,
   ...rest
 }) => {
   const cx = useStyles(styles);
@@ -27,7 +26,6 @@ export const Input: React.FC<Props> = ({
         type={type}
         className={cx('input')}
         value={value}
-        onChange={onChange}
         placeholder={placeholder}
         {...rest}
       />

@@ -1,8 +1,5 @@
 import React, { useEffect } from 'react';
 
-import { getUserData, userReload } from '@store/auth/data';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '@src/utility/contants';
 
 import { useAuth } from '@hooks/useAuth';
@@ -10,6 +7,9 @@ import { useStyles } from '@hooks/useStyles';
 
 import { ButtonLink } from '@components/ButtonLink';
 import { Avatar } from '@components/Avatar';
+
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { getUserData, userReload } from '@store/auth/data';
 
 import Logo from '../../assets/images/cloud-logo.png';
 import styles from './styles.module.scss';

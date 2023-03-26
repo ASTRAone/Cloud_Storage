@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "es5",
     "lib": [
       "dom",
       "dom.iterable",
@@ -12,22 +12,17 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "sourceMap": true,
-    "noImplicitAny": true,
-    "noFallthroughCasesInSwitch": true
+    "experimentalDecorators": true
   },
-  "extends": "./ts.paths.json",
   "include": [
     "src"
   ],
-  "exclude": [
-    "node_modules",
-    "build"
-  ]
+  "extends": "./tsconfig.paths.json"
 }

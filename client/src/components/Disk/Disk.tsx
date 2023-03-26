@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 
-import { fetchFiles, getFilesData, popToStack, selectedDir, uploadFile } from '@store/file/data';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-
 import { usePopupControls } from '@hooks/usePopupControls';
 import { useStyles } from '@hooks/useStyles';
 
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
 import { FileList } from '@components/FileList';
+
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { fetchFiles, getFilesData, popToStack, selectedDir, uploadFile } from '@store/file/data';
 
 import styles from './styles.module.scss';
 import { ModalCreateFile } from './components';

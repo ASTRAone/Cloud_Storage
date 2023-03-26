@@ -28,6 +28,7 @@ export const Button: React.FC<Props> = ({
   className,
   isLoading = false,
   text,
+  type = 'button',
   ...restProps
 }) => {
   const cx = useStyles(styles);
@@ -35,6 +36,7 @@ export const Button: React.FC<Props> = ({
   return (
     <button
       className={cx('btn', className, variant)}
+      type={type}
       {...restProps}
     >
       {isLoading ? <Loader /> : text}
