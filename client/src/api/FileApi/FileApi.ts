@@ -16,7 +16,11 @@ class FileApi {
 
   static uploadFile(data: FormData) {
     const url = 'files/upload';
-    return $api.post<FormData, any>(url, { ...data });
+    return $api.post<FormData, any>(url, data, {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    });
   }
 }
 
