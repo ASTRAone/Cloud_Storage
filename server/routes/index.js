@@ -14,12 +14,13 @@ router.post(
 router.post("/login", UserController.login);
 router.post("/logout", UserController.logout);
 router.post("/file", authMiddleware, fileController.createDir);
+router.post("/files/upload", authMiddleware, fileController.uploadFile);
+router.post('/files/avatar', authMiddleware, fileController.uploadAvatar);
 router.get("/activate/:link", UserController.activate);
 router.get("/refresh", UserController.refresh);
 router.get("/users", authMiddleware, UserController.getUsers);
 router.get("/user", authMiddleware, UserController.getUser);
 router.get("/files", authMiddleware, fileController.getFiles);
-router.post("/files/upload", authMiddleware, fileController.uploadFile);
-router.post('/files/avatar', authMiddleware, fileController.uploadAvatar)
+router.get("/files/download", authMiddleware, fileController.downloadFile);
 
 module.exports = router;

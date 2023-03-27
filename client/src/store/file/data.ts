@@ -16,6 +16,7 @@ type State = {
   status: RequestStatus;
   statusCreate: RequestStatus;
   statusUpload: RequestStatus;
+  statusDownload: RequestStatus;
 };
 
 const initialState: State = {
@@ -26,6 +27,7 @@ const initialState: State = {
   status: 'idle',
   statusCreate: 'idle',
   statusUpload: 'idle',
+  statusDownload: 'idle',
 };
 
 const fetchFiles = createAsyncThunk(
@@ -62,6 +64,29 @@ const uploadFile = createAsyncThunk(
     }
     try {
       const response = await FileApi.uploadFile(formData);
+      return response.data;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
+const downloadFile = createAsyncThunk(
+  'file/download',
+  async (payload: FileResponse, { rejectWithValue }) => {
+    try {
+      //TODO реализовать функцию с отображением изображений
+      const response = await FileApi.downloadFile(payload._id);
+      if (response.status === 200) {
+        const blob = new Blob([response.data], { type: 'image/png' });
+        const downloadUrl = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.download = payload.name;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      }
       return response.data;
     } catch (e) {
       return rejectWithValue(e);
@@ -121,6 +146,19 @@ const fileDataSlice = createSlice({
       .addCase(uploadFile.rejected, (state) => {
         state.statusUpload = 'failed';
         state.needUpdate = false;
+      })
+
+      .addCase(downloadFile.pending, (state) => {
+        state.statusDownload = 'loading';
+        state.needUpdate = true;
+      })
+      .addCase(downloadFile.fulfilled, (state) => {
+        state.statusDownload = 'idle';
+        state.needUpdate = false;
+      })
+      .addCase(downloadFile.rejected, (state) => {
+        state.statusDownload = 'failed';
+        state.needUpdate = false;
       });
   },
 });
@@ -144,5 +182,6 @@ export {
   createFile,
   getStackDir,
   uploadFile,
+  downloadFile,
 };
 export default fileDataSlice.reducer;

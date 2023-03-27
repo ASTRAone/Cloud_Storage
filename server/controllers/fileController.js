@@ -60,14 +60,14 @@ class FileController {
 
       if (parent) {
         // change to windows
-        path = `${process.env.FILE_PATH}\\${user._id}\\${parent.path}\\${file.name}`;
-        // path = `${process.env.FILE_PATH}\/${user._id}\/${parent.path}\/${
-        //   file.name
-        // }`;
+        // path = `${process.env.FILE_PATH}\\${user._id}\\${parent.path}\\${file.name}`;
+        path = `${process.env.FILE_PATH}\/${user._id}\/${parent.path}\/${
+          file.name
+        }`;
       } else {
         // change to windows
-        path = `${process.env.FILE_PATH}}\\${user._id}\\${file.name}`;
-        // path = `${process.env.FILE_PATH}\/${user._id}\/${file.name}`;
+        // path = `${process.env.FILE_PATH}}\\${user._id}\\${file.name}`;
+        path = `${process.env.FILE_PATH}\/${user._id}\/${file.name}`;
       }
 
       if (fs.existsSync(path)) {
@@ -92,6 +92,25 @@ class FileController {
     } catch (error) {
       console.log(error);
       return res.status(500).json({ message: "Upload error" });
+    }
+  }
+
+  async downloadFile(req,res) {
+    try {
+      const file = await File.findOne({_id: req.query.id, user: req.user.id});
+      if (file) {
+        const hasPath = file.path !== '' ? `\/${file.path}` : '';
+        const path = `${process.env.FILE_PATH}\/${req.user.id}${hasPath}\/${file.name}`;
+        if (fs.existsSync(path)) {
+          return res.download(path, file.name);
+        }
+      } else {
+        return res.status(400).json({message: 'Download Error'});
+      }
+      
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Download error" });
     }
   }
 

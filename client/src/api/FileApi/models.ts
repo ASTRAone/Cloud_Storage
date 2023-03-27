@@ -22,4 +22,9 @@ type FileUploadDTO = {
   file: any;
 };
 
-export type { FileResponse, FileCreateDTO, FileUploadDTO };
+type FileDownloadDTO = {
+  parent?: UUID;
+  file: any;
+};
+
+export type { FileResponse, FileCreateDTO, FileUploadDTO, FileDownloadDTO };

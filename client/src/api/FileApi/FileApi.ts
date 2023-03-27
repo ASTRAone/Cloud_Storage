@@ -22,6 +22,11 @@ class FileApi {
       },
     });
   }
+
+  static downloadFile(fileId?: string) {
+    const url = `files/download${fileId ? '?id=' + fileId : ''}`;
+    return $api.get<any>(url);
+  }
 }
 
 export { FileApi };
