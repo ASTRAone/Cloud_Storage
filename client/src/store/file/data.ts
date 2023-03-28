@@ -80,7 +80,7 @@ const downloadFile = createAsyncThunk(
       //TODO реализовать функцию с отображением изображений
       const response = await FileApi.downloadFile(payload._id);
       if (response.status === 200) {
-        const blob = new Blob([response.data], { type: 'image/png' });
+        const blob = new Blob([response.data]);
         const downloadUrl = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = downloadUrl;

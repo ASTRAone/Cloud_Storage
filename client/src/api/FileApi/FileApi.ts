@@ -25,7 +25,7 @@ class FileApi {
 
   static downloadFile(fileId?: string) {
     const url = `files/download${fileId ? '?id=' + fileId : ''}`;
-    return $api.get<any>(url);
+    return $api.get<any>(url, { responseType: 'blob' });
   }
 
   static deleteFile(fileId?: string) {
