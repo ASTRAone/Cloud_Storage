@@ -1,0 +1,49 @@
+// @import 'size';
+@import './font-family';
+@import './colors';
+
+@mixin heading-12 {
+  font-weight: 600;
+  // font-size: sizes.$xs;
+  line-height: 4rem;
+  letter-spacing: 0.018em;
+  text-transform: uppercase;
+}
+
+@mixin paragraph-19 {
+  font-family: $base;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 23px;
+  color: $dark-blue-100;
+}
+
+@mixin paragraph-16 {
+  font-family: $base;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+@mixin paragraph-14 {
+  font-family: $base;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: $dark-blue-100;
+}
+
+@mixin paragraph-12 {
+  font-family: 'Itim';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: $dark-blue-100;
+}
+
+
+

@@ -4,3 +4,6 @@ export { Spinner } from './Spinner';
 export { FolderIcon } from './FolderIcon';
 export { FileIcon } from './FileIcon';
 export { CloseIcon } from './CloseIcon';
+export { UserIcon } from './UserIcon';
+export { MailIcon } from './MailIcon';
+export { SecurityIcon } from './SecurityIcon';

@@ -6,12 +6,16 @@ import { Icon } from '@components/icon';
 
 import styles from './styles.module.scss';
 
-export const Loader: React.FC = () => {
+type Props = {
+  className?: string;
+};
+
+export const Loader: React.FC<Props> = ({ className }) => {
   const cx = useStyles(styles);
   return (
     <Icon
       type="spinner"
-      className={cx('loader')}
+      className={cx('loader', className)}
     />
   );
 };
