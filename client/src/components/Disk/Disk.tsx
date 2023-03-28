@@ -21,12 +21,15 @@ export const Disk: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchFiles());
+    console.log('wtf');
   }, []);
 
   // TODO поправить обновление
   useEffect(() => {
+    console.log('currentDir, needUpdate ', currentDir, needUpdate);
     if (currentDir || needUpdate) {
       dispatch(fetchFiles(currentDir));
+      console.log('EFFECTED');
     }
   }, [needUpdate, currentDir]);
 
@@ -40,6 +43,7 @@ export const Disk: React.FC = () => {
   const submitUploadFile = (data: any) => {
     const files = [...data];
     files.forEach((file: unknown) => {
+      console.log('UPLOAD!');
       dispatch(uploadFile({ file, parent: currentDir }));
     });
   };

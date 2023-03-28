@@ -102,9 +102,10 @@ class FileController {
   async downloadFile(req,res) {
     try {
       const file = await File.findOne({_id: req.query.id, user: req.user.id});
+      console.log('file  server', file)
       if (file) {
-        const hasPath = file.path !== '' ? `\/${file.path}` : '';
-        const path = `${process.env.FILE_PATH}\/${req.user.id}${hasPath}\/${file.name}`;
+        const path = `${process.env.FILE_PATH}\/${req.user.id}\/${file.path}`;
+        console.log('path', path);
         if (fs.existsSync(path)) {
           return res.download(path, file.name);
         }
@@ -124,6 +125,8 @@ class FileController {
       const user = await User.findById(req.user.id);
       const fileType = file.name.split(".").pop();
       const avatarName = `${uuid.v4()}.${fileType}`;
+      // change
+      // file.mv(process.env.STATIC_PATH + "\/" + avatarName);
       file.mv(process.env.STATIC_PATH + "\\" + avatarName);
       user.avatar = avatarName;
       await user.save();
