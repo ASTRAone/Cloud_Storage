@@ -8,7 +8,7 @@ import { useStyles } from '@hooks/useStyles';
 
 import { Icon } from '@components/icon';
 
-import { downloadFile } from '@store/file/data';
+import { downloadFile, deleteFile } from '@store/file/data';
 import { useAppDispatch } from '@store/hooks';
 
 import styles from './styles.module.scss';
@@ -22,8 +22,13 @@ export const File: React.FC<Props> = ({ file, onClick = () => {} }) => {
   const { name, size, type, date } = file;
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
+
   const downloadClickHandler = () => {
     dispatch(downloadFile(file));
+  };
+  const deleteClickHandler = (e: any) => {
+    e.stopPropagation();
+    dispatch(deleteFile(file));
   };
   return (
     <div
@@ -46,7 +51,12 @@ export const File: React.FC<Props> = ({ file, onClick = () => {} }) => {
           скачать
         </div>
       )}
-      <div className={cx('file-delete')}>удалить</div>
+      <div
+        className={cx('file-delete')}
+        onClick={(e) => deleteClickHandler(e)}
+      >
+        удалить
+      </div>
     </div>
   );
 };

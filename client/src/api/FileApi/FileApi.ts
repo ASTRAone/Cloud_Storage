@@ -27,6 +27,11 @@ class FileApi {
     const url = `files/download${fileId ? '?id=' + fileId : ''}`;
     return $api.get<any>(url);
   }
+
+  static deleteFile(fileId?: string) {
+    const url = `files/delete${fileId ? '?id=' + fileId : ''}`;
+    return $api.delete<any>(url);
+  }
 }
 
 export { FileApi };

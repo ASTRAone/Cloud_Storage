@@ -22,5 +22,6 @@ router.get("/users", authMiddleware, UserController.getUsers);
 router.get("/user", authMiddleware, UserController.getUser);
 router.get("/files", authMiddleware, fileController.getFiles);
 router.get("/files/download", authMiddleware, fileController.downloadFile);
+router.delete("/files/delete", authMiddleware, fileController.deleteFile);
 
 module.exports = router;

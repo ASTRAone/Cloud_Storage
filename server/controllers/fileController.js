@@ -76,11 +76,15 @@ class FileController {
 
       file.mv(path);
       const type = file.name.split(".").pop();
+      let filePath = file.name;
+      if (parent) {
+        filePath = parent.path + `\/${file.name}`
+      }
       const dbFile = new File({
         name: file.name,
         type,
         size: file.size,
-        path: parent?.path,
+        path: filePath,
         parent: parent?._id,
         user: user._id,
       });
@@ -127,6 +131,22 @@ class FileController {
     } catch (e) {
       console.log(e);
       return res.status(400).json({ message: "Upload avatar error" });
+    }
+  }
+
+  async deleteFile(req, res) {
+    try {
+      const file = await File.findOne({_id : req.query.id, user: req.user.id});
+      if (!file) {
+        return res.status(400).json('File not found');
+      }
+      console.log('file !~!!', file);
+      fileService.deleteFile(file);
+      await file.remove();
+      return res.json({message: 'File was removed'});
+    } catch (e) {
+      console.log(e)
+      return res.status(400).json({message: 'Dir is not empty'});
     }
   }
 }

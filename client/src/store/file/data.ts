@@ -17,6 +17,7 @@ type State = {
   statusCreate: RequestStatus;
   statusUpload: RequestStatus;
   statusDownload: RequestStatus;
+  statusDelete: RequestStatus;
 };
 
 const initialState: State = {
@@ -28,6 +29,7 @@ const initialState: State = {
   statusCreate: 'idle',
   statusUpload: 'idle',
   statusDownload: 'idle',
+  statusDelete: 'idle',
 };
 
 const fetchFiles = createAsyncThunk(
@@ -87,6 +89,18 @@ const downloadFile = createAsyncThunk(
         link.click();
         link.remove();
       }
+      return response.data;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
+const deleteFile = createAsyncThunk(
+  'file/delete',
+  async (payload: FileResponse, { rejectWithValue }) => {
+    try {
+      const response = await FileApi.deleteFile(payload._id);
       return response.data;
     } catch (e) {
       return rejectWithValue(e);
@@ -159,6 +173,19 @@ const fileDataSlice = createSlice({
       .addCase(downloadFile.rejected, (state) => {
         state.statusDownload = 'failed';
         state.needUpdate = false;
+      })
+
+      .addCase(deleteFile.pending, (state) => {
+        state.statusDelete = 'loading';
+        state.needUpdate = true;
+      })
+      .addCase(deleteFile.fulfilled, (state) => {
+        state.statusDelete = 'idle';
+        state.needUpdate = false;
+      })
+      .addCase(deleteFile.rejected, (state) => {
+        state.statusDelete = 'failed';
+        state.needUpdate = false;
       });
   },
 });
@@ -183,5 +210,6 @@ export {
   getStackDir,
   uploadFile,
   downloadFile,
+  deleteFile,
 };
 export default fileDataSlice.reducer;
