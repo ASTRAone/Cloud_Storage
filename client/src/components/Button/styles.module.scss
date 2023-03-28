@@ -1,29 +1,39 @@
-@import "../../utility/colors.scss";
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+@import '@assets/styles/variables/colors';
 
 .btn {
-  outline: none;
-  border: none;
+  @include button();
+  @include paragraph-16();
+  text-align: center;
 
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  background-color: transparent;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 26px;
-  padding: 2px 30px 4px;
-  border-radius: 12px;
-  border: 1px solid $font-color;
-
-  &.ligth {
-    background-color: $font-color;
-    color: white;
+  &.full {
+    width: 100%;
   }
 
-  &.outline {
-    background-color: transparent;
-    color: $font-color;
-    border: 1px solid $font-color;
+  & .container {
+    padding: 7px 41px;
+    border: 1px solid $dark-blue-100;
+    border-radius: 7px;
+    cursor: pointer;
+    background-color: $light-sweet-100;
+
+    & .content {
+      & .spinner {
+        & .loader {
+          width: 18px;
+          height: 18px;
+        }
+      }
+      & .contentText {
+        display: flex;
+        align-items: center;
+
+        & .caption {
+          color: $white;
+          text-transform: uppercase;
+        }
+      }
+    }
   }
 }

@@ -20,13 +20,19 @@ export const InputPass: React.FC<InputProps> = ({ placeholder, error, ...rest })
         error={error}
         type={show ? 'text' : 'password'}
         placeholder={placeholder}
+        actions={[
+          {
+            icon: (
+              <Icon
+                onClick={show ? hidePass : showPass}
+                type={show ? 'hide' : 'show'}
+                className={cx('icon')}
+              />
+            ),
+            align: 'right',
+          },
+        ]}
         {...rest}
-      />
-      <Icon
-        className={cx('icon')}
-        size="lg"
-        type={show ? 'hide' : 'show'}
-        onClick={show ? hidePass : showPass}
       />
     </div>
   );

@@ -11,6 +11,7 @@ import { ErrorComponent } from '@components/ErrorComponent';
 import { Input } from '@components/Input';
 import { ButtonLink } from '@components/ButtonLink';
 import { Button } from '@components/Button';
+import { Icon } from '@components/icon';
 
 import styles from './styles.module.scss';
 
@@ -49,11 +50,22 @@ export const AuthView: React.FC<Props> = ({ loading, isError, setError }) => {
               isBorder
               placeholder="Введите адрес электронной почты..."
               error={errors.email || isError}
+              label="name"
+              actions={[
+                {
+                  icon: (
+                    <Icon
+                      type="user"
+                      className={cx('icon')}
+                    />
+                  ),
+                  align: 'left',
+                },
+              ]}
             />
           )}
           name="email"
         />
-
         <Controller
           control={control}
           rules={{ required: true, minLength: 3 }}
@@ -76,10 +88,9 @@ export const AuthView: React.FC<Props> = ({ loading, isError, setError }) => {
           text="Нет аккаунта?"
         />
         <Button
-          // onClick={handleSubmit(loginUser)}
-          type="submit"
+          // type="submit"
           isLoading={loading}
-          text="Войти"
+          text="sing up"
         />
       </div>
     </div>

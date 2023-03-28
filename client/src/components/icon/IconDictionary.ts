@@ -1,4 +1,14 @@
-import { HideIcon, ShowIcon, Spinner, FolderIcon, FileIcon, CloseIcon } from '@assets/icons';
+import {
+  HideIcon,
+  ShowIcon,
+  Spinner,
+  FolderIcon,
+  FileIcon,
+  CloseIcon,
+  UserIcon,
+  MailIcon,
+  SecurityIcon,
+} from '@assets/icons';
 
 const dictionary = {
   hide: HideIcon,
@@ -7,6 +17,9 @@ const dictionary = {
   folder: FolderIcon,
   file: FileIcon,
   close: CloseIcon,
+  user: UserIcon,
+  mail: MailIcon,
+  security: SecurityIcon,
 };
 
 type IconTypes = keyof typeof dictionary;

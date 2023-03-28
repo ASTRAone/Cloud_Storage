@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { cloneElement } from 'react';
 
-import { Size } from '@src/utility/common';
+import { IconObject, Size } from '@src/utility/common';
 
 import { useStyles } from '@hooks/useStyles';
 
 import { IconTypes } from '@components/icon/IconDictionary';
 import { Loader } from '@components/Loader';
-import { Icon } from '@components/icon';
 
 import styles from './styles.module.scss';
 
@@ -18,10 +17,12 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   isLoading?: boolean;
   text?: string;
   className?: string;
+  full?: boolean;
+  actions?: Array<IconObject>;
 };
 
 export const Button: React.FC<Props> = ({
-  variant = 'ligth',
+  // variant = 'ligth',
   isIcon,
   typeIcon,
   sizeIcon,
@@ -29,23 +30,48 @@ export const Button: React.FC<Props> = ({
   isLoading = false,
   text,
   type = 'button',
+  full = false,
+  actions = [],
   ...restProps
 }) => {
   const cx = useStyles(styles);
 
+  const actionsLeft: Array<JSX.Element> = [];
+  const actionsRight: Array<JSX.Element> = [];
+
+  if (actions) {
+    actions.forEach((elem) => {
+      console.log('elem', elem);
+      const icon = cloneElement(elem.icon, {
+        key: elem.icon.type,
+        ...elem.icon.props,
+        className: cx(elem.icon.props.className, 'icon'),
+      });
+      elem.align === 'left' ? actionsLeft.push(icon) : actionsRight.push(icon);
+    });
+  }
+
   return (
     <button
-      className={cx('btn', className, variant)}
-      type={type}
       {...restProps}
+      type={type}
+      className={cx('btn', full ? 'full' : '')}
     >
-      {isLoading ? <Loader /> : text}
-      {isIcon && typeIcon && (
-        <Icon
-          type={typeIcon}
-          size={sizeIcon}
-        />
-      )}
+      <div className={cx('container')}>
+        <div className={cx('content')}>
+          {isLoading ? (
+            <div className={cx('spinner')}>
+              <Loader className={cx('loader')} />
+            </div>
+          ) : (
+            <div className={cx('contentText')}>
+              {actionsLeft}
+              {text && <div className={cx('caption')}>{text}</div>}
+              {actionsRight}
+            </div>
+          )}
+        </div>
+      </div>
     </button>
   );
 };
