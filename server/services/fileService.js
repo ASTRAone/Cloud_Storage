@@ -18,6 +18,21 @@ class FileService {
       }
     });
   }
+
+  deleteFile(file) {
+    const path = this.getPath(file);
+    if (file.type === 'dir') {
+      fs.rmSync(path, {recursive: true})
+    } else {
+      fs.unlinkSync(path)
+    }
+  }
+
+  getPath(file) {
+    // change to windows
+    // return `${process.env.FILE_PATH}//${file.user}//${file.path}`
+    return `${process.env.FILE_PATH}\/${file.user}\/${file.path}`;
+  }
 }
 
 module.exports = new FileService();

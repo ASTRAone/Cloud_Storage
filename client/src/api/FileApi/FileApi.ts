@@ -16,7 +16,21 @@ class FileApi {
 
   static uploadFile(data: FormData) {
     const url = 'files/upload';
-    return $api.post<FormData, any>(url, { ...data });
+    return $api.post<FormData, any>(url, data, {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    });
+  }
+
+  static downloadFile(fileId?: string) {
+    const url = `files/download${fileId ? '?id=' + fileId : ''}`;
+    return $api.get<any>(url, { responseType: 'blob' });
+  }
+
+  static deleteFile(fileId?: string) {
+    const url = `files/delete${fileId ? '?id=' + fileId : ''}`;
+    return $api.delete<any>(url);
   }
 }
 

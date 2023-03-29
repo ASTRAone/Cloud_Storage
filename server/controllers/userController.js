@@ -77,7 +77,6 @@ class UserController {
     try {
       const user = await User.findOne({ _id: req.user.id });
       const omittedUser = omit( user.toObject(), ["password", "activationLink", "files"]);
-      console.log('omitted user', omittedUser);
       return res.json(omittedUser);
     } catch (error) {
       next(error);

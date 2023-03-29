@@ -28,3 +28,11 @@
   text-align: center;
   justify-content: center;
 }
+
+.file-download, .file-delete {
+  cursor: pointer;
+  background: lightgray;
+  padding: 5px 15px;
+  border: 1px black solid;
+  width: 70px;
+}

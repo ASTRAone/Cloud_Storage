@@ -60,14 +60,14 @@ class FileController {
 
       if (parent) {
         // change to windows
-        path = `${process.env.FILE_PATH}\\${user._id}\\${parent.path}\\${file.name}`;
-        // path = `${process.env.FILE_PATH}\/${user._id}\/${parent.path}\/${
-        //   file.name
-        // }`;
+        // path = `${process.env.FILE_PATH}\\${user._id}\\${parent.path}\\${file.name}`;
+        path = `${process.env.FILE_PATH}\/${user._id}\/${parent.path}\/${
+          file.name
+        }`;
       } else {
         // change to windows
-        path = `${process.env.FILE_PATH}}\\${user._id}\\${file.name}`;
-        // path = `${process.env.FILE_PATH}\/${user._id}\/${file.name}`;
+        // path = `${process.env.FILE_PATH}}\\${user._id}\\${file.name}`;
+        path = `${process.env.FILE_PATH}\/${user._id}\/${file.name}`;
       }
 
       if (fs.existsSync(path)) {
@@ -76,11 +76,15 @@ class FileController {
 
       file.mv(path);
       const type = file.name.split(".").pop();
+      let filePath = file.name;
+      if (parent) {
+        filePath = parent.path + `\/${file.name}`
+      }
       const dbFile = new File({
         name: file.name,
         type,
         size: file.size,
-        path: parent?.path,
+        path: filePath,
         parent: parent?._id,
         user: user._id,
       });
@@ -88,10 +92,28 @@ class FileController {
       await dbFile.save();
       await user.save();
 
-      res.json(dbFile);
+      return res.json(dbFile);
     } catch (error) {
       console.log(error);
       return res.status(500).json({ message: "Upload error" });
+    }
+  }
+
+  async downloadFile(req,res) {
+    try {
+      const file = await File.findOne({_id: req.query.id, user: req.user.id});
+      if (file) {
+        const path = `${process.env.FILE_PATH}\/${req.user.id}\/${file.path}`;
+        if (fs.existsSync(path)) {
+          return res.download(path, file.name);
+        }
+      } else {
+        return res.status(400).json({message: 'Download Error'});
+      }
+      
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Download error" });
     }
   }
 
@@ -101,13 +123,30 @@ class FileController {
       const user = await User.findById(req.user.id);
       const fileType = file.name.split(".").pop();
       const avatarName = `${uuid.v4()}.${fileType}`;
-      file.mv(process.env.STATIC_PATH + "\\" + avatarName);
+      // change to windows
+      // file.mv(process.env.STATIC_PATH + "\\" + avatarName);
+      file.mv(process.env.STATIC_PATH + "\/" + avatarName);
       user.avatar = avatarName;
       await user.save();
       return res.json({ message: "Avatar was uploaded" });
     } catch (e) {
       console.log(e);
       return res.status(400).json({ message: "Upload avatar error" });
+    }
+  }
+
+  async deleteFile(req, res) {
+    try {
+      const file = await File.findOne({_id : req.query.id, user: req.user.id});
+      if (!file) {
+        return res.status(400).json('File not found');
+      }
+      fileService.deleteFile(file);
+      await file.remove();
+      return res.json({message: 'File was removed'});
+    } catch (e) {
+      console.log(e)
+      return res.status(400).json({message: 'Dir is not empty'});
     }
   }
 }
