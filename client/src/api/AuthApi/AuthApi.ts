@@ -15,7 +15,6 @@ class AuthApi {
 
   static registration(data: AuthRegDTO) {
     const url = 'registration';
-    console.log('data ', data);
     return $api.post<AuthRegDTO>(url, { ...data });
   }
 
