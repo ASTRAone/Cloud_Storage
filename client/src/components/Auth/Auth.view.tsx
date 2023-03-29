@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { REGEXP_DICTIONARY } from '@utils/regexp';
 import { REGISTRATION_ROUTE } from '@utils/contants';
@@ -30,6 +31,8 @@ export const AuthView: React.FC<Props> = ({ loading, isError, setError }) => {
   } = useFormContext();
   const [email, pass] = watch(['email', 'password']);
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     if (isError) {
       setError(false);
@@ -38,7 +41,7 @@ export const AuthView: React.FC<Props> = ({ loading, isError, setError }) => {
 
   return (
     <div className={cx('container')}>
-      <p className={cx('title')}>sign in</p>
+      <p className={cx('title')}>{t('authorization.title.main')}</p>
       <Controller
         control={control}
         rules={{ required: true, pattern: REGEXP_DICTIONARY.email }}
@@ -47,9 +50,9 @@ export const AuthView: React.FC<Props> = ({ loading, isError, setError }) => {
             onChange={onChange}
             value={value}
             full
-            placeholder="Enter your email"
+            placeholder={t('authorization.placeholder.email')}
             error={errors.email || isError}
-            label="email"
+            label={t('authorization.labels.email')}
             actions={[
               {
                 icon: (
@@ -73,9 +76,9 @@ export const AuthView: React.FC<Props> = ({ loading, isError, setError }) => {
           <InputPass
             onChange={onChange}
             value={value}
-            label="password"
+            label={t('authorization.labels.password')}
             full
-            placeholder="Enter password"
+            placeholder={t('authorization.placeholder.password')}
             actions={[
               {
                 icon: (
@@ -94,13 +97,13 @@ export const AuthView: React.FC<Props> = ({ loading, isError, setError }) => {
       />
       {isError && <ErrorComponent text="Authorisation error" />}
       <Button
-        text="sign in"
+        text={t('authorization.button.login')}
         type="submit"
         isLoading={loading}
         className={cx('btn')}
       />
       <ButtonLink
-        text="Don’t have an account?"
+        text={t('authorization.title.accountQuestion')}
         to={REGISTRATION_ROUTE}
         className={cx('btn-link')}
       />

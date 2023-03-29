@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '@utils/contants';
 
@@ -15,6 +16,7 @@ import styles from './styles.module.scss';
 export const HeaderLayout: React.FC = () => {
   const cx = useStyles(styles);
   const location = useLocation();
+  const { t } = useTranslation();
   return (
     <div className={cx('container')}>
       <div className={cx('containerLogo')}>
@@ -31,16 +33,16 @@ export const HeaderLayout: React.FC = () => {
           type="moon"
           className={cx('icon')}
         />
-        <p className={cx('text')}>what’s about?</p>
+        <p className={cx('text')}>{t('navBar.title.about')}</p>
         {location.pathname === LOGIN_ROUTE ? (
           <ButtonLink
-            text="registration"
+            text={t('navBar.title.signup')}
             className={cx('btn')}
             to={REGISTRATION_ROUTE}
           />
         ) : (
           <ButtonLink
-            text="sign in"
+            text={t('navBar.title.signin')}
             className={cx('btn')}
             to={LOGIN_ROUTE}
           />

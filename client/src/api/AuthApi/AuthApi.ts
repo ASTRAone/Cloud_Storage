@@ -1,4 +1,4 @@
-import $api from '@hooks/useAuth';
+import { $api } from '@src/http/http';
 
 import { IRestService, RestService } from '../../services/RestService';
 import { ApiResultResponse } from '../../utility/common';

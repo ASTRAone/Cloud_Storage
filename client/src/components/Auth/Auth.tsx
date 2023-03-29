@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { CLOUD_ROUTE } from '@utils/contants';
 
 import { AUTH_HEADER } from '@src/utility/headers';
 
@@ -13,6 +16,7 @@ import { AuthView } from './Auth.view';
 
 export const Auth: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [errorRes, setErrorRes] = useState(false);
   const { status } = useAppSelector(getUserData);
 
@@ -20,6 +24,7 @@ export const Auth: React.FC = () => {
     try {
       const { accessToken } = await dispatch(userLogin(data)).unwrap();
       localStorage.setItem(AUTH_HEADER, `Bearer ${accessToken}`);
+      navigate(CLOUD_ROUTE);
     } catch (error) {
       setErrorRes(true);
       console.log(error);
