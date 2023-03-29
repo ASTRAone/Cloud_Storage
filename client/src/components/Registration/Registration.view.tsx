@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import { REGEXP_DICTIONARY } from '@utils/regexp';
-import { REGISTRATION_ROUTE } from '@utils/contants';
+import { LOGIN_ROUTE } from '@utils/contants';
 
 import { useStyles } from '@hooks/useStyles';
 
+import { Input } from '@components/Input';
 import { InputPass } from '@components/InputPass';
 import { ErrorComponent } from '@components/ErrorComponent';
-import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 import { Icon } from '@components/icon';
 import { ButtonLink } from '@components/ButtonLink';
@@ -21,24 +21,79 @@ type Props = {
   setError: (value: boolean) => void;
 };
 
-export const AuthView: React.FC<Props> = ({ loading, isError, setError }) => {
+export const RegistrationView: React.FC<Props> = ({ loading, isError, setError }) => {
   const cx = useStyles(styles);
   const {
     control,
     watch,
     formState: { errors },
   } = useFormContext();
-  const [email, pass] = watch(['email', 'password']);
+
+  const [name, surname, email, pass] = watch(['name', 'surname', 'email', 'password']);
 
   useEffect(() => {
     if (isError) {
       setError(false);
     }
-  }, [email, pass]);
+  }, [name, surname, email, pass]);
 
   return (
     <div className={cx('container')}>
-      <p className={cx('title')}>sign in</p>
+      <p className={cx('title')}>sign up</p>
+      <Controller
+        control={control}
+        rules={{ required: true }}
+        render={({ field: { onChange, value } }) => (
+          <Input
+            onChange={onChange}
+            value={value}
+            label="name"
+            full
+            placeholder="Enter your name"
+            error={errors.name || isError}
+            actions={[
+              {
+                icon: (
+                  <Icon
+                    type="user"
+                    className={cx('icon')}
+                  />
+                ),
+                align: 'left',
+              },
+            ]}
+          />
+        )}
+        name="name"
+      />
+
+      <Controller
+        control={control}
+        rules={{ required: true }}
+        render={({ field: { onChange, value } }) => (
+          <Input
+            onChange={onChange}
+            value={value}
+            label="surname"
+            full
+            placeholder="Enter last name"
+            error={errors.surname || isError}
+            actions={[
+              {
+                icon: (
+                  <Icon
+                    type="user"
+                    className={cx('icon')}
+                  />
+                ),
+                align: 'left',
+              },
+            ]}
+          />
+        )}
+        name="surname"
+      />
+
       <Controller
         control={control}
         rules={{ required: true, pattern: REGEXP_DICTIONARY.email }}
@@ -47,9 +102,9 @@ export const AuthView: React.FC<Props> = ({ loading, isError, setError }) => {
             onChange={onChange}
             value={value}
             full
+            label="email"
             placeholder="Enter your email"
             error={errors.email || isError}
-            label="email"
             actions={[
               {
                 icon: (
@@ -73,9 +128,10 @@ export const AuthView: React.FC<Props> = ({ loading, isError, setError }) => {
           <InputPass
             onChange={onChange}
             value={value}
-            label="password"
             full
+            label="password"
             placeholder="Enter password"
+            error={errors.password || isError}
             actions={[
               {
                 icon: (
@@ -87,21 +143,19 @@ export const AuthView: React.FC<Props> = ({ loading, isError, setError }) => {
                 align: 'left',
               },
             ]}
-            error={errors.password || isError}
           />
         )}
         name="password"
       />
-      {isError && <ErrorComponent text="Authorisation error" />}
+      {isError && <ErrorComponent text="Registration error" />}
       <Button
-        text="sign in"
         type="submit"
         isLoading={loading}
-        className={cx('btn')}
+        text="sign up"
       />
       <ButtonLink
-        text="Don’t have an account?"
-        to={REGISTRATION_ROUTE}
+        text="Do you already have an account?"
+        to={LOGIN_ROUTE}
         className={cx('btn-link')}
       />
     </div>

@@ -1,39 +1,36 @@
 @import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
 
+// TODO поменять цвета 
 .container {
-  margin-top: 40px;
-
-  width: 573px;
-  padding: 25px 33px 20px;
-  background-color: white;
-  border-radius: 27px;
-}
-
-.title {
-  font-weight: 700;
-  font-size: 28px;
-  line-height: 33px;
-  // color: $font-color;
-  margin-bottom: 27px;
-  text-align: center;
-}
-
-.content {
+  min-width: 365px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #004b75;
+  box-shadow: 0px 4px 5px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 22px 50px 28px 50px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  align-items: center;
+  gap: 16px;
+
+  & .title {
+    @include text();
+    @include paragraph-22();
+    color: #053A89;
+    text-transform: uppercase;
+  }
 
   & .icon {
-    width: 24px;
-    height: 24px;
     margin-right: 10px;
-    color: $dark-blue-100;
   }
-}
 
-.footer {
-  margin-top: 23px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  & .btn {
+    min-width: 145px;
+  }
+
+  & .btn-link {
+    @include paragraph-12();
+  }
 }

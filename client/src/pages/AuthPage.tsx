@@ -1,21 +1,14 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
+
+import { LOGIN_ROUTE } from '@utils/contants';
 
 import { LayoutAuth } from '@src/layout/LayoutAuth';
 
-import { useStyles } from '@hooks/useStyles';
-
-import styles from './styles.module.scss';
+import { Auth } from '@components/Auth';
+import { Registration } from '@components/Registration';
 
 export const AuthPage: React.FC = () => {
-  const cx = useStyles(styles);
-  // const location = useLocation();
-  return (
-    <div className={cx('wrapper')}>
-      <div>1</div>
-      <div className={cx('content')}>
-        <LayoutAuth />
-      </div>
-      <div className={cx('footer')}>1</div>
-    </div>
-  );
+  const location = useLocation();
+  return <LayoutAuth>{location.pathname === LOGIN_ROUTE ? <Auth /> : <Registration />}</LayoutAuth>;
 };

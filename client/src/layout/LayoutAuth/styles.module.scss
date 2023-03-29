@@ -1,0 +1,26 @@
+body, html {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  
+  & .content {
+    flex: 1 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('../../assets/images/bc-layout-auth.jpg');
+    background-size: 626px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  & .footer {
+    flex: 0 0 auto;
+  }
+}

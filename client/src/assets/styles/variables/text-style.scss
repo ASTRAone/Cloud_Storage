@@ -10,8 +10,26 @@
   text-transform: uppercase;
 }
 
+@mixin paragraph-29 {
+  font-family: $DMSans;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 29px;
+  line-height: 38px;
+  color: $white;
+}
+
+@mixin paragraph-22 {
+  font-family: $DMSans;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 29px;
+  color: $white;
+}
+
 @mixin paragraph-19 {
-  font-family: $base;
+  font-family: $itim;
   font-style: normal;
   font-weight: 400;
   font-size: 19px;
@@ -20,15 +38,24 @@
 }
 
 @mixin paragraph-16 {
-  font-family: $base;
+  font-family: $itim;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
 }
 
+@mixin paragraph-15 {
+  font-family: $DMSans;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 20px;
+  color: $white;
+}
+
 @mixin paragraph-14 {
-  font-family: $base;
+  font-family: $itim;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -37,13 +64,10 @@
 }
 
 @mixin paragraph-12 {
-  font-family: 'Itim';
+  font-family: $itim;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
   color: $dark-blue-100;
 }
-
-
-

@@ -8,9 +8,9 @@ import styles from './styles.module.scss';
 
 type Props = Partial<React.ComponentPropsWithRef<'input'>> & {
   error?: FormError;
-  isBorder?: boolean;
   actions?: Array<IconObject>;
   label?: string;
+  full?: boolean;
 };
 
 export const Input: React.FC<Props> = ({
@@ -20,17 +20,16 @@ export const Input: React.FC<Props> = ({
   error,
   actions,
   label,
-  // isBorder = false,
+  full = false,
   ...rest
 }) => {
   const cx = useStyles(styles);
-  // const isError = !!error;
+  const isError = !!error;
   const actionsLeft: Array<JSX.Element> = [];
   const actionsRight: Array<JSX.Element> = [];
 
   if (actions) {
     actions.forEach((elem) => {
-      console.log('elem', elem);
       const icon = cloneElement(elem.icon, {
         key: elem.icon.type,
         ...elem.icon.props,
@@ -41,9 +40,9 @@ export const Input: React.FC<Props> = ({
   }
 
   return (
-    <div className={cx('container')}>
+    <div className={cx('container', full ? 'full' : '')}>
       {label && <label className={cx('label')}>{label}</label>}
-      <div className={cx('content')}>
+      <div className={cx('content', isError ? 'error' : '')}>
         {actionsLeft}
         <div className={cx('controller-input')}>
           <input
