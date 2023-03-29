@@ -7,6 +7,8 @@ import { store } from '@store/root';
 import { App } from './App';
 import { EnvProvider } from './EnvProvider/EnvProvider';
 
+import './i18next';
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <BrowserRouter>
