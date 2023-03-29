@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { LOGIN_ROUTE } from '@src/utility/contants';
 import { REGEXP_DICTIONARY } from '@src/utility/regexp';
@@ -26,6 +27,8 @@ export const Registration: React.FC = () => {
   const navigate = useNavigate();
   const { statusReg } = useAppSelector(getUserData);
   const [errorRes, setErrorRes] = useState(false);
+
+  const { t } = useTranslation();
 
   const {
     control,
@@ -54,7 +57,7 @@ export const Registration: React.FC = () => {
 
   return (
     <div className={cx('container')}>
-      <h2 className={cx('title')}>Регистрация</h2>
+      <h2 className={cx('title')}>{t('registration.title.main')}</h2>
       <div className={cx('content')}>
         <Controller
           control={control}
@@ -64,7 +67,7 @@ export const Registration: React.FC = () => {
               onChange={onChange}
               value={value}
               isBorder
-              placeholder="Введите имя..."
+              placeholder={t('registration.placeholder.name')}
               error={errors.name}
             />
           )}
@@ -79,7 +82,7 @@ export const Registration: React.FC = () => {
               onChange={onChange}
               value={value}
               isBorder
-              placeholder="Введите фамилию..."
+              placeholder={t('registration.placeholder.surname')!}
               error={errors.surname}
             />
           )}
@@ -94,7 +97,7 @@ export const Registration: React.FC = () => {
               onChange={onChange}
               value={value}
               isBorder
-              placeholder="Введите адрес электронной почты..."
+              placeholder={t('registration.placeholder.email')}
               error={errors.email}
             />
           )}
@@ -109,7 +112,7 @@ export const Registration: React.FC = () => {
               onChange={onChange}
               value={value}
               isBorder
-              placeholder="Введите пароль..."
+              placeholder={t('registration.placeholder.password')}
               error={errors.password}
             />
           )}
@@ -120,12 +123,12 @@ export const Registration: React.FC = () => {
       <div className={cx('footer')}>
         <ButtonLink
           to={LOGIN_ROUTE}
-          text="Есть аккаунт?"
+          text={t('registration.title.accountQuestion')}
         />
         <Button
           onClick={handleSubmit(createUser)}
           isLoading={statusReg === 'loading'}
-          text="Зарегистрироваться"
+          text={t('registration.button.register')}
         />
       </div>
     </div>

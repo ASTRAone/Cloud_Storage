@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '@src/utility/contants';
 
 import { useAuth } from '@hooks/useAuth';
@@ -18,6 +20,8 @@ export const NavBar: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(getUserData);
+
+  const { t } = useTranslation();
 
   useAuth();
   useEffect(() => {
@@ -48,7 +52,7 @@ export const NavBar: React.FC = () => {
           <ButtonLink
             className={cx('login')}
             to={LOGIN_ROUTE}
-            text="Войти"
+            text={t('navbar.title.login')}
           />
         )}
         {!user?.isAuth && (
