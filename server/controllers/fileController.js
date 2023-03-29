@@ -123,7 +123,7 @@ class FileController {
       const user = await User.findById(req.user.id);
       const fileType = file.name.split(".").pop();
       const avatarName = `${uuid.v4()}.${fileType}`;
-      // change
+      // change to windows
       // file.mv(process.env.STATIC_PATH + "\\" + avatarName);
       file.mv(process.env.STATIC_PATH + "\/" + avatarName);
       user.avatar = avatarName;

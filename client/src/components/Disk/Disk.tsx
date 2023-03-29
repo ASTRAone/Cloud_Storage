@@ -23,9 +23,9 @@ export const Disk: React.FC = () => {
     dispatch(fetchFiles());
   }, []);
 
-  // TODO поправить обновление
+  //TODO поправить обновление
   useEffect(() => {
-    if (currentDir || needUpdate) {
+    if (currentDir || !needUpdate) {
       dispatch(fetchFiles(currentDir));
     }
   }, [needUpdate, currentDir]);
