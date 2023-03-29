@@ -8,7 +8,7 @@ import { FooterLayout } from '@components/FooterLayout';
 import styles from './styles.module.scss';
 
 type Props = {
-  children?: JSX.Element;
+  children: JSX.Element;
 };
 
 export const LayoutAuth: React.FC<Props> = ({ children }) => {
