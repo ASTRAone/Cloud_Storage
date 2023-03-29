@@ -1,4 +1,5 @@
-import $api from '../../hooks/useAuth';
+import { $api } from '@src/http/http';
+
 import { IRestService, RestService } from '../../services/RestService';
 import { FileCreateDTO, FileResponse } from './models';
 class FileApi {

@@ -1,8 +1,8 @@
-import { Disk } from './components/Disk';
 import { AuthPage } from './pages/AuthPage';
-import { DISK_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from './utility/contants';
+import { CloudPage } from './pages/CloudPage';
+import { LOGIN_ROUTE, REGISTRATION_ROUTE, CLOUD_ROUTE } from './utility/contants';
 
-export const publicRoutes = [
+export const routes = [
   {
     path: LOGIN_ROUTE,
     Element: AuthPage,
@@ -11,11 +11,8 @@ export const publicRoutes = [
     path: REGISTRATION_ROUTE,
     Element: AuthPage,
   },
-];
-
-export const privateRoutes = [
   {
-    path: DISK_ROUTE,
-    Element: Disk,
+    path: CLOUD_ROUTE,
+    Element: CloudPage,
   },
 ];
