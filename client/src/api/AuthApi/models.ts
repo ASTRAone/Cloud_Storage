@@ -12,6 +12,7 @@ type AuthResponse = {
 
 type AuthViewDTO = {
   id?: number;
+  name?: string;
   email?: string;
   diskSpace?: number;
   usedSpace?: number;
@@ -25,7 +26,6 @@ type AuthDTO = {
 
 type AuthRegDTO = {
   name: string;
-  surname: string;
   email: string;
   password: string;
 };

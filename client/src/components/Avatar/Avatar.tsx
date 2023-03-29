@@ -16,7 +16,7 @@ import styles from './styles.module.scss';
 
 type Props = {
   src?: string;
-  fullName: string;
+  fullName?: string;
 };
 
 export const Avatar: React.FC<Props> = ({ src }) => {

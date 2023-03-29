@@ -59,7 +59,7 @@ export const NavBar: React.FC = () => {
           />
         )}
         {/* {user?.isAuth && <Button text="Выйти" onClick={logout} />} */}
-        {user?.isAuth && <Avatar fullName="Смирнов В.В." />}
+        {user?.isAuth && <Avatar fullName={user.name} />}
       </div>
     </div>
   );

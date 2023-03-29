@@ -32,7 +32,14 @@ export const Registration: React.FC = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      name: '',
+      surname: '',
+      email: '',
+      password: '',
+    },
+  });
 
   const [email, pass] = watch(['email', 'password']);
 
@@ -42,9 +49,15 @@ export const Registration: React.FC = () => {
     }
   }, [email, pass]);
 
-  const createUser = async (data: unknown) => {
+  const createUser = async (data: any) => {
+    const fullName = [data.name, data.surname].join(' ');
+    const resObject = {
+      name: fullName,
+      email: data.email,
+      password: data.password,
+    } as AuthRegDTO;
     try {
-      await dispatch(userRegistration(data as AuthRegDTO)).unwrap();
+      await dispatch(userRegistration(resObject)).unwrap();
       navigate(LOGIN_ROUTE);
     } catch (error) {
       setErrorRes(true);
