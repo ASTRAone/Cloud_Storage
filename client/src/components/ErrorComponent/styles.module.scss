@@ -1,8 +1,13 @@
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
 .container {
   text-align: center;
-  margin-top: 15px;
+
+  & .errorText {
+    @include text();
+    color: red;
+  } 
 }
 
-.errorText {
-  color: red;
-}
+

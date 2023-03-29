@@ -1,6 +1,4 @@
-// import { Auth } from './components/Auth';
 import { Disk } from './components/Disk';
-import { Registration } from './components/Registration';
 import { AuthPage } from './pages/AuthPage';
 import { DISK_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from './utility/contants';
 
@@ -11,7 +9,7 @@ export const publicRoutes = [
   },
   {
     path: REGISTRATION_ROUTE,
-    Element: Registration,
+    Element: AuthPage,
   },
 ];
 

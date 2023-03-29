@@ -8,6 +8,7 @@ import {
   UserIcon,
   MailIcon,
   SecurityIcon,
+  MoonIcon,
 } from '@assets/icons';
 
 const dictionary = {
@@ -20,6 +21,7 @@ const dictionary = {
   user: UserIcon,
   mail: MailIcon,
   security: SecurityIcon,
+  moon: MoonIcon,
 };
 
 type IconTypes = keyof typeof dictionary;

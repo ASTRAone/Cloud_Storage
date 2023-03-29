@@ -41,7 +41,6 @@ export const Button: React.FC<Props> = ({
 
   if (actions) {
     actions.forEach((elem) => {
-      console.log('elem', elem);
       const icon = cloneElement(elem.icon, {
         key: elem.icon.type,
         ...elem.icon.props,
@@ -55,7 +54,7 @@ export const Button: React.FC<Props> = ({
     <button
       {...restProps}
       type={type}
-      className={cx('btn', full ? 'full' : '')}
+      className={cx('btn', className, full ? 'full' : '')}
     >
       <div className={cx('container')}>
         <div className={cx('content')}>

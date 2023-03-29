@@ -1,0 +1,52 @@
+// TODO поменять цвета
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+@import '@assets/styles/variables/colors';
+
+.container {
+  padding: 20px 40px 20px 20px;
+  background: #004b75;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & .containerLogo {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+  }
+
+  & .containerText {
+    @include paragraph-15();
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+
+    & .span {
+      @include paragraph-29();
+      text-transform: uppercase;
+    }
+  }
+
+  & .containerOptions {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    color: $white;
+
+    & .icon {
+      cursor: pointer;
+    }
+
+    & .text {
+      @include text();
+      @include paragraph-22();
+      text-transform: uppercase;
+    }
+
+    & .btn {
+      @include paragraph-22();
+      text-transform: uppercase;
+    }
+  }
+}

@@ -16,9 +16,9 @@ export const Auth: React.FC = () => {
   const [errorRes, setErrorRes] = useState(false);
   const { status } = useAppSelector(getUserData);
 
-  const loginUser = async (data: unknown) => {
+  const loginUser = async (data: AuthDTO) => {
     try {
-      const { accessToken } = await dispatch(userLogin(data as AuthDTO)).unwrap();
+      const { accessToken } = await dispatch(userLogin(data)).unwrap();
       localStorage.setItem(AUTH_HEADER, `Bearer ${accessToken}`);
     } catch (error) {
       setErrorRes(true);
