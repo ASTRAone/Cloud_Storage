@@ -4,6 +4,8 @@ import { FormError, IconObject } from '@utils/common';
 
 import { useStyles } from '@hooks/useStyles';
 
+import { Form } from '@components/Form';
+
 import styles from './styles.module.scss';
 
 type Props = Partial<React.ComponentPropsWithRef<'input'>> & {
@@ -14,7 +16,7 @@ type Props = Partial<React.ComponentPropsWithRef<'input'>> & {
 };
 
 export const InputFilter: React.FC<Props> = ({
-  type = 'text',
+  type = 'filter',
   placeholder = '',
   value,
   error,
@@ -28,6 +30,15 @@ export const InputFilter: React.FC<Props> = ({
   const actionsLeft: Array<JSX.Element> = [];
   const actionsRight: Array<JSX.Element> = [];
 
+  // TODO: Дополнить логику в зависимости от бека
+  const onSubmitFilter = async (data: unknown) => {
+    try {
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (actions) {
     actions.forEach((elem) => {
       const icon = cloneElement(elem.icon, {
@@ -40,7 +51,10 @@ export const InputFilter: React.FC<Props> = ({
   }
 
   return (
-    <div className={cx('container', full ? 'full' : '', header ? 'header' : '')}>
+    <Form
+      onSubmit={onSubmitFilter}
+      className={cx('container', full ? 'full' : '', header ? 'header' : '')}
+    >
       <div className={cx('content', isError ? 'error' : '')}>
         {actionsLeft}
         <div className={cx('controller-input')}>
@@ -54,7 +68,7 @@ export const InputFilter: React.FC<Props> = ({
         </div>
         {actionsRight}
       </div>
-    </div>
+    </Form>
   );
 };
 

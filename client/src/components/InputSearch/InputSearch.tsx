@@ -4,6 +4,8 @@ import { FormError, IconObject } from '@utils/common';
 
 import { useStyles } from '@hooks/useStyles';
 
+import { Form } from '@components/Form';
+
 import styles from './styles.module.scss';
 
 type Props = Partial<React.ComponentPropsWithRef<'input'>> & {
@@ -13,7 +15,7 @@ type Props = Partial<React.ComponentPropsWithRef<'input'>> & {
 };
 
 export const InputSearch: React.FC<Props> = ({
-  type = 'text',
+  type = 'searcxh',
   placeholder = '',
   value,
   error,
@@ -25,6 +27,15 @@ export const InputSearch: React.FC<Props> = ({
   const isError = !!error;
   const actionsLeft: Array<JSX.Element> = [];
   const actionsRight: Array<JSX.Element> = [];
+
+  // TODO: Дополнить логику в зависимости от бека
+  const onSubmitSearch = async (data: unknown) => {
+    try {
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (actions) {
     actions.forEach((elem) => {
@@ -38,7 +49,10 @@ export const InputSearch: React.FC<Props> = ({
   }
 
   return (
-    <div className={cx('container', full ? 'full' : '')}>
+    <Form
+      onSubmit={onSubmitSearch}
+      className={cx('container', full ? 'full' : '')}
+    >
       <div className={cx('content', isError ? 'error' : '')}>
         {actionsLeft}
         <div className={cx('controller-input')}>
@@ -52,7 +66,7 @@ export const InputSearch: React.FC<Props> = ({
         </div>
         {actionsRight}
       </div>
-    </div>
+    </Form>
   );
 };
 
