@@ -4,7 +4,6 @@
 
 .btn {
   @include button();
-  @include paragraph-16();
   text-align: center;
   min-width: 145px;
 
@@ -14,10 +13,28 @@
 
   & .container {
     padding: 7px 41px;
-    border: 1px solid #004b75;
+    border: 1px;
     border-radius: 7px;
     cursor: pointer;
     background-color: #004b75;
+
+    &.white {
+      background-color: $white;
+      border-color: $white;
+      color: #327BD1;
+    }
+
+    &.gray {
+      background-color: #DEE1E6;
+      border-color: #DEE1E6;
+      color: #51459E;
+    }
+
+    &.blue {
+      border-color: #004b75;
+      background-color: #004b75;
+      color: $white;
+    }
 
     & .content {
       & .spinner {
@@ -28,7 +45,6 @@
         & .loader {
           width: 18px;
           height: 18px;
-          color: $white;
         }
       }
       & .contentText {
@@ -37,9 +53,11 @@
         width: 100%;
 
         & .caption {
-          color: $white;
-          text-transform: uppercase;
           width: inherit;
+
+          &.upper {
+            text-transform: uppercase;
+          }
         }
       }
     }

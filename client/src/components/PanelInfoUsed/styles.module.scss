@@ -1,0 +1,28 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  & .text-used {
+    @include text();
+    @include paragraph-16();
+    color: $white;
+    margin-bottom: 4px;
+
+    & .span {
+      text-transform: uppercase;
+    }
+  }
+
+  & .text-info {
+    @include text();
+    @include paragraph-13();
+    color: $white;
+    margin-bottom: 12px;
+  }
+}

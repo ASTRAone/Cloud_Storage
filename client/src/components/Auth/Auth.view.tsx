@@ -99,6 +99,7 @@ export const AuthView: React.FC<Props> = ({ loading, isError, setError }) => {
       <Button
         text={t('authorization.button.login')}
         type="submit"
+        isUpperCase
         isLoading={loading}
         className={cx('btn')}
       />
