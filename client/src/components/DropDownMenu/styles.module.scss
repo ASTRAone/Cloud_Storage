@@ -1,0 +1,54 @@
+// TODO поменять цвета
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+@import '@assets/styles/variables/colors';
+
+.container {
+  position: absolute;
+  width: 100%;
+  top: 100px;
+  background-color: #004b75;
+  max-width: 289px;
+  z-index: 9;
+  border-radius: 0 0 0 16px;
+  
+  & .dropdown-content .btn-link {
+    float: none;
+    color: white;
+    padding: 12px 14px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+  }
+
+  & .dropdown-content .containerLink {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+  }
+
+  & .dropdown-content .containerLink > .icon {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  & .dropdown-content .containerLink:hover {
+    background: $light-sweet-100;
+    border: 1px solid white;
+    border-left: none;
+    border-right: none;
+  }
+
+  & .dropdown-content .containerLink:has(.no-border-hover):hover {
+      border-radius: 0 0 0 16px !important;
+  }
+
+  & .dropdown-content hr {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+

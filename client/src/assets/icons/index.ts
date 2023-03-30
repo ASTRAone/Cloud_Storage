@@ -15,3 +15,6 @@ export { SharedIcon } from './SharedIcon';
 export { HeartIcon } from './HeartIcon';
 export { RequestIcon } from './RequestIcon';
 export { ArrowIcon } from './ArrowIcon';
+export { BellIcon } from './BellIcon';
+export { MagnifierIcon } from './MagnifierIcon';
+export { ArrowDownIcon } from './ArrowDownIcon';

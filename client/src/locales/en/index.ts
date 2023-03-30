@@ -43,5 +43,9 @@ export const localizationEn = {
       signin: 'Sign In',
       signup: 'Sign Up',
     },
+    placeholder: {
+      search: 'Search Files...',
+      filter: 'Filter',
+    },
   },
 };
