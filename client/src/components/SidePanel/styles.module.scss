@@ -1,0 +1,21 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.container {
+  height: 100%;
+  background-color: #004b75;
+  padding: 0 18px 0px 37px;
+
+  & .menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 47px 0 80px;
+    height: calc(100% - 127px);
+
+    & .btn {
+      @include paragraph-14();
+    }
+  }
+}

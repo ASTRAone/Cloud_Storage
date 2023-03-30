@@ -28,6 +28,7 @@
 
   & .btn {
     min-width: 145px;
+    @include paragraph-16();
   }
 
   & .btn-link {

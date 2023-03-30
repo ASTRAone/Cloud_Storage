@@ -1,0 +1,22 @@
+.progress {
+  background: #F6F9FF;
+  justify-content: flex-start;
+  border-radius: 6px;
+  align-items: center;
+  position: relative;
+  display: flex;
+  height: 8px;
+}
+
+.progress-value {
+  background: #FF9900;
+  border-radius: 6px;
+  height: 100%;
+  width: 0;
+  transition:
+    width .3s,
+    background-color .3s;
+  &.warning {
+    background-color: rgb(165, 51, 51)
+  }
+}

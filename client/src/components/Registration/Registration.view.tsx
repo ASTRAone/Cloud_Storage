@@ -153,6 +153,8 @@ export const RegistrationView: React.FC<Props> = ({ loading, isError, setError }
       {isError && <ErrorComponent text="Registration error" />}
       <Button
         type="submit"
+        isUpperCase
+        className={cx('btn')}
         isLoading={loading}
         text={t('registration.button.register')}
       />

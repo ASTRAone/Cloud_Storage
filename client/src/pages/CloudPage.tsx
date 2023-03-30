@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 
 import { LayoutPage } from '@src/layout/LayoutPage';
 
+import { Cloud } from '@components/Cloud';
+
 import { useAppDispatch } from '@store/hooks';
 import { fetchFiles } from '@store/file/data';
 
@@ -13,5 +15,9 @@ export const CloudPage: React.FC = () => {
     dispatch(fetchFiles());
   });
 
-  return <LayoutPage />;
+  return (
+    <LayoutPage>
+      <Cloud />
+    </LayoutPage>
+  );
 };

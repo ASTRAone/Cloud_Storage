@@ -18,6 +18,8 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   text?: string;
   className?: string;
   full?: boolean;
+  color?: 'white' | 'gray' | 'blue';
+  isUpperCase?: boolean;
   actions?: Array<IconObject>;
 };
 
@@ -32,6 +34,8 @@ export const Button: React.FC<Props> = ({
   type = 'button',
   full = false,
   actions = [],
+  color = 'blue',
+  isUpperCase = false,
   ...restProps
 }) => {
   const cx = useStyles(styles);
@@ -56,7 +60,7 @@ export const Button: React.FC<Props> = ({
       type={type}
       className={cx('btn', className, full ? 'full' : '')}
     >
-      <div className={cx('container')}>
+      <div className={cx('container', color)}>
         <div className={cx('content')}>
           {isLoading ? (
             <div className={cx('spinner')}>
@@ -65,7 +69,7 @@ export const Button: React.FC<Props> = ({
           ) : (
             <div className={cx('contentText')}>
               {actionsLeft}
-              {text && <div className={cx('caption')}>{text}</div>}
+              {text && <div className={cx('caption', isUpperCase ? 'upper' : '')}>{text}</div>}
               {actionsRight}
             </div>
           )}
