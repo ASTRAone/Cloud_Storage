@@ -10,12 +10,18 @@ type Props = {
   usedGb?: number;
   usedProcent?: number;
   freeGb?: number;
+  className?: string;
 };
 
-export const PanelInfoUsed: React.FC<Props> = ({ usedGb = 0, usedProcent = 0, freeGb = 0 }) => {
+export const PanelInfoUsed: React.FC<Props> = ({
+  usedGb = 0,
+  usedProcent = 0,
+  freeGb = 0,
+  className = '',
+}) => {
   const cx = useStyles(styles);
   return (
-    <div className={cx('container')}>
+    <div className={cx('container', className)}>
       <p className={cx('text-used')}>
         {usedGb} <span className={cx('span')}>gb</span> used
       </p>

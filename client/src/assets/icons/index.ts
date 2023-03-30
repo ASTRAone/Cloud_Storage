@@ -14,3 +14,4 @@ export { ShapeIcon } from './ShapeIcon';
 export { SharedIcon } from './SharedIcon';
 export { HeartIcon } from './HeartIcon';
 export { RequestIcon } from './RequestIcon';
+export { ArrowIcon } from './ArrowIcon';
