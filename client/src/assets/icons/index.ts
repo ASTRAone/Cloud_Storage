@@ -23,3 +23,5 @@ export { LogoutIcon } from './LogoutIcon';
 export { DiskIcon } from './DiskIcon';
 export { ProfileIcon } from './ProfileIcon';
 export { DrageIcon } from './DrageIcon';
+export { RussianIcon } from './RussianIcon';
+export { EnglishIcon } from './EnglishIcon';

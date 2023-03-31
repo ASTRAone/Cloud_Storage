@@ -11,6 +11,7 @@ import { ButtonLink } from '@components/ButtonLink';
 import { MenuProfile } from '@components/MenuProfile';
 import { InputSearch } from '@components/InputSearch';
 import { InputFilter } from '@components/InputFilter';
+import { PopupLocalization } from '@components/PopupLocalization';
 
 import CloudLogo from '@assets/images/logo.png';
 
@@ -37,6 +38,7 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
       </div>
       {!auth ? (
         <div className={cx('containerOptions')}>
+          <PopupLocalization />
           <Icon
             type="moon"
             className={cx('icon')}
@@ -92,6 +94,7 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
             />
           </div>
           <div className={cx('containerOptions')}>
+            <PopupLocalization />
             <Icon
               type="moon"
               className={cx('icon')}
