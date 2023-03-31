@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
 import { customDate } from '@src/utility/customDate';
 
@@ -26,7 +26,7 @@ export const File: React.FC<Props> = ({ file, onClick = () => {} }) => {
   const downloadClickHandler = () => {
     dispatch(downloadFile(file));
   };
-  const deleteClickHandler = (e: any) => {
+  const deleteClickHandler = (e: MouseEvent) => {
     e.stopPropagation();
     dispatch(deleteFile(file));
   };

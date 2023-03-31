@@ -1,0 +1,1 @@
+export { DrageComponent } from './DrageComponent';

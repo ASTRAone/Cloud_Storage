@@ -1,10 +1,16 @@
 import React from 'react';
 
-// import { useStyles } from '@hooks/useStyles';
+import { useStyles } from '@hooks/useStyles';
 
-// import styles from './styles.module.scss';
+import { DrageComponent } from '@components/DrageComponent';
+
+import styles from './styles.module.scss';
 
 export const Cloud: React.FC = () => {
-  // const cx = useStyles(styles);
-  return <>Cloud</>;
+  const cx = useStyles(styles);
+  return (
+    <div className={cx('page')}>
+      <DrageComponent />
+    </div>
+  );
 };
