@@ -22,6 +22,7 @@ import {
   SettingsIcon,
   LogoutIcon,
   DiskIcon,
+  ProfileIcon,
 } from '@assets/icons';
 
 const dictionary = {
@@ -48,6 +49,7 @@ const dictionary = {
   settings: SettingsIcon,
   logout: LogoutIcon,
   disk: DiskIcon,
+  profile: ProfileIcon,
 };
 
 type IconTypes = keyof typeof dictionary;
