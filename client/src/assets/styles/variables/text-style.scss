@@ -2,12 +2,12 @@
 @import './font-family';
 @import './colors';
 
-@mixin heading-12 {
-  font-weight: 600;
-  // font-size: sizes.$xs;
-  line-height: 4rem;
-  letter-spacing: 0.018em;
-  text-transform: uppercase;
+@mixin heading-40 {
+  font-family: $itim;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40.99px;
+  line-height: 49px;
 }
 
 @mixin paragraph-29 {

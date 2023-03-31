@@ -1,0 +1,28 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.container {
+  width: 100%;
+  min-height: 224px;
+  border: 2px dashed #327bd1;
+  border-radius: 12px;
+  background: #dcecff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+
+  & .icon {
+    width: 72px;
+    height: 68px;
+    color: $light-blue-40;
+  }
+
+  & .text {
+    @include text();
+    @include heading-40();
+    text-transform: uppercase;
+    color: $light-blue-40;
+  }
+}
