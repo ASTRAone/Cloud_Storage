@@ -17,7 +17,7 @@ export const LayoutPage: React.FC<Props> = ({ children }) => {
   return (
     <div className={cx('wrapper')}>
       <div className={cx('header')}>
-        <HeaderLayout />
+        <HeaderLayout auth />
       </div>
       <div className={cx('content')}>
         <div className={cx('sidepanel')}>

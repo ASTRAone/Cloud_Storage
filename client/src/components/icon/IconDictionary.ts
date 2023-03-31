@@ -16,6 +16,12 @@ import {
   DashboardIcon,
   StockholmIcon,
   ArrowIcon,
+  BellIcon,
+  MagnifierIcon,
+  ArrowDownIcon,
+  SettingsIcon,
+  LogoutIcon,
+  DiskIcon,
 } from '@assets/icons';
 
 const dictionary = {
@@ -36,6 +42,12 @@ const dictionary = {
   dashboard: DashboardIcon,
   stockholm: StockholmIcon,
   arrow: ArrowIcon,
+  bell: BellIcon,
+  magnifier: MagnifierIcon,
+  arrowDown: ArrowDownIcon,
+  settings: SettingsIcon,
+  logout: LogoutIcon,
+  disk: DiskIcon,
 };
 
 type IconTypes = keyof typeof dictionary;

@@ -43,5 +43,9 @@ export const localizationRu = {
       signin: 'Авторизация',
       signup: 'Регистрация',
     },
+    placeholder: {
+      search: 'Найти файлы...',
+      filter: 'Фильтр',
+    },
   },
 };
