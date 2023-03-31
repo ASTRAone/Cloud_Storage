@@ -18,3 +18,6 @@ export { ArrowIcon } from './ArrowIcon';
 export { BellIcon } from './BellIcon';
 export { MagnifierIcon } from './MagnifierIcon';
 export { ArrowDownIcon } from './ArrowDownIcon';
+export { SettingsIcon } from './SettingsIcon';
+export { LogoutIcon } from './LogoutIcon';
+export { DiskIcon } from './DiskIcon';

@@ -8,7 +8,7 @@
   width: 100%;
   top: 100px;
   background-color: #004b75;
-  max-width: 289px;
+  max-width: 291px;
   z-index: 9;
   border-radius: 0 0 0 16px;
   
@@ -21,27 +21,23 @@
     text-align: center;
   }
 
-  & .dropdown-content .containerLink {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+  & .dropdown-content .item {
     border: 1px solid transparent;
   }
 
-  & .dropdown-content .containerLink > .icon {
+  & .dropdown-content .item > .icon {
     display: flex;
     justify-content: flex-start;
   }
 
-  & .dropdown-content .containerLink:hover {
+  & .dropdown-content .item:hover {
     background: $light-sweet-100;
     border: 1px solid white;
     border-left: none;
     border-right: none;
   }
 
-  & .dropdown-content .containerLink:has(.no-border-hover):hover {
+  & .dropdown-content .item:has(.no-border-hover):hover {
       border-radius: 0 0 0 16px !important;
   }
 

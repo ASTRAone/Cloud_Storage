@@ -2,8 +2,7 @@ import React from 'react';
 
 import { useStyles } from '@hooks/useStyles';
 
-import { Icon } from '@components/icon';
-import { ButtonLink } from '@components/ButtonLink';
+import { ItemMenu } from '@components/ItemMenu';
 
 import styles from './styles.module.scss';
 
@@ -17,49 +16,41 @@ export const DropDownMenu: React.FC<Props> = () => {
   return (
     <div className={cx('container')}>
       <div className={cx('dropdown-content')}>
-        <div className={cx('containerLink')}>
-          <Icon
-            type="user"
-            className={cx('icon')}
-          />
-          <ButtonLink
-            text="Edit"
+        <div className={cx('item')}>
+          <ItemMenu
+            iconType="user"
             to="/account"
-            className={cx('btn-link')}
+            linkName="Edit"
+            classNameIcon={cx('icon')}
+            classNameLink={cx('btn-link')}
           />
         </div>
-        <div className={cx('containerLink')}>
-          <Icon
-            type="user"
-            className={cx('icon')}
-          />
-          <ButtonLink
-            text="My Disk"
+        <div className={cx('item')}>
+          <ItemMenu
+            iconType="disk"
             to="/mydisk"
-            className={cx('btn-link')}
+            linkName="My Disk"
+            classNameIcon={cx('icon')}
+            classNameLink={cx('btn-link')}
           />
         </div>
-        <div className={cx('containerLink')}>
-          <Icon
-            type="user"
-            className={cx('icon')}
-          />
-          <ButtonLink
-            text="Settings"
+        <div className={cx('item')}>
+          <ItemMenu
+            iconType="settings"
             to="/settings"
-            className={cx('btn-link')}
+            linkName="Settings"
+            classNameIcon={cx('icon')}
+            classNameLink={cx('btn-link')}
           />
         </div>
         <hr />
-        <div className={cx('containerLink')}>
-          <Icon
-            type="user"
-            className={cx('icon')}
-          />
-          <ButtonLink
-            text="Log Out"
+        <div className={cx('item')}>
+          <ItemMenu
+            iconType="logout"
             to="/logout"
-            className={cx('btn-link', 'no-border-hover')}
+            linkName="LogOut"
+            classNameIcon={cx('icon')}
+            classNameLink={cx('btn-link', 'no-border-hover')}
           />
         </div>
       </div>

@@ -19,6 +19,9 @@ import {
   BellIcon,
   MagnifierIcon,
   ArrowDownIcon,
+  SettingsIcon,
+  LogoutIcon,
+  DiskIcon,
 } from '@assets/icons';
 
 const dictionary = {
@@ -42,6 +45,9 @@ const dictionary = {
   bell: BellIcon,
   magnifier: MagnifierIcon,
   arrowDown: ArrowDownIcon,
+  settings: SettingsIcon,
+  logout: LogoutIcon,
+  disk: DiskIcon,
 };
 
 type IconTypes = keyof typeof dictionary;

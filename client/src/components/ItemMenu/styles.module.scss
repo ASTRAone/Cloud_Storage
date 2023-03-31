@@ -1,0 +1,11 @@
+@import '@assets/styles/variables/text-style.scss';
+@import '@assets/styles/variables/reset.scss';
+@import '@assets/styles/variables/colors.scss';
+
+.containerLink {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+}
