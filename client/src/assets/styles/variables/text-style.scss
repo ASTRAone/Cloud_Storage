@@ -19,6 +19,15 @@
   color: $white;
 }
 
+@mixin paragraph-25 {
+  font-family: $DMSans;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 38px;
+  color: $white;
+}
+
 @mixin paragraph-22 {
   font-family: $itim;
   font-style: normal;
