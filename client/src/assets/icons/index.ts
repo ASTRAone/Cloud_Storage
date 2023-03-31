@@ -21,4 +21,5 @@ export { ArrowDownIcon } from './ArrowDownIcon';
 export { SettingsIcon } from './SettingsIcon';
 export { LogoutIcon } from './LogoutIcon';
 export { DiskIcon } from './DiskIcon';
+export { ProfileIcon } from './ProfileIcon';
 export { DrageIcon } from './DrageIcon';

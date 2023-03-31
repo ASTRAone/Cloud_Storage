@@ -1,45 +1,88 @@
-@import '@assets/styles/variables/colors.scss';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+@import '@assets/styles/variables/colors';
 
 .container {
-  cursor: pointer;
+    cursor: pointer;
+    display: flex;
+    margin-right: 30px;
+    align-items: center;
+    gap: 15px;
+    .half-circle {
+      position: absolute;
+      top: 0;
+      z-index: 1;
+      width: 11em;
+      height: 100px;
+      border-radius: 0 0 50% 50% / 0 0 100% 100%;
+      background: $light-sweet-100;
+    }
+    &:hover .half-circle {
+      background: cadetblue;
+    }
+    .avatar {
+      z-index: 2;
+      background: url('../../assets/images/vlados.jpg');
+      background-size: contain;
+      border-radius: 50%;
+      background-position: top center;
+      width: 60px;
+      height: 60px;
+      border: 1px solid white;
+    }
+    & .information {
+      z-index: 2;
+      & .name {
+        color: white;
+        text-transform: none;
+      }
+      & .email {
+        text-decoration: none;
+        font-size: 13px;
+        color: white;
+      }
+    }
+  }
+
+
+.dropdown {
+  position: absolute;
+  background-color: #004b75;
   display: flex;
-  margin-right: 30px;
-  align-items: center;
-  gap: 15px;
-  .half-circle {
-    position: absolute;
-    top: 0;
-    z-index: 1;
-    width: 11em;
-    height: 100px;
-    border-radius: 0 0 50% 50% / 0 0 100% 100%;
-    background: $light-sweet-100;
-  }
-  &:hover .half-circle {
-    background: cadetblue;
-  }
-  .avatar {
-    z-index: 2;
-    background: url('../../assets/images/vlados.jpg');
-    background-size: contain;
-    border-radius: 50%;
-    background-position: top center;
-    width: 60px;
-    height: 60px;
-    border: 1px solid white;
-  }
-  & .information {
-    z-index: 2;
-    & .name {
+  justify-content: center;
+  top: 20px;
+  left: 15px;
+  width: 250px;
+  border-radius: 0 0 15px 15px;
+    & .dropdown-content .btn-link {
+      @include paragraph-19();
       color: white;
-      text-transform: none;
-    }
-    & .email {
+      padding: 12px 14px;
       text-decoration: none;
-      font-size: 13px;
-      color: white;
+      display: block;
+      text-align: center;
     }
-}
-}
-
-
+    & .dropdown-content {
+      width: 100%;
+    }
+    & .dropdown-content .item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid transparent;
+      padding: 10px 40px;
+      gap: 25px;
+    }
+    & .dropdown-content .item-top-border {
+      border-top: 1px solid white;
+    }
+    & .dropdown-content .item:hover {
+      background: $light-sweet-100;
+      border: 1px solid white;
+      border-left: none;
+      border-right: none;
+    }
+    & .dropdown-content .item.item-top-border:hover {
+      border-radius: 0 0 15px 15px;
+    }
+  }
