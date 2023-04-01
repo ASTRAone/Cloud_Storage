@@ -1,0 +1,1 @@
+export { TextShorter } from './TextShorter';

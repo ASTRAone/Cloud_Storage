@@ -1,0 +1,27 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.dark {
+  background-color: '';
+  color: '';
+}
+
+.light {
+  background-color: '';
+  color: '';
+}
+
+.tooltip {
+  display: inline-block;
+  max-width: 300px;
+  &__text {
+    margin: 0;
+  }
+}
+:global {
+  .tooltip-content {
+    z-index: 1001 !important;
+    filter: drop-shadow(0px 0px 1px rgba(26, 32, 36, 0.32)) drop-shadow(0px 8px 16px rgba(91, 104, 113, 0.24));
+  }
+}
