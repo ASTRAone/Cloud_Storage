@@ -44,7 +44,7 @@ export const Tooltip: React.FC<Props> = ({
   place = 'bottom',
   events,
   classes,
-  color,
+  color = 'light',
   text,
   children,
 }) => {
@@ -59,7 +59,7 @@ export const Tooltip: React.FC<Props> = ({
   // TODO заменить цвета
   const arrowStyle = useMemo(
     () => ({
-      color: color === 'dark' ? '#303940' : '#ffffff',
+      color: color === 'dark' ? '#303940' : 'rgba(255, 255, 255, 0.9)',
     }),
     [color],
   );

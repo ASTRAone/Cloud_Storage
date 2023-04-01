@@ -26,7 +26,7 @@ export const PanelInfoUsed: React.FC<Props> = ({
         {usedGb} <span className={cx('span')}>gb</span> used
       </p>
       <p className={cx('text-info')}>
-        {usedProcent}% used - {freeGb} GB free
+        {usedProcent}% used - {freeGb} <span className={cx('span')}>gb</span> free
       </p>
       <ProgressBar
         value={usedProcent}
