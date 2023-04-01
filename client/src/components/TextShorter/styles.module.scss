@@ -1,0 +1,14 @@
+@import '@assets/styles/variables/common';
+
+.wrapper {
+  overflow: hidden;
+  min-width: 0;
+}
+
+.content {
+  @include text-no-wrap;
+}
+
+.isHidden {
+  visibility: hidden !important;
+}
