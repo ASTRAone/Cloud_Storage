@@ -4,8 +4,7 @@ import { useStyles } from '@hooks/useStyles';
 
 import { Popup } from '@components/Popup';
 import { IconTypes } from '@components/icon/IconDictionary';
-import { Icon } from '@components/icon';
-import { ButtonLink } from '@components/ButtonLink';
+import { MenuItem } from '@components/MenuIteim';
 
 import styles from './styles.module.scss';
 
@@ -43,7 +42,6 @@ export const MenuProfile: React.FC<Props> = ({ name, email }) => {
         position="left bottom"
         on="click"
       >
-        {/* <DropDownMenu /> */}
         <div className={cx('dropdown')}>
           <div className={cx('dropdown-content')}>
             {menu.map(({ url, iconType, linkName }) => {
@@ -53,13 +51,10 @@ export const MenuProfile: React.FC<Props> = ({ name, email }) => {
                     key={url}
                     className={cx('item', iconType == 'logout' ? 'item-top-border' : '')}
                   >
-                    <Icon
-                      type={iconType}
-                      className={cx('icon')}
-                    />
-                    <ButtonLink
-                      text={linkName}
-                      to={url}
+                    <MenuItem
+                      url={url}
+                      iconType={iconType}
+                      name={linkName}
                       className={cx('btn-link')}
                     />
                   </div>

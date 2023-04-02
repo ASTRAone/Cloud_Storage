@@ -3,23 +3,28 @@ import { initReactI18next } from 'react-i18next';
 import i18next from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
+// import { AuthViewDTO } from '@api/AuthApi/models';
+
+// import { useAppSelector } from '@store/hooks';
+// import { getUserData } from '@store/auth/data';
+
 import { localizationEn, localizationRu } from './locales';
 
-// TODO На будущее для бека
+// const { user } = useAppSelector(getUserData);
 
-// export const getLanguage = (): string => {
-//   let _user = localStorage.getItem('user')
-//   let user: UserDtoType | undefined
-//   if (_user) {
-//     user = JSON.parse(_user) as UserDtoType
-//   }
-//   return (
-//     user?.userInfo?.language?.toLocaleLowerCase() ||
-//     i18next.language ||
-//     window.localStorage.i18nextLng ||
-//     'ru'
-//   )
-// }
+// const getLanguage = (lang: AuthViewDTO | null) => {
+//   console.log('language', lang);
+//   return lang;
+// };
+
+// getLanguage(user);
+
+localStorage.setItem('language', 'en-US');
+
+export const getLanguage = (): string => {
+  const _language = localStorage.getItem('language');
+  return _language as string;
+};
 
 const resources = {
   ru: {
@@ -39,7 +44,8 @@ declare module 'i18next' {
 i18next.use(initReactI18next).use(LanguageDetector).init({
   resources,
   fallbackLng: 'ru',
-  lng: 'en',
+  lng: getLanguage(),
+  // lng: 'en',
   // debug: false,
   // interpolation: {
   //   escapeValue: false,
@@ -47,3 +53,5 @@ i18next.use(initReactI18next).use(LanguageDetector).init({
 });
 
 export default i18next;
+
+// TODO На будущее для бека

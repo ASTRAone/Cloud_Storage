@@ -20,7 +20,7 @@ export const Registration: React.FC = () => {
 
   const createUser = async (data: AuthRegDTO) => {
     try {
-      await dispatch(userRegistration(data)).unwrap();
+      await dispatch(userRegistration({ ...data, language: 'en-US' })).unwrap();
       navigate(LOGIN_ROUTE);
     } catch (error) {
       setErrorRes(true);

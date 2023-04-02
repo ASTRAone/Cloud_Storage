@@ -4,8 +4,7 @@ import { useStyles } from '@hooks/useStyles';
 
 import { Popup } from '@components/Popup';
 import { IconTypes } from '@components/icon/IconDictionary';
-import { Icon } from '@components/icon';
-import { ButtonLink } from '@components/ButtonLink';
+import { MenuItem } from '@components/MenuIteim';
 
 import styles from './styles.module.scss';
 
@@ -35,22 +34,17 @@ export const PopupLocalization: React.FC = () => {
           <div className={cx('dropdown-content-language')}>
             {menu.map(({ iconType, name }) => {
               return (
-                <>
-                  <div
-                    key={name}
-                    className={cx('item')}
-                  >
-                    <Icon
-                      type={iconType}
-                      className={cx('icon')}
-                    />
-                    <ButtonLink
-                      text={name}
-                      to={name}
-                      className={cx('btn-link')}
-                    />
-                  </div>
-                </>
+                <div
+                  key={name}
+                  className={cx('item')}
+                >
+                  <MenuItem
+                    noLink
+                    iconType={iconType}
+                    name={name}
+                    className={cx('btn')}
+                  />
+                </div>
               );
             })}
           </div>

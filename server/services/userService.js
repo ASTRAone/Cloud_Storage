@@ -9,7 +9,8 @@ const File = require("../models/File");
 const FileService = require("../services/fileService");
 
 class UserService {
-  async registration(email, password) {
+  async registration(email, password, language) {
+    console.log('language: ' + language);
     const candidate = await UserModel.findOne({ email });
     if (candidate) {
       throw ApiError.BadRequestError(`User with email ${email} already exists`);
@@ -21,6 +22,7 @@ class UserService {
       email,
       password: hashPassword,
       activationLink,
+      language,
     });
     user.save();
     await MailService.sendActivationMail(
@@ -99,6 +101,18 @@ class UserService {
   async getAllUsers() {
     const users = await UserModel.find();
     return users;
+  }
+
+  async changeLanguage(user, language) {
+    if (!user) {
+      throw ApiError.BadRequestError("User not found");
+    }
+    user.language = language;
+    await user.save();
+
+    return {
+      user
+    };
   }
 }
 
