@@ -34,4 +34,22 @@
   & .btn-link {
     @include paragraph-12();
   }
+
+  & .input::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: gray;
+  }
+  & .input:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: gray;
+  }
+  & .input::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: gray;
+  }
+  & .input:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: gray;
+  }
 }
+
