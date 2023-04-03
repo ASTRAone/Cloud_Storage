@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useStyles } from '@hooks/useStyles';
 
@@ -15,14 +16,16 @@ export type MenuItemType = {
   iconType: IconTypes;
   linkName: string;
 };
-const menu: Array<MenuItemType> = [
-  { url: '/account', iconType: 'profile', linkName: 'Account' },
-  { url: '/mydisk', iconType: 'disk', linkName: 'MyDisk' },
-  { url: '/settings', iconType: 'settings', linkName: 'Settings' },
-  { url: '/logout', iconType: 'logout', linkName: 'Logout' },
-];
 
 export const MenuProfile: React.FC<Props> = ({ name, email }) => {
+  const { t } = useTranslation();
+  const menu: Array<MenuItemType> = [
+    { url: '/account', iconType: 'profile', linkName: t('profileMenu.menu.account') },
+    { url: '/mydisk', iconType: 'disk', linkName: t('profileMenu.menu.mydisk') },
+    { url: '/settings', iconType: 'settings', linkName: t('profileMenu.menu.settings') },
+    { url: '/logout', iconType: 'logout', linkName: t('profileMenu.menu.logout') },
+  ];
+
   const cx = useStyles(styles);
   return (
     <>

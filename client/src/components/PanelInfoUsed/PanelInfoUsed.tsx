@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useStyles } from '@hooks/useStyles';
 
@@ -20,13 +21,14 @@ export const PanelInfoUsed: React.FC<Props> = ({
   className = '',
 }) => {
   const cx = useStyles(styles);
+  const { t } = useTranslation();
   return (
     <div className={cx('container', className)}>
       <p className={cx('text-used')}>
-        {usedGb} <span className={cx('span')}>gb</span> used
+        {usedGb} <span className={cx('span')}>{t('common.gb')}</span> {t('common.used')}
       </p>
       <p className={cx('text-info')}>
-        {usedProcent}% used - {freeGb} <span className={cx('span')}>gb</span> free
+        {usedProcent}% {t('common.used')} - {freeGb} {t('common.Gb')} {t('common.free')}
       </p>
       <ProgressBar
         value={usedProcent}
