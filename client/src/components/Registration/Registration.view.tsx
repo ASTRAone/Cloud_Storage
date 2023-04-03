@@ -42,7 +42,7 @@ export const RegistrationView: React.FC<Props> = ({ loading, isError, setError }
 
   return (
     <div className={cx('container')}>
-      <p className={cx('title')}>{t('registration.title.main')}</p>
+      <p className={cx('title')}>{t('authorization.title.register')}</p>
       <Controller
         control={control}
         rules={{ required: true }}
@@ -50,9 +50,9 @@ export const RegistrationView: React.FC<Props> = ({ loading, isError, setError }
           <Input
             onChange={onChange}
             value={value}
-            label={t('registration.labels.name')}
+            label={t('authorization.labels.name')}
             full
-            placeholder={t('registration.placeholder.name')}
+            placeholder={t('authorization.placeholder.name')}
             error={errors.name || isError}
             actions={[
               {
@@ -77,9 +77,9 @@ export const RegistrationView: React.FC<Props> = ({ loading, isError, setError }
           <Input
             onChange={onChange}
             value={value}
-            label={t('registration.labels.surname')}
+            label={t('authorization.labels.surname')}
             full
-            placeholder={t('registration.placeholder.surname')}
+            placeholder={t('authorization.placeholder.surname')}
             error={errors.surname || isError}
             actions={[
               {
@@ -105,8 +105,8 @@ export const RegistrationView: React.FC<Props> = ({ loading, isError, setError }
             onChange={onChange}
             value={value}
             full
-            label={t('registration.labels.email')}
-            placeholder={t('registration.placeholder.email')}
+            label={t('authorization.labels.email')}
+            placeholder={t('authorization.placeholder.email')}
             error={errors.email || isError}
             actions={[
               {
@@ -132,8 +132,8 @@ export const RegistrationView: React.FC<Props> = ({ loading, isError, setError }
             onChange={onChange}
             value={value}
             full
-            label={t('registration.labels.password')}
-            placeholder={t('registration.placeholder.password')}
+            label={t('authorization.labels.password')}
+            placeholder={t('authorization.placeholder.password')}
             error={errors.password || isError}
             actions={[
               {
@@ -150,16 +150,16 @@ export const RegistrationView: React.FC<Props> = ({ loading, isError, setError }
         )}
         name="password"
       />
-      {isError && <ErrorComponent text="Registration error" />}
+      {isError && <ErrorComponent text="authorization error" />}
       <Button
         type="submit"
         isUpperCase
         className={cx('btn')}
         isLoading={loading}
-        text={t('registration.button.register')}
+        text={t('authorization.button.register')}
       />
       <ButtonLink
-        text={t('registration.title.accountQuestion')}
+        text={t('authorization.title.accountQuestion')}
         to={LOGIN_ROUTE}
         className={cx('btn-link')}
       />

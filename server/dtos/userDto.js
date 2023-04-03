@@ -5,6 +5,7 @@ module.exports = class UserDto {
   avatar;
   usedSpace;
   isActivated;
+  language;
 
   constructor(model) {
     this.email = model.email;
@@ -13,5 +14,6 @@ module.exports = class UserDto {
     this.diskSpace = model.diskSpace;
     this.usedSpace = model.usedSpace;
     this.isActivated = model.isActivated;
+    this.language = model.language;
   }
 };

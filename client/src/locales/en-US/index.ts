@@ -1,10 +1,12 @@
 export const localizationEn = {
-  registration: {
+  authorization: {
     title: {
-      main: 'Registration',
+      login: 'Authorization',
+      register: 'Registration',
       accountQuestion: "Don't have an account?",
     },
     button: {
+      login: 'Sign in',
       register: 'Register',
     },
     labels: {
@@ -20,24 +22,7 @@ export const localizationEn = {
       password: 'Enter password...',
     },
   },
-  authorization: {
-    title: {
-      main: 'Authorization',
-      accountQuestion: "Don't have an account?",
-    },
-    button: {
-      login: 'Sign in',
-    },
-    labels: {
-      email: 'Email',
-      password: 'Password',
-    },
-    placeholder: {
-      email: 'Enter email...',
-      password: 'Enter password...',
-    },
-  },
-  navBar: {
+  headerPanel: {
     title: {
       about: "what's about?",
       signin: 'Sign In',
@@ -48,4 +33,15 @@ export const localizationEn = {
       filter: 'Filter',
     },
   },
+  menu: {
+    sidePanel: {
+      dashboard: 'Dashboard',
+      allFiles: 'All Files',
+      favorites: 'Favorites',
+      shared: 'Shared',
+      pictures: 'Pictures',
+      request: 'Request',
+    },
+  },
+  language: 'EN',
 };

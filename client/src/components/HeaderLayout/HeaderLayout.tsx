@@ -43,16 +43,16 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
             type="moon"
             className={cx('icon')}
           />
-          <p className={cx('text')}>{t('navBar.title.about')}</p>
+          <p className={cx('text')}>{t('headerPanel.title.about')}</p>
           {location.pathname === LOGIN_ROUTE ? (
             <ButtonLink
-              text={t('navBar.title.signup')}
+              text={t('headerPanel.title.signup')}
               className={cx('btn')}
               to={REGISTRATION_ROUTE}
             />
           ) : (
             <ButtonLink
-              text={t('navBar.title.signin')}
+              text={t('headerPanel.title.signin')}
               className={cx('btn')}
               to={LOGIN_ROUTE}
             />
@@ -63,7 +63,7 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
           <div className={cx('containerInputs')}>
             <InputSearch
               full
-              placeholder={t('navBar.placeholder.search')}
+              placeholder={t('headerPanel.placeholder.search')}
               actions={[
                 {
                   icon: (
@@ -79,7 +79,7 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
             <InputFilter
               full
               header
-              placeholder={t('navBar.placeholder.filter')}
+              placeholder={t('headerPanel.placeholder.filter')}
               actions={[
                 {
                   icon: (
@@ -103,7 +103,7 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
               type="bell"
               className={cx('icon')}
             />
-            <p className={cx('text')}>
+            <p className={cx('profile')}>
               <MenuProfile
                 name="Vlados Panov"
                 email="voidstein@gmail.com"

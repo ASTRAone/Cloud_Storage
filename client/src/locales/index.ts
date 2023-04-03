@@ -1,2 +1,2 @@
-export { localizationRu } from './ru';
-export { localizationEn } from './en';
+export { localizationRu } from './ru-RUS';
+export { localizationEn } from './en-US';

@@ -12,8 +12,8 @@ class UserController {
           ApiError.BadRequestError("Error validation", errors.array())
         );
       }
-      const { email, password } = req.body;
-      const userData = await userService.registration(email, password);
+      const { email, password, language } = req.body;
+      const userData = await userService.registration(email, password, language);
       res.cookie("refreshToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
@@ -67,7 +67,7 @@ class UserController {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
-      return res.json({accessToken :userData.accessToken, refreshToken: userData.refreshToken});
+      return res.json({accessToken: userData.accessToken, refreshToken: userData.refreshToken});
     } catch (error) {
       next(error);
     }
@@ -91,6 +91,20 @@ class UserController {
       next(error);
     }
   }
+
+
+  async postLanguage(req, res, next) {
+    try {
+      const user = await User.findOne({ _id: req.user.id });
+      console.log('user ', user);
+      const { language } = req.body;
+      const userData = await userService.changeLanguage(user, language);
+      return res.json(userData);
+    } catch (error) {
+      next(error);
+    }
+  }
+
 }
 
 module.exports = new UserController();
