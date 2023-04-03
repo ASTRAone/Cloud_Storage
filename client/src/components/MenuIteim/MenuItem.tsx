@@ -36,6 +36,7 @@ export const MenuItem: React.FC<Props> = ({ iconType, name, url, className, noLi
           typeIcon={iconType}
           text={name}
           className={className}
+          onClick={() => console.log('ok')}
         />
       )}
     </>

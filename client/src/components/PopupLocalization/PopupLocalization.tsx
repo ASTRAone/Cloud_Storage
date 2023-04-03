@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useStyles } from '@hooks/useStyles';
 
@@ -11,20 +12,26 @@ import styles from './styles.module.scss';
 export type MenuItemType = {
   iconType: IconTypes;
   name: string;
+  lang: string;
 };
 const menu: Array<MenuItemType> = [
-  { iconType: 'russian', name: 'Russian' },
-  { iconType: 'english', name: 'English' },
+  { iconType: 'russian', name: 'Russian', lang: 'ru' },
+  { iconType: 'english', name: 'English', lang: 'en' },
 ];
 
 export const PopupLocalization: React.FC = () => {
   const cx = useStyles(styles);
+  const { t, i18n } = useTranslation();
+
+  const changingLanguage = (lang: string) => {
+    i18n.changeLanguage(lang == 'ru' ? 'ru' : 'en');
+  };
   return (
     <>
       <Popup
         trigger={
           <>
-            <div className={cx('localization')}>EN</div>
+            <div className={cx('localization')}>{t('language')}</div>
           </>
         }
         position="right bottom"
@@ -32,11 +39,12 @@ export const PopupLocalization: React.FC = () => {
       >
         <div className={cx('dropdown-language')}>
           <div className={cx('dropdown-content-language')}>
-            {menu.map(({ iconType, name }) => {
+            {menu.map(({ iconType, name, lang }) => {
               return (
                 <div
                   key={name}
                   className={cx('item')}
+                  onClick={() => changingLanguage(lang)}
                 >
                   <MenuItem
                     noLink

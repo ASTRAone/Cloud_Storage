@@ -34,7 +34,7 @@ export const localizationEn = {
     },
   },
   menu: {
-    leftMenu: {
+    sidePanel: {
       dashboard: 'Dashboard',
       allFiles: 'All Files',
       favorites: 'Favorites',
@@ -43,4 +43,5 @@ export const localizationEn = {
       request: 'Request',
     },
   },
+  language: 'EN',
 };

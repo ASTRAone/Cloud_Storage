@@ -26,11 +26,12 @@ export const localizationRu = {
     title: {
       about: 'Что нового?',
       signin: 'Авторизация',
-      signup: 'Регистрация',
+      signup: 'Зарегаться',
     },
     placeholder: {
       search: 'Найти файлы...',
       filter: 'Фильтр',
     },
   },
+  language: 'RU',
 };
