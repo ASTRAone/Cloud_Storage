@@ -10,21 +10,29 @@ import { Button } from '@components/Button';
 import styles from './styles.module.scss';
 
 type Props = {
-  iconType: IconTypes;
+  iconType?: IconTypes;
   className: string;
   name: string;
   url?: string;
   noLink?: boolean;
 };
 
-export const MenuItem: React.FC<Props> = ({ iconType, name, url, className, noLink = false }) => {
+export const MenuItem: React.FC<Props> = ({
+  iconType = null,
+  name,
+  url,
+  className,
+  noLink = false,
+}) => {
   const cx = useStyles(styles);
   return (
     <>
-      <Icon
-        type={iconType}
-        className={cx('icon')}
-      />
+      {iconType !== null && (
+        <Icon
+          type={iconType}
+          className={cx('icon')}
+        />
+      )}
       {!noLink ? (
         <ButtonLink
           text={name}
@@ -33,7 +41,6 @@ export const MenuItem: React.FC<Props> = ({ iconType, name, url, className, noLi
         />
       ) : (
         <Button
-          typeIcon={iconType}
           text={name}
           className={className}
         />

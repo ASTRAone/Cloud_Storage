@@ -10,6 +10,13 @@ import { dictionary, IconTypes } from './IconDictionary';
 type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
   type: IconTypes;
   size?: Size;
+  color?: string;
+};
+export const dictionaryColorFolder: Record<string, string> = {
+  music: '#327BD1',
+  documents: '#2FE6C8',
+  films: '#FDBC64',
+  images: '#FF7F5C',
 };
 
 const iconSizesDictionary: Record<Size, string> = {
@@ -22,7 +29,7 @@ const iconSizesDictionary: Record<Size, string> = {
   xxxl: styles.icon_xxxl,
 };
 
-export const Icon: React.FC<Props> = ({ type, size = 'lg', className, ...rest }) => {
+export const Icon: React.FC<Props> = ({ type, color, size = 'lg', className, ...rest }) => {
   const Icon = dictionary[type];
 
   if (!Icon) return null;
@@ -35,7 +42,7 @@ export const Icon: React.FC<Props> = ({ type, size = 'lg', className, ...rest })
       className={classnames}
       {...rest}
     >
-      <Icon />
+      <Icon color={color} />
     </div>
   );
 };
