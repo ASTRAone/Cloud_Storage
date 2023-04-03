@@ -1,4 +1,10 @@
 export const localizationEn = {
+  common: {
+    gb: 'gb',
+    Gb: 'GB',
+    used: 'used',
+    free: 'free',
+  },
   authorization: {
     title: {
       login: 'Authorization',
@@ -33,8 +39,8 @@ export const localizationEn = {
       filter: 'Filter',
     },
   },
-  menu: {
-    sidePanel: {
+  sidebar: {
+    menu: {
       dashboard: 'Dashboard',
       allFiles: 'All Files',
       favorites: 'Favorites',
@@ -42,6 +48,23 @@ export const localizationEn = {
       pictures: 'Pictures',
       request: 'Request',
     },
+    mydisk: {
+      button: {
+        title: 'Add more space',
+      },
+    },
   },
-  language: 'EN',
+  profileMenu: {
+    menu: {
+      account: 'Account',
+      mydisk: 'My Disk',
+      settings: 'Settings',
+      logout: 'Logout',
+    },
+  },
+  language: {
+    lang: 'EN',
+    russian: 'Russian',
+    english: 'English',
+  },
 };

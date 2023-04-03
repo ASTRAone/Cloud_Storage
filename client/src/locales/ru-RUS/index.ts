@@ -1,4 +1,10 @@
 export const localizationRu = {
+  common: {
+    gb: 'гб',
+    Gb: 'ГБ',
+    used: 'используется',
+    free: 'свободно',
+  },
   authorization: {
     title: {
       login: 'Авторизация',
@@ -33,5 +39,32 @@ export const localizationRu = {
       filter: 'Фильтр',
     },
   },
-  language: 'RU',
+  sidebar: {
+    menu: {
+      dashboard: 'Dashboard',
+      allFiles: 'All Files',
+      favorites: 'Favorites',
+      shared: 'Shared',
+      pictures: 'Pictures',
+      request: 'Request',
+    },
+    mydisk: {
+      button: {
+        title: 'Больше памяти',
+      },
+    },
+  },
+  profileMenu: {
+    menu: {
+      account: 'Профиль',
+      mydisk: 'Мой диск',
+      settings: 'Настройка',
+      logout: 'Выход',
+    },
+  },
+  language: {
+    lang: 'RU',
+    russian: 'Русский',
+    english: 'English',
+  },
 };

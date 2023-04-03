@@ -1,6 +1,10 @@
+// import { useTranslation } from 'react-i18next';
+
 import { IconTypes } from '@components/icon/IconDictionary';
 
 type LinkTypes = 'dashboard' | 'files' | 'favorites' | 'shared' | 'pictures' | 'request';
+
+// const { t } = useTranslation();
 
 export const linkTitles: Record<LinkTypes, string> = {
   dashboard: 'Dashboard',

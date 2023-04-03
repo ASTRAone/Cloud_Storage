@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { linkIcons, linkTitles } from '@utils/links';
 
@@ -34,6 +35,8 @@ export const SidePanel: React.FC = () => {
   const [open, setOpen] = useState(true);
   const handleToggleSidePanel = () => setOpen((prev) => !prev);
 
+  const { t } = useTranslation();
+
   const handleChangeActiveTab = (tab: LinkTypes) => {
     localStorage.setItem('tab', tab);
     setActiveTab(tab);
@@ -60,7 +63,7 @@ export const SidePanel: React.FC = () => {
           <PanelInfoUsed className={cx('panel', !open ? 'hide' : '')} />
           <Button
             color="white"
-            text="Add more space"
+            text={t('sidebar.mydisk.button.title')}
             className={cx('btn', !open ? 'hide' : '')}
           />
         </>

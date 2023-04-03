@@ -14,14 +14,14 @@ export type MenuItemType = {
   name: string;
   lang: string;
 };
-const menu: Array<MenuItemType> = [
-  { iconType: 'russian', name: 'Russian', lang: 'ru' },
-  { iconType: 'english', name: 'English', lang: 'en' },
-];
 
 export const PopupLocalization: React.FC = () => {
   const cx = useStyles(styles);
   const { t, i18n } = useTranslation();
+  const menu: Array<MenuItemType> = [
+    { iconType: 'russian', name: t('language.russian'), lang: 'ru' },
+    { iconType: 'english', name: t('language.english'), lang: 'en' },
+  ];
 
   const changingLanguage = (lang: string) => {
     i18n.changeLanguage(lang == 'ru' ? 'ru' : 'en');
@@ -31,7 +31,7 @@ export const PopupLocalization: React.FC = () => {
       <Popup
         trigger={
           <>
-            <div className={cx('localization')}>{t('language')}</div>
+            <div className={cx('localization')}>{t('language.lang')}</div>
           </>
         }
         position="right bottom"
