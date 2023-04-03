@@ -1,10 +1,12 @@
 export const localizationRu = {
-  registration: {
+  authorization: {
     title: {
-      main: 'Регистрация',
+      login: 'Авторизация',
+      register: 'Регистрация',
       accountQuestion: 'Еще нету аккаунта?',
     },
     button: {
+      login: 'Войти',
       register: 'Зарегистрироваться',
     },
     labels: {
@@ -20,24 +22,7 @@ export const localizationRu = {
       password: 'Введите пароль...',
     },
   },
-  authorization: {
-    title: {
-      main: 'Авторизация',
-      accountQuestion: 'Еще нету аккаунта?',
-    },
-    button: {
-      login: 'Войти',
-    },
-    labels: {
-      email: 'Почта',
-      password: 'Пароль',
-    },
-    placeholder: {
-      email: 'Введите почту...',
-      password: 'Введите пароль...',
-    },
-  },
-  navBar: {
+  headerPanel: {
     title: {
       about: 'Что нового?',
       signin: 'Авторизация',

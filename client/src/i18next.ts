@@ -44,7 +44,7 @@ declare module 'i18next' {
 i18next.use(initReactI18next).use(LanguageDetector).init({
   resources,
   fallbackLng: 'ru',
-  lng: getLanguage(),
+  lng: 'en',
   // lng: 'en',
   // debug: false,
   // interpolation: {
