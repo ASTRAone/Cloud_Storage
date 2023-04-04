@@ -6,13 +6,48 @@ const fileController = require("../controllers/fileController");
 const UserController = require("../controllers/userController");
 
 //Authorization
+/**
+ * @swagger
+ * /registration:
+ *   post:
+ *     summary: Registration of new user.
+ *     description: Пошел нахуй свагер
+ *     parameters:
+ *       - name: name
+ *         required: true
+ *         description: String Id required
+ *         schema:
+ *           type: string
+ *       - email: email
+ *         required: true
+ *         description: String Email required
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Creating a user 
+ */
 router.post(
   "/registration",
   body("email").isEmail(),
   body("password").isLength({ min: 3, max: 32 }),
   UserController.registration
 );
+/**
+ * @swagger
+ * /login:
+ *   post:
+ *     summary: Retrieve a list of JSONPlaceholder users
+ *     description: Retrieve a list of users from JSONPlaceholder. Can be used to populate a list of fake users when prototyping or testing an API.
+*/
 router.post("/login", UserController.login);
+/**
+ * @swagger
+ * /logout:
+ *   post:
+ *     summary: Retrieve a list of JSONPlaceholder users
+ *     description: Retrieve a list of users from JSONPlaceholder. Can be used to populate a list of fake users when prototyping or testing an API.
+*/
 router.post("/logout", UserController.logout);
 
 //folder

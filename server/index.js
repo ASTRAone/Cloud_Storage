@@ -1,13 +1,41 @@
 require('dotenv').config();
 const express = require("express");
+const app = express();
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc");
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
 const router = require("./routes/index")
-const app = express();
 const corsMiddleware = require("./middleware/cors.middleware");
 const errorMiddleware = require("./middleware/error.middleware");
 const cors = require('cors');   
+
+const options = {
+  definition: {
+    swagger: "2.0",
+    openapi: "3.1.0",
+    info: {
+      title: "Swagger of Cloud Mern",
+      version: "3.1.0",
+      description:
+        "No one cares, I guess",
+    },
+    servers: [
+      {
+        url: "http://localhost:5000",
+      },
+    ],
+  },
+  apis: ["./routes/*.js"],
+};
+
+const specs = swaggerJsdoc(options);
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(specs, { explorer: true })
+);
 
 app.use(cors({
   credentials: true,
