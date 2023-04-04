@@ -3,6 +3,7 @@
 @import '@assets/styles/variables/reset';
 
 .container {
+  cursor: pointer;
   width: 100%;
   min-height: 224px;
   border: 2px dashed #327bd1;
@@ -24,5 +25,9 @@
     @include heading-40();
     text-transform: uppercase;
     color: $light-blue-40;
+  }
+
+  &:hover > .icon,  &:hover > .text {
+    color: $light-sweet-100;
   }
 }
