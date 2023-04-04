@@ -1,6 +1,7 @@
 import React from 'react';
 
 import cn from 'classnames';
+import { ColorFolder } from '@utils/contants';
 
 import { Size } from '@src/utility/common';
 
@@ -12,11 +13,12 @@ type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLD
   size?: Size;
   color?: string;
 };
-export const dictionaryColorFolder: Record<string, string> = {
-  music: '#327BD1',
-  documents: '#2FE6C8',
-  films: '#FDBC64',
-  images: '#FF7F5C',
+
+export const dictionaryColorFolder: Record<string, ColorFolder> = {
+  music: ColorFolder.music,
+  documents: ColorFolder.documents,
+  films: ColorFolder.films,
+  images: ColorFolder.images,
 };
 
 const iconSizesDictionary: Record<Size, string> = {

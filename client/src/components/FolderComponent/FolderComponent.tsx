@@ -35,22 +35,22 @@ export const FolderComponent: React.FC<Props> = ({ type, title, files, gb }) => 
       <div className={cx('box', type)}>
         <div className={cx('box-title')}>
           <Icon
-            type="bigFolder"
+            type="bigfolder"
             className={cx('icon')}
             color={dictionaryColorFolder[type]}
             size="xl"
           />
           <Popup
             trigger={
-              <div className={cx('container-dots')}>
+              <div className={cx('block-dots')}>
                 <div className={cx('dots')} />
               </div>
             }
-            position="right top"
+            position="left center"
             on="click"
           >
             <div className={cx('dropdown-context')}>
-              <div className={cx('dropdown-content-context')}>
+              <div className={cx('dropdown-content')}>
                 {menu.map(({ name }) => {
                   return (
                     <div
@@ -58,6 +58,7 @@ export const FolderComponent: React.FC<Props> = ({ type, title, files, gb }) => 
                       className={cx('item')}
                     >
                       <MenuItem
+                        noLink
                         name={name}
                         className={cx('btn')}
                       />
@@ -68,10 +69,10 @@ export const FolderComponent: React.FC<Props> = ({ type, title, files, gb }) => 
             </div>
           </Popup>
         </div>
-        <div className={cx('text')}>{title}</div>
-        <div className={cx('box-subtitle')}>
-          <div className={cx('text')}>{files} files</div>
-          <div className={cx('text')}>{gb} GB</div>
+        <div className={cx('title')}>{title}</div>
+        <div className={cx('box-information-disk')}>
+          <div className={cx('sub-text')}>{files} files</div>
+          <div className={cx('sub-text')}>{gb} GB</div>
         </div>
       </div>
     </div>

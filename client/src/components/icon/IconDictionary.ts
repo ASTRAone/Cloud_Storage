@@ -57,7 +57,7 @@ const dictionary = {
   drage: DrageIcon,
   russian: RussianIcon,
   english: EnglishIcon,
-  bigFolder: BigFolderIcon,
+  bigfolder: BigFolderIcon,
 };
 
 type IconTypes = keyof typeof dictionary;

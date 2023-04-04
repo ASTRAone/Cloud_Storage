@@ -11,7 +11,7 @@ import styles from './styles.module.scss';
 
 type Props = {
   iconType?: IconTypes;
-  className: string;
+  className?: string;
   name: string;
   url?: string;
   noLink?: boolean;
