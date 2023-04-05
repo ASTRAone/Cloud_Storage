@@ -26,13 +26,11 @@
     padding: 47px 0 80px;
     z-index: 999999;
     position: relative;
-
     width: 100%;
     height: calc(100% - 127px);
 
     & .btn {
       @include paragraph-14();
-
       &.hide {
         opacity: 0;
       }

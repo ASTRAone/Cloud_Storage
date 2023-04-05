@@ -28,7 +28,7 @@ export const SidePanelItem: React.FC<Props> = ({
 
   return (
     <ButtonLink
-      to=""
+      to={`/${to}`}
       onClick={() => setActiveTab(to as LinkTypes)}
       className={cx('link')}
     >

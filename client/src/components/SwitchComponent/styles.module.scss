@@ -1,0 +1,36 @@
+@import '@assets/styles/variables/colors';
+
+.input {
+  position: relative;
+  width: 65px;
+  height: 35px;
+  -webkit-appearance: none;
+  outline: none;
+  background-color: $white;
+  border: 1px solid #327BD1;
+  border-radius: 20px;
+  padding-left: 6px;
+  padding-right: 6px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    background-color: #327BD1;
+    border-radius: 20px;
+    top: 50%;
+    transform: translate(0, -50%);
+    transition: background-color 0.3s ease;
+  }
+
+  &:checked::before {
+    right: 6px;
+    background-color: $white;
+    border: 1px solid #327BD1;
+    transition: background-color 0.3s ease;
+  }
+}
+

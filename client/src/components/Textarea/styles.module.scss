@@ -1,0 +1,77 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.container {
+  & .label {
+    @include paragraph-19();
+    display: block;
+    margin-bottom: 11px;
+
+    &.dark {
+      color: $dark-blue-100;
+    }
+
+    &.blue {
+      color: #327bd1;
+    }
+  }
+
+  & .textarea {
+    @include input();
+    @include paragraph-19();
+    width: 100%;
+    padding: 10px;
+    border-radius: 7px;
+    resize: none;
+    height: 105px;
+    border: 1px solid;
+    box-sizing: border-box;
+
+    &.error {
+      border-color: red!important;
+    }
+
+    &.dark {
+      border-color: $dark-blue-100;
+      color: $dark-blue-100;
+
+      &::-webkit-input-placeholder {
+        color: $dark-blue-100;
+      }
+
+      &:-moz-placeholder {
+        color: $dark-blue-100;
+      }
+
+      &::-moz-placeholder {
+        color: $dark-blue-100;
+      }
+
+      &:-ms-input-placeholder {
+        color: $dark-blue-100;
+      }
+    }
+
+    &.blue {
+      border-color: #327bd1;
+      color: #327bd1;
+
+      &::-webkit-input-placeholder {
+        color: #327bd1;
+      }
+
+      &:-moz-placeholder {
+        color: #327bd1;
+      }
+
+      &::-moz-placeholder {
+        color: #327bd1;
+      }
+
+      &:-ms-input-placeholder {
+        color: #327bd1;
+      }
+    }
+  }
+}

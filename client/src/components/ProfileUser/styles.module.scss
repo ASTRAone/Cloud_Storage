@@ -1,0 +1,60 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.page {
+  width: 100%;
+  padding-right: 56px;
+
+  & .header {
+    margin-left: 48px;
+    margin-bottom: 35px;
+
+    & .title {
+      @include text();
+      @include heading-39();
+      color: $white;
+      text-transform: uppercase;
+    }
+
+    & .text {
+      @include text();
+      @include paragraph-19();
+      color: $white;
+    }
+  }
+
+  & .container {
+    display: flex;
+    gap: 125px;
+
+    & .content-left {
+      position: relative;
+      &::after {
+        content: '';
+        display: block;
+        width: 3px;
+        height: 425px;
+        background-color: #dcecff;
+        position: absolute;
+        top: 100px;
+        right: -60px;
+      }
+
+      & .content-info {
+        margin-top: 19px;
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+      }
+    }
+
+    & .content-right {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin-top: 58px;
+      width: 100%;
+    }
+  }
+}

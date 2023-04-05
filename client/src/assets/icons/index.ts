@@ -25,4 +25,5 @@ export { ProfileIcon } from './ProfileIcon';
 export { DrageIcon } from './DrageIcon';
 export { RussianIcon } from './RussianIcon';
 export { EnglishIcon } from './EnglishIcon';
+export { CameraIcon } from './CameraIcon';
 export { BigFolderIcon } from './BigFolderIcon';

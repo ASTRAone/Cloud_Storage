@@ -14,6 +14,7 @@ type State = {
   statusReg: RequestStatus;
   statusLogout: RequestStatus;
   statusAuth: RequestStatus;
+  statusAvatar: RequestStatus;
 };
 
 const initialState: State = {
@@ -22,6 +23,7 @@ const initialState: State = {
   statusReg: 'idle',
   statusLogout: 'idle',
   statusAuth: 'idle',
+  statusAvatar: 'idle',
 };
 
 const userLogin = createAsyncThunk('user/login', async (payload: AuthDTO, { rejectWithValue }) => {
@@ -74,6 +76,20 @@ const userLogout = createAsyncThunk('user/logout', async (_, { rejectWithValue }
     return rejectWithValue(e);
   }
 });
+
+const userUploadAvatar = createAsyncThunk(
+  'user/uploadAvatar',
+  async (file: any, { rejectWithValue }) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    try {
+      const response = await AuthApi.uploadAvatar(formData);
+      return response.data;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
 
 const userDataSlice = createSlice({
   name: 'userDataSlice',
@@ -135,6 +151,16 @@ const userDataSlice = createSlice({
         if (state.user?.isAuth) {
           state.user.isAuth = false;
         }
+      })
+
+      .addCase(userUploadAvatar.pending, (state) => {
+        state.statusAvatar = 'loading';
+      })
+      .addCase(userUploadAvatar.fulfilled, (state) => {
+        state.statusAvatar = 'idle';
+      })
+      .addCase(userUploadAvatar.rejected, (state) => {
+        state.statusAvatar = 'failed';
       });
     // .addCase(userLanguage.pending, (state) => {
     //   state.status = 'loading';
@@ -167,5 +193,6 @@ export {
   userReload,
   userRegistration,
   userLogout,
+  userUploadAvatar,
 };
 export default userDataSlice.reducer;

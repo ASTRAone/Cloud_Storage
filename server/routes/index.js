@@ -33,7 +33,7 @@ router.post("/changeLanguage", authMiddleware, UserController.postLanguage);
 router.get("/files", authMiddleware, fileController.getFiles);
 router.get("/files/download", authMiddleware, fileController.downloadFile);
 router.post("/files/upload", authMiddleware, fileController.uploadFile);
-router.post('/files/avatar', authMiddleware, fileController.uploadAvatar);
 router.delete("/files/delete", authMiddleware, fileController.deleteFile);
+router.post('/files/avatar', authMiddleware, fileController.uploadAvatar);
 
 module.exports = router;

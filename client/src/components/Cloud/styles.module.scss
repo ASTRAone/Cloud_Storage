@@ -8,6 +8,8 @@
     grid-template-columns: repeat(6, 1fr);
     gap: 1rem;
     justify-content: center;
+    margin-top: 50px;
+
     @media (max-width: 1600px) {
       & { grid-template-columns: repeat(5, 1fr); }
     }

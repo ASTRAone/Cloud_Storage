@@ -26,6 +26,7 @@ import {
   DrageIcon,
   RussianIcon,
   EnglishIcon,
+  CameraIcon,
   BigFolderIcon,
 } from '@assets/icons';
 
@@ -57,6 +58,7 @@ const dictionary = {
   drage: DrageIcon,
   russian: RussianIcon,
   english: EnglishIcon,
+  camera: CameraIcon,
   bigfolder: BigFolderIcon,
 };
 

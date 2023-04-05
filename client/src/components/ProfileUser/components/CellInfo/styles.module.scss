@@ -1,0 +1,32 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.container {
+  @include paragraph-15();
+  text-transform: uppercase;
+  color: $light-sweet-100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  border: 1px solid #327BD1;
+  max-width: 208px;
+  box-sizing: border-box;
+
+  &.light {
+    background: $white
+  }
+
+  &.blue {
+    background: #DEEFFF;
+  }
+
+  & .text {
+    @include text();  
+  }
+
+  & .span {
+    margin-left: 3px;
+  }
+}

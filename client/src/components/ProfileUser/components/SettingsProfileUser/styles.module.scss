@@ -1,0 +1,45 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.container {
+  max-width: 592px;
+  margin-bottom: 57px;
+
+  & .content {
+    display: flex;
+    flex-direction: column;
+    gap: 55px;
+    margin-bottom: 137px;
+    position: relative;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 425px;
+      height: 3px;
+      background-color: #dcecff;
+      position: absolute;
+      bottom: -80px;
+      right: 50%;
+      transform: translate(50%);
+    }
+
+    & .checkbox-block {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  
+      & .text {
+        @include text();
+        @include paragraph-23();
+        color: #327BD1;
+      }
+    }
+  }
+
+  & .btn {
+    @include paragraph-23();
+    text-transform: uppercase;
+  }
+}

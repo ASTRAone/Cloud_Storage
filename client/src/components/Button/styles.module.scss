@@ -36,6 +36,12 @@
       color: $white;
     }
 
+    &.light-blue {
+      border-color: #01293F;
+      background-color: #327BD1;
+      color: $white;
+    }
+
     & .content {
       & .spinner {
         display: flex;
