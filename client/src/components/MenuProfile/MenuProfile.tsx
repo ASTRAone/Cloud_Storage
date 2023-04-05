@@ -16,12 +16,6 @@ export type MenuItemType = {
   iconType: IconTypes;
   linkName: string;
 };
-const menu: Array<MenuItemType> = [
-  { url: '/profile', iconType: 'profile', linkName: 'Account' },
-  { url: '/mydisk', iconType: 'disk', linkName: 'MyDisk' },
-  { url: '/settings', iconType: 'settings', linkName: 'Settings' },
-  { url: '/logout', iconType: 'logout', linkName: 'Logout' },
-];
 
 export const MenuProfile: React.FC<Props> = ({ name, email }) => {
   const { t } = useTranslation();
