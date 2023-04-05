@@ -27,7 +27,6 @@ export const Cloud: React.FC = () => {
   return (
     <div className={cx('page')}>
       <DrageComponent />
-      <br />
       <div className={cx('container')}>
         {folders.map(({ type, title, files, gb }, index) => (
           <FolderComponent
