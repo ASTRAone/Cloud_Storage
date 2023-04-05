@@ -35,6 +35,18 @@ const userLogin = createAsyncThunk('user/login', async (payload: AuthDTO, { reje
   }
 });
 
+// const userLanguage = createAsyncThunk(
+//   'user/language',
+//   async (payload: AuthDTO, { rejectWithValue }) => {
+//     try {
+//       const response = await AuthApi.changeLanguage(payload);
+//       return response;
+//     } catch (e) {
+//       return rejectWithValue(e);
+//     }
+//   },
+// );
+
 const userRegistration = createAsyncThunk(
   'user/registration',
   async (payload: AuthRegDTO, { rejectWithValue }) => {
@@ -100,7 +112,6 @@ const userDataSlice = createSlice({
       .addCase(userLogin.rejected, (state) => {
         state.status = 'failed';
       })
-
       .addCase(userRegistration.pending, (state) => {
         state.statusReg = 'loading';
       })
@@ -151,6 +162,19 @@ const userDataSlice = createSlice({
       .addCase(userUploadAvatar.rejected, (state) => {
         state.statusAvatar = 'failed';
       });
+    // .addCase(userLanguage.pending, (state) => {
+    //   state.status = 'loading';
+    // })
+    // .addCase(userLanguage.fulfilled, (state, action) => {
+    //   state.user = action.payload;
+    //   if (state.user) {
+    //     state.user.language = 'ru-RU';
+    //   }
+    //   state.status = 'idle';
+    // })
+    // .addCase(userLanguage.rejected, (state) => {
+    //   state.status = 'failed';
+    // });
   },
 });
 

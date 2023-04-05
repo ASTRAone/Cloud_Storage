@@ -41,7 +41,7 @@ export const AuthView: React.FC<Props> = ({ loading, isError, setError }) => {
 
   return (
     <div className={cx('container')}>
-      <p className={cx('title')}>{t('authorization.title.main')}</p>
+      <p className={cx('title')}>{t('authorization.title.login')}</p>
       <Controller
         control={control}
         rules={{ required: true, pattern: REGEXP_DICTIONARY.email }}

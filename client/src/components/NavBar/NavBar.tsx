@@ -34,7 +34,7 @@ export const NavBar: React.FC = () => {
   // };
 
   return (
-    <div className={cx('navBar')}>
+    <div className={cx('headerPanel')}>
       <div className={cx('containerLogo')}>
         <img
           src={Logo}

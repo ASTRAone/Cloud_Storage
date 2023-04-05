@@ -27,6 +27,7 @@ router.get("/refresh", UserController.refresh);
 //users
 router.get("/users", authMiddleware, UserController.getUsers);
 router.get("/user", authMiddleware, UserController.getUser);
+router.post("/changeLanguage", authMiddleware, UserController.postLanguage);
 
 //CRUD files
 router.get("/files", authMiddleware, fileController.getFiles);

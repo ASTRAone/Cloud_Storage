@@ -1,31 +1,37 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useStyles } from '@hooks/useStyles';
 
 import { Popup } from '@components/Popup';
 import { IconTypes } from '@components/icon/IconDictionary';
-import { Icon } from '@components/icon';
-import { ButtonLink } from '@components/ButtonLink';
+import { MenuItem } from '@components/MenuIteim';
 
 import styles from './styles.module.scss';
 
 export type MenuItemType = {
   iconType: IconTypes;
   name: string;
+  lang: string;
 };
-const menu: Array<MenuItemType> = [
-  { iconType: 'russian', name: 'Russian' },
-  { iconType: 'english', name: 'English' },
-];
 
 export const PopupLocalization: React.FC = () => {
   const cx = useStyles(styles);
+  const { t, i18n } = useTranslation();
+  const menu: Array<MenuItemType> = [
+    { iconType: 'russian', name: t('language.russian'), lang: 'ru' },
+    { iconType: 'english', name: t('language.english'), lang: 'en' },
+  ];
+
+  const changingLanguage = (lang: string) => {
+    i18n.changeLanguage(lang == 'ru' ? 'ru' : 'en');
+  };
   return (
     <>
       <Popup
         trigger={
           <>
-            <div className={cx('localization')}>EN</div>
+            <div className={cx('localization')}>{t('language.lang')}</div>
           </>
         }
         position="right bottom"
@@ -33,24 +39,20 @@ export const PopupLocalization: React.FC = () => {
       >
         <div className={cx('dropdown-language')}>
           <div className={cx('dropdown-content-language')}>
-            {menu.map(({ iconType, name }) => {
+            {menu.map(({ iconType, name, lang }) => {
               return (
-                <>
-                  <div
-                    key={name}
-                    className={cx('item')}
-                  >
-                    <Icon
-                      type={iconType}
-                      className={cx('icon')}
-                    />
-                    <ButtonLink
-                      text={name}
-                      to={name}
-                      className={cx('btn-link')}
-                    />
-                  </div>
-                </>
+                <div
+                  key={name}
+                  className={cx('item')}
+                  onClick={() => changingLanguage(lang)}
+                >
+                  <MenuItem
+                    noLink
+                    iconType={iconType}
+                    name={name}
+                    className={cx('btn')}
+                  />
+                </div>
               );
             })}
           </div>

@@ -7,6 +7,7 @@ type AuthResponse = {
     diskSpace?: number;
     usedSpace?: number;
     isAuth?: boolean;
+    language: string;
   };
 };
 
@@ -16,11 +17,13 @@ type AuthViewDTO = {
   diskSpace?: number;
   usedSpace?: number;
   isAuth?: boolean;
+  language: string;
 };
 
 type AuthDTO = {
   email: string;
   password: string;
+  language: string;
 };
 
 type AuthRegDTO = {
@@ -28,6 +31,7 @@ type AuthRegDTO = {
   surname: string;
   email: string;
   password: string;
+  language: string;
 };
 
 export type { AuthResponse, AuthDTO, AuthViewDTO, AuthRegDTO };

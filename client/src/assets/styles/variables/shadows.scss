@@ -9,3 +9,18 @@
 // $block: 0px 7px 15px rgba(0, 0, 0, 0.05);
 
 // $header-popup: -15px 7px 30px rgba(0, 0, 0, 0.05);
+
+$color_shadow_folder_music: rgba(158, 160, 249, 0.04);
+$color_shadow_folder_documents:rgba(103, 207, 236, 0.07);
+$color_shadow_folder_films: rgba(253, 131, 66, 0.04);
+$color_shadow_folder_images:rgba(255, 125, 125, 0.04);
+
+
+
+$shadow_folder_music: 0px 100px 80px 0px $color_shadow_folder_music, 0px 65px 47px 0px $color_shadow_folder_music, 0px 39px 26px 0px $color_shadow_folder_music, 0px 20px 13px 0px $color_shadow_folder_music, 0px 8px 7px 0px $color_shadow_folder_music, 0px 2px 3px 0px $color_shadow_folder_music; 
+
+$shadow_folder_documents: 0px 100px 80px 0px $color_shadow_folder_documents, 0px 65px 47px 0px $color_shadow_folder_documents, 0px 39px 26px 0px $color_shadow_folder_documents, 0px 20px 13px 0px $color_shadow_folder_documents, 0px 8px 7px 0px $color_shadow_folder_documents, 0px 2px 3px 0px $color_shadow_folder_documents; 
+
+$shadow_folder_films: 0px 100px 80px 0px $color_shadow_folder_films, 0px 65px 47px 0px $color_shadow_folder_films, 0px 39px 26px 0px $color_shadow_folder_films, 0px 20px 13px 0px $color_shadow_folder_films, 0px 8px 7px 0px $color_shadow_folder_films, 0px 2px 3px 0px $color_shadow_folder_films; 
+
+$shadow_folder_images: 0px 100px 80px 0px $color_shadow_folder_images, 0px 65px 47px 0px $color_shadow_folder_images, 0px 39px 26px 0px $color_shadow_folder_images, 0px 20px 13px 0px $color_shadow_folder_images, 0px 8px 7px 0px $color_shadow_folder_images, 0px 2px 3px 0px $color_shadow_folder_images; 

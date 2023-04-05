@@ -7,7 +7,7 @@ import styles from './styles.module.scss';
 
 // TODO Сделать варианты цвета пропсами
 
-type Props = NavLinkProps & { to: string; text?: string; className?: string };
+type Props = NavLinkProps & { to?: string; text?: string; className?: string };
 
 export const ButtonLink: React.FC<Props> = ({ to, text, className, children, ...rest }) => {
   const cx = useStyles(styles);

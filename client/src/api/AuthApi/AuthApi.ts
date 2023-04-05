@@ -13,6 +13,13 @@ class AuthApi {
     });
   }
 
+  static changeLanguage(data: AuthDTO) {
+    const url = 'changeLanguage';
+    return $api.post<AuthDTO, ApiResultResponse<AuthResponse>>(url, {
+      ...data,
+    });
+  }
+
   static registration(data: AuthRegDTO) {
     const url = 'registration';
     return $api.post<AuthRegDTO>(url, { ...data });
