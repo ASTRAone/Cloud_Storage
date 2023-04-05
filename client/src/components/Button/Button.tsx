@@ -18,7 +18,7 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   text?: string;
   className?: string;
   full?: boolean;
-  color?: 'white' | 'gray' | 'blue';
+  color?: 'white' | 'gray' | 'blue' | 'light-blue';
   isUpperCase?: boolean;
   actions?: Array<IconObject>;
 };

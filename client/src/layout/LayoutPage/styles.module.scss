@@ -14,6 +14,12 @@ html {
     flex: 1 0 auto;
     display: flex;
     gap: 70px;
+
+    &.bg-profile {
+      background: url('../../assets/images/profile-page-bg.png');
+      background-repeat: no-repeat;
+      background-position-x: 138px;
+    }
   }
 
   & .footer {

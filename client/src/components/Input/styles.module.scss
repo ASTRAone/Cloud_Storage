@@ -8,23 +8,43 @@
   }
 
   & .label {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    color: $dark-blue-100;
-    text-transform: uppercase;
     margin-bottom: 7px;
     display: block;
+
+    &.upperCase {
+      text-transform: uppercase;
+    }
   }
 
   & .content {
     padding: 0 12px 0 16px;
     height: 36px;
     background: transparent;
-    border: 1px solid $dark-blue-100;
+    border: 1px solid;
     border-radius: 7px;
     display: flex;
     align-items: center;
+
+    // TODO сделать для всех браузеров
+    &.dark {
+      border-color: $dark-blue-100;
+      & .input {
+        color: $dark-blue-100;
+        &::-webkit-input-placeholder {
+          color: $dark-blue-100;
+        }
+      }
+    }
+
+    &.blue {
+      border-color: #327BD1;
+      & .input {  
+        color: #327BD1;
+        &::-webkit-input-placeholder {
+          color: #327BD1;
+        }
+      }
+    }
 
     &.error {
       border: 1px solid red;

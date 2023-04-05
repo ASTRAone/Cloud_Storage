@@ -26,6 +26,7 @@ import {
   DrageIcon,
   RussianIcon,
   EnglishIcon,
+  CameraIcon,
 } from '@assets/icons';
 
 const dictionary = {
@@ -56,6 +57,7 @@ const dictionary = {
   drage: DrageIcon,
   russian: RussianIcon,
   english: EnglishIcon,
+  camera: CameraIcon,
 };
 
 type IconTypes = keyof typeof dictionary;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { linkIcons, linkTitles } from '@utils/links';
 
@@ -30,9 +30,26 @@ const menu: Array<MenuItemType> = [
 
 export const SidePanel: React.FC = () => {
   const cx = useStyles(styles);
-  const [activeTab, setActiveTab] = useState(localStorage.getItem('tab') || menu[0].link);
+  const [activeTab, setActiveTab] = useState<LinkTypes>();
   const [open, setOpen] = useState(true);
-  const handleToggleSidePanel = () => setOpen((prev) => !prev);
+
+  useEffect(() => {
+    const activeTabLC = localStorage.getItem('tab') as LinkTypes;
+    const isOpenPanelLC = JSON.parse(localStorage.getItem('openPanel') as string) as boolean;
+    if (activeTabLC) {
+      setActiveTab(activeTabLC);
+    } else setActiveTab(menu[0].link);
+
+    if (isOpenPanelLC) {
+      setOpen(isOpenPanelLC);
+    } else setOpen(true);
+  }, []);
+
+  const handleToggleSidePanel = () => {
+    const isOpenPanel = !open;
+    localStorage.setItem('openPanel', JSON.stringify(isOpenPanel));
+    setOpen((prev: boolean) => !prev);
+  };
 
   const handleChangeActiveTab = (tab: LinkTypes) => {
     localStorage.setItem('tab', tab);

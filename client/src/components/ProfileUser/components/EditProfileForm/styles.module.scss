@@ -1,0 +1,40 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.container {
+  position: relative;
+  margin-bottom: 67px;
+
+  &::after {
+    content: '';
+    width: 425px;
+    height: 3px;
+    position: absolute;
+    background-color: #DCECFF;
+    bottom: 50px;
+    left: 50%;
+    transform: translate(-50%);
+  }
+
+  & .input-block {
+    display: flex;
+    gap: 90px;
+    margin-bottom: 30px;
+
+    & .label {
+      @include paragraph-19();
+      color: #327bd1;
+    }
+  }
+
+  & .textarea {
+    text-transform: uppercase;
+  }
+
+  & .btn {
+    @include paragraph-23();
+    margin-top: 70px;
+    text-transform: uppercase;
+  }
+}

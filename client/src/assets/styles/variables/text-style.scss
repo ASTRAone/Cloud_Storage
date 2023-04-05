@@ -10,6 +10,14 @@
   line-height: 49px;
 }
 
+@mixin heading-39 {
+  font-family: $itim;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 39px;
+  line-height: 47px;
+}
+
 @mixin paragraph-29 {
   font-family: $DMSans;
   font-style: normal;
@@ -28,6 +36,14 @@
   color: $white;
 }
 
+@mixin paragraph-23 {
+  font-family: $itim;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 28px;
+}
+
 @mixin paragraph-22 {
   font-family: $itim;
   font-style: normal;
@@ -43,7 +59,14 @@
   font-weight: 400;
   font-size: 19px;
   line-height: 23px;
-  color: $dark-blue-100;
+}
+
+@mixin paragraph-18 {
+  font-family: $itim;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
 }
 
 @mixin paragraph-16 {
@@ -60,7 +83,6 @@
   font-weight: 700;
   font-size: 15px;
   line-height: 20px;
-  color: $white;
 }
 
 @mixin paragraph-14 {
@@ -69,7 +91,6 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  color: $dark-blue-100;
 }
 
 @mixin paragraph-13 {
@@ -78,7 +99,6 @@
   font-weight: 500;
   font-size: 13px;
   line-height: 20px;
-  color: $white;
 }
 
 @mixin paragraph-12 {
@@ -87,7 +107,6 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
-  color: $dark-blue-100;
 }
 
 @mixin paragraph-10 {

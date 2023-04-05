@@ -17,7 +17,7 @@ export type MenuItemType = {
   linkName: string;
 };
 const menu: Array<MenuItemType> = [
-  { url: '/account', iconType: 'profile', linkName: 'Account' },
+  { url: '/profile', iconType: 'profile', linkName: 'Account' },
   { url: '/mydisk', iconType: 'disk', linkName: 'MyDisk' },
   { url: '/settings', iconType: 'settings', linkName: 'Settings' },
   { url: '/logout', iconType: 'logout', linkName: 'Logout' },

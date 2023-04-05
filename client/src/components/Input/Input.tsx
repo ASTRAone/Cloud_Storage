@@ -11,6 +11,10 @@ type Props = Partial<React.ComponentPropsWithRef<'input'>> & {
   actions?: Array<IconObject>;
   label?: string;
   full?: boolean;
+  className?: string;
+  classNameLabel?: string;
+  variant?: 'blue' | 'dark';
+  isUpperCase?: boolean;
 };
 
 export const Input: React.FC<Props> = ({
@@ -20,6 +24,10 @@ export const Input: React.FC<Props> = ({
   error,
   actions,
   label,
+  className,
+  classNameLabel,
+  variant = 'dark',
+  isUpperCase = true,
   full = false,
   ...rest
 }) => {
@@ -40,9 +48,13 @@ export const Input: React.FC<Props> = ({
   }
 
   return (
-    <div className={cx('container', full ? 'full' : '')}>
-      {label && <label className={cx('label')}>{label}</label>}
-      <div className={cx('content', isError ? 'error' : '')}>
+    <div className={cx('container', className, full ? 'full' : '')}>
+      {label && (
+        <label className={cx('label', classNameLabel, isUpperCase ? 'upperCase' : '')}>
+          {label}
+        </label>
+      )}
+      <div className={cx('content', variant, isError ? 'error' : '')}>
         {actionsLeft}
         <div className={cx('controller-input')}>
           <input

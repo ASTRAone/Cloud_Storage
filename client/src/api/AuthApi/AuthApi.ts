@@ -32,6 +32,20 @@ class AuthApi {
     const url = 'logout';
     return $api.post(url);
   }
+
+  // TODO доделать(проверить)
+  static uploadAvatar(data: FormData) {
+    const url = 'files/avatar';
+    return $api.post<FormData>(
+      url,
+      { ...data },
+      {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      },
+    );
+  }
 }
 
 export { AuthApi };
