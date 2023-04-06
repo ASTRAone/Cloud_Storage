@@ -16,7 +16,8 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   sizeIcon?: Size;
   isLoading?: boolean;
   text?: string;
-  className?: string;
+  classNameBtn?: string;
+  classNameContainer?: string;
   full?: boolean;
   color?: 'white' | 'gray' | 'blue' | 'light-blue';
   isUpperCase?: boolean;
@@ -28,7 +29,8 @@ export const Button: React.FC<Props> = ({
   isIcon,
   typeIcon,
   sizeIcon,
-  className,
+  classNameBtn,
+  classNameContainer,
   isLoading = false,
   text,
   type = 'button',
@@ -58,9 +60,9 @@ export const Button: React.FC<Props> = ({
     <button
       {...restProps}
       type={type}
-      className={cx('btn', className, full ? 'full' : '')}
+      className={cx('btn', classNameBtn, full ? 'full' : '')}
     >
-      <div className={cx('container', color)}>
+      <div className={cx('container', classNameContainer, color)}>
         <div className={cx('content')}>
           {isLoading ? (
             <div className={cx('spinner')}>

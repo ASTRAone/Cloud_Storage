@@ -1,9 +1,134 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
 .page {
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 
   & .header {
+    position: relative;
+    background: #004b75;
+    border-radius: 0px 0px 0px 197px;
+    padding: 103px 0 110px 130px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 90px;
 
-    &-left {
-      
+    & .text-block {
+      max-width: 551px;
+
+      & .title {
+        @include text();
+        @include heading-43();
+        color: $white;
+        margin-bottom: 26px;
+      }
+
+      & .text {
+        @include text();
+        @include paragraph-18();
+        font-weight: 400;
+        color: $white;
+      }
+
+      & .btn-container {
+        @include paragraph-22();
+        box-sizing: border-box;
+        height: 61px;
+        align-items: center;
+        display: flex;
+        border-radius: 34px;
+        margin-left: 100px;
+      }
+
+      & .btn {
+        margin-top: 60px;
+      }
     }
+
+    & .circle {
+      position: absolute;
+      width: 311px;
+      height: 300px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.24);
+
+      &.center {
+        top: 74px;
+        left: 400px;
+      }
+
+      &.bottom {
+        height: 150px;
+        border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+        right: -33px;
+        bottom: 0px;
+      }
+    }
+  }
+
+  & .sign {
+    position: relative;
+    padding: 0 0 153px 176px;
+    background-image: url('../../assets/images/bg-people-preview.png');
+    background-repeat: no-repeat;
+    background-position: 625px 146px;
+
+    & .text-block {
+      max-width: 547px;
+
+      & .text {
+        @include text();
+        @include heading-46();
+        color: #004b75;
+      }
+
+      & .btn {
+        @include paragraph-26();
+        width: 255px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #004b75;
+        border: 1px solid #01293f;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
+        border-radius: 7px;
+        margin-top: 56px;
+        color: #f2f2f2;
+        margin-left: 177px;
+      }
+    }
+
+    & .circle {
+      position: absolute;
+      width: 409px;
+      height: 376px;
+      background: #004b75;
+      opacity: 0.04;
+      border-radius: 50%;
+      top: 55px;
+      left: 112px;
+    }
+  }
+
+  & .feature {
+    padding: 62px 67px 0 119px;
+    background: #004b75;
+    border-radius: 197px 0px 0px 0px;
+    background-size: 100%, 281px;
+  }
+
+  & .bg-header {
+    background-image: url('../../assets/images/bg-preview.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 687px;
+    height: 970px;
+    top: 101px;
+    right: 0;
+    position: absolute;
   }
 }
