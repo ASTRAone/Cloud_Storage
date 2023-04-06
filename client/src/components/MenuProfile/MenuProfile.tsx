@@ -54,7 +54,7 @@ export const MenuProfile: React.FC<Props> = ({ name, email }) => {
                     <MenuItem
                       url={url}
                       iconType={iconType}
-                      name={linkName}
+                      title={linkName}
                       className={cx('btn-link')}
                     />
                   </div>

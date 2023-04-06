@@ -114,6 +114,9 @@
   height: 170px;
   border-radius: 12px;
   box-shadow: 2px 2px 20px 1px rgba(0, 0, 55, .2);
+    & .dropdown-content .btn {
+      background: $white;
+    }
     & .dropdown-content .btn > * {
       @include paragraph-16();
       background: $white;
