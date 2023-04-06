@@ -1,3 +1,6 @@
+
+@import '@assets/styles/variables/colors';
+
 body,
 html {
   height: 100%;
@@ -9,6 +12,7 @@ html {
   display: flex;
   flex-direction: column;
   height: 100%;
+  background: $color-main;
 
   & .content {
     flex: 1 0 auto;
