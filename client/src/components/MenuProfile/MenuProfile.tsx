@@ -47,9 +47,9 @@ export const MenuProfile: React.FC<Props> = ({ name, email }) => {
       >
         <div className={cx('dropdown')}>
           <div className={cx('dropdown-content')}>
-            {menu.map(({ url, iconType, linkName }) => {
+            {menu.map(({ url, iconType, linkName }, index) => {
               return (
-                <>
+                <div key={index}>
                   <div
                     key={url}
                     className={cx('item', iconType == 'logout' ? 'item-top-border' : '')}
@@ -61,7 +61,7 @@ export const MenuProfile: React.FC<Props> = ({ name, email }) => {
                       className={cx('btn-link')}
                     />
                   </div>
-                </>
+                </div>
               );
             })}
           </div>
