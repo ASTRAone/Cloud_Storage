@@ -2,48 +2,49 @@ import React from 'react';
 
 import { useStyles } from '@hooks/useStyles';
 
-import { Icon } from '@components/icon';
-import { ButtonLink } from '@components/ButtonLink';
-import { IconTypes } from '@components/icon/IconDictionary';
 import { Button } from '@components/Button';
+import { ButtonLink } from '@components/ButtonLink';
+import { Icon } from '@components/icon';
+import { IconTypes } from '@components/icon/IconDictionary';
 
 import styles from './styles.module.scss';
 
 type Props = {
   iconType?: IconTypes;
   className?: string;
-  name: string;
+  title: string;
   url?: string;
-  noLink?: boolean;
+  button?: boolean;
 };
 
 export const MenuItem: React.FC<Props> = ({
-  iconType = null,
-  name,
+  iconType = 'default',
+  title,
   url,
   className,
-  noLink = false,
+  button = false,
 }) => {
   const cx = useStyles(styles);
   return (
     <>
-      {iconType !== null && (
-        <Icon
-          type={iconType}
-          className={cx('icon')}
-        />
-      )}
-      {!noLink ? (
-        <ButtonLink
-          text={name}
-          to={url || ''}
+      {button ? (
+        <Button
+          text={title}
+          typeIcon={iconType}
           className={className}
         />
       ) : (
-        <Button
-          text={name}
+        <ButtonLink
+          to={url || ''}
           className={className}
-        />
+        >
+          <div className={cx('container-child-buttonlink')}>
+            <div className={cx('icon')}>
+              <Icon type={iconType} />
+            </div>
+            <p className={cx('text')}>{title}</p>
+          </div>
+        </ButtonLink>
       )}
     </>
   );

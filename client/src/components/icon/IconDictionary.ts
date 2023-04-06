@@ -60,6 +60,7 @@ const dictionary = {
   english: EnglishIcon,
   camera: CameraIcon,
   bigfolder: BigFolderIcon,
+  default: '',
 };
 
 type IconTypes = keyof typeof dictionary;

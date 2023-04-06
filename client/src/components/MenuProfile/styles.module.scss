@@ -51,16 +51,16 @@
   display: flex;
   justify-content: center;
   top: 20px;
-  left: 15px;
-  width: 250px;
+  left: 30px;
+  width: 200px;
   border-radius: 0 0 15px 15px;
     & .dropdown-content .btn-link {
       @include paragraph-19();
       color: white;
-      padding: 12px 14px;
       text-decoration: none;
       display: block;
       text-align: center;
+      width: 100%;
     }
     & .dropdown-content {
       width: 100%;
@@ -70,7 +70,6 @@
       justify-content: center;
       align-items: center;
       border: 1px solid transparent;
-      padding: 10px 40px;
       gap: 25px;
     }
     & .dropdown-content .item-top-border {

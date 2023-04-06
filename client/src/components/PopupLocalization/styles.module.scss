@@ -22,7 +22,7 @@
   top: 27px;
   left: -50px;
   width: 236px;
-  height: 128px;
+  height: 130px;
   border-radius: 0 0 15px 15px;
     & .dropdown-content-language .btn {
       @include paragraph-22();
@@ -36,19 +36,20 @@
       width: 100%;
     }
     & .dropdown-content-language .item {
+      @include paragraph-19();
       cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
       border: 1px solid transparent;
-      padding: 10px 15px;
+      padding: 10px;
       cursor: pointer;
+
+      &:hover > .btns > * {
+        background: $light-sweet-100;
+      }
     }
     & .dropdown-content-language .item:hover{
-      background: $light-sweet-100;
-      border-radius: 5px;
-    }
-    & .dropdown-content-language .item:hover > .btn > *{
       background: $light-sweet-100;
       border-radius: 5px;
     }
