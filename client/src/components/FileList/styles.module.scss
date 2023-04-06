@@ -4,7 +4,7 @@
 
 .header {
   display: grid;
-  grid-template-columns: 1fr 4fr repeat(4, 1fr);
+  grid-template-columns: 1fr 6fr repeat(6, 1fr);
 
   & .sort-name {
     grid-column-start: 2;
@@ -18,6 +18,18 @@
 
   & .sort-size {
     grid-column-start: 6;
+    justify-content: center;
+    text-align: center;
+  }
+
+  & .sort-delete {
+    grid-column-start: 7;
+    justify-content: center;
+    text-align: center;
+  }
+
+  & .sort-download {
+    grid-column-start: 8;
     justify-content: center;
     text-align: center;
   }

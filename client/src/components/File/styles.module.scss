@@ -2,9 +2,10 @@
 
 .container {
   margin: 10px 0;
-  border-bottom: 2px solid $font-color;
+  border-bottom: 1px solid $light-gray;
+  // margin-bottom: 10px;
   display: grid;
-  grid-template-columns: 1fr 4fr repeat(4, 1fr);
+  grid-template-columns: 1fr 6fr repeat(6, 1fr);
   align-items: center;
   transition: all 0.3 ease;
 
@@ -30,9 +31,17 @@
 }
 
 .file-download, .file-delete {
+  display: flex;
+  justify-content: center;
   cursor: pointer;
-  background: lightgray;
   padding: 5px 15px;
-  border: 1px black solid;
   width: 70px;
 }
+
+// .file-delete {
+//   &.folder-icon {
+//     grid-column-start: 7;
+//     text-align: center;
+//     justify-content: center;
+//   }
+// }

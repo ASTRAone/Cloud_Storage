@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { FileResponse } from '@api/FileApi/models';
 
 import { useStyles } from '@hooks/useStyles';
 
@@ -15,6 +17,13 @@ export const FileList: React.FC = () => {
   const dispatch = useAppDispatch();
   const { file } = useAppSelector(getFilesData);
 
+  const [fileData, setFileData] = useState<FileResponse[]>([]);
+
+  useEffect(() => {
+    const sortedData = [...file].sort((a, b) => (a.type > b.type ? 1 : -1)) as FileResponse[];
+    setFileData(sortedData);
+  });
+
   const openFile = (dirId: string) => {
     dispatch(selectedDir(dirId));
     dispatch(pushToStack(dirId));
@@ -24,14 +33,16 @@ export const FileList: React.FC = () => {
     <div className={cx('container')}>
       {file.length > 0 && (
         <div className={cx('header')}>
-          <div className={cx('sort-name')}>Название</div>
-          <div className={cx('sort-date')}>Дата</div>
-          <div className={cx('sort-size')}>Размер</div>
+          <div className={cx('sort-name')}>Name</div>
+          <div className={cx('sort-date')}>Date</div>
+          <div className={cx('sort-size')}>Size</div>
+          <div className={cx('sort-delete')}>Delete</div>
+          <div className={cx('sort-download')}>Download</div>
         </div>
       )}
 
-      {file.length > 0 ? (
-        file?.map((item) => (
+      {fileData.length > 0 ? (
+        fileData?.map((item) => (
           <File
             file={item}
             key={item._id}
