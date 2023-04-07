@@ -3,8 +3,6 @@ import { NavLink, NavLinkProps } from 'react-router-dom';
 
 import { useStyles } from '@hooks/useStyles';
 
-import { IconTypes } from '@components/icon/IconDictionary';
-
 import styles from './styles.module.scss';
 
 // TODO Сделать варианты цвета пропсами
