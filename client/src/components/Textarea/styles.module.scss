@@ -56,21 +56,20 @@
     &.blue {
       border-color: #327bd1;
       color: #327bd1;
-
       &::-webkit-input-placeholder {
-        color: #327bd1;
+        color: $gray;
       }
 
       &:-moz-placeholder {
-        color: #327bd1;
+        color: $gray;
       }
 
       &::-moz-placeholder {
-        color: #327bd1;
+        color: $gray;
       }
 
       &:-ms-input-placeholder {
-        color: #327bd1;
+        color: $gray;
       }
     }
   }

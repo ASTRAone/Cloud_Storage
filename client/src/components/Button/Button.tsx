@@ -6,6 +6,7 @@ import { useStyles } from '@hooks/useStyles';
 
 import { IconTypes } from '@components/icon/IconDictionary';
 import { Loader } from '@components/Loader';
+import { Icon } from '@components/icon';
 
 import styles from './styles.module.scss';
 
@@ -27,7 +28,7 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 export const Button: React.FC<Props> = ({
   // variant = 'ligth',
   isIcon,
-  typeIcon,
+  typeIcon = 'default',
   sizeIcon,
   classNameBtn,
   classNameContainer,
@@ -64,6 +65,12 @@ export const Button: React.FC<Props> = ({
     >
       <div className={cx('container', classNameContainer, color)}>
         <div className={cx('content')}>
+          {typeIcon !== 'default' && (
+            <Icon
+              type={typeIcon}
+              className={cx('icon')}
+            />
+          )}
           {isLoading ? (
             <div className={cx('spinner')}>
               <Loader className={cx('loader')} />

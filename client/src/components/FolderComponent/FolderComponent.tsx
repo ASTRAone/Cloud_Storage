@@ -58,8 +58,8 @@ export const FolderComponent: React.FC<Props> = ({ type, title, files, gb }) => 
                       className={cx('item')}
                     >
                       <MenuItem
-                        noLink
-                        name={name}
+                        button
+                        title={name}
                         className={cx('btn')}
                       />
                     </div>

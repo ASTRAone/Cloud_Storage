@@ -47,10 +47,10 @@ export const PopupLocalization: React.FC = () => {
                   onClick={() => changingLanguage(lang)}
                 >
                   <MenuItem
-                    noLink
+                    button
                     iconType={iconType}
-                    name={name}
-                    className={cx('btn')}
+                    title={name}
+                    className={cx('btns')}
                   />
                 </div>
               );

@@ -103,12 +103,12 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
               type="bell"
               className={cx('icon')}
             />
-            <p className={cx('profile')}>
+            <div className={cx('profile')}>
               <MenuProfile
                 name="Vlados Panov"
                 email="voidstein@gmail.com"
               />
-            </p>
+            </div>
           </div>
         </>
       )}
