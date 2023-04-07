@@ -6,6 +6,7 @@
   width: 100%;
   box-sizing: border-box;
   overflow-x: hidden;
+  position: relative;
 
   & .header {
     position: relative;
@@ -99,6 +100,8 @@
         margin-top: 56px;
         color: #f2f2f2;
         margin-left: 177px;
+        position: relative;
+        z-index: 999;
       }
     }
 
@@ -116,9 +119,84 @@
 
   & .feature {
     padding: 62px 67px 0 119px;
-    background: #004b75;
-    border-radius: 197px 0px 0px 0px;
-    background-size: 100%, 281px;
+    position: relative;
+    z-index: 9999;
+
+    & .cards-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 9999;
+    }
+
+    & .bg {
+      background: #004b75;
+      border-radius: 197px 0px 0px 0px;
+      position: absolute;
+      width: 100%;
+      height: 287px;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    & .circle-bottom {
+      position: absolute;
+      background: #ffffff;
+      width: 425px;
+      height: 190px;
+      border-radius: 0 0 50% 50% / 0 0 100% 100%;
+      right: 287px;
+      top: 0;
+      opacity: 0.5;
+      z-index: 99;
+    }
+  }
+
+  & .feedback {
+    position: relative;
+    z-index: 99999;
+    padding-bottom: 100px;
+    padding-top: 24px;
+    background-image: url('../../assets/images/bg-feedback.png');
+    background-repeat: no-repeat;
+    background-position-x: 290px;
+    background-position-y: 3px;
+
+    & .title {
+      @include text();
+      @include heading-46();
+      color: #004b75;
+      text-align: center;
+    }
+
+    & .email-block {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 27px;
+      gap: 20px;
+      border: 1px solid #327bd1;
+      border-radius: 7px;
+      width: fit-content;
+      padding: 11px 65px 11px 19px;
+
+      & .icon {
+        width: 40px;
+        height: 40px;
+        color: #01293f;
+      }
+
+      & .text {
+        @include text();
+        @include paragraph-33();
+        text-decoration: none;
+        color: #004b75;
+      }
+    }
   }
 
   & .bg-header {
@@ -130,5 +208,28 @@
     top: 101px;
     right: 0;
     position: absolute;
+  }
+
+  & .circle-left-feature {
+    position: absolute;
+    width: 314px;
+    height: 151px;
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+    left: -82px;
+    bottom: 210px;
+    background: rgba(0, 75, 117, 0.05);
+    transform: rotate(270deg);
+    opacity: 0.5;
+    z-index: 99;
+  }
+
+  & .circle {
+    position: absolute;
+    border-radius: 50%;
+    width: 311px;
+    height: 299px;
+    bottom: 27px;
+    right: 250px;
+    background: rgba(0, 75, 117, 0.05);
   }
 }

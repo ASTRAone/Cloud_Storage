@@ -8,8 +8,10 @@ import { useStyles } from '@hooks/useStyles';
 
 import { Button } from '@components/Button';
 import { ButtonLink } from '@components/ButtonLink';
+import { Icon } from '@components/icon';
 
 import styles from './styles.module.scss';
+import { Card } from './components/Card';
 
 export const StartPage: React.FC = () => {
   const cx = useStyles(styles);
@@ -47,7 +49,49 @@ export const StartPage: React.FC = () => {
           </div>
           <div className={cx('circle')} />
         </section>
-        <section className={cx('feature')} />
+        <section className={cx('feature')}>
+          <div className={cx('cards-container')}>
+            <Card
+              title="Feature One"
+              text="
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            />
+            <Card
+              title="Feature Two"
+              text="
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            />
+            <Card
+              title="Feature There"
+              text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+              when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            />
+          </div>
+          <div className={cx('bg')} />
+          <div className={cx('circle-bottom')} />
+        </section>
+        <div className={cx('circle-left-feature')} />
+        <section className={cx('feedback')}>
+          <p className={cx('title')}>Subscribe and get your fucking news.</p>
+          <div className={cx('email-block')}>
+            <Icon
+              type="mail"
+              className={cx('icon')}
+            />
+            <a
+              href="mailto:voidstein@gmail.com"
+              className={cx('text')}
+            >
+              voidstein@gmail.com
+            </a>
+          </div>
+        </section>
+        <div className={cx('circle')} />
       </div>
     </LayoutStartPage>
   );

@@ -35,6 +35,14 @@
   line-height: 47px;
 }
 
+@mixin paragraph-33 {
+  font-family: $itim;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 33px;
+  line-height: 40px;
+}
+
 @mixin paragraph-29 {
   font-family: $DMSans;
   font-style: normal;
@@ -76,6 +84,14 @@
   font-size: 22px;
   line-height: 23px;
   color: $white;
+}
+
+@mixin paragraph-21 {
+  font-family: $itim;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 25px;
 }
 
 @mixin paragraph-19 {
