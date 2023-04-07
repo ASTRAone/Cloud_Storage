@@ -1,0 +1,31 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.container {
+  padding: 31px 47px 90px 45px;
+  background: linear-gradient(155.73deg, $white 0%, rgba(255, 255, 255, 0.4) 96.15%);
+  box-shadow: 0px 4px 11px 10px rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  max-width: 335px;
+
+  & .header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 41px;
+
+    & .title {
+      @include text();
+      @include paragraph-33();
+      color: $black;
+    }
+  }
+
+  & .text {
+    @include text();
+    @include paragraph-21();
+    color: $black;
+  }
+}

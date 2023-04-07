@@ -3,8 +3,6 @@ import { NavLink, NavLinkProps } from 'react-router-dom';
 
 import { useStyles } from '@hooks/useStyles';
 
-import { IconTypes } from '@components/icon/IconDictionary';
-
 import styles from './styles.module.scss';
 
 // TODO Сделать варианты цвета пропсами
@@ -13,10 +11,17 @@ type Props = NavLinkProps & {
   to?: string;
   text?: string;
   className?: string;
-  typeIcon?: IconTypes;
+  isUpperCase?: boolean;
 };
 
-export const ButtonLink: React.FC<Props> = ({ to, text, className, children, ...rest }) => {
+export const ButtonLink: React.FC<Props> = ({
+  to,
+  text,
+  className,
+  isUpperCase = false,
+  children,
+  ...rest
+}) => {
   const cx = useStyles(styles);
   const content = text ?? children;
 
@@ -24,7 +29,7 @@ export const ButtonLink: React.FC<Props> = ({ to, text, className, children, ...
     <div className={cx('container')}>
       <NavLink
         to={to}
-        className={cx(className, 'link')}
+        className={cx(className, 'link', isUpperCase ? 'upperCase' : '')}
         {...rest}
       >
         {content}

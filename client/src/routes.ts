@@ -5,8 +5,10 @@ import {
   REGISTRATION_ROUTE,
   CLOUD_ROUTE,
   PROFILE_USER_ROUTE,
+  START_ROUTE,
 } from './utility/contants';
 import { ProfileUserPage } from './pages/ProfileUserPage';
+import { StartPage } from './pages/PageStart';
 
 export const routes = [
   {
@@ -24,5 +26,9 @@ export const routes = [
   {
     path: PROFILE_USER_ROUTE,
     Element: ProfileUserPage,
+  },
+  {
+    path: START_ROUTE,
+    Element: StartPage,
   },
 ];
