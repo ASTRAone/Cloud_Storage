@@ -45,7 +45,8 @@
 
     & .containerArrow {
       position: absolute;
-      top: 217px;
+      top: 42%;
+      transform: translate(0, -100%);
       right: -25px;
       width: 12px;
       height: 14px;
@@ -71,7 +72,8 @@
     height: 53px;
     background-repeat: no-repeat;
     right: 0px;
-    top: 198px;
+    top: 42%;
+    transform: translate(0, -60%);
     background-repeat: no-repeat;
     background-image: url('../../assets/images/arrow-bg.png');
   }
