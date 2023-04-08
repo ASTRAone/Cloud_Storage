@@ -87,6 +87,7 @@ export const ProfileUser: React.FC = () => {
             </TabPanel>
           </div>
         </div>
+        <div className={cx('circle')} />
       </div>
     </div>
   );

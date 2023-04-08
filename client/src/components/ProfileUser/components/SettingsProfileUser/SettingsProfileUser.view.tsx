@@ -75,7 +75,7 @@ export const SettingsProfileUserView: React.FC = () => {
         type="submit"
         text="update"
         color="light-blue"
-        className={cx('btn')}
+        classNameBtn={cx('btn')}
       />
     </div>
   );

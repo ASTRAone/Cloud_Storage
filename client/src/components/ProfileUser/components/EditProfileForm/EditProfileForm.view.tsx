@@ -14,7 +14,6 @@ export const EditProfileFormView: React.FC = () => {
 
   const {
     control,
-    // watch,
     formState: { errors },
   } = useFormContext();
 
@@ -160,7 +159,7 @@ export const EditProfileFormView: React.FC = () => {
         text="update"
         type="submit"
         color="light-blue"
-        className={cx('btn')}
+        classNameBtn={cx('btn')}
       />
     </div>
   );

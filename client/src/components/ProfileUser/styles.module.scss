@@ -5,6 +5,8 @@
 .page {
   width: 100%;
   padding-right: 56px;
+  position: relative;
+  z-index: 99999;
 
   & .header {
     margin-left: 48px;
@@ -27,9 +29,12 @@
   & .container {
     display: flex;
     gap: 125px;
+    position: relative;
+    z-index: 9999;
 
     & .content-left {
       position: relative;
+      z-index: 9999;
       &::after {
         content: '';
         display: block;
@@ -55,6 +60,17 @@
       gap: 40px;
       margin-top: 58px;
       width: 100%;
+      position: relative;
+      z-index: 9999;
+    }
+
+    & .circle {
+      position: absolute;
+      width: 435px;
+      height: 435px;
+      background: #f7fafe;
+      bottom: 26px;
+      border-radius: 50%;
     }
   }
 }
