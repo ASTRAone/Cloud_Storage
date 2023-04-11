@@ -24,6 +24,7 @@ export type MenuItemType = {
 
 export const FolderComponent: React.FC<Props> = ({ type, title, files, gb }) => {
   const cx = useStyles(styles);
+  const color = dictionaryColorFolder[type];
 
   const menu: Array<MenuItemType> = [
     { name: 'Open' },
@@ -39,7 +40,7 @@ export const FolderComponent: React.FC<Props> = ({ type, title, files, gb }) => 
           <Icon
             type="bigfolder"
             className={cx('icon')}
-            color={dictionaryColorFolder[type]}
+            style={{ color }}
             size="xl"
           />
           <Popup

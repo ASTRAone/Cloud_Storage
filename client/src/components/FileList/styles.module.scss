@@ -2,6 +2,12 @@
   margin: 20px 0;
 }
 
+.container-plate {
+  display: flex;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
 .header {
   display: grid;
   grid-template-columns: 1fr 6fr repeat(6, 1fr);

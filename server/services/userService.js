@@ -1,7 +1,7 @@
 const UserModel = require("../models/User");
 const bcrypt = require("bcryptjs");
 const uuid = require("uuid");
-const MailService = require("../services/mailService");
+// const MailService = require("../services/mailService");
 const TokenService = require("../services/tokenService");
 const UserDto = require("../dtos/userDto");
 const ApiError = require("../exceptions/apiError");
@@ -9,8 +9,7 @@ const File = require("../models/File");
 const FileService = require("../services/fileService");
 
 class UserService {
-  async registration(email, password, language) {
-    console.log('language: ' + language);
+  async registration(email, password, language, name, surname) {
     const candidate = await UserModel.findOne({ email });
     if (candidate) {
       throw ApiError.BadRequestError(`User with email ${email} already exists`);
@@ -18,12 +17,16 @@ class UserService {
     const hashPassword = await bcrypt.hash(password, 8);
     const activationLink = uuid.v4();
 
+
     const user = await UserModel.create({
       email,
       password: hashPassword,
       activationLink,
       language,
+      name,
+      surname
     });
+    // console.log('user', user);
     user.save();
     // await MailService.sendActivationMail(
     //   email,

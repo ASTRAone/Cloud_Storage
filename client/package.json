@@ -75,6 +75,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-transition-group": "^4.4.5",
     "@types/redux-persist": "^4.3.1",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
@@ -83,6 +84,7 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-react": "^7.32.2",
     "node-sass": "^7.0.3",
-    "prettier": "2.8.7"
+    "prettier": "2.8.7",
+    "react-transition-group": "^4.4.5"
   }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -15,6 +15,9 @@ import { PopupLocalization } from '@components/PopupLocalization';
 
 import CloudLogo from '@assets/images/logo.png';
 
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { getUserData, userReload } from '@store/auth/data';
+
 import styles from './styles.module.scss';
 
 type Props = {
@@ -25,6 +28,13 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
   const cx = useStyles(styles);
   const location = useLocation();
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector(getUserData);
+
+  useEffect(() => {
+    dispatch(userReload()).unwrap();
+  }, []);
+
   return (
     <div className={cx('container')}>
       <div className={cx('containerLogo')}>
@@ -105,8 +115,8 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
             />
             <div className={cx('profile')}>
               <MenuProfile
-                name="Vlados Panov"
-                email="voidstein@gmail.com"
+                name={user?.name + ' ' + user?.surname}
+                email={user?.email}
               />
             </div>
           </div>

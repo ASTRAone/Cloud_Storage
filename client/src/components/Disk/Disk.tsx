@@ -6,9 +6,17 @@ import { useStyles } from '@hooks/useStyles';
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
 import { FileList } from '@components/FileList';
+import { Icon } from '@components/icon';
 
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { fetchFiles, getFilesData, popToStack, selectedDir, uploadFile } from '@store/file/data';
+import {
+  fetchFiles,
+  getFilesData,
+  popToStack,
+  selectedDir,
+  viewFolder,
+  uploadFile,
+} from '@store/file/data';
 
 import styles from './styles.module.scss';
 import { ModalCreateFile } from './components';
@@ -48,19 +56,21 @@ export const Disk: React.FC = () => {
     <>
       <div className={cx('container')}>
         <div className={cx('btns')}>
-          {!!dirStack.length && (
+          <div className={cx('btns_left')}>
+            {!!dirStack.length && (
+              <Button
+                className={cx('back')}
+                text="Back"
+                onClick={goBack}
+              />
+            )}
             <Button
-              className={cx('back')}
-              text="Назад"
-              onClick={goBack}
+              variant="outline"
+              onClick={openPopup}
+              className={cx('create')}
+              text="Create a folder"
             />
-          )}
-          <Button
-            variant="outline"
-            onClick={openPopup}
-            className={cx('create')}
-            text="Create a folder"
-          />
+          </div>
           <div className={cx('upload')}>
             <label
               htmlFor="upload"
@@ -74,6 +84,20 @@ export const Disk: React.FC = () => {
               type="file"
               id="upload"
               className={cx('input')}
+            />
+          </div>
+          <div className={cx('btns_right')}>
+            <Icon
+              type="tile"
+              className={cx('icon')}
+              size="xl"
+              onClick={() => dispatch(viewFolder('plate'))}
+            />
+            <Icon
+              type="list"
+              className={cx('icon')}
+              size="xl"
+              onClick={() => dispatch(viewFolder('list'))}
             />
           </div>
         </div>

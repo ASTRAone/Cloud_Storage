@@ -26,7 +26,7 @@ export const PopupComponent: React.FC<Props> = ({
   loading = false,
   error = false,
   title = '',
-  textBtn = 'Создать',
+  textBtn = 'Create',
   children,
 }) => {
   const cx = useStyles(styles);

@@ -27,3 +27,7 @@ export { RussianIcon } from './RussianIcon';
 export { EnglishIcon } from './EnglishIcon';
 export { CameraIcon } from './CameraIcon';
 export { BigFolderIcon } from './BigFolderIcon';
+export { DownloadIcon } from './DownloadIcon';
+export { RemoveIcon } from './RemoveIcon';
+export { TileIcon } from './TileIcon';
+export { ListIcon } from './ListIcon';

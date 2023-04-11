@@ -6,9 +6,13 @@ module.exports = class UserDto {
   usedSpace;
   isActivated;
   language;
+  name;
+  surname;
 
   constructor(model) {
     this.email = model.email;
+    this.name = model.name;
+    this.surname = model.surname;
     this.id = model._id;
     this.avatar = model.avatar;
     this.diskSpace = model.diskSpace;

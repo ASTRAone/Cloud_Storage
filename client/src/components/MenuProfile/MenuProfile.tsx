@@ -9,7 +9,7 @@ import { MenuItem } from '@components/MenuIteim';
 
 import styles from './styles.module.scss';
 
-type Props = { name: string; email: string; className?: string };
+type Props = { name?: string; email?: string; className?: string };
 
 export type MenuItemType = {
   url: string;

@@ -6,6 +6,9 @@ import { TabList } from '@components/Tab/TabList';
 import { Tab } from '@components/Tab';
 import { TabPanel } from '@components/Tab/TabPanel';
 
+import { useAppSelector } from '@store/hooks';
+import { getUserData } from '@store/auth/data';
+
 import styles from './styles.module.scss';
 import { CellInfo, SettingsProfileUser } from './components';
 import { AvatarUser } from './components';
@@ -20,11 +23,13 @@ export const ProfileUser: React.FC = () => {
   const cx = useStyles(styles);
   const [activeTab, setActiveTab] = useState(TABS[0]);
 
+  const { user } = useAppSelector(getUserData);
+
   return (
     <div className={cx('page')}>
       <div className={cx('header')}>
-        <h3 className={cx('title')}>vlados panov</h3>
-        <p className={cx('text')}>Russia, Kostroma</p>
+        <h3 className={cx('title')}>{user?.name + ' ' + user?.surname}</h3>
+        <p className={cx('text')}>{user?.email}</p>
       </div>
       <div className={cx('container')}>
         <div className={cx('content-left')}>
