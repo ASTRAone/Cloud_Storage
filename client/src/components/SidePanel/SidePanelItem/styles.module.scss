@@ -5,7 +5,7 @@
 .link {
   & :hover {
     transition: background-color 0.3s ease;
-    background-color: #327bd1;
+    background-color: $light-sweet-100;
   }
 
   & .container {
@@ -18,7 +18,7 @@
     box-sizing: border-box;
 
     &.active {
-      background-color: #327bd1;
+      background-color: $light-sweet-100;
     }
 
     & .icon {
@@ -30,7 +30,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #327bd1;
+      color: $light-sweet-100;
       display: flex;
       flex-shrink: 0;
 

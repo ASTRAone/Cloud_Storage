@@ -5,7 +5,7 @@
 
 .container {
   padding: 20px 40px 20px 20px;
-  background: #004b75;
+  background: $primary-800;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -46,7 +46,7 @@
       border: 1px solid transparent;
       padding: 6px;
       &:hover {
-        border: 1px solid white;
+        border: 1px solid $white;
         padding: 6px;
         background: $light-sweet-100;
         border-radius: 13px;
@@ -63,7 +63,7 @@
         background: $light-sweet-100;
         padding: 15px 16px;
         border-radius: 15px;
-        border:1px solid white;
+        border:1px solid $white;
         cursor: pointer;
       }
     }
@@ -83,7 +83,7 @@
         background: $light-sweet-100;
         padding: 15px 16px;
         border-radius: 15px;
-        border:1px solid white;
+        border:1px solid $white;
         cursor: pointer;
       }
     }

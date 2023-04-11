@@ -16,12 +16,12 @@
     border: 1px;
     border-radius: 7px;
     cursor: pointer;
-    background-color: #004b75;
+    background-color: $primary-800;
 
     &.white {
       background-color: $white;
       border-color: $white;
-      color: #327BD1;
+      color: $light-sweet-100;
     }
 
     &.gray {
@@ -31,14 +31,14 @@
     }
 
     &.blue {
-      border-color: #004b75;
-      background-color: #004b75;
+      border-color: $primary-800;
+      background-color: $primary-800;
       color: $white;
     }
 
     &.light-blue {
-      border-color: #01293F;
-      background-color: #327BD1;
+      border-color: $dark-blue-100;
+      background-color: $light-sweet-100;
       color: $white;
     }
 

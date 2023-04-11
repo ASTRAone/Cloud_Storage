@@ -13,7 +13,7 @@
     }
 
     &.blue {
-      color: #327bd1;
+      color: $light-sweet-100;
     }
   }
 
@@ -54,8 +54,8 @@
     }
 
     &.blue {
-      border-color: #327bd1;
-      color: #327bd1;
+      border-color: $light-sweet-100;
+      color: $light-sweet-100;
       &::-webkit-input-placeholder {
         color: $gray;
       }

@@ -33,7 +33,7 @@
       & .text {
         @include text();
         @include paragraph-23();
-        color: #327BD1;
+        color: $light-sweet-100;
       }
     }
   }

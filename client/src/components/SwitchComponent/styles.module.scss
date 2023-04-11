@@ -7,7 +7,7 @@
   -webkit-appearance: none;
   outline: none;
   background-color: $white;
-  border: 1px solid #327BD1;
+  border: 1px solid $light-sweet-100;
   border-radius: 20px;
   padding-left: 6px;
   padding-right: 6px;
@@ -19,7 +19,7 @@
     width: 25px;
     height: 25px;
     position: absolute;
-    background-color: #327BD1;
+    background-color: $light-sweet-100;
     border-radius: 20px;
     top: 50%;
     transform: translate(0, -50%);
@@ -29,7 +29,7 @@
   &:checked::before {
     right: 6px;
     background-color: $white;
-    border: 1px solid #327BD1;
+    border: 1px solid $light-sweet-100;
     transition: background-color 0.3s ease;
   }
 }

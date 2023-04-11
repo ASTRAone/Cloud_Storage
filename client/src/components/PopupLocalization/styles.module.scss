@@ -4,7 +4,7 @@
 
 .localization {
   @include paragraph-22();
-  color: white;
+  color: $white;
   padding: 10px 15px;
   cursor: pointer;
 
@@ -16,7 +16,7 @@
 }
 .dropdown-language {
   position: absolute;
-  background-color: #004b75;
+  background-color: $primary-800;
   display: flex;
   justify-content: center;
   top: 27px;
@@ -26,7 +26,7 @@
   border-radius: 0 0 15px 15px;
     & .dropdown-content-language .btn {
       @include paragraph-22();
-      color: white;
+      color: $white;
       text-decoration: none;
       display: block;
       text-align: center;

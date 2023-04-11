@@ -4,7 +4,6 @@
 
 .container {
   position: relative;
-  margin-bottom: 67px;
 
   &::after {
     content: '';
@@ -24,7 +23,7 @@
 
     & .label {
       @include paragraph-19();
-      color: #327bd1;
+      color: $light-sweet-100;
     }
   }
 

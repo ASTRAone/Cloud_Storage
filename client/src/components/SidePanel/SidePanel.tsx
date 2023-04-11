@@ -81,7 +81,7 @@ export const SidePanel: React.FC = () => {
           <Button
             color="white"
             text={t('sidebar.mydisk.button.title')}
-            className={cx('btn', !open ? 'hide' : '')}
+            classNameBtn={cx('btn', !open ? 'hide' : '')}
           />
         </>
 
