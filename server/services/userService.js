@@ -25,10 +25,10 @@ class UserService {
       language,
     });
     user.save();
-    await MailService.sendActivationMail(
-      email,
-      `${process.env.API_URL}/api/activate/${activationLink}`
-    );
+    // await MailService.sendActivationMail(
+    //   email,
+    //   `${process.env.API_URL}/api/activate/${activationLink}`
+    // );
 
     const userDto = new UserDto(user);
     await FileService.createDir(new File({user: user.id, name: ''}));

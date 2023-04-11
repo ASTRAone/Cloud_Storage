@@ -2,8 +2,6 @@ const fs = require("fs");
 
 class FileService {
   createDir(file) {
-    // change to windows
-    // const filePath = `${config.get(process.env.FILE_PATH)}\\${file.user}\\${file.path}`;
     const filePath = `${process.env.FILE_PATH}\/${file.user}\/${file.path}`;
     return new Promise((resolve, reject) => {
       try {
@@ -29,9 +27,7 @@ class FileService {
   }
 
   getPath(file) {
-    // change to windows
-    return `${process.env.FILE_PATH}\\${file.user}\\${file.path}`
-    // return `${process.env.FILE_PATH}\/${file.user}\/${file.path}`;
+    return `${process.env.FILE_PATH}\/${file.user}\/${file.path}`;
   }
 }
 

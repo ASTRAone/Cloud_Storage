@@ -1,0 +1,23 @@
+.page {
+  width: 100%;
+  margin-top: 22px;
+  padding-right: 70px;
+
+  & .container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 50px;
+
+    @media (max-width: 1600px) {
+      & { grid-template-columns: repeat(5, 1fr); }
+    }
+    @media (max-width: 1500px) {
+      & { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (max-width: 1300px) {
+      & { grid-template-columns: repeat(3, 1fr); }
+    }
+  }
+}

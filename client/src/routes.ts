@@ -5,10 +5,12 @@ import {
   REGISTRATION_ROUTE,
   CLOUD_ROUTE,
   PROFILE_USER_ROUTE,
+  ALL_FILES_ROUTE,
   START_ROUTE,
 } from './utility/contants';
 import { ProfileUserPage } from './pages/ProfileUserPage';
 import { StartPage } from './pages/PageStart';
+import { FilesPage } from './pages/FilesPage';
 
 export const routes = [
   {
@@ -22,6 +24,10 @@ export const routes = [
   {
     path: CLOUD_ROUTE,
     Element: CloudPage,
+  },
+  {
+    path: ALL_FILES_ROUTE,
+    Element: FilesPage,
   },
   {
     path: PROFILE_USER_ROUTE,
