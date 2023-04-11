@@ -1,4 +1,4 @@
-@import '../../utility/colors.scss';
+@import '@assets/styles/variables/colors';
 
 .container {
   width: 100%;
@@ -28,7 +28,7 @@
 
       & .title {
         font-size: 24px;
-        color: $font-color;
+        // color: $font-color;
       }
 
       & .icon {
