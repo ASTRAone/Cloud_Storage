@@ -77,7 +77,6 @@ const downloadFile = createAsyncThunk(
   'file/download',
   async (payload: FileResponse, { rejectWithValue }) => {
     try {
-      //TODO реализовать функцию с отображением изображений
       const response = await FileApi.downloadFile(payload._id);
       if (response.status === 200) {
         const blob = new Blob([response.data]);

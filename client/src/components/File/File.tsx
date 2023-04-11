@@ -36,27 +36,37 @@ export const File: React.FC<Props> = ({ file, onClick = () => {} }) => {
       onClick={onClick}
     >
       <Icon
+        type={type === 'dir' ? 'bigfolder' : 'file'}
+        color="#327BD1"
         size="xl"
-        type={type === 'dir' ? 'folder' : 'file'}
-        className={cx('img')}
       />
       <div className={cx('file-name')}>{name}</div>
       <div className={cx('file-date')}>{customDate(date)}</div>
       <div className={cx('file-size')}>{size}</div>
+      <div
+        className={cx('file-delete')}
+        onClick={(e) => deleteClickHandler(e)}
+      >
+        <Icon
+          type="close"
+          className={type === 'dir' ? cx('folder_icon') : cx('icon')}
+          color="#327BD1"
+          size="xl"
+        />
+      </div>
       {file.type !== 'dir' && (
         <div
           onClick={() => downloadClickHandler()}
           className={cx('file-download')}
         >
-          скачать
+          <Icon
+            type="heart"
+            className={cx('icon')}
+            color="#327BD1"
+            size="xl"
+          />
         </div>
       )}
-      <div
-        className={cx('file-delete')}
-        onClick={(e) => deleteClickHandler(e)}
-      >
-        удалить
-      </div>
     </div>
   );
 };

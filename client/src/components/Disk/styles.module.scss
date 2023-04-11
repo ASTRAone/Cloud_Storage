@@ -2,14 +2,27 @@
 
 .container {
   margin-top: 20px;
-  padding-left: 200px;
-  padding-right: 200px;
   width: 100%;
 
   & .btns {
     display: flex;
     align-items: center;
     gap: 10px;
+
+    & .create {
+      cursor: pointer;
+      & > * {
+        background:$light;
+      }
+    }
+
+    & .upload {
+      cursor: pointer;
+      border-radius: 3px;
+      & > * {
+        border-radius: 6px;
+      }
+    }
   }
 
   .upload {

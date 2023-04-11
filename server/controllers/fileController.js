@@ -14,9 +14,7 @@ class FileController {
         file.path = name;
         await fileService.createDir(file);
       } else {
-        // change to windows
-        file.path = `${parentFile.path}\\${file.name}`;
-        // file.path = `${parentFile.path}\/${file.name}`;
+        file.path = `${parentFile.path}\/${file.name}`;
         await fileService.createDir(file);
         parentFile.childs.push(file._id);
         await parentFile.save();
@@ -59,15 +57,11 @@ class FileController {
       let path;
 
       if (parent) {
-        // change to windows
-        path = `${process.env.FILE_PATH}\\${user._id}\\${parent.path}\\${file.name}`;
-        // path = `${process.env.FILE_PATH}\/${user._id}\/${parent.path}\/${
-          // file.name
-        // }`;
+        path = `${process.env.FILE_PATH}\/${user._id}\/${parent.path}\/${
+          file.name
+        }`;
       } else {
-        // change to windows
-        path = `${process.env.FILE_PATH}}\\${user._id}\\${file.name}`;
-        // path = `${process.env.FILE_PATH}\/${user._id}\/${file.name}`;
+        path = `${process.env.FILE_PATH}\/${user._id}\/${file.name}`;
       }
 
       if (fs.existsSync(path)) {
@@ -78,9 +72,7 @@ class FileController {
       const type = file.name.split(".").pop();
       let filePath = file.name;
       if (parent) {
-        // change to windows
-        filePath = parent.path + `\\${file.name}`
-        // filePath = parent.path + `\/${file.name}`
+        filePath = parent.path + `\/${file.name}`
       }
       const dbFile = new File({
         name: file.name,
@@ -105,9 +97,8 @@ class FileController {
     try {
       const file = await File.findOne({_id: req.query.id, user: req.user.id});
       if (file) {
-        // change to windows
-        const path = `${process.env.FILE_PATH}\\${req.user.id}\\${file.path}`;
-        // const path = `${process.env.FILE_PATH}\/${req.user.id}\/${file.path}`;
+        const path = `${process.env.FILE_PATH}\/${req.user.id}\/${file.path}`;
+        console.log('path: ' + path);
         if (fs.existsSync(path)) {
           return res.download(path, file.name);
         }
@@ -127,9 +118,7 @@ class FileController {
       const user = await User.findById(req.user.id);
       const fileType = file.name.split(".").pop();
       const avatarName = `${uuid.v4()}.${fileType}`;
-      // change to windows
-      file.mv(process.env.STATIC_PATH + "\\" + avatarName);
-      // file.mv(process.env.STATIC_PATH + "\/" + avatarName);
+      file.mv(process.env.STATIC_PATH + "\/" + avatarName);
       user.avatar = avatarName;
       await user.save();
       return res.json({ message: "Avatar was uploaded" });
