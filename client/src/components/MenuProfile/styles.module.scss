@@ -28,18 +28,18 @@
       background-position: top center;
       width: 60px;
       height: 60px;
-      border: 1px solid white;
+      border: 1px solid $white;
     }
     & .information {
       z-index: 2;
       & .name {
-        color: white;
+        color: $white;
         text-transform: none;
       }
       & .email {
         text-decoration: none;
         font-size: 13px;
-        color: white;
+        color: $white;
       }
     }
   }
@@ -47,7 +47,7 @@
 
 .dropdown {
   position: absolute;
-  background-color: #004b75;
+  background-color: $primary-800;
   display: flex;
   justify-content: center;
   top: 20px;
@@ -56,7 +56,7 @@
   border-radius: 0 0 15px 15px;
     & .dropdown-content .btn-link {
       @include paragraph-19();
-      color: white;
+      color: $white;
       text-decoration: none;
       display: block;
       text-align: center;
@@ -73,11 +73,11 @@
       gap: 25px;
     }
     & .dropdown-content .item-top-border {
-      border-top: 1px solid white;
+      border-top: 1px solid $white;
     }
     & .dropdown-content .item:hover {
       background: $light-sweet-100;
-      border: 1px solid white;
+      border: 1px solid $white;
       border-left: none;
       border-right: none;
     }

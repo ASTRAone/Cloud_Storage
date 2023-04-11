@@ -10,7 +10,7 @@
 
   & .header {
     position: relative;
-    background: #004b75;
+    background: $primary-800;
     border-radius: 0px 0px 0px 197px;
     padding: 103px 0 110px 130px;
     width: 100%;
@@ -83,7 +83,7 @@
       & .text {
         @include text();
         @include heading-46();
-        color: #004b75;
+        color: $primary-800;
       }
 
       & .btn {
@@ -93,7 +93,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #004b75;
+        background: $primary-800;
         border: 1px solid #01293f;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
         border-radius: 7px;
@@ -109,7 +109,7 @@
       position: absolute;
       width: 409px;
       height: 376px;
-      background: #004b75;
+      background: $primary-800;
       opacity: 0.04;
       border-radius: 50%;
       top: 55px;
@@ -131,7 +131,7 @@
     }
 
     & .bg {
-      background: #004b75;
+      background: $primary-800;
       border-radius: 197px 0px 0px 0px;
       position: absolute;
       width: 100%;
@@ -143,7 +143,7 @@
 
     & .circle-bottom {
       position: absolute;
-      background: #ffffff;
+      background: $white;
       width: 425px;
       height: 190px;
       border-radius: 0 0 50% 50% / 0 0 100% 100%;
@@ -167,7 +167,7 @@
     & .title {
       @include text();
       @include heading-46();
-      color: #004b75;
+      color: $primary-800;
       text-align: center;
     }
 
@@ -179,7 +179,7 @@
       margin-right: auto;
       margin-top: 27px;
       gap: 20px;
-      border: 1px solid #327bd1;
+      border: 1px solid $light-sweet-100;
       border-radius: 7px;
       width: fit-content;
       padding: 11px 65px 11px 19px;
@@ -187,14 +187,14 @@
       & .icon {
         width: 40px;
         height: 40px;
-        color: #01293f;
+        color: $dark-blue-100;
       }
 
       & .text {
         @include text();
         @include paragraph-33();
         text-decoration: none;
-        color: #004b75;
+        color: $primary-800;
       }
     }
   }

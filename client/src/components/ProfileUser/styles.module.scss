@@ -6,7 +6,7 @@
   width: 100%;
   padding-right: 56px;
   position: relative;
-  z-index: 99999;
+  z-index: 2;
 
   & .header {
     margin-left: 48px;
@@ -30,11 +30,11 @@
     display: flex;
     gap: 125px;
     position: relative;
-    z-index: 9999;
+    z-index: 2;
 
     & .content-left {
       position: relative;
-      z-index: 9999;
+      z-index: 2;
       &::after {
         content: '';
         display: block;
@@ -61,7 +61,7 @@
       margin-top: 58px;
       width: 100%;
       position: relative;
-      z-index: 9999;
+      z-index: 2;
     }
 
     & .circle {
@@ -71,6 +71,7 @@
       background: #f7fafe;
       bottom: 26px;
       border-radius: 50%;
+      z-index: 1;
     }
   }
 }
