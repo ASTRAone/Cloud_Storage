@@ -20,6 +20,8 @@ export type MenuItemType = {
   name: string;
 };
 
+// TODO провести рефакторинг
+
 export const FolderComponent: React.FC<Props> = ({ type, title, files, gb }) => {
   const cx = useStyles(styles);
 

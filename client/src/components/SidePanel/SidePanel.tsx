@@ -31,6 +31,7 @@ const menu: Array<MenuItemType> = [
 
 export const SidePanel: React.FC = () => {
   const cx = useStyles(styles);
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<LinkTypes>();
   const [open, setOpen] = useState(true);
 
@@ -51,8 +52,6 @@ export const SidePanel: React.FC = () => {
     localStorage.setItem('openPanel', JSON.stringify(isOpenPanel));
     setOpen((prev: boolean) => !prev);
   };
-
-  const { t } = useTranslation();
 
   const handleChangeActiveTab = (tab: LinkTypes) => {
     localStorage.setItem('tab', tab);

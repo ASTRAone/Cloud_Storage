@@ -1,0 +1,21 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.container {
+  max-width: 228px;
+
+  & .title {
+    @include text();
+    @include paragraph-18();
+    color: $dark-gray-100;
+    margin-bottom: 25px;
+    margin-left: 3px;
+  }
+
+  & .content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+}
