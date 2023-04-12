@@ -27,10 +27,15 @@ import {
   RussianIcon,
   EnglishIcon,
   CameraIcon,
+  DownloadIcon,
   BigFolderIcon,
+  RemoveIcon,
+  TileIcon,
+  ListIcon,
 } from '@assets/icons';
 
 const dictionary = {
+  default: '',
   hide: HideIcon,
   show: ShowIcon,
   spinner: Spinner,
@@ -60,7 +65,10 @@ const dictionary = {
   english: EnglishIcon,
   camera: CameraIcon,
   bigfolder: BigFolderIcon,
-  default: '',
+  download: DownloadIcon,
+  remove: RemoveIcon,
+  tile: TileIcon,
+  list: ListIcon,
 };
 
 type IconTypes = keyof typeof dictionary;

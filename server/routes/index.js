@@ -31,6 +31,7 @@ router.post("/changeLanguage", authMiddleware, UserController.postLanguage);
 
 //CRUD files
 router.get("/files", authMiddleware, fileController.getFiles);
+router.get("/recently_files", authMiddleware, fileController.getRecentlyUpdatedFiles);
 router.get("/files/download", authMiddleware, fileController.downloadFile);
 router.post("/files/upload", authMiddleware, fileController.uploadFile);
 router.delete("/files/delete", authMiddleware, fileController.deleteFile);

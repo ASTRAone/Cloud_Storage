@@ -58,7 +58,7 @@ export const ModalCreateFile: React.FC<Props> = ({ isOpen, closeModal = () => {}
       open={isOpen}
       loading={isLoading}
       close={closeModal}
-      title="Создание папки"
+      title="Creating a folder"
       error={error}
       submit={handleSubmit(handleCreateFile)}
     >
@@ -69,7 +69,7 @@ export const ModalCreateFile: React.FC<Props> = ({ isOpen, closeModal = () => {}
           <Input
             onChange={onChange}
             value={value}
-            placeholder="Введите название папки"
+            placeholder="Enter a folder name"
             error={errors.name}
           />
         )}

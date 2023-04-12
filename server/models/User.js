@@ -9,7 +9,9 @@ const User = new Schema({
   files: [{ type: ObjectId, ref: "File" }],
   isActivated: { type: Boolean, default: false },
   activationLink: { type: String },
-  language: { type: String, default: 'en-US'}
+  language: { type: String, default: 'en-US'},
+  name: { type: String, required: true, default: false },
+  surname: { type: String, required: true, default: false }
 });
 
 module.exports = model("User", User);

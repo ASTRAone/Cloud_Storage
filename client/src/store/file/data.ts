@@ -18,6 +18,7 @@ type State = {
   statusUpload: RequestStatus;
   statusDownload: RequestStatus;
   statusDelete: RequestStatus;
+  view: 'list' | 'plate';
 };
 
 const initialState: State = {
@@ -30,6 +31,7 @@ const initialState: State = {
   statusUpload: 'idle',
   statusDownload: 'idle',
   statusDelete: 'idle',
+  view: 'list',
 };
 
 const fetchFiles = createAsyncThunk(
@@ -38,6 +40,17 @@ const fetchFiles = createAsyncThunk(
     try {
       const response = await FileApi.fetchFiles(dirId);
       return response.data;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
+const viewFiles = createAsyncThunk(
+  'file/view',
+  async (view: 'list' | 'plate', { rejectWithValue }) => {
+    try {
+      return view;
     } catch (e) {
       return rejectWithValue(e);
     }
@@ -121,6 +134,9 @@ const fileDataSlice = createSlice({
     popToStack: (state, action: PayloadAction<any>) => {
       state.dirStack = state.dirStack.filter((item) => item !== action.payload);
     },
+    viewFolder: (state, action: PayloadAction<'list' | 'plate'>) => {
+      state.view = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -134,7 +150,16 @@ const fileDataSlice = createSlice({
       .addCase(fetchFiles.rejected, (state) => {
         state.status = 'failed';
       })
-
+      .addCase(viewFiles.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(viewFiles.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.view = action.payload;
+      })
+      .addCase(viewFiles.rejected, (state) => {
+        state.status = 'failed';
+      })
       .addCase(createFile.pending, (state) => {
         state.statusCreate = 'loading';
         state.needUpdate = true;
@@ -196,8 +221,10 @@ const statusCreate = createSelector(selectSelf, ({ statusCreate }) => statusCrea
 const getCurrentDir = createSelector(selectSelf, ({ currentDir }) => currentDir);
 const getStackDir = createSelector(selectSelf, ({ dirStack }) => dirStack);
 const getStatus = createSelector(selectSelf, statusFlags);
+const setViewFolders = createSelector(selectSelf, ({ ...view }) => view);
 
-export const { selectedDir, pushToStack, dropState, popToStack } = fileDataSlice.actions;
+export const { selectedDir, pushToStack, dropState, popToStack, viewFolder } =
+  fileDataSlice.actions;
 
 export {
   getFilesData,
@@ -210,5 +237,6 @@ export {
   uploadFile,
   downloadFile,
   deleteFile,
+  setViewFolders,
 };
 export default fileDataSlice.reducer;

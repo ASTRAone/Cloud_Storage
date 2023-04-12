@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+
+import { sortedData } from '@src/utility/data';
 
 import { FileResponse } from '@api/FileApi/models';
 
@@ -15,14 +17,8 @@ import styles from './styles.module.scss';
 export const FileList: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
-  const { file } = useAppSelector(getFilesData);
-
-  const [fileData, setFileData] = useState<FileResponse[]>([]);
-
-  useEffect(() => {
-    const sortedData = [...file].sort((a, b) => (a.type > b.type ? 1 : -1)) as FileResponse[];
-    setFileData(sortedData);
-  }, []);
+  const { file, view } = useAppSelector(getFilesData);
+  const fileData = sortedData(file) as FileResponse[];
 
   const openFile = (dirId: string) => {
     dispatch(selectedDir(dirId));
@@ -30,8 +26,8 @@ export const FileList: React.FC = () => {
   };
 
   return (
-    <div className={cx('container')}>
-      {file.length > 0 && (
+    <div className={cx(view == 'list' ? 'container' : 'container-plate')}>
+      {view == 'list' && file.length > 0 && (
         <div className={cx('header')}>
           <div className={cx('sort-name')}>Name</div>
           <div className={cx('sort-date')}>Date</div>
@@ -44,6 +40,7 @@ export const FileList: React.FC = () => {
       {fileData.length > 0 ? (
         fileData?.map((item) => (
           <File
+            view={view}
             file={item}
             key={item._id}
             onClick={item.type === 'dir' ? () => openFile(item._id) : undefined}

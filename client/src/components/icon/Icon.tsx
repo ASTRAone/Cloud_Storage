@@ -31,7 +31,7 @@ const iconSizesDictionary: Record<Size, string> = {
   xxxl: styles.icon_xxxl,
 };
 
-export const Icon: React.FC<Props> = ({ type, color, size = 'lg', className, ...rest }) => {
+export const Icon: React.FC<Props> = ({ type, size = 'lg', className, ...rest }) => {
   const Icon = dictionary[type];
 
   if (!Icon) return null;
@@ -44,7 +44,7 @@ export const Icon: React.FC<Props> = ({ type, color, size = 'lg', className, ...
       className={classnames}
       {...rest}
     >
-      <Icon color={color} />
+      <Icon />
     </div>
   );
 };

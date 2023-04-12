@@ -15,10 +15,11 @@ import styles from './styles.module.scss';
 
 type Props = {
   file: FileResponse;
+  view: 'list' | 'plate';
   onClick?: () => void;
 };
 
-export const File: React.FC<Props> = ({ file, onClick = () => {} }) => {
+export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} }) => {
   const { name, size, type, date } = file;
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
@@ -32,12 +33,12 @@ export const File: React.FC<Props> = ({ file, onClick = () => {} }) => {
   };
   return (
     <div
-      className={cx('container')}
+      className={cx(view == 'list' ? 'container' : 'container-plate')}
       onClick={onClick}
     >
       <Icon
         type={type === 'dir' ? 'bigfolder' : 'file'}
-        color="#327BD1"
+        className={cx('icon')}
         size="xl"
       />
       <div className={cx('file-name')}>{name}</div>
@@ -47,22 +48,21 @@ export const File: React.FC<Props> = ({ file, onClick = () => {} }) => {
         className={cx('file-delete')}
         onClick={(e) => deleteClickHandler(e)}
       >
-        <Icon
-          type="close"
-          className={type === 'dir' ? cx('folder_icon') : cx('icon')}
-          color="#327BD1"
-          size="xl"
-        />
+        {view == 'list' && (
+          <Icon
+            type="remove"
+            className={type === 'dir' ? cx('folder_icon') : cx('icon')}
+          />
+        )}
       </div>
-      {file.type !== 'dir' && (
+      {file.type !== 'dir' && view == 'list' && (
         <div
           onClick={() => downloadClickHandler()}
           className={cx('file-download')}
         >
           <Icon
-            type="heart"
+            type="download"
             className={cx('icon')}
-            color="#327BD1"
             size="xl"
           />
         </div>

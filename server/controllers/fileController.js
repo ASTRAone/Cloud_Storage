@@ -40,6 +40,19 @@ class FileController {
     }
   }
 
+  async getRecentlyUpdatedFiles(req, res) {
+    try {
+      const files = await File.find({
+        user: req.user.id,
+        parent: req.query.parent,
+      }).sort({$natural:-1}).limit(4);
+      return res.json(files);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Can not get files" });
+    }
+  }
+
   async uploadFile(req, res) {
     try {
       const file = req.files.file;
@@ -98,7 +111,6 @@ class FileController {
       const file = await File.findOne({_id: req.query.id, user: req.user.id});
       if (file) {
         const path = `${process.env.FILE_PATH}\/${req.user.id}\/${file.path}`;
-        console.log('path: ' + path);
         if (fs.existsSync(path)) {
           return res.download(path, file.name);
         }
