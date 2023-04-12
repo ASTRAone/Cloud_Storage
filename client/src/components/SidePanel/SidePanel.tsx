@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { linkIcons, linkTitles } from '@utils/links';
@@ -32,20 +32,12 @@ const menu: Array<MenuItemType> = [
 export const SidePanel: React.FC = () => {
   const cx = useStyles(styles);
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState<LinkTypes>();
-  const [open, setOpen] = useState(true);
-
-  useEffect(() => {
-    const activeTabLC = localStorage.getItem('tab') as LinkTypes;
-    const isOpenPanelLC = JSON.parse(localStorage.getItem('openPanel') as string) as boolean;
-    if (activeTabLC) {
-      setActiveTab(activeTabLC);
-    } else setActiveTab(menu[0].link);
-
-    if (isOpenPanelLC) {
-      setOpen(isOpenPanelLC);
-    } else setOpen(true);
-  }, []);
+  const [activeTab, setActiveTab] = useState<LinkTypes>(
+    (localStorage.getItem('tab') as LinkTypes) || menu[0].link,
+  );
+  const [open, setOpen] = useState<boolean>(
+    (JSON.parse(localStorage.getItem('openPanel') as string) as boolean) || false,
+  );
 
   const handleToggleSidePanel = () => {
     const isOpenPanel = !open;

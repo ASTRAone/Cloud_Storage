@@ -8,8 +8,7 @@ import { Input } from '@components/Input';
 import { FileList } from '@components/FileList';
 
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-// import { fetchFiles, getFilesData, popToStack, selectedDir, uploadFile } from '@store/file/data';
-import { fetchFiles, getFilesData, uploadFile } from '@store/file/data';
+import { fetchFiles, getFilesData, popToStack, selectedDir, uploadFile } from '@store/file/data';
 
 import styles from './styles.module.scss';
 import { ModalCreateFile } from './components';
@@ -17,8 +16,7 @@ import { ModalCreateFile } from './components';
 export const Disk: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
-  // const { currentDir, dirStack, needUpdate } = useAppSelector(getFilesData);
-  const { currentDir, needUpdate } = useAppSelector(getFilesData);
+  const { currentDir, dirStack, needUpdate } = useAppSelector(getFilesData);
   const { isOpened, openPopup, closePopup } = usePopupControls();
 
   useEffect(() => {
@@ -32,12 +30,12 @@ export const Disk: React.FC = () => {
     }
   }, [needUpdate, currentDir]);
 
-  // const goBack = () => {
-  //   const newStackDir = [...dirStack];
-  //   const backDirId = newStackDir.pop();
-  //   dispatch(popToStack(backDirId));
-  //   dispatch(selectedDir(newStackDir.pop()));
-  // };
+  const goBack = () => {
+    const newStackDir = [...dirStack];
+    const backDirId = newStackDir.pop();
+    dispatch(popToStack(backDirId));
+    dispatch(selectedDir(newStackDir.pop()));
+  };
 
   const submitUploadFile = async (data: any) => {
     const files = [...data];
@@ -50,13 +48,13 @@ export const Disk: React.FC = () => {
     <>
       <div className={cx('container')}>
         <div className={cx('btns')}>
-          {/* {!!dirStack.length && (
+          {!!dirStack.length && (
             <Button
               className={cx('back')}
               text="Назад"
               onClick={goBack}
             />
-          )} */}
+          )}
           <Button
             variant="outline"
             onClick={openPopup}
