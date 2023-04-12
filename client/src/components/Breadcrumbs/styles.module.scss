@@ -1,0 +1,11 @@
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+@import '@assets/styles/variables/colors';
+
+.container {
+  display: flex;
+  padding: 20px;
+  width: 100%;
+  border: 1px solid $dark-blue-100;
+  margin-top: 10px;
+}

@@ -15,9 +15,9 @@ import { RootState } from '@store/root';
 
 type State = {
   file: FileResponse[] | [];
-  dirStack: any[];
   dataRecently: FileResponseRecently[];
   needUpdate: boolean;
+  dirStack: string[];
   currentDir?: string;
   status: RequestStatus;
   statusCreate: RequestStatus;
@@ -148,7 +148,7 @@ const fileDataSlice = createSlice({
   initialState,
   reducers: {
     dropState: () => initialState,
-    selectedDir: (state, action: PayloadAction<string | undefined>) => {
+    selectedDir: (state, action: PayloadAction<any>) => {
       state.currentDir = action.payload;
     },
     pushToStack: (state, action: PayloadAction<any>) => {

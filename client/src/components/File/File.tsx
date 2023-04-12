@@ -33,7 +33,7 @@ export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} 
   };
   return (
     <div
-      className={cx(view == 'list' ? 'container' : 'container-plate')}
+      className={cx(view === 'list' ? 'container' : 'container-plate')}
       onClick={onClick}
     >
       <Icon
@@ -48,14 +48,14 @@ export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} 
         className={cx('file-delete')}
         onClick={(e) => deleteClickHandler(e)}
       >
-        {view == 'list' && (
+        {view === 'list' && (
           <Icon
             type="remove"
             className={type === 'dir' ? cx('folder_icon') : cx('icon')}
           />
         )}
       </div>
-      {file.type !== 'dir' && view == 'list' && (
+      {file.type !== 'dir' && view === 'list' && (
         <div
           onClick={() => downloadClickHandler()}
           className={cx('file-download')}

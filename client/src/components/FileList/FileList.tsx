@@ -20,14 +20,17 @@ export const FileList: React.FC = () => {
   const { file, view } = useAppSelector(getFilesData);
   const fileData = sortedData(file) as FileResponse[];
 
+  // const openFile = (dirId: string, nameDir: string) => {
   const openFile = (dirId: string) => {
+    // dispatch(selectedDir({ dirId, nameDir }));
+    // dispatch(pushToStack({ dirId, nameDir }));
     dispatch(selectedDir(dirId));
     dispatch(pushToStack(dirId));
   };
 
   return (
-    <div className={cx(view == 'list' ? 'container' : 'container-plate')}>
-      {view == 'list' && file.length > 0 && (
+    <div className={cx(view === 'list' ? 'container' : 'container-plate')}>
+      {view === 'list' && file.length > 0 && (
         <div className={cx('header')}>
           <div className={cx('sort-name')}>Name</div>
           <div className={cx('sort-date')}>Date</div>
@@ -43,6 +46,7 @@ export const FileList: React.FC = () => {
             view={view}
             file={item}
             key={item._id}
+            // onClick={item.type === 'dir' ? () => openFile(item._id, item.name) : undefined}
             onClick={item.type === 'dir' ? () => openFile(item._id) : undefined}
           />
         ))
