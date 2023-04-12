@@ -13,7 +13,7 @@ export const FilesPage: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchFiles());
-  });
+  }, []);
 
   return (
     <LayoutPage>

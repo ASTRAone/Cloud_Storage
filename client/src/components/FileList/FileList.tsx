@@ -22,7 +22,7 @@ export const FileList: React.FC = () => {
   useEffect(() => {
     const sortedData = [...file].sort((a, b) => (a.type > b.type ? 1 : -1)) as FileResponse[];
     setFileData(sortedData);
-  });
+  }, []);
 
   const openFile = (dirId: string) => {
     dispatch(selectedDir(dirId));
