@@ -12,7 +12,8 @@ html {
   display: flex;
   flex-direction: column;
   background: $color-main;
-  height: 100%;
+  height: auto;
+  min-height: 100%;
 
   & .content {
     flex: 1 0 auto;

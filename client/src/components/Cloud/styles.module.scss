@@ -2,6 +2,7 @@
   width: 100%;
   margin-top: 22px;
   padding-right: 70px;
+  padding-bottom: 66px;
 
   & .container {
     display: grid;
@@ -19,5 +20,9 @@
     @media (max-width: 1300px) {
       & { grid-template-columns: repeat(3, 1fr); }
     }
+  }
+
+  & .info-panel {
+    margin-top: 66px;
   }
 }

@@ -1,0 +1,45 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & .content-left {
+    & .folder {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 7px;
+
+      & .icon {
+        color: #327BD1;
+      }
+
+      & .text {
+        @include text();
+        @include paragraph-13();
+        color: $dark-gray-100;
+      }
+    }
+
+    & .date-our {
+      margin-left: 23px;
+      & .text {
+        @include text();
+        @include paragraph-10();
+        color: $dark-gray-50;
+      }
+    }
+  }
+
+  & .content-right {
+    & .text {
+      @include text();
+      @include paragraph-12();
+      color: $dark-gray-50;
+    }
+  }
+}
