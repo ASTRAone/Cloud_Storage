@@ -22,6 +22,7 @@ type PropsForm = {
 export const ModalCreateFile: React.FC<Props> = ({ isOpen, closeModal = () => {}, currentDir }) => {
   const dispatch = useAppDispatch();
   const { status, statusCreate } = useAppSelector(getFilesData);
+  const [btnDisabled, setBtnDisabled] = useState(false);
 
   const {
     control,
@@ -34,6 +35,7 @@ export const ModalCreateFile: React.FC<Props> = ({ isOpen, closeModal = () => {}
   const isLoading = status === 'loading' || statusCreate === 'loading';
 
   const handleCreateFile = async (data: unknown) => {
+    setBtnDisabled(true);
     const { name } = data as PropsForm;
     const payload: FileCreateDTO = {
       name,
@@ -49,6 +51,7 @@ export const ModalCreateFile: React.FC<Props> = ({ isOpen, closeModal = () => {}
       closeModal();
     } catch (error) {
       setError(true);
+      setBtnDisabled(false);
       console.log(error);
     }
   };
@@ -57,6 +60,7 @@ export const ModalCreateFile: React.FC<Props> = ({ isOpen, closeModal = () => {}
     <PopupComponent
       open={isOpen}
       loading={isLoading}
+      isDisabled={btnDisabled}
       close={closeModal}
       title="Creating a folder"
       error={error}

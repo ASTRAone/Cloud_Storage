@@ -18,15 +18,18 @@ export const Auth: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [errorRes, setErrorRes] = useState(false);
+  const [btnDisabled, setBtnDisabled] = useState(false);
   const { status } = useAppSelector(getUserData);
 
   const loginUser = async (data: AuthDTO) => {
+    setBtnDisabled(true);
     try {
       const { accessToken } = await dispatch(userLogin(data)).unwrap();
       localStorage.setItem(AUTH_HEADER, `Bearer ${accessToken}`);
       navigate(CLOUD_ROUTE);
     } catch (error) {
       setErrorRes(true);
+      setBtnDisabled(false);
       console.log(error);
     }
   };
@@ -36,6 +39,7 @@ export const Auth: React.FC = () => {
       <AuthView
         loading={status === 'loading'}
         isError={errorRes}
+        isDisabled={btnDisabled}
         setError={setErrorRes}
       />
     </Form>
