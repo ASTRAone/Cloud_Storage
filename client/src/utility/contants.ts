@@ -11,3 +11,18 @@ export enum ColorFolder {
   films = '#FDBC64',
   images = '#FF7F5C',
 }
+
+export const mounths = [
+  'Dec',
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'June',
+  'July',
+  'Aug',
+  'Sept',
+  'Oct',
+  'Nov',
+];

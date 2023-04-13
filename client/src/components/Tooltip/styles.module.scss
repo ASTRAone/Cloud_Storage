@@ -18,7 +18,9 @@
   border-radius: 5px;
   padding: 11px 5px;
   &__text {
-    margin: 0;
+    @include text();
+    @include paragraph-10();
+    color: $dark-gray-100;
   }
 }
 :global {

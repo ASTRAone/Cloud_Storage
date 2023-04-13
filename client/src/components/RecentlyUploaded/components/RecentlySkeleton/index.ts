@@ -1,0 +1,1 @@
+export { RecentlySkeleton } from './RecentlySkeleton';

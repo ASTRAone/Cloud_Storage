@@ -6,7 +6,7 @@
 }
 
 .content {
-  @include text-no-wrap;
+  @include text-no-wrap();
 }
 
 .isHidden {

@@ -6,8 +6,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 
   & .content-left {
+    width: 100%;
     & .folder {
       display: flex;
       align-items: center;
@@ -36,10 +38,16 @@
   }
 
   & .content-right {
+    margin-left: 10px;
     & .text {
       @include text();
       @include paragraph-12();
       color: $dark-gray-50;
+      text-align: right;
+
+      &.size {
+        text-transform: uppercase;
+      }
     }
   }
 }
