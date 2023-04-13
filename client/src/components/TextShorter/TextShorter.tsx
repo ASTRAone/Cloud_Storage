@@ -5,7 +5,7 @@ import { useStyles } from '@hooks/useStyles';
 
 import { Tooltip } from '@components/Tooltip';
 
-import styles from './TextShorter.module.scss';
+import styles from './styles.module.scss';
 
 type Props = {
   className?: string;

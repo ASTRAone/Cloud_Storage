@@ -2,7 +2,12 @@ import { createAsyncThunk, createSelector, createSlice, PayloadAction } from '@r
 
 import { RequestStatus, UUID } from '@src/utility/common';
 
-import { FileCreateDTO, FileResponse, FileUploadDTO } from '@api/FileApi/models';
+import {
+  FileCreateDTO,
+  FileResponse,
+  FileUploadDTO,
+  FileResponseRecently,
+} from '@api/FileApi/models';
 import { FileApi } from '@api/FileApi';
 
 import { statusFlags } from '@store/selectors';
@@ -11,6 +16,7 @@ import { RootState } from '@store/root';
 type State = {
   file: FileResponse[] | [];
   dirStack: any[];
+  dataRecently: FileResponseRecently[];
   needUpdate?: boolean;
   currentDir?: string;
   status: RequestStatus;
@@ -18,12 +24,14 @@ type State = {
   statusUpload: RequestStatus;
   statusDownload: RequestStatus;
   statusDelete: RequestStatus;
+  statusFetchRecently: RequestStatus;
   view: 'list' | 'plate';
 };
 
 const initialState: State = {
   file: [],
   dirStack: [],
+  dataRecently: [],
   needUpdate: false,
   currentDir: '',
   status: 'idle',
@@ -31,6 +39,7 @@ const initialState: State = {
   statusUpload: 'idle',
   statusDownload: 'idle',
   statusDelete: 'idle',
+  statusFetchRecently: 'idle',
   view: 'list',
 };
 
@@ -113,6 +122,18 @@ const deleteFile = createAsyncThunk(
   async (payload: FileResponse, { rejectWithValue }) => {
     try {
       const response = await FileApi.deleteFile(payload._id);
+      return response.data;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
+const fetchRecentlyUploaded = createAsyncThunk(
+  'file/fetchRecentlyUploaded',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await FileApi.fetchRecentlyUploaded();
       return response.data;
     } catch (e) {
       return rejectWithValue(e);
@@ -210,6 +231,20 @@ const fileDataSlice = createSlice({
       .addCase(deleteFile.rejected, (state) => {
         state.statusDelete = 'failed';
         state.needUpdate = false;
+      })
+
+      .addCase(fetchRecentlyUploaded.pending, (state) => {
+        state.statusFetchRecently = 'loading';
+        state.needUpdate = true;
+      })
+      .addCase(fetchRecentlyUploaded.fulfilled, (state, action) => {
+        state.statusFetchRecently = 'idle';
+        state.dataRecently = action.payload;
+        state.needUpdate = false;
+      })
+      .addCase(fetchRecentlyUploaded.rejected, (state) => {
+        state.statusFetchRecently = 'failed';
+        state.needUpdate = false;
       });
   },
 });
@@ -222,6 +257,7 @@ const getCurrentDir = createSelector(selectSelf, ({ currentDir }) => currentDir)
 const getStackDir = createSelector(selectSelf, ({ dirStack }) => dirStack);
 const getStatus = createSelector(selectSelf, statusFlags);
 const setViewFolders = createSelector(selectSelf, ({ ...view }) => view);
+const getRecentlyUploaded = createSelector(selectSelf, ({ ...dataRecently }) => dataRecently);
 
 export const { selectedDir, pushToStack, dropState, popToStack, viewFolder } =
   fileDataSlice.actions;
@@ -238,5 +274,7 @@ export {
   downloadFile,
   deleteFile,
   setViewFolders,
+  fetchRecentlyUploaded,
+  getRecentlyUploaded,
 };
 export default fileDataSlice.reducer;

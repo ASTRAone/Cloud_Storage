@@ -42,7 +42,7 @@ export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} 
         size="xl"
       />
       <div className={cx('file-name')}>{name}</div>
-      <div className={cx('file-date')}>{customDate(date)}</div>
+      <div className={cx('file-date')}>{customDate(date).fullDate}</div>
       <div className={cx('file-size')}>{size}</div>
       <div
         className={cx('file-delete')}

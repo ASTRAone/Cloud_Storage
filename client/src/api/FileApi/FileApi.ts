@@ -1,7 +1,7 @@
 import { $api } from '@src/http/http';
 
 import { IRestService, RestService } from '../../services/RestService';
-import { FileCreateDTO, FileResponse } from './models';
+import { FileCreateDTO, FileResponse, FileResponseRecently } from './models';
 class FileApi {
   static restService: IRestService = RestService.getInstance();
 
@@ -32,6 +32,11 @@ class FileApi {
   static deleteFile(fileId?: string) {
     const url = `files/delete${fileId ? '?id=' + fileId : ''}`;
     return $api.delete<any>(url);
+  }
+
+  static fetchRecentlyUploaded() {
+    const url = 'recently_files';
+    return $api.get<FileResponseRecently[]>(url);
   }
 }
 

@@ -27,4 +27,14 @@ type FileDownloadDTO = {
   file: any;
 };
 
-export type { FileResponse, FileCreateDTO, FileUploadDTO, FileDownloadDTO };
+type FileResponseRecently = {
+  date: string;
+  name: string;
+  path: string;
+  size: number;
+  type: string;
+  user: UUID;
+  _id: UUID;
+};
+
+export type { FileResponse, FileCreateDTO, FileUploadDTO, FileDownloadDTO, FileResponseRecently };

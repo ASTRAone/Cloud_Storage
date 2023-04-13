@@ -1,32 +1,51 @@
 import React from 'react';
 
+import { customDate, customTime } from '@utils/customDate';
+
+import { FileResponseRecently } from '@api/FileApi/models';
+
 import { useStyles } from '@hooks/useStyles';
 
 import { Icon } from '@components/icon';
+import { TextShorter } from '@components/TextShorter';
 
 import styles from './styles.module.scss';
 
-// TODO создать тип
+type Props = {
+  data: FileResponseRecently;
+};
 
-export const RecentlyUploadedItem: React.FC = () => {
+export const RecentlyUploadedItem: React.FC<Props> = ({ data }) => {
   const cx = useStyles(styles);
+
+  const { date, size, type, name } = data;
+  const { day, mounth } = customDate(date);
+  const time = customTime(date);
+
   return (
     <div className={cx('container')}>
       <div className={cx('content-left')}>
         <div className={cx('folder')}>
           <Icon
-            type="file"
+            type={type === 'file' ? 'file' : 'folder'}
             className={cx('icon')}
           />
-          <p className={cx('text')}>Marcus Family.jpg</p>
+          <TextShorter
+            tooltip
+            className={cx('text')}
+          >
+            <>{name}</>
+          </TextShorter>
         </div>
         <div className={cx('date-our')}>
-          <p className={cx('text')}>10 oct</p>
-          <p className={cx('text')}>10:23pm</p>
+          <p className={cx('text')}>
+            {day} {mounth}
+          </p>
+          <p className={cx('text')}>{time}pm</p>
         </div>
       </div>
       <div className={cx('content-right')}>
-        <p className={cx('text')}>12</p>
+        <p className={cx('text')}>{size}</p>
         <p className={cx('text', 'size')}>mb</p>
       </div>
     </div>

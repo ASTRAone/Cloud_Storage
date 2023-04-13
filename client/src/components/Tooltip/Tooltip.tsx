@@ -82,7 +82,6 @@ export const Tooltip: React.FC<Props> = ({
     (arrowSvg as SVGElement).style.transform = 'translateY(25%)';
   };
 
-  // TODO если потребуется, то можно расширить отображаемый контент
   const tooltipContent = useMemo(() => {
     if (!Array.isArray(text)) {
       return text;
