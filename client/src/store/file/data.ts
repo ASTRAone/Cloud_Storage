@@ -165,7 +165,6 @@ const fileDataSlice = createSlice({
     builder
       .addCase(fetchFiles.pending, (state) => {
         state.status = 'loading';
-        state.needUpdate = true;
       })
       .addCase(fetchFiles.fulfilled, (state, action) => {
         state.needUpdate = false;
@@ -173,7 +172,6 @@ const fileDataSlice = createSlice({
         state.status = 'idle';
       })
       .addCase(fetchFiles.rejected, (state) => {
-        state.needUpdate = false;
         state.status = 'failed';
       })
       .addCase(viewFiles.pending, (state) => {
@@ -181,6 +179,7 @@ const fileDataSlice = createSlice({
       })
       .addCase(viewFiles.fulfilled, (state, action) => {
         state.statusViewFiles = 'idle';
+        state.needUpdate = true;
         state.view = action.payload;
       })
       .addCase(viewFiles.rejected, (state) => {
@@ -188,28 +187,24 @@ const fileDataSlice = createSlice({
       })
       .addCase(createFile.pending, (state) => {
         state.statusCreate = 'loading';
-        state.needUpdate = true;
       })
       .addCase(createFile.fulfilled, (state) => {
         state.statusCreate = 'idle';
-        state.needUpdate = false;
+        state.needUpdate = true;
       })
       .addCase(createFile.rejected, (state) => {
         state.statusCreate = 'failed';
-        state.needUpdate = false;
       })
 
       .addCase(uploadFile.pending, (state) => {
-        state.needUpdate = true;
         state.statusUpload = 'loading';
       })
       .addCase(uploadFile.fulfilled, (state) => {
+        state.needUpdate = true;
         state.statusUpload = 'idle';
-        state.needUpdate = false;
       })
       .addCase(uploadFile.rejected, (state) => {
         state.statusUpload = 'failed';
-        state.needUpdate = false;
       })
 
       .addCase(downloadFile.pending, (state) => {
@@ -224,29 +219,25 @@ const fileDataSlice = createSlice({
 
       .addCase(deleteFile.pending, (state) => {
         state.statusDelete = 'loading';
-        state.needUpdate = true;
       })
       .addCase(deleteFile.fulfilled, (state) => {
+        state.needUpdate = true;
         state.statusDelete = 'idle';
-        state.needUpdate = false;
       })
       .addCase(deleteFile.rejected, (state) => {
         state.statusDelete = 'failed';
-        state.needUpdate = false;
       })
 
       .addCase(fetchRecentlyUploaded.pending, (state) => {
-        state.needUpdate = true;
         state.statusFetchRecently = 'loading';
       })
       .addCase(fetchRecentlyUploaded.fulfilled, (state, action) => {
         state.statusFetchRecently = 'idle';
-        state.needUpdate = false;
+        state.needUpdate = true;
         state.dataRecently = action.payload;
       })
       .addCase(fetchRecentlyUploaded.rejected, (state) => {
         state.statusFetchRecently = 'failed';
-        state.needUpdate = false;
       });
   },
 });

@@ -4,14 +4,14 @@ import { useStyles } from '@hooks/useStyles';
 
 import { Icon } from '@components/icon';
 
-import { useAppDispatch } from '@store/hooks';
-import { uploadFile } from '@store/file/data';
+// import { useAppDispatch } from '@store/hooks';
+// import { uploadFile } from '@store/file/data';
 
 import styles from './styles.module.scss';
 
 export const DrageComponent: React.FC = () => {
   const cx = useStyles(styles);
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   const handleDragEnter = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -27,14 +27,16 @@ export const DrageComponent: React.FC = () => {
     event.preventDefault();
     event.stopPropagation();
 
-    const files = [...(event.dataTransfer.files as any)];
-    try {
-      files.forEach((file) => {
-        dispatch(uploadFile({ file }));
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    console.log('111');
+
+    // const files = [...(event.dataTransfer.files as any)];
+    // try {
+    //   files.forEach((file) => {
+    //     dispatch(uploadFile({ file }));
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (

@@ -5,7 +5,6 @@ import { PopupProps } from 'reactjs-popup/dist/types';
 import { useStyles } from '@hooks/useStyles';
 
 import styles from './styles.module.scss';
-// import styles from './Popup.module.scss';
 
 type Props = PopupProps & {
   // size?: Extract<Size, 'sm' | 'md' | 'lg' | 'xl'>;
