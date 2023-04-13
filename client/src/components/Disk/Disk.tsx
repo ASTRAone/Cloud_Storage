@@ -7,6 +7,7 @@ import { Button } from '@components/Button';
 import { Input } from '@components/Input';
 import { FileList } from '@components/FileList';
 import { Icon } from '@components/icon';
+import { Breadcrumbs } from '@components/Breadcrumbs';
 
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import {
@@ -16,6 +17,9 @@ import {
   selectedDir,
   viewFolder,
   uploadFile,
+  pushToStack,
+  popBreadcrumbsStack,
+  clearBeadcrumbsStack,
 } from '@store/file/data';
 
 import styles from './styles.module.scss';
@@ -24,18 +28,33 @@ import { ModalCreateFile } from './components';
 export const Disk: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
-  const { currentDir, dirStack, needUpdate } = useAppSelector(getFilesData);
+  const { currentDir, dirStack, breadCrumbsStack, needUpdate } = useAppSelector(getFilesData);
   const { isOpened, openPopup, closePopup } = usePopupControls();
 
   useEffect(() => {
     dispatch(fetchFiles());
+    dispatch(clearBeadcrumbsStack());
   }, []);
 
   useEffect(() => {
-    if (currentDir || needUpdate) {
+    dispatch(fetchFiles(currentDir));
+  }, [currentDir]);
+
+  useEffect(() => {
+    if (needUpdate) {
       dispatch(fetchFiles(currentDir));
     }
-  }, [needUpdate, currentDir]);
+  }, [needUpdate]);
+
+  const handlerBreadcrumbs = (dirId: string, index: number) => {
+    dispatch(selectedDir(dirId));
+    dispatch(pushToStack(dirId));
+    if (index == -1) {
+      dispatch(clearBeadcrumbsStack());
+    } else {
+      dispatch(popBreadcrumbsStack({ dirId, index }));
+    }
+  };
 
   const goBack = () => {
     const newStackDir = [...dirStack];
@@ -100,6 +119,10 @@ export const Disk: React.FC = () => {
             />
           </div>
         </div>
+        <Breadcrumbs
+          breadcrumbsPath={breadCrumbsStack ?? []}
+          navDir={handlerBreadcrumbs}
+        />
         <FileList />
       </div>
       {isOpened && (

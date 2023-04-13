@@ -10,7 +10,7 @@ import { File } from '@components/File/File';
 import { EmptyComponent } from '@components/EmptyComponent';
 
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { getFilesData, pushToStack, selectedDir } from '@store/file/data';
+import { getFilesData, pushBreadcrumbsStack, pushToStack, selectedDir } from '@store/file/data';
 
 import styles from './styles.module.scss';
 
@@ -20,14 +20,15 @@ export const FileList: React.FC = () => {
   const { file, view } = useAppSelector(getFilesData);
   const fileData = sortedData(file) as FileResponse[];
 
-  const openFile = (dirId: string) => {
+  const openFile = (dirId: string, name: string) => {
     dispatch(selectedDir(dirId));
     dispatch(pushToStack(dirId));
+    dispatch(pushBreadcrumbsStack({ dirId, name }));
   };
 
   return (
-    <div className={cx(view == 'list' ? 'container' : 'container-plate')}>
-      {view == 'list' && file.length > 0 && (
+    <div className={cx(view === 'list' ? 'container' : 'container-plate')}>
+      {view === 'list' && file.length > 0 && (
         <div className={cx('header')}>
           <div className={cx('sort-name')}>Name</div>
           <div className={cx('sort-date')}>Date</div>
@@ -43,7 +44,7 @@ export const FileList: React.FC = () => {
             view={view}
             file={item}
             key={item._id}
-            onClick={item.type === 'dir' ? () => openFile(item._id) : undefined}
+            onClick={item.type === 'dir' ? () => openFile(item._id, item.name) : undefined}
           />
         ))
       ) : (

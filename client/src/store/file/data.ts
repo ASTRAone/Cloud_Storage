@@ -13,12 +13,18 @@ import { FileApi } from '@api/FileApi';
 import { statusFlags } from '@store/selectors';
 import { RootState } from '@store/root';
 
+interface Stack {
+  name: string;
+  dirId: string;
+}
+
 type State = {
   file: FileResponse[] | [];
-  dirStack: any[];
   dataRecently: FileResponseRecently[];
   needUpdate: boolean;
+  dirStack: string[];
   currentDir?: string;
+  breadCrumbsStack: Stack[];
   status: RequestStatus;
   statusCreate: RequestStatus;
   statusUpload: RequestStatus;
@@ -35,6 +41,7 @@ const initialState: State = {
   dataRecently: [],
   needUpdate: false,
   currentDir: '',
+  breadCrumbsStack: [],
   status: 'idle',
   statusCreate: 'idle',
   statusUpload: 'idle',
@@ -160,6 +167,21 @@ const fileDataSlice = createSlice({
     viewFolder: (state, action: PayloadAction<'list' | 'plate'>) => {
       state.view = action.payload;
     },
+    pushBreadcrumbsStack: (state, action: PayloadAction<Stack>) => {
+      state.breadCrumbsStack = [...state.breadCrumbsStack, action.payload];
+    },
+    popBreadcrumbsStack: (state, action: PayloadAction<any>) => {
+      const spliced = [...state.breadCrumbsStack].splice(
+        action.payload.index + 1,
+        state.breadCrumbsStack.length - action.payload.index,
+      );
+      state.breadCrumbsStack =
+        [...state.breadCrumbsStack].filter((x) => spliced.indexOf(x) === -1) || [];
+    },
+    clearBeadcrumbsStack: (state) => {
+      state.breadCrumbsStack = [];
+      state.currentDir = '';
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -168,13 +190,13 @@ const fileDataSlice = createSlice({
         state.needUpdate = true;
       })
       .addCase(fetchFiles.fulfilled, (state, action) => {
-        state.needUpdate = false;
         state.file = action.payload;
         state.status = 'idle';
+        state.needUpdate = false;
       })
       .addCase(fetchFiles.rejected, (state) => {
-        state.needUpdate = false;
         state.status = 'failed';
+        state.needUpdate = false;
       })
       .addCase(viewFiles.pending, (state) => {
         state.statusViewFiles = 'loading';
@@ -200,12 +222,11 @@ const fileDataSlice = createSlice({
       })
 
       .addCase(uploadFile.pending, (state) => {
-        state.needUpdate = true;
         state.statusUpload = 'loading';
       })
       .addCase(uploadFile.fulfilled, (state) => {
         state.statusUpload = 'idle';
-        state.needUpdate = false;
+        state.needUpdate = true;
       })
       .addCase(uploadFile.rejected, (state) => {
         state.statusUpload = 'failed';
@@ -223,16 +244,16 @@ const fileDataSlice = createSlice({
       })
 
       .addCase(deleteFile.pending, (state) => {
+        state.needUpdate = false;
         state.statusDelete = 'loading';
-        state.needUpdate = true;
       })
       .addCase(deleteFile.fulfilled, (state) => {
+        state.needUpdate = true;
         state.statusDelete = 'idle';
-        state.needUpdate = false;
       })
       .addCase(deleteFile.rejected, (state) => {
-        state.statusDelete = 'failed';
         state.needUpdate = false;
+        state.statusDelete = 'failed';
       })
 
       .addCase(fetchRecentlyUploaded.pending, (state) => {
@@ -261,7 +282,8 @@ const getStatus = createSelector(selectSelf, statusFlags);
 const setViewFolders = createSelector(selectSelf, ({ ...view }) => view);
 const getRecentlyUploaded = createSelector(selectSelf, ({ ...dataRecently }) => dataRecently);
 
-export const { selectedDir, pushToStack, dropState, popToStack, viewFolder } =
+// eslint-disable-next-line prettier/prettier
+export const { selectedDir, pushToStack, popBreadcrumbsStack, clearBeadcrumbsStack, pushBreadcrumbsStack, dropState, popToStack, viewFolder } =
   fileDataSlice.actions;
 
 export {
