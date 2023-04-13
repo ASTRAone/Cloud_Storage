@@ -2,36 +2,44 @@ import React from 'react';
 
 import { useStyles } from '@hooks/useStyles';
 
-// import { useStyles } from '@hooks/useStyles';
-// import { getFilesData, pushToStack, selectedDir } from '@store/file/data';
-
-import { Button } from '@components/Button';
+// import { Button } from '@components/Button';
 
 import styles from './styles.module.scss';
 
+interface BreadCrumbsStack {
+  name: string;
+  dirId: string;
+}
+
 type Props = {
-  path?: string[];
-  navDir: (nav: string) => void;
+  breadcrumbsPath?: BreadCrumbsStack[];
+  navDir: (nav: string, index: number) => void;
 };
 
-export const Breadcrumbs: React.FC<Props> = ({ path, navDir }) => {
+export const Breadcrumbs: React.FC<Props> = ({ breadcrumbsPath, navDir }) => {
   const cx = useStyles(styles);
 
   return (
-    <div className={cx('container', 'btns')}>
-      {path?.length == 0 ? (
-        <Button text="root" />
-      ) : (
-        path?.map((name, index) => (
-          <div key={index}>
-            <Button
-              text={name}
-              onClick={() => navDir(name)}
-            />
-            {'>>>'}
-          </div>
-        ))
-      )}
+    <div className={cx('container')}>
+      {breadcrumbsPath?.map(({ dirId, name }, index) => (
+        <div key={index}>
+          {index == 0 ? (
+            <span
+              className={cx('btn')}
+              onClick={() => navDir('', -1)}
+            >
+              Root
+            </span>
+          ) : null}
+          <span className={cx('arrow-forward')}>{'>'}</span>
+          <span
+            className={cx('btn')}
+            onClick={() => navDir(dirId, index)}
+          >
+            {name}
+          </span>
+        </div>
+      ))}
     </div>
   );
 };

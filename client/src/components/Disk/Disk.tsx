@@ -18,6 +18,8 @@ import {
   viewFolder,
   uploadFile,
   pushToStack,
+  popBreadcrumbsStack,
+  clearBeadcrumbsStack,
 } from '@store/file/data';
 
 import styles from './styles.module.scss';
@@ -26,29 +28,32 @@ import { ModalCreateFile } from './components';
 export const Disk: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
-  // const { currentDir, currentNameDir, dirStack, needUpdate, file } = useAppSelector(getFilesData);
-  // const { currentDir, dirStack, needUpdate, file } = useAppSelector(getFilesData);
-  const { currentDir, dirStack, needUpdate } = useAppSelector(getFilesData);
+  const { currentDir, dirStack, breadCrumbsStack, needUpdate } = useAppSelector(getFilesData);
   const { isOpened, openPopup, closePopup } = usePopupControls();
 
   useEffect(() => {
     dispatch(fetchFiles());
+    dispatch(clearBeadcrumbsStack());
   }, []);
 
   useEffect(() => {
-    if (currentDir || needUpdate) {
+    dispatch(fetchFiles(currentDir));
+  }, [currentDir]);
+
+  useEffect(() => {
+    if (needUpdate) {
       dispatch(fetchFiles(currentDir));
     }
-  }, [needUpdate, currentDir]);
+  }, [needUpdate]);
 
-  const handlerDirectoryNavigation = (dirId: string) => {
-    const newStackDir = [...dirStack];
-    const backDirId = newStackDir.pop();
-    console.log('newStackDir: ' + newStackDir);
-    console.log('backDirId: ' + backDirId);
-    // dispatch(popToStack(backDirId));
+  const handlerBreadcrumbs = (dirId: string, index: number) => {
     dispatch(selectedDir(dirId));
     dispatch(pushToStack(dirId));
+    if (index == -1) {
+      dispatch(clearBeadcrumbsStack());
+    } else {
+      dispatch(popBreadcrumbsStack({ dirId, index }));
+    }
   };
 
   const goBack = () => {
@@ -57,11 +62,6 @@ export const Disk: React.FC = () => {
     dispatch(popToStack(backDirId));
     dispatch(selectedDir(newStackDir.pop()));
   };
-
-  // const preparatorPath = (stack: string[]) => {
-  //   const name = file.map((f) => f.parent == currentDir);
-  //   return [];
-  // };
 
   const submitUploadFile = async (data: any) => {
     const files = [...data];
@@ -120,9 +120,8 @@ export const Disk: React.FC = () => {
           </div>
         </div>
         <Breadcrumbs
-          // path={preparatorPath(dirStack) ?? []}
-          path={dirStack ? dirStack : []}
-          navDir={handlerDirectoryNavigation}
+          breadcrumbsPath={breadCrumbsStack ?? []}
+          navDir={handlerBreadcrumbs}
         />
         <FileList />
       </div>

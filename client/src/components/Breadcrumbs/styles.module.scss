@@ -4,8 +4,20 @@
 
 .container {
   display: flex;
-  padding: 20px;
+  padding-top: 15px;
   width: 100%;
-  border: 1px solid $dark-blue-100;
-  margin-top: 10px;
+  height: 40px;
+
+  & .arrow-forward {
+    margin: 0 10px;
+  }
+
+  & .btn {
+    cursor: pointer;
+  }
+
+  & .btn:hover {
+    text-decoration: underline;
+    color: $light-sweet-100;
+  }
 }

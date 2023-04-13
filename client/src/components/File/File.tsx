@@ -27,6 +27,7 @@ export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} 
   const downloadClickHandler = () => {
     dispatch(downloadFile(file));
   };
+
   const deleteClickHandler = (e: MouseEvent) => {
     e.stopPropagation();
     dispatch(deleteFile(file));
