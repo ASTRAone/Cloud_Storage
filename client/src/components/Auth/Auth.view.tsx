@@ -19,10 +19,11 @@ import styles from './styles.module.scss';
 type Props = {
   loading: boolean;
   isError: boolean;
+  isDisabled: boolean;
   setError: (value: boolean) => void;
 };
 
-export const AuthView: React.FC<Props> = ({ loading, isError, setError }) => {
+export const AuthView: React.FC<Props> = ({ loading, isError, isDisabled, setError }) => {
   const cx = useStyles(styles);
   const {
     control,
@@ -100,6 +101,7 @@ export const AuthView: React.FC<Props> = ({ loading, isError, setError }) => {
         text={t('authorization.button.login')}
         type="submit"
         isUpperCase
+        disabled={isDisabled}
         isLoading={loading}
         className={cx('btn')}
       />

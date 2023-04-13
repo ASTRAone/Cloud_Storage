@@ -19,10 +19,11 @@ import styles from './styles.module.scss';
 type Props = {
   loading: boolean;
   isError: boolean;
+  isDisabled: boolean;
   setError: (value: boolean) => void;
 };
 
-export const RegistrationView: React.FC<Props> = ({ loading, isError, setError }) => {
+export const RegistrationView: React.FC<Props> = ({ loading, isError, isDisabled, setError }) => {
   const cx = useStyles(styles);
   const {
     control,
@@ -156,6 +157,7 @@ export const RegistrationView: React.FC<Props> = ({ loading, isError, setError }
         isUpperCase
         className={cx('btn')}
         isLoading={loading}
+        disabled={isDisabled}
         text={t('authorization.button.register')}
       />
       <ButtonLink

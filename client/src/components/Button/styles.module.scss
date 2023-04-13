@@ -13,10 +13,14 @@
 
   & .container {
     padding: 7px 41px;
-    border: 1px;
+    border: 1px solid;
     border-radius: 7px;
     cursor: pointer;
-    background-color: $primary-800;
+
+    &.disabled {
+      background-color: $primary-200!important;
+      border: 1px solid $dark-blue-100;
+    }
 
     &.white {
       background-color: $white;

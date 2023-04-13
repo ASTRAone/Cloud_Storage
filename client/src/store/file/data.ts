@@ -17,13 +17,14 @@ type State = {
   file: FileResponse[] | [];
   dirStack: any[];
   dataRecently: FileResponseRecently[];
-  needUpdate?: boolean;
+  needUpdate: boolean;
   currentDir?: string;
   status: RequestStatus;
   statusCreate: RequestStatus;
   statusUpload: RequestStatus;
   statusDownload: RequestStatus;
   statusDelete: RequestStatus;
+  statusViewFiles: RequestStatus;
   statusFetchRecently: RequestStatus;
   view: 'list' | 'plate';
 };
@@ -38,6 +39,7 @@ const initialState: State = {
   statusCreate: 'idle',
   statusUpload: 'idle',
   statusDownload: 'idle',
+  statusViewFiles: 'idle',
   statusDelete: 'idle',
   statusFetchRecently: 'idle',
   view: 'list',
@@ -163,23 +165,26 @@ const fileDataSlice = createSlice({
     builder
       .addCase(fetchFiles.pending, (state) => {
         state.status = 'loading';
+        state.needUpdate = true;
       })
       .addCase(fetchFiles.fulfilled, (state, action) => {
+        state.needUpdate = false;
         state.file = action.payload;
         state.status = 'idle';
       })
       .addCase(fetchFiles.rejected, (state) => {
+        state.needUpdate = false;
         state.status = 'failed';
       })
       .addCase(viewFiles.pending, (state) => {
-        state.status = 'loading';
+        state.statusViewFiles = 'loading';
       })
       .addCase(viewFiles.fulfilled, (state, action) => {
-        state.status = 'idle';
+        state.statusViewFiles = 'idle';
         state.view = action.payload;
       })
       .addCase(viewFiles.rejected, (state) => {
-        state.status = 'failed';
+        state.statusViewFiles = 'failed';
       })
       .addCase(createFile.pending, (state) => {
         state.statusCreate = 'loading';
@@ -195,8 +200,8 @@ const fileDataSlice = createSlice({
       })
 
       .addCase(uploadFile.pending, (state) => {
-        state.statusUpload = 'loading';
         state.needUpdate = true;
+        state.statusUpload = 'loading';
       })
       .addCase(uploadFile.fulfilled, (state) => {
         state.statusUpload = 'idle';
@@ -209,15 +214,12 @@ const fileDataSlice = createSlice({
 
       .addCase(downloadFile.pending, (state) => {
         state.statusDownload = 'loading';
-        state.needUpdate = true;
       })
       .addCase(downloadFile.fulfilled, (state) => {
         state.statusDownload = 'idle';
-        state.needUpdate = false;
       })
       .addCase(downloadFile.rejected, (state) => {
         state.statusDownload = 'failed';
-        state.needUpdate = false;
       })
 
       .addCase(deleteFile.pending, (state) => {
@@ -234,13 +236,13 @@ const fileDataSlice = createSlice({
       })
 
       .addCase(fetchRecentlyUploaded.pending, (state) => {
-        state.statusFetchRecently = 'loading';
         state.needUpdate = true;
+        state.statusFetchRecently = 'loading';
       })
       .addCase(fetchRecentlyUploaded.fulfilled, (state, action) => {
         state.statusFetchRecently = 'idle';
-        state.dataRecently = action.payload;
         state.needUpdate = false;
+        state.dataRecently = action.payload;
       })
       .addCase(fetchRecentlyUploaded.rejected, (state) => {
         state.statusFetchRecently = 'failed';

@@ -17,6 +17,7 @@ type Props = {
   children?: any;
   title?: string;
   textBtn?: string;
+  isDisabled: boolean;
 };
 
 export const PopupComponent: React.FC<Props> = ({
@@ -26,6 +27,7 @@ export const PopupComponent: React.FC<Props> = ({
   loading = false,
   error = false,
   title = '',
+  isDisabled,
   textBtn = 'Create',
   children,
 }) => {
@@ -53,6 +55,7 @@ export const PopupComponent: React.FC<Props> = ({
           className={cx('btn')}
           isLoading={loading}
           text={textBtn}
+          disabled={isDisabled}
           onClick={submit}
         />
       </div>

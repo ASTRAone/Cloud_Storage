@@ -12,11 +12,11 @@ import { RecentlySkeleton } from './components/RecentlySkeleton';
 export const RecentlyUploaded: React.FC = () => {
   const cx = useStyles(styles);
   const dispath = useAppDispatch();
-  const { dataRecently, statusFetchRecently } = useAppSelector(getRecentlyUploaded);
+  const { dataRecently, statusFetchRecently, needUpdate } = useAppSelector(getRecentlyUploaded);
 
   useEffect(() => {
-    dispath(fetchRecentlyUploaded());
-  }, []);
+    needUpdate && dispath(fetchRecentlyUploaded());
+  }, [needUpdate]);
 
   return (
     <div className={cx('container')}>
