@@ -10,7 +10,7 @@ import { File } from '@components/File/File';
 import { EmptyComponent } from '@components/EmptyComponent';
 
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { getFilesData, pushBreadcrumbsStack, pushToStack, selectedDir } from '@store/file/data';
+import { getFilesData, pushBreadcrumbsStack, selectedDir } from '@store/file/data';
 
 import styles from './styles.module.scss';
 
@@ -22,7 +22,6 @@ export const FileList: React.FC = () => {
 
   const openFile = (dirId: string, name: string) => {
     dispatch(selectedDir(dirId));
-    dispatch(pushToStack(dirId));
     dispatch(pushBreadcrumbsStack({ dirId, name }));
   };
 

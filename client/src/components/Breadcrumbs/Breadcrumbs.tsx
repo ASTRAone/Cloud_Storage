@@ -1,18 +1,13 @@
 import React from 'react';
 
-import { useStyles } from '@hooks/useStyles';
+import { BreadCrumbStack } from '@utils/common';
 
-// import { Button } from '@components/Button';
+import { useStyles } from '@hooks/useStyles';
 
 import styles from './styles.module.scss';
 
-interface BreadCrumbsStack {
-  name: string;
-  dirId: string;
-}
-
 type Props = {
-  breadcrumbsPath?: BreadCrumbsStack[];
+  breadcrumbsPath?: BreadCrumbStack[];
   navDir: (nav: string, index: number) => void;
 };
 

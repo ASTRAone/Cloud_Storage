@@ -13,11 +13,9 @@ import { useAppDispatch, useAppSelector } from '@store/hooks';
 import {
   fetchFiles,
   getFilesData,
-  popToStack,
   selectedDir,
   viewFolder,
   uploadFile,
-  pushToStack,
   popBreadcrumbsStack,
   clearBeadcrumbsStack,
 } from '@store/file/data';
@@ -28,7 +26,7 @@ import { ModalCreateFile } from './components';
 export const Disk: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
-  const { currentDir, dirStack, breadCrumbsStack, needUpdate } = useAppSelector(getFilesData);
+  const { currentDir, breadCrumbsStack, needUpdate } = useAppSelector(getFilesData);
   const { isOpened, openPopup, closePopup } = usePopupControls();
 
   useEffect(() => {
@@ -48,19 +46,11 @@ export const Disk: React.FC = () => {
 
   const handlerBreadcrumbs = (dirId: string, index: number) => {
     dispatch(selectedDir(dirId));
-    dispatch(pushToStack(dirId));
     if (index == -1) {
       dispatch(clearBeadcrumbsStack());
     } else {
       dispatch(popBreadcrumbsStack({ dirId, index }));
     }
-  };
-
-  const goBack = () => {
-    const newStackDir = [...dirStack];
-    const backDirId = newStackDir.pop();
-    dispatch(popToStack(backDirId));
-    dispatch(selectedDir(newStackDir.pop()));
   };
 
   const submitUploadFile = async (data: any) => {
@@ -75,13 +65,6 @@ export const Disk: React.FC = () => {
       <div className={cx('container')}>
         <div className={cx('btns')}>
           <div className={cx('btns_left')}>
-            {!!dirStack.length && (
-              <Button
-                className={cx('back')}
-                text="Back"
-                onClick={goBack}
-              />
-            )}
             <Button
               variant="outline"
               onClick={openPopup}

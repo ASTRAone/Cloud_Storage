@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { RequestStatus, UUID } from '@src/utility/common';
+import { BreadCrumbStack, RequestStatus, UUID } from '@src/utility/common';
 
 import {
   FileCreateDTO,
@@ -13,18 +13,12 @@ import { FileApi } from '@api/FileApi';
 import { statusFlags } from '@store/selectors';
 import { RootState } from '@store/root';
 
-interface Stack {
-  name: string;
-  dirId: string;
-}
-
 type State = {
   file: FileResponse[] | [];
   dataRecently: FileResponseRecently[];
   needUpdate: boolean;
-  dirStack: string[];
   currentDir?: string;
-  breadCrumbsStack: Stack[];
+  breadCrumbsStack: BreadCrumbStack[];
   status: RequestStatus;
   statusCreate: RequestStatus;
   statusUpload: RequestStatus;
@@ -37,7 +31,6 @@ type State = {
 
 const initialState: State = {
   file: [],
-  dirStack: [],
   dataRecently: [],
   needUpdate: false,
   currentDir: '',
@@ -158,16 +151,10 @@ const fileDataSlice = createSlice({
     selectedDir: (state, action: PayloadAction<string | undefined>) => {
       state.currentDir = action.payload;
     },
-    pushToStack: (state, action: PayloadAction<any>) => {
-      state.dirStack = [...state.dirStack, action.payload];
-    },
-    popToStack: (state, action: PayloadAction<any>) => {
-      state.dirStack = state.dirStack.filter((item) => item !== action.payload);
-    },
     viewFolder: (state, action: PayloadAction<'list' | 'plate'>) => {
       state.view = action.payload;
     },
-    pushBreadcrumbsStack: (state, action: PayloadAction<Stack>) => {
+    pushBreadcrumbsStack: (state, action: PayloadAction<BreadCrumbStack>) => {
       state.breadCrumbsStack = [...state.breadCrumbsStack, action.payload];
     },
     popBreadcrumbsStack: (state, action: PayloadAction<any>) => {
@@ -277,13 +264,12 @@ const selectSelf = (state: RootState) => state.file.data;
 const getFilesData = createSelector(selectSelf, ({ ...fileData }) => fileData);
 const statusCreate = createSelector(selectSelf, ({ statusCreate }) => statusCreate);
 const getCurrentDir = createSelector(selectSelf, ({ currentDir }) => currentDir);
-const getStackDir = createSelector(selectSelf, ({ dirStack }) => dirStack);
 const getStatus = createSelector(selectSelf, statusFlags);
 const setViewFolders = createSelector(selectSelf, ({ ...view }) => view);
 const getRecentlyUploaded = createSelector(selectSelf, ({ ...dataRecently }) => dataRecently);
 
 // eslint-disable-next-line prettier/prettier
-export const { selectedDir, pushToStack, popBreadcrumbsStack, clearBeadcrumbsStack, pushBreadcrumbsStack, dropState, popToStack, viewFolder } =
+export const { selectedDir, popBreadcrumbsStack, clearBeadcrumbsStack, pushBreadcrumbsStack, dropState, viewFolder } =
   fileDataSlice.actions;
 
 export {
@@ -293,7 +279,6 @@ export {
   getCurrentDir,
   statusCreate,
   createFile,
-  getStackDir,
   uploadFile,
   downloadFile,
   deleteFile,
