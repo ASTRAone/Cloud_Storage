@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useStyles } from '@hooks/useStyles';
 
@@ -10,14 +10,17 @@ import styles from './styles.module.scss';
 
 type Props = {
   isOpen: boolean;
-  closeModal?: () => void;
+  closeModal: () => void;
 };
 
-export const ModalUpload: React.FC<Props> = () => {
+export const ModalUpload: React.FC<Props> = ({ closeModal }) => {
   const cx = useStyles(styles);
+
+  useEffect(() => () => closeModal(), []);
+
   return (
     <Modal
-      open
+      open={false}
       classNamePrefix={cx('modal')}
     >
       <div className={cx('container')}>

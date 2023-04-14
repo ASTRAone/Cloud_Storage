@@ -7,6 +7,9 @@ import { Popup } from '@components/Popup';
 import { IconTypes } from '@components/icon/IconDictionary';
 import { MenuItem } from '@components/MenuIteim';
 
+import { useAppDispatch } from '@store/hooks';
+import { userLogout } from '@store/auth/data';
+
 import styles from './styles.module.scss';
 
 type Props = { name?: string; email?: string; className?: string };
@@ -19,12 +22,19 @@ export type MenuItemType = {
 
 export const MenuProfile: React.FC<Props> = ({ name, email }) => {
   const { t } = useTranslation();
+  const dispath = useAppDispatch();
   const menu: Array<MenuItemType> = [
     { url: '/profile', iconType: 'profile', linkName: t('profileMenu.menu.account') },
     { url: '/mydisk', iconType: 'disk', linkName: t('profileMenu.menu.mydisk') },
     { url: '/settings', iconType: 'settings', linkName: t('profileMenu.menu.settings') },
     { url: '/logout', iconType: 'logout', linkName: t('profileMenu.menu.logout') },
   ];
+
+  const logout = async () => {
+    localStorage.removeItem('Authorization');
+    localStorage.removeItem('activeTabLC');
+    await dispath(userLogout()).unwrap();
+  };
 
   const cx = useStyles(styles);
   return (
@@ -56,6 +66,7 @@ export const MenuProfile: React.FC<Props> = ({ name, email }) => {
                       iconType={iconType}
                       title={linkName}
                       className={cx('btn-link')}
+                      onClick={url === '/logout' ? logout : undefined}
                     />
                   </div>
                 </div>

@@ -13,6 +13,7 @@ type Props = {
   iconType?: IconTypes;
   className?: string;
   title: string;
+  onClick?: () => void;
   url?: string;
   button?: boolean;
 };
@@ -21,6 +22,7 @@ export const MenuItem: React.FC<Props> = ({
   iconType = 'default',
   title,
   url,
+  onClick = () => {},
   className,
   button = false,
 }) => {
@@ -37,6 +39,7 @@ export const MenuItem: React.FC<Props> = ({
         <ButtonLink
           to={url || ''}
           className={className}
+          onClick={onClick}
         >
           <div className={cx('container-child-buttonlink')}>
             <div className={cx('icon')}>

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 
 import { linkIcons, linkTitles } from '@utils/links';
 
@@ -32,10 +31,9 @@ const menu: Array<MenuItemType> = [
 
 export const SidePanel: React.FC = () => {
   const cx = useStyles(styles);
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<LinkTypes>(
-    (localStorage.getItem('tab') as LinkTypes) || menu[0].link,
+    (localStorage.getItem('activeTabLC') as LinkTypes) || menu[0].link,
   );
   const [open, setOpen] = useState<boolean>(
     (JSON.parse(localStorage.getItem('openPanel') as string) as boolean) || false,
@@ -48,16 +46,9 @@ export const SidePanel: React.FC = () => {
   };
 
   const handleChangeActiveTab = (tab: LinkTypes) => {
-    localStorage.setItem('tab', tab);
+    localStorage.setItem('activeTabLC', tab);
     setActiveTab(tab);
   };
-
-  useEffect(() => {
-    const activeTabLC = localStorage.getItem('tab') as LinkTypes;
-    if (activeTabLC) {
-      navigate(`/${activeTabLC}`);
-    }
-  }, []);
 
   return (
     <aside className={cx('container', open ? 'open' : '')}>
