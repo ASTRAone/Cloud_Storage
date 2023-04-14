@@ -40,6 +40,20 @@ class FileController {
     }
   }
 
+  async getPathsFiles(req, res) {
+    try {
+      const files = await File.find({
+        user: req.user.id,
+        parent: req.query.parent,
+        type: 'dir',
+      }, { path: 1, _id: 1});
+      return res.json(files);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Can not get files" });
+    }
+  }
+
   async getRecentlyUpdatedFiles(req, res) {
     try {
       const files = await File.find({
