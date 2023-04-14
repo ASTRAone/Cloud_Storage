@@ -143,6 +143,7 @@ const fetchRecentlyUploaded = createAsyncThunk(
   },
 );
 
+// TODO переделать общение с папкой
 const fileDataSlice = createSlice({
   name: 'fileDataSlice',
   initialState,
@@ -200,8 +201,8 @@ const fileDataSlice = createSlice({
         state.statusUpload = 'loading';
       })
       .addCase(uploadFile.fulfilled, (state) => {
-        state.needUpdate = true;
         state.statusUpload = 'idle';
+        state.needUpdate = true;
       })
       .addCase(uploadFile.rejected, (state) => {
         state.statusUpload = 'failed';
@@ -221,8 +222,8 @@ const fileDataSlice = createSlice({
         state.statusDelete = 'loading';
       })
       .addCase(deleteFile.fulfilled, (state) => {
-        state.needUpdate = true;
         state.statusDelete = 'idle';
+        state.needUpdate = true;
       })
       .addCase(deleteFile.rejected, (state) => {
         state.statusDelete = 'failed';

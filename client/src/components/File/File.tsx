@@ -24,12 +24,12 @@ export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} 
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
 
-  const downloadClickHandler = () => {
-    dispatch(downloadFile(file));
+  const downloadClickHandler = async () => {
+    await dispatch(downloadFile(file)).unwrap();
   };
-  const deleteClickHandler = (e: MouseEvent) => {
+  const deleteClickHandler = async (e: MouseEvent) => {
     e.stopPropagation();
-    dispatch(deleteFile(file));
+    await dispatch(deleteFile(file)).unwrap();
   };
   return (
     <div

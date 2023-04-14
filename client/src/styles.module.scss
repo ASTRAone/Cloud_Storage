@@ -1,22 +1,22 @@
 // @import './utility/colors.scss';
 
-// body {
-//   padding: 0;
-//   margin: 0;
-//   box-sizing: border-box;
-//   background-color: $background-color;
-//   height: 100%;
-// }
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  // background-color: $background-color;
+  height: 100%;
+}
 
-// h1, h2, h3, h3, h5, h6, p {
-//   margin: 0;
-// }
+h1, h2, h3, h3, h5, h6, p {
+  margin: 0;
+}
 
-// ul, li {
-//   padding: 0;
-//   margin: 0;
-//   list-style: none;
-// }
+ul, li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
 
 // .container {
 //   // display: flex;
@@ -26,3 +26,16 @@
 // .app {
 //   // height: 100vh;
 // }
+::-webkit-scrollbar {
+  width: 2px;               /* ширина всей полосы прокрутки */
+}
+
+::-webkit-scrollbar-track {
+  background: #F3F3F3;        /* цвет зоны отслеживания */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #3F82B7;    /* цвет бегунка */
+  // border-radius: 20px;       /* округлось бегунка */
+  border: 2px solid #3F82B7;  /* отступ вокруг бегунка */
+}
