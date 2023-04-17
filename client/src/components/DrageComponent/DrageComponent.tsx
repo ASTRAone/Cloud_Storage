@@ -1,4 +1,4 @@
-import React, { DragEvent } from 'react';
+import React, { DragEvent, useState } from 'react';
 
 import { useStyles } from '@hooks/useStyles';
 import { usePopupControls } from '@hooks/usePopupControls';
@@ -13,6 +13,7 @@ import styles from './styles.module.scss';
 export const DrageComponent: React.FC = () => {
   const cx = useStyles(styles);
   const { isOpened, openPopup, closePopup } = usePopupControls();
+  const [uploadsFiles, setUploadsFiles] = useState<any>();
   // const dispatch = useAppDispatch();
 
   const handleDragEnter = (event: DragEvent<HTMLDivElement>) => {
@@ -28,10 +29,9 @@ export const DrageComponent: React.FC = () => {
   const handleDrop = async (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.stopPropagation();
+    const files = [...(event.dataTransfer.files as any)];
+    setUploadsFiles(files);
     openPopup();
-    console.log('111');
-
-    // const files = [...(event.dataTransfer.files as any)];
     // try {
     //   files.forEach((file) => {
     //     dispatch(uploadFile({ file }));
@@ -56,10 +56,13 @@ export const DrageComponent: React.FC = () => {
         />
         <p className={cx('text')}>drag files to upload</p>
       </div>
-      <ModalUpload
-        isOpen={isOpened}
-        closeModal={closePopup}
-      />
+      {isOpened && (
+        <ModalUpload
+          isOpen={isOpened}
+          closeModal={closePopup}
+          uploadsFiles={uploadsFiles}
+        />
+      )}
     </>
   );
 };

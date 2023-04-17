@@ -38,6 +38,11 @@ class FileApi {
     const url = 'recently_files';
     return $api.get<FileResponseRecently[]>(url);
   }
+
+  static fetchFoldersPaths() {
+    const url = 'paths_files';
+    return $api.get<any[]>(url);
+  }
 }
 
 export { FileApi };

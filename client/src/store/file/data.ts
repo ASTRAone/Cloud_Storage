@@ -17,6 +17,7 @@ type State = {
   file: FileResponse[] | [];
   dirStack: any[];
   dataRecently: FileResponseRecently[];
+  foldersPaths: any[];
   needUpdate: boolean;
   currentDir?: string;
   status: RequestStatus;
@@ -26,6 +27,7 @@ type State = {
   statusDelete: RequestStatus;
   statusViewFiles: RequestStatus;
   statusFetchRecently: RequestStatus;
+  statusFoldersPath: RequestStatus;
   view: 'list' | 'plate';
 };
 
@@ -33,6 +35,7 @@ const initialState: State = {
   file: [],
   dirStack: [],
   dataRecently: [],
+  foldersPaths: [],
   needUpdate: false,
   currentDir: '',
   status: 'idle',
@@ -41,6 +44,7 @@ const initialState: State = {
   statusDownload: 'idle',
   statusViewFiles: 'idle',
   statusDelete: 'idle',
+  statusFoldersPath: 'idle',
   statusFetchRecently: 'idle',
   view: 'list',
 };
@@ -136,6 +140,18 @@ const fetchRecentlyUploaded = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await FileApi.fetchRecentlyUploaded();
+      return response.data;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
+const fetchFoldersPath = createAsyncThunk(
+  'file/fetchFoldersPath',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await FileApi.fetchFoldersPaths();
       return response.data;
     } catch (e) {
       return rejectWithValue(e);
@@ -239,6 +255,17 @@ const fileDataSlice = createSlice({
       })
       .addCase(fetchRecentlyUploaded.rejected, (state) => {
         state.statusFetchRecently = 'failed';
+      })
+
+      .addCase(fetchFoldersPath.pending, (state) => {
+        state.statusFoldersPath = 'loading';
+      })
+      .addCase(fetchFoldersPath.fulfilled, (state, action) => {
+        state.statusFoldersPath = 'idle';
+        state.foldersPaths = action.payload;
+      })
+      .addCase(fetchFoldersPath.rejected, (state) => {
+        state.statusFoldersPath = 'failed';
       });
   },
 });
@@ -252,6 +279,7 @@ const getStackDir = createSelector(selectSelf, ({ dirStack }) => dirStack);
 const getStatus = createSelector(selectSelf, statusFlags);
 const setViewFolders = createSelector(selectSelf, ({ ...view }) => view);
 const getRecentlyUploaded = createSelector(selectSelf, ({ ...dataRecently }) => dataRecently);
+const getFoldersPath = createSelector(selectSelf, ({ ...foldersPath }) => foldersPath);
 
 export const { selectedDir, pushToStack, dropState, popToStack, viewFolder } =
   fileDataSlice.actions;
@@ -270,5 +298,7 @@ export {
   setViewFolders,
   fetchRecentlyUploaded,
   getRecentlyUploaded,
+  fetchFoldersPath,
+  getFoldersPath,
 };
 export default fileDataSlice.reducer;
