@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { RequestStatus, UUID } from '@src/utility/common';
+import { BreadCrumbStack, RequestStatus, UUID } from '@src/utility/common';
 
 import {
   FileCreateDTO,
@@ -15,11 +15,11 @@ import { RootState } from '@store/root';
 
 type State = {
   file: FileResponse[] | [];
-  dirStack: any[];
   dataRecently: FileResponseRecently[];
   foldersPaths: any[];
   needUpdate: boolean;
   currentDir?: string;
+  breadCrumbsStack: BreadCrumbStack[];
   status: RequestStatus;
   statusCreate: RequestStatus;
   statusUpload: RequestStatus;
@@ -33,11 +33,11 @@ type State = {
 
 const initialState: State = {
   file: [],
-  dirStack: [],
   dataRecently: [],
   foldersPaths: [],
   needUpdate: false,
   currentDir: '',
+  breadCrumbsStack: [],
   status: 'idle',
   statusCreate: 'idle',
   statusUpload: 'idle',
@@ -168,14 +168,23 @@ const fileDataSlice = createSlice({
     selectedDir: (state, action: PayloadAction<string | undefined>) => {
       state.currentDir = action.payload;
     },
-    pushToStack: (state, action: PayloadAction<any>) => {
-      state.dirStack = [...state.dirStack, action.payload];
-    },
-    popToStack: (state, action: PayloadAction<any>) => {
-      state.dirStack = state.dirStack.filter((item) => item !== action.payload);
-    },
     viewFolder: (state, action: PayloadAction<'list' | 'plate'>) => {
       state.view = action.payload;
+    },
+    pushBreadcrumbsStack: (state, action: PayloadAction<BreadCrumbStack>) => {
+      state.breadCrumbsStack = [...state.breadCrumbsStack, action.payload];
+    },
+    popBreadcrumbsStack: (state, action: PayloadAction<any>) => {
+      const spliced = [...state.breadCrumbsStack].splice(
+        action.payload.index + 1,
+        state.breadCrumbsStack.length - action.payload.index,
+      );
+      state.breadCrumbsStack =
+        [...state.breadCrumbsStack].filter((x) => spliced.indexOf(x) === -1) || [];
+    },
+    clearBeadcrumbsStack: (state) => {
+      state.breadCrumbsStack = [];
+      state.currentDir = '';
     },
   },
   extraReducers: (builder) => {
@@ -184,9 +193,9 @@ const fileDataSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchFiles.fulfilled, (state, action) => {
-        state.needUpdate = false;
         state.file = action.payload;
         state.status = 'idle';
+        state.needUpdate = false;
       })
       .addCase(fetchFiles.rejected, (state) => {
         state.status = 'failed';
@@ -219,6 +228,7 @@ const fileDataSlice = createSlice({
       .addCase(uploadFile.fulfilled, (state) => {
         state.statusUpload = 'idle';
         state.needUpdate = true;
+        state.needUpdate = true;
       })
       .addCase(uploadFile.rejected, (state) => {
         state.statusUpload = 'failed';
@@ -235,13 +245,16 @@ const fileDataSlice = createSlice({
       })
 
       .addCase(deleteFile.pending, (state) => {
+        state.needUpdate = false;
         state.statusDelete = 'loading';
       })
       .addCase(deleteFile.fulfilled, (state) => {
+        state.needUpdate = true;
         state.statusDelete = 'idle';
         state.needUpdate = true;
       })
       .addCase(deleteFile.rejected, (state) => {
+        state.needUpdate = false;
         state.statusDelete = 'failed';
       })
 
@@ -275,13 +288,13 @@ const selectSelf = (state: RootState) => state.file.data;
 const getFilesData = createSelector(selectSelf, ({ ...fileData }) => fileData);
 const statusCreate = createSelector(selectSelf, ({ statusCreate }) => statusCreate);
 const getCurrentDir = createSelector(selectSelf, ({ currentDir }) => currentDir);
-const getStackDir = createSelector(selectSelf, ({ dirStack }) => dirStack);
 const getStatus = createSelector(selectSelf, statusFlags);
 const setViewFolders = createSelector(selectSelf, ({ ...view }) => view);
 const getRecentlyUploaded = createSelector(selectSelf, ({ ...dataRecently }) => dataRecently);
 const getFoldersPath = createSelector(selectSelf, ({ ...foldersPath }) => foldersPath);
 
-export const { selectedDir, pushToStack, dropState, popToStack, viewFolder } =
+// eslint-disable-next-line prettier/prettier
+export const { selectedDir, popBreadcrumbsStack, clearBeadcrumbsStack, pushBreadcrumbsStack, dropState, viewFolder } =
   fileDataSlice.actions;
 
 export {
@@ -291,7 +304,6 @@ export {
   getCurrentDir,
   statusCreate,
   createFile,
-  getStackDir,
   uploadFile,
   downloadFile,
   deleteFile,

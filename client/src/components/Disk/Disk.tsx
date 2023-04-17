@@ -7,15 +7,17 @@ import { Button } from '@components/Button';
 import { Input } from '@components/Input';
 import { FileList } from '@components/FileList';
 import { Icon } from '@components/icon';
+import { Breadcrumbs } from '@components/Breadcrumbs';
 
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import {
   fetchFiles,
   getFilesData,
-  popToStack,
   selectedDir,
   viewFolder,
   uploadFile,
+  popBreadcrumbsStack,
+  clearBeadcrumbsStack,
 } from '@store/file/data';
 
 import styles from './styles.module.scss';
@@ -24,24 +26,31 @@ import { ModalCreateFile } from './components';
 export const Disk: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
-  const { currentDir, dirStack, needUpdate } = useAppSelector(getFilesData);
+  const { currentDir, breadCrumbsStack, needUpdate } = useAppSelector(getFilesData);
   const { isOpened, openPopup, closePopup } = usePopupControls();
 
   useEffect(() => {
     dispatch(fetchFiles());
+    dispatch(clearBeadcrumbsStack());
   }, []);
 
   useEffect(() => {
-    if (currentDir || needUpdate) {
+    dispatch(fetchFiles(currentDir));
+  }, [currentDir]);
+
+  useEffect(() => {
+    if (needUpdate) {
       dispatch(fetchFiles(currentDir));
     }
-  }, [needUpdate, currentDir]);
+  }, [needUpdate]);
 
-  const goBack = () => {
-    const newStackDir = [...dirStack];
-    const backDirId = newStackDir.pop();
-    dispatch(popToStack(backDirId));
-    dispatch(selectedDir(newStackDir.pop()));
+  const handlerBreadcrumbs = (dirId: string, index: number) => {
+    dispatch(selectedDir(dirId));
+    if (index == -1) {
+      dispatch(clearBeadcrumbsStack());
+    } else {
+      dispatch(popBreadcrumbsStack({ dirId, index }));
+    }
   };
 
   const submitUploadFile = async (data: any) => {
@@ -56,13 +65,6 @@ export const Disk: React.FC = () => {
       <div className={cx('container')}>
         <div className={cx('btns')}>
           <div className={cx('btns_left')}>
-            {!!dirStack.length && (
-              <Button
-                className={cx('back')}
-                text="Back"
-                onClick={goBack}
-              />
-            )}
             <Button
               variant="outline"
               onClick={openPopup}
@@ -100,6 +102,10 @@ export const Disk: React.FC = () => {
             />
           </div>
         </div>
+        <Breadcrumbs
+          breadcrumbsPath={breadCrumbsStack ?? []}
+          navDir={handlerBreadcrumbs}
+        />
         <FileList />
       </div>
       {isOpened && (

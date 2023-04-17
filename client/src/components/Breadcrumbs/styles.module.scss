@@ -1,0 +1,23 @@
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+@import '@assets/styles/variables/colors';
+
+.container {
+  display: flex;
+  padding-top: 15px;
+  width: 100%;
+  height: 40px;
+
+  & .arrow-forward {
+    margin: 0 10px;
+  }
+
+  & .btn {
+    cursor: pointer;
+  }
+
+  & .btn:hover {
+    text-decoration: underline;
+    color: $light-sweet-100;
+  }
+}

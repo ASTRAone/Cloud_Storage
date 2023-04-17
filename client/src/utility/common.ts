@@ -14,3 +14,8 @@ export type IconObject = {
   icon: JSX.Element;
   align: 'left' | 'right';
 };
+
+export interface BreadCrumbStack {
+  name: string;
+  dirId: string;
+}
