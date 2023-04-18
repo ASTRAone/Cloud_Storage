@@ -1,0 +1,77 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  & .content {
+    & .title {
+      @include text();
+      @include heading-120();
+      color: $black;
+      margin-bottom: 13px;
+
+      & .span {
+        color: #e65a44;
+      }
+    }
+    & .sub-title {
+      @include text();
+      @include paragraph-30();
+      color: $black;
+      margin-bottom: 25px;
+      text-align: center
+    }
+
+    & .text {
+      @include text();
+      @include paragraph-23();
+      color: $black;
+      margin-bottom: 40px;
+      max-width: 582px;
+      margin-left: auto;
+      margin-right: auto
+    }
+
+    & .btn {
+      @include text();
+      @include paragraph-16();
+      color: $white-80;
+      width: 212px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #e65a44;
+      border: 1px solid $dark-blue-100;
+      border-radius: 7px;
+      margin-left: 86px;
+    }
+  }
+}
+
+.man-binocul {
+  position: absolute;
+  width: 282px;
+  height: 282px;
+  background: url('../../assets/images/man-with-binocul.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  left: 144px;
+  bottom: 37px;
+}
+
+.explosion {
+  position: absolute;
+  width: 512px;
+  height: 512px;
+  background: url('../../assets/images/explosion.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  right: 293px;
+  bottom: 30px;
+}

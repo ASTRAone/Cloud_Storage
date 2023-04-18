@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 
-import { routes } from '@src/routes';
-import { LOGIN_ROUTE } from '@src/utility/contants';
+import { NOT_FOUND_ROUTE } from '@utils/contants';
 
-// TODO при не существующей странице выводить 404
+import { routes } from '@src/routes';
+
 export const AppRouter: React.FC = () => {
   return (
     <Routes>
@@ -17,7 +17,7 @@ export const AppRouter: React.FC = () => {
       ))}
       <Route
         path="*"
-        element={<Navigate to={LOGIN_ROUTE} />}
+        element={<Navigate to={NOT_FOUND_ROUTE} />}
       />
     </Routes>
   );

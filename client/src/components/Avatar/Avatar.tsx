@@ -37,6 +37,7 @@ export const Avatar: React.FC<Props> = ({ src }) => {
     e.stopPropagation();
     try {
       localStorage.removeItem(AUTH_HEADER);
+      localStorage.removeItem('activeTabLC');
       await dispatch(userLogout()).unwrap();
     } catch (error) {
       console.log(error);
