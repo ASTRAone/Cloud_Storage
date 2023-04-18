@@ -6,6 +6,7 @@
   @include button();
   text-align: center;
   min-width: 145px;
+  width: fit-content;
 
   &.full {
     width: 100%;

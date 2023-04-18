@@ -1,0 +1,184 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.select {
+  .control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 37px;
+    transition: all 100ms;
+
+    // background-color: $white;
+    // border-color: colors.$light-gray-40;
+    border-radius: 6px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: none;
+
+    &:hover {
+      // background-color: colors.$light-gray-10;
+      // border-color: colors.$light-gray-40;
+    }
+
+    &.menuIsOpen {
+      // background-color: colors.$light-gray-20;
+      // border-color: colors.$light-gray-40;
+    }
+
+    &.isError {
+      // border-color: colors.$red-60;
+    }
+
+    &.lg {
+      height: 10rem;
+      padding: calc(2rem - 1px) calc(2rem - 1px) calc(2rem - 1px) calc(4rem - 1px);
+    }
+    &.md {
+      height: 8rem;
+      padding: calc(1rem - 1px) calc(1rem - 1px) calc(1rem - 1px) calc(3rem - 1px);
+    }
+    &.sm {
+      height: 6rem;
+      padding: 0 0 0 calc(2rem - 1px);
+    }
+
+    &.isDisabled {
+      // background: colors.$light-gray-10;
+      // border-color: colors.$light-gray-20;
+    }
+
+    &.withoutBorder {
+      cursor: pointer;
+      border-color: transparent;
+    }
+
+    overflow: hidden;
+  }
+
+  .valueContainer {
+    @include paragraph-15();
+    padding: 0 19px;
+    min-height: 37px;
+    flex-wrap: nowrap;
+    color: $primary-800;
+    margin: 0;
+    background-color: transparent!important;
+
+    &.sm {
+      height: calc(24px - 2px);
+    }
+
+    &.isDisabled {
+      opacity: 0.9;
+    }
+  }
+
+  .noOptionsText {
+    padding: 0;
+    min-width: 15rem;
+    transform: translate(-8px);
+  }
+
+  .icon {
+    // color: colors.$gray-90;
+    margin-right: 4px;
+    z-index: 1;
+    flex-shrink: 0;
+
+    &.loader {
+      // color: colors.$gray-60;
+    }
+
+    &.isDisabled {
+      opacity: 0.4;
+    }
+  }
+}
+
+.optionContainer {
+  background: none!important;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  .option {
+    @include paragraph-15();
+    cursor: pointer;
+    color: $primary-800;
+    border-radius: 7px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.2s;
+
+    &:active,
+    &.isFocused {
+      background-color: $dark-gray-20;
+    }
+
+    &.isSelected {
+      background-color: $light-blue-40;
+    }
+  }
+
+  .optionWithIcon {
+    display: flex;
+    align-items: center;
+    .icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+    }
+  }
+}
+
+.caption {
+  @include text();
+  @include paragraph-14();
+  color: $dark-blue-100;
+  margin-bottom: 4px;
+
+  &.isDisabled {
+    opacity: 0.4;
+  }
+}
+
+.captionTooltip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+}
+
+.error {
+  // @include common.filed-error-message;
+  margin-top: 4px;
+}
+
+.hover {
+  position: absolute;
+  right: 0;
+  width: 24px;
+  height: 100%;
+  // background-color: colors.$light-gray-10;
+  // border-left: 1px solid colors.$light-gray-40;
+}
+
+.containerOptions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.submitContainer {
+  display: flex;
+  padding: 8px 8px 0;
+  // border-top: 1px solid colors.$light-gray-30;
+  justify-content: flex-end;
+}
+
+.textShorterConainer {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

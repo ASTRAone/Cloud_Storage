@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { ReactNode, useMemo, useState } from 'react';
 import { EventType } from 'reactjs-popup/dist/types';
 
 import { useStyles } from '@hooks/useStyles';
@@ -11,7 +11,7 @@ type Props = {
   className?: string;
   tooltip?: boolean;
   clickEvent?: boolean;
-  children?: JSX.Element;
+  children?: ReactNode;
 };
 
 const TT_EVENTS: EventType[] = ['focus', 'hover'];

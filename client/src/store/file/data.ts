@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { BreadCrumbStack, RequestStatus, UUID } from '@src/utility/common';
+import { BreadCrumbStack, mapToOption, RequestStatus, UUID } from '@src/utility/common';
 
 import {
   FileCreateDTO,
@@ -10,12 +10,15 @@ import {
 } from '@api/FileApi/models';
 import { FileApi } from '@api/FileApi';
 
+import { SelectOption } from '@components/Select/Select';
+
 import { statusFlags } from '@store/selectors';
 import { RootState } from '@store/root';
 
 type State = {
   file: FileResponse[] | [];
   dataRecently: FileResponseRecently[];
+  foldersPaths: SelectOption<string>[];
   needUpdate: boolean;
   currentDir?: string;
   breadCrumbsStack: BreadCrumbStack[];
@@ -26,12 +29,14 @@ type State = {
   statusDelete: RequestStatus;
   statusViewFiles: RequestStatus;
   statusFetchRecently: RequestStatus;
+  statusFoldersPath: RequestStatus;
   view: 'list' | 'plate';
 };
 
 const initialState: State = {
   file: [],
   dataRecently: [],
+  foldersPaths: [],
   needUpdate: false,
   currentDir: '',
   breadCrumbsStack: [],
@@ -41,6 +46,7 @@ const initialState: State = {
   statusDownload: 'idle',
   statusViewFiles: 'idle',
   statusDelete: 'idle',
+  statusFoldersPath: 'idle',
   statusFetchRecently: 'idle',
   view: 'list',
 };
@@ -143,6 +149,18 @@ const fetchRecentlyUploaded = createAsyncThunk(
   },
 );
 
+const fetchFoldersPath = createAsyncThunk(
+  'file/fetchFoldersPath',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await FileApi.fetchFoldersPaths();
+      return response.data;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
 const fileDataSlice = createSlice({
   name: 'fileDataSlice',
   initialState,
@@ -174,7 +192,6 @@ const fileDataSlice = createSlice({
     builder
       .addCase(fetchFiles.pending, (state) => {
         state.status = 'loading';
-        state.needUpdate = true;
       })
       .addCase(fetchFiles.fulfilled, (state, action) => {
         state.file = action.payload;
@@ -183,13 +200,13 @@ const fileDataSlice = createSlice({
       })
       .addCase(fetchFiles.rejected, (state) => {
         state.status = 'failed';
-        state.needUpdate = false;
       })
       .addCase(viewFiles.pending, (state) => {
         state.statusViewFiles = 'loading';
       })
       .addCase(viewFiles.fulfilled, (state, action) => {
         state.statusViewFiles = 'idle';
+        state.needUpdate = true;
         state.view = action.payload;
       })
       .addCase(viewFiles.rejected, (state) => {
@@ -197,15 +214,13 @@ const fileDataSlice = createSlice({
       })
       .addCase(createFile.pending, (state) => {
         state.statusCreate = 'loading';
-        state.needUpdate = true;
       })
       .addCase(createFile.fulfilled, (state) => {
         state.statusCreate = 'idle';
-        state.needUpdate = false;
+        state.needUpdate = true;
       })
       .addCase(createFile.rejected, (state) => {
         state.statusCreate = 'failed';
-        state.needUpdate = false;
       })
 
       .addCase(uploadFile.pending, (state) => {
@@ -214,10 +229,10 @@ const fileDataSlice = createSlice({
       .addCase(uploadFile.fulfilled, (state) => {
         state.statusUpload = 'idle';
         state.needUpdate = true;
+        state.needUpdate = true;
       })
       .addCase(uploadFile.rejected, (state) => {
         state.statusUpload = 'failed';
-        state.needUpdate = false;
       })
 
       .addCase(downloadFile.pending, (state) => {
@@ -237,6 +252,7 @@ const fileDataSlice = createSlice({
       .addCase(deleteFile.fulfilled, (state) => {
         state.needUpdate = true;
         state.statusDelete = 'idle';
+        state.needUpdate = true;
       })
       .addCase(deleteFile.rejected, (state) => {
         state.needUpdate = false;
@@ -244,17 +260,26 @@ const fileDataSlice = createSlice({
       })
 
       .addCase(fetchRecentlyUploaded.pending, (state) => {
-        state.needUpdate = true;
         state.statusFetchRecently = 'loading';
       })
       .addCase(fetchRecentlyUploaded.fulfilled, (state, action) => {
         state.statusFetchRecently = 'idle';
-        state.needUpdate = false;
+        state.needUpdate = true;
         state.dataRecently = action.payload;
       })
       .addCase(fetchRecentlyUploaded.rejected, (state) => {
         state.statusFetchRecently = 'failed';
-        state.needUpdate = false;
+      })
+
+      .addCase(fetchFoldersPath.pending, (state) => {
+        state.statusFoldersPath = 'loading';
+      })
+      .addCase(fetchFoldersPath.fulfilled, (state, action) => {
+        state.statusFoldersPath = 'idle';
+        state.foldersPaths = action.payload.map(({ path, _id }) => mapToOption(_id, path));
+      })
+      .addCase(fetchFoldersPath.rejected, (state) => {
+        state.statusFoldersPath = 'failed';
       });
   },
 });
@@ -267,6 +292,7 @@ const getCurrentDir = createSelector(selectSelf, ({ currentDir }) => currentDir)
 const getStatus = createSelector(selectSelf, statusFlags);
 const setViewFolders = createSelector(selectSelf, ({ ...view }) => view);
 const getRecentlyUploaded = createSelector(selectSelf, ({ ...dataRecently }) => dataRecently);
+const getFoldersPath = createSelector(selectSelf, ({ ...foldersPath }) => foldersPath);
 
 // eslint-disable-next-line prettier/prettier
 export const { selectedDir, popBreadcrumbsStack, clearBeadcrumbsStack, pushBreadcrumbsStack, dropState, viewFolder } =
@@ -285,5 +311,7 @@ export {
   setViewFolders,
   fetchRecentlyUploaded,
   getRecentlyUploaded,
+  fetchFoldersPath,
+  getFoldersPath,
 };
 export default fileDataSlice.reducer;

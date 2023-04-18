@@ -37,4 +37,16 @@ type FileResponseRecently = {
   _id: UUID;
 };
 
-export type { FileResponse, FileCreateDTO, FileUploadDTO, FileDownloadDTO, FileResponseRecently };
+type FilesPathsDTO = {
+  path: string;
+  _id: UUID;
+};
+
+export type {
+  FileResponse,
+  FileCreateDTO,
+  FileUploadDTO,
+  FileDownloadDTO,
+  FileResponseRecently,
+  FilesPathsDTO,
+};

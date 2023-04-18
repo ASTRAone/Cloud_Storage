@@ -1,0 +1,28 @@
+@import '@assets/styles/variables/colors';
+
+:global {
+  .modal-content {
+    margin-top: 154px!important;
+    overflow: overlay;
+  }
+}
+
+.modal {
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid $primary-500;
+  border-radius: 20px;
+  padding: 29px 36px 19px;
+}
+
+.sm {
+  width: 400px;
+}
+
+.md {
+  width: 160rem;
+}
+
+.lg {
+  width: 250rem;
+}

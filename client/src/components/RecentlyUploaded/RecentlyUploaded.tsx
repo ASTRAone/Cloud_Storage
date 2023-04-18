@@ -15,6 +15,10 @@ export const RecentlyUploaded: React.FC = () => {
   const { dataRecently, statusFetchRecently, needUpdate } = useAppSelector(getRecentlyUploaded);
 
   useEffect(() => {
+    dispath(fetchRecentlyUploaded());
+  }, []);
+
+  useEffect(() => {
     needUpdate && dispath(fetchRecentlyUploaded());
   }, [needUpdate]);
 

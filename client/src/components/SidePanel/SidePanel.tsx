@@ -33,7 +33,7 @@ export const SidePanel: React.FC = () => {
   const cx = useStyles(styles);
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<LinkTypes>(
-    (localStorage.getItem('tab') as LinkTypes) || menu[0].link,
+    (localStorage.getItem('activeTabLC') as LinkTypes) || menu[0].link,
   );
   const [open, setOpen] = useState<boolean>(
     (JSON.parse(localStorage.getItem('openPanel') as string) as boolean) || false,
@@ -46,7 +46,7 @@ export const SidePanel: React.FC = () => {
   };
 
   const handleChangeActiveTab = (tab: LinkTypes) => {
-    localStorage.setItem('tab', tab);
+    localStorage.setItem('activeTabLC', tab);
     setActiveTab(tab);
   };
 
