@@ -7,10 +7,12 @@ import {
   PROFILE_USER_ROUTE,
   ALL_FILES_ROUTE,
   START_ROUTE,
+  NOT_FOUND_ROUTE,
 } from './utility/contants';
 import { ProfileUserPage } from './pages/ProfileUserPage';
 import { StartPage } from './pages/PageStart';
 import { FilesPage } from './pages/FilesPage';
+import { PageNotFound } from './pages/PageNotFound';
 
 export const routes = [
   {
@@ -36,5 +38,9 @@ export const routes = [
   {
     path: START_ROUTE,
     Element: StartPage,
+  },
+  {
+    path: NOT_FOUND_ROUTE,
+    Element: PageNotFound,
   },
 ];

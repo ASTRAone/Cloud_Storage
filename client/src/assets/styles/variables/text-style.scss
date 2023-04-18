@@ -2,6 +2,14 @@
 @import './font-family';
 @import './colors';
 
+@mixin heading-120 {
+  font-family: $itim;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 120px;
+  line-height: 144px;
+}
+
 @mixin heading-46 {
   font-family: $itim;
   font-style: normal;
@@ -41,6 +49,14 @@
   font-weight: 700;
   font-size: 33px;
   line-height: 40px;
+}
+
+@mixin paragraph-30 {
+  font-family: $DMSans;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 36px;
 }
 
 @mixin paragraph-29 {
