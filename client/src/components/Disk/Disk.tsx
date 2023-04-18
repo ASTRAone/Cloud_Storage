@@ -46,7 +46,7 @@ export const Disk: React.FC = () => {
 
   const handlerBreadcrumbs = (dirId: string, index: number) => {
     dispatch(selectedDir(dirId));
-    if (index == -1) {
+    if (index === -1) {
       dispatch(clearBeadcrumbsStack());
     } else {
       dispatch(popBreadcrumbsStack({ dirId, index }));

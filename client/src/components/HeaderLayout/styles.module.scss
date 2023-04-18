@@ -14,6 +14,10 @@
     display: flex;
     flex-basis: 50%;
     padding: 0 50px;
+
+    & .select-filter {
+      width: 217px;
+    }
   }
 
   & .containerLogo {

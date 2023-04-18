@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { BreadCrumbStack, RequestStatus, UUID } from '@src/utility/common';
+import { BreadCrumbStack, mapToOption, RequestStatus, UUID } from '@src/utility/common';
 
 import {
   FileCreateDTO,
@@ -10,13 +10,15 @@ import {
 } from '@api/FileApi/models';
 import { FileApi } from '@api/FileApi';
 
+import { SelectOption } from '@components/Select/Select';
+
 import { statusFlags } from '@store/selectors';
 import { RootState } from '@store/root';
 
 type State = {
   file: FileResponse[] | [];
   dataRecently: FileResponseRecently[];
-  foldersPaths: any[];
+  foldersPaths: SelectOption<string>[];
   needUpdate: boolean;
   currentDir?: string;
   breadCrumbsStack: BreadCrumbStack[];
@@ -159,7 +161,6 @@ const fetchFoldersPath = createAsyncThunk(
   },
 );
 
-// TODO переделать общение с папкой
 const fileDataSlice = createSlice({
   name: 'fileDataSlice',
   initialState,
@@ -275,7 +276,7 @@ const fileDataSlice = createSlice({
       })
       .addCase(fetchFoldersPath.fulfilled, (state, action) => {
         state.statusFoldersPath = 'idle';
-        state.foldersPaths = action.payload;
+        state.foldersPaths = action.payload.map(({ path, _id }) => mapToOption(_id, path));
       })
       .addCase(fetchFoldersPath.rejected, (state) => {
         state.statusFoldersPath = 'failed';

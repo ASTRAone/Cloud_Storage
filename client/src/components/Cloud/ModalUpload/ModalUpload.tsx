@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SelectComponents } from 'react-select/dist/declarations/src/components';
 import { GroupBase } from 'react-select';
 
@@ -11,7 +11,7 @@ import { Select } from '@components/Select';
 import { ValueContainer } from '@components/Select/ValueContainer';
 
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { fetchFoldersPath, getFoldersPath } from '@store/file/data';
+import { fetchFoldersPath, getFoldersPath, uploadFile } from '@store/file/data';
 
 import styles from './styles.module.scss';
 
@@ -21,20 +21,16 @@ type Props = {
   uploadsFiles: any[];
 };
 
-const DEFAULT_VALUE = [
-  {
-    label: '/',
-    value: '/',
-  },
-];
-
+const DEFAULT_VALUE = {
+  label: '/',
+  value: '',
+};
 export const ModalUpload: React.FC<Props> = ({ isOpen, closeModal, uploadsFiles }) => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
 
-  const { foldersPaths } = useAppSelector(getFoldersPath);
-
-  console.log('foldersPaths', foldersPaths);
+  const { foldersPaths, statusFoldersPath, statusUpload } = useAppSelector(getFoldersPath);
+  const [selectValue, setSelectValue] = useState(DEFAULT_VALUE);
 
   useEffect(() => () => closeModal(), []);
 
@@ -42,8 +38,20 @@ export const ModalUpload: React.FC<Props> = ({ isOpen, closeModal, uploadsFiles 
     dispatch(fetchFoldersPath());
   }, []);
 
-  const submit = async () => {
-    console.log('submit', uploadsFiles);
+  const submit = () => {
+    const value = selectValue.value;
+    try {
+      uploadsFiles.forEach(async (file) => {
+        await dispatch(
+          uploadFile({
+            parent: value,
+            file,
+          }),
+        ).unwrap();
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const innerComponent: Partial<SelectComponents<unknown, boolean, GroupBase<unknown>>> = {
@@ -68,17 +76,13 @@ export const ModalUpload: React.FC<Props> = ({ isOpen, closeModal, uploadsFiles 
       <div className={cx('container')}>
         <p className={cx('title')}>Choose a path for loading:</p>
         <Select
-          options={[
-            ...DEFAULT_VALUE,
-            {
-              label: '/first',
-              value: 'first',
-            },
-          ]}
+          options={[DEFAULT_VALUE, ...foldersPaths]}
+          onChange={setSelectValue}
+          value={selectValue}
           components={innerComponent}
           isSearchable={false}
           maxMenuHeight={115}
-          defaultValue={DEFAULT_VALUE}
+          isLoading={statusFoldersPath === 'loading'}
         />
         <div className={cx('loaded-container')}>
           <p className={cx('title')}>Loaded files:</p>
@@ -105,6 +109,7 @@ export const ModalUpload: React.FC<Props> = ({ isOpen, closeModal, uploadsFiles 
             isUpperCase
             color="light-blue"
             onClick={submit}
+            isLoading={statusUpload === 'loading'}
           />
         </div>
         <Icon

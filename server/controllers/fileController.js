@@ -139,8 +139,11 @@ class FileController {
   }
 
   async uploadAvatar(req, res) {
+    console.log('req', req) 
     try {
       const file = req.files.file;
+      
+      
       const user = await User.findById(req.user.id);
       const fileType = file.name.split(".").pop();
       const avatarName = `${uuid.v4()}.${fileType}`;

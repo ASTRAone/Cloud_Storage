@@ -10,8 +10,9 @@ import { Icon } from '@components/icon';
 import { ButtonLink } from '@components/ButtonLink';
 import { MenuProfile } from '@components/MenuProfile';
 import { InputSearch } from '@components/InputSearch';
-import { InputFilter } from '@components/InputFilter';
+// import { InputFilter } from '@components/InputFilter';
 import { PopupLocalization } from '@components/PopupLocalization';
+import { Select } from '@components/Select';
 
 import CloudLogo from '@assets/images/logo.png';
 
@@ -86,21 +87,13 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
                 },
               ]}
             />
-            <InputFilter
-              full
-              header
-              placeholder={t('headerPanel.placeholder.filter')}
-              actions={[
-                {
-                  icon: (
-                    <Icon
-                      type="arrowDown"
-                      className={cx('icon')}
-                    />
-                  ),
-                  align: 'right',
-                },
-              ]}
+            <Select
+              options={[]}
+              isSearchable={false}
+              maxMenuHeight={115}
+              className={cx('select-filter')}
+              heightControl={47}
+              backgroundControl="white"
             />
           </div>
           <div className={cx('containerOptions')}>

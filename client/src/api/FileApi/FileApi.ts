@@ -1,7 +1,7 @@
 import { $api } from '@src/http/http';
 
 import { IRestService, RestService } from '../../services/RestService';
-import { FileCreateDTO, FileResponse, FileResponseRecently } from './models';
+import { FileCreateDTO, FileResponse, FileResponseRecently, FilesPathsDTO } from './models';
 class FileApi {
   static restService: IRestService = RestService.getInstance();
 
@@ -41,7 +41,7 @@ class FileApi {
 
   static fetchFoldersPaths() {
     const url = 'paths_files';
-    return $api.get<any[]>(url);
+    return $api.get<FilesPathsDTO[]>(url);
   }
 }
 

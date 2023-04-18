@@ -4,6 +4,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import { routes } from '@src/routes';
 import { LOGIN_ROUTE } from '@src/utility/contants';
 
+// TODO при не существующей странице выводить 404
 export const AppRouter: React.FC = () => {
   return (
     <Routes>

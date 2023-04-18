@@ -18,7 +18,7 @@ export const Breadcrumbs: React.FC<Props> = ({ breadcrumbsPath, navDir }) => {
     <div className={cx('container')}>
       {breadcrumbsPath?.map(({ dirId, name }, index) => (
         <div key={index}>
-          {index == 0 ? (
+          {index === 0 ? (
             <span
               className={cx('btn')}
               onClick={() => navDir('', -1)}

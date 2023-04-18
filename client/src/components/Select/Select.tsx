@@ -46,6 +46,8 @@ type CustomProps<T> = {
   menuStyles?: CSSProperties;
   portal?: boolean | HTMLElement;
   maxMenuHeight?: number;
+  backgroundControl?: string;
+  heightControl?: number;
 };
 
 type Props<T = string> = CustomProps<T> & Omit<SelectProps, keyof CustomProps<T>>;
@@ -81,6 +83,8 @@ const SelectInner = <T,>(
     onContainerClick,
     options,
     maxMenuHeight,
+    backgroundControl,
+    heightControl,
     ...restProps
   }: Props<T>,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -96,7 +100,8 @@ const SelectInner = <T,>(
         ...baseStyles,
         borderColor: isError ? 'red' : '#3F82B7',
         borderRadius: 13,
-        backgroundColor: 'transparent',
+        backgroundColor: backgroundControl ?? 'transparent',
+        height: heightControl ?? 'auto',
       }),
       singleValue: (baseStyle) => ({
         ...baseStyle,

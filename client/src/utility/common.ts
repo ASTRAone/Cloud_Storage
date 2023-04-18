@@ -1,5 +1,7 @@
 import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form';
 
+import { SelectOption } from '@components/Select/Select';
+
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
 export type RequestStatus = 'idle' | 'loading' | 'failed';
 export type UUID = string;
@@ -19,3 +21,11 @@ export interface BreadCrumbStack {
   name: string;
   dirId: string;
 }
+
+export const mapToOption = <T, M = string>(
+  value: T,
+  label: string | number,
+  meta?: M,
+): SelectOption<T, M> => {
+  return { label, value, meta };
+};
