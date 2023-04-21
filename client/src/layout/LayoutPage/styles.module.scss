@@ -20,11 +20,11 @@ html {
     display: flex;
     gap: 70px;
 
-    // TODO заменить круг на верстку
     &.bg-profile {
       background: url('../../assets/images/profile-page-bg.png');
       background-repeat: no-repeat;
       background-position-x: 138px;
+      background-position-y: -35px;
     }
   }
 

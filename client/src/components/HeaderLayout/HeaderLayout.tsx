@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -10,9 +10,8 @@ import { Icon } from '@components/icon';
 import { ButtonLink } from '@components/ButtonLink';
 import { MenuProfile } from '@components/MenuProfile';
 import { InputSearch } from '@components/InputSearch';
-// import { InputFilter } from '@components/InputFilter';
 import { PopupLocalization } from '@components/PopupLocalization';
-import { Select } from '@components/Select';
+import { SelectTreeNode } from '@components/SelectTreeNode';
 
 import CloudLogo from '@assets/images/logo.png';
 
@@ -31,6 +30,8 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(getUserData);
+
+  const [selectedTree, setSelectedTree] = useState<(string | number | undefined)[]>([]);
 
   useEffect(() => {
     dispatch(userReload()).unwrap();
@@ -87,13 +88,13 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
                 },
               ]}
             />
-            <Select
-              options={[]}
-              isSearchable={false}
-              maxMenuHeight={115}
-              className={cx('select-filter')}
-              heightControl={47}
-              backgroundControl="white"
+            <SelectTreeNode
+              iconAnimation
+              icon="right"
+              multiple
+              checkStrictly
+              value={selectedTree}
+              onChangeSelected={setSelectedTree}
             />
           </div>
           <div className={cx('containerOptions')}>

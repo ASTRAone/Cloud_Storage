@@ -1,0 +1,64 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.container {
+  width: 217px;
+  position: relative;
+
+  & .tree-select {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 45px;
+    overflow-y: auto;
+    background-color: $white;
+    padding: 0 38px 0 24px;
+    border: 1px solid #f0f0f0;
+    border-radius: 10px;
+    position: relative;
+    transition: border-radius 0.3s ease;
+
+    &.isOpened {
+      border-radius: 10px 10px 0px 0px;
+      border-bottom: none;
+    }
+
+    &-pl {
+      @include text();
+      @include paragraph-15();
+      color: #25396F;
+    }
+
+    & .icon {
+      position: absolute;
+      right: 21px;
+      cursor: pointer;
+      width: 10px;
+      transition: transform 0.3s ease;
+
+      &.isOpened {
+        transform: rotate(-90deg);
+      }
+    }
+  }
+
+  & .menu {
+    background-color: $white;
+    padding: 4px 13px 15px 14px;
+    position: absolute;
+    box-sizing: border-box;
+    border-radius: 0px 0px 15px 15px;
+    width: 100%;
+    border: 1px solid #f0f0f0;
+    border-top: none;
+
+    &-content {
+      max-height: 192px;
+      overflow-y: auto;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 5px;
+  background: #F2F2F2;
+  border: 1px solid $primary-800;
+
+  & .text {
+    @include paragraph-12();
+    color: $primary-800;
+  }
+
+  & .icon {
+    cursor: pointer;
+    width: 11px;
+    height: 11px;
+    color: #778083;
+  }
+}
