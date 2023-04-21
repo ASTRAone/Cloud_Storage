@@ -33,7 +33,7 @@ export const Avatar: React.FC<Props> = ({ src }) => {
   //   closePopup();
   // };
 
-  const logout = async (e: any) => {
+  const logout = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
     try {
       localStorage.removeItem(AUTH_HEADER);

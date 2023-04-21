@@ -12,7 +12,7 @@ type AuthResponse = {
     language: string;
   };
 };
-
+// TODO добавить src для аватарки
 type AuthViewDTO = {
   id?: number;
   email?: string;
