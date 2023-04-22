@@ -2,9 +2,13 @@
 
 import axios from 'axios';
 import { AUTH_HEADER } from '@utils/headers';
+
+import { StorageService } from '@services/StorageService';
 // import { LOGIN_ROUTE } from '@utils/contants';
 
 // import { AuthApi } from '@api/AuthApi';
+
+const storageService = StorageService.getInstance();
 
 export const $api = axios.create({
   withCredentials: true,
@@ -13,7 +17,7 @@ export const $api = axios.create({
 
 $api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem(AUTH_HEADER);
+    const token = storageService.getItem(AUTH_HEADER);
     if (token) {
       config.headers[AUTH_HEADER] = token;
     }
@@ -45,7 +49,7 @@ $api.interceptors.response.use(
           // const { accessToken } = rs.data;
           // localStorage.setItem(AUTH_HEADER, `Bearer ${accessToken}`);
           // $api.defaults.headers.common[AUTH_HEADER] = `Bearer ${accessToken}`;
-          localStorage.removeItem(AUTH_HEADER);
+          storageService.removeItem(AUTH_HEADER);
           // navigate(LOGIN_ROUTE);
 
           // return $api(originalConfig);

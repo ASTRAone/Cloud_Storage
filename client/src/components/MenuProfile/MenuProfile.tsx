@@ -1,6 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { StorageService } from '@services/StorageService';
+
 import { useStyles } from '@hooks/useStyles';
 
 import { Popup } from '@components/Popup';
@@ -20,6 +22,8 @@ export type MenuItemType = {
   linkName: string;
 };
 
+const storageService = StorageService.getInstance();
+
 export const MenuProfile: React.FC<Props> = ({ name, email }) => {
   const { t } = useTranslation();
   const dispath = useAppDispatch();
@@ -31,8 +35,8 @@ export const MenuProfile: React.FC<Props> = ({ name, email }) => {
   ];
 
   const logout = async () => {
-    localStorage.removeItem('Authorization');
-    localStorage.removeItem('activeTabLC');
+    storageService.removeItem('Authorization');
+    storageService.removeItem('activeTabLC');
     await dispath(userLogout()).unwrap();
   };
 

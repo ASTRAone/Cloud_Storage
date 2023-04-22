@@ -2,6 +2,8 @@ import React from 'react';
 
 import { AUTH_HEADER } from '@src/utility/headers';
 
+import { StorageService } from '@services/StorageService';
+
 import { usePopupControls } from '@hooks/usePopupControls';
 import { useStyles } from '@hooks/useStyles';
 
@@ -18,6 +20,8 @@ type Props = {
   src?: string;
   fullName: string;
 };
+
+const storageService = StorageService.getInstance();
 
 export const Avatar: React.FC<Props> = ({ src }) => {
   const cx = useStyles(styles);
@@ -36,8 +40,8 @@ export const Avatar: React.FC<Props> = ({ src }) => {
   const logout = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
     try {
-      localStorage.removeItem(AUTH_HEADER);
-      localStorage.removeItem('activeTabLC');
+      storageService.removeItem(AUTH_HEADER);
+      storageService.removeItem('activeTabLC');
       await dispatch(userLogout()).unwrap();
     } catch (error) {
       console.log(error);
