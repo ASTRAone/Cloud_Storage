@@ -8,6 +8,8 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 // import { useAppSelector } from '@store/hooks';
 // import { getUserData } from '@store/auth/data';
 
+import { StorageService } from '@services/StorageService';
+
 import { localizationEn, localizationRu } from './locales';
 
 // const { user } = useAppSelector(getUserData);
@@ -19,10 +21,12 @@ import { localizationEn, localizationRu } from './locales';
 
 // getLanguage(user);
 
-localStorage.setItem('language', 'en-US');
+const storageService = StorageService.getInstance();
+
+storageService.setItem('language', 'en-US');
 
 export const getLanguage = (): string => {
-  const _language = localStorage.getItem('language');
+  const _language = storageService.getItem('language');
   return _language as string;
 };
 

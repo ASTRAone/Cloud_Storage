@@ -4,17 +4,21 @@ import { CLOUD_ROUTE } from '@utils/contants';
 
 import { LayoutStartPage } from '@src/layout/LayoutStartPage';
 
+import { StorageService } from '@services/StorageService';
+
 import { useStyles } from '@hooks/useStyles';
 
 import { ButtonLink } from '@components/ButtonLink';
 
 import styles from './styles.module.scss';
 
+const storageService = StorageService.getInstance();
+
 export const PageNotFound: React.FC = () => {
   const cx = useStyles(styles);
 
   const handleReturnedHome = () => {
-    localStorage.removeItem('activeTabLC');
+    storageService.removeItem('activeTabLC');
   };
 
   return (

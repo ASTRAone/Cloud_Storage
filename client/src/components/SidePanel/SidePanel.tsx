@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 
 import { linkIcons, linkTitles } from '@utils/links';
 
+import { StorageService } from '@services/StorageService';
+
 import { useStyles } from '@hooks/useStyles';
 
 import { IconTypes } from '@components/icon/IconDictionary';
@@ -29,24 +31,26 @@ const menu: Array<MenuItemType> = [
   { link: 'request' },
 ];
 
+const storageService = StorageService.getInstance();
+
 export const SidePanel: React.FC = () => {
   const cx = useStyles(styles);
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<LinkTypes>(
-    (localStorage.getItem('activeTabLC') as LinkTypes) || menu[0].link,
+    (storageService.getItem('activeTabLC') as LinkTypes) || menu[0].link,
   );
   const [open, setOpen] = useState<boolean>(
-    (JSON.parse(localStorage.getItem('openPanel') as string) as boolean) || false,
+    (JSON.parse(storageService.getItem('openPanel') as string) as boolean) || false,
   );
 
   const handleToggleSidePanel = () => {
     const isOpenPanel = !open;
-    localStorage.setItem('openPanel', JSON.stringify(isOpenPanel));
+    storageService.setItem('openPanel', JSON.stringify(isOpenPanel));
     setOpen((prev: boolean) => !prev);
   };
 
   const handleChangeActiveTab = (tab: LinkTypes) => {
-    localStorage.setItem('activeTabLC', tab);
+    storageService.setItem('activeTabLC', tab);
     setActiveTab(tab);
   };
 

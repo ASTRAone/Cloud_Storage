@@ -7,12 +7,16 @@ import { AUTH_HEADER } from '@src/utility/headers';
 
 import { AuthDTO } from '@api/AuthApi/models';
 
+import { StorageService } from '@services/StorageService';
+
 import { Form } from '@components/Form';
 
 import { getUserData, userLogin } from '@store/auth/data';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 
 import { AuthView } from './Auth.view';
+
+const storageService = StorageService.getInstance();
 
 export const Auth: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -25,7 +29,7 @@ export const Auth: React.FC = () => {
     setBtnDisabled(true);
     try {
       const { accessToken } = await dispatch(userLogin(data)).unwrap();
-      localStorage.setItem(AUTH_HEADER, `Bearer ${accessToken}`);
+      storageService.setItem(AUTH_HEADER, `Bearer ${accessToken}`);
       navigate(CLOUD_ROUTE);
     } catch (error) {
       setErrorRes(true);
