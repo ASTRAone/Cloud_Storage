@@ -33,7 +33,8 @@ export const MenuItem: React.FC<Props> = ({
         <Button
           text={title}
           typeIcon={iconType}
-          className={className}
+          classNameContainer={className}
+          onClick={onClick}
         />
       ) : (
         <ButtonLink

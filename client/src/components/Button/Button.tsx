@@ -65,7 +65,7 @@ export const Button: React.FC<Props> = ({
       className={cx('btn', classNameBtn, full ? 'full' : '')}
       disabled={disabled}
     >
-      <div className={cx('container', classNameContainer, color, disabled ? 'disabled' : '')}>
+      <div className={cx('container', color, classNameContainer, disabled ? 'disabled' : '')}>
         <div className={cx('content')}>
           {typeIcon !== 'default' && (
             <Icon
