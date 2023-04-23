@@ -75,7 +75,7 @@ export const MenuProfile: React.FC<Props> = ({ name, email, src }) => {
             {menu.map(({ url, iconType, linkName }, index) => {
               return (
                 <div
-                  className={cx('item', iconType == 'logout' ? 'item-top-border' : '')}
+                  className={cx('item', iconType === 'logout' ? 'item-top-border' : '')}
                   key={index}
                 >
                   <MenuItem

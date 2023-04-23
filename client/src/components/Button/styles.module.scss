@@ -19,7 +19,7 @@
     cursor: pointer;
 
     &.disabled {
-      background-color: $primary-200!important;
+      background-color: $primary-200 !important;
       border: 1px solid $dark-blue-100;
     }
 
@@ -30,9 +30,9 @@
     }
 
     &.gray {
-      background-color: #DEE1E6;
-      border-color: #DEE1E6;
-      color: #51459E;
+      background-color: #dee1e6;
+      border-color: #dee1e6;
+      color: #51459e;
     }
 
     &.blue {

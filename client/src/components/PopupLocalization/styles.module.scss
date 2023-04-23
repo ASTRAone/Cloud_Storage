@@ -29,6 +29,11 @@
       &:hover {
         background-color: #327bd1;
       }
+
+      &:focus-within {
+        background-color: red;
+        border-color: transparent;
+      }
     }
   }
 }
