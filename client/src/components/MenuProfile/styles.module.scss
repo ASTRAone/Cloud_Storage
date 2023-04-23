@@ -22,10 +22,7 @@
     }
     .avatar {
       z-index: 2;
-      background: url('../../assets/images/vlados.jpg');
-      background-size: contain;
       border-radius: 50%;
-      background-position: top center;
       width: 60px;
       height: 60px;
       border: 1px solid $white;
@@ -44,7 +41,6 @@
     }
   }
 
-
 .dropdown {
   position: absolute;
   background-color: $primary-800;
@@ -61,6 +57,7 @@
       display: block;
       text-align: center;
       width: 100%;
+      padding: 10px 0;
     }
     & .dropdown-content {
       width: 100%;

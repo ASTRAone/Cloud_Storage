@@ -24,7 +24,7 @@ export const PopupLocalization: React.FC = () => {
   ];
 
   const changingLanguage = (lang: string) => {
-    i18n.changeLanguage(lang == 'ru' ? 'ru' : 'en');
+    i18n.changeLanguage(lang);
   };
   return (
     <>
@@ -39,20 +39,16 @@ export const PopupLocalization: React.FC = () => {
       >
         <div className={cx('dropdown-language')}>
           <div className={cx('dropdown-content-language')}>
-            {menu.map(({ iconType, name, lang }) => {
+            {menu.map(({ iconType, name, lang }, index) => {
               return (
-                <div
-                  key={name}
-                  className={cx('item')}
+                <MenuItem
+                  key={index}
+                  button
+                  iconType={iconType}
+                  title={name}
+                  className={cx('btn')}
                   onClick={() => changingLanguage(lang)}
-                >
-                  <MenuItem
-                    button
-                    iconType={iconType}
-                    title={name}
-                    className={cx('btns')}
-                  />
-                </div>
+                />
               );
             })}
           </div>

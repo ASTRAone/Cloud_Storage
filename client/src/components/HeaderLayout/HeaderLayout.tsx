@@ -109,6 +109,7 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
             />
             <div className={cx('profile')}>
               <MenuProfile
+                src=""
                 name={user?.name + ' ' + user?.surname}
                 email={user?.email}
               />
