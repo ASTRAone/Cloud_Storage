@@ -31,3 +31,8 @@ export { DownloadIcon } from './DownloadIcon';
 export { RemoveIcon } from './RemoveIcon';
 export { TileIcon } from './TileIcon';
 export { ListIcon } from './ListIcon';
+export { QuestionMark } from './QuestionMark';
+export { ErrorIcon } from './ErrorIcon';
+export { SuccessIcon } from './SuccessIcon';
+export { LoadingIcon } from './LoadingIcon';
+export { BubblesIcon } from './BubblesIcon';
