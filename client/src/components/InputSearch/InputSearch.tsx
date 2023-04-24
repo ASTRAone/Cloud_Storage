@@ -12,10 +12,11 @@ type Props = Partial<React.ComponentPropsWithRef<'input'>> & {
   error?: FormError;
   actions?: Array<IconObject>;
   full?: boolean;
+  // onSearchChange?: (value: string) => void;
 };
 
 export const InputSearch: React.FC<Props> = ({
-  type = 'searcxh',
+  type = 'search',
   placeholder = '',
   value,
   error,
@@ -29,13 +30,23 @@ export const InputSearch: React.FC<Props> = ({
   const actionsRight: Array<JSX.Element> = [];
 
   // TODO: Дополнить логику в зависимости от бека
-  const onSubmitSearch = async (data: unknown) => {
-    try {
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const onSubmitSearch = async (data: any) => {
+  //   console.log('data ', data);
+  //   try {
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // const onSearchChange = async (data: unknown) => {
+  //   console.log('omfg');
+  //   try {=
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   if (actions) {
     actions.forEach((elem) => {
@@ -50,7 +61,7 @@ export const InputSearch: React.FC<Props> = ({
 
   return (
     <Form
-      onSubmit={onSubmitSearch}
+      // onSubmit={onSubmitSearch}
       className={cx('container', full ? 'full' : '')}
     >
       <div className={cx('content', isError ? 'error' : '')}>

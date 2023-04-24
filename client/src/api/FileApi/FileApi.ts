@@ -34,6 +34,11 @@ class FileApi {
     return $api.delete<any>(url);
   }
 
+  static searchFile(searchName?: string) {
+    const url = `files/search?search=${searchName}`;
+    return $api.get<FileResponse[]>(url);
+  }
+
   static fetchRecentlyUploaded() {
     const url = 'recently_files';
     return $api.get<FileResponseRecently[]>(url);

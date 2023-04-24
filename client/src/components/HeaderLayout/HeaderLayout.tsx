@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '@utils/contants';
+import { ALL_FILES_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from '@utils/contants';
 
 import { useStyles } from '@hooks/useStyles';
 
@@ -17,6 +17,7 @@ import CloudLogo from '@assets/images/logo.png';
 
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { getUserData, userReload } from '@store/auth/data';
+import { getSearchText, searchFile, setSearchText } from '@store/file/data';
 
 import styles from './styles.module.scss';
 
@@ -28,14 +29,29 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
   const cx = useStyles(styles);
   const location = useLocation();
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(getUserData);
+  const { searchText } = useAppSelector(getSearchText);
+  const [enterSearchName, setEnterSearchName] = useState('');
 
   const [selectedTree, setSelectedTree] = useState<(string | number | undefined)[]>([]);
 
   useEffect(() => {
     dispatch(userReload()).unwrap();
   }, []);
+
+  const searchChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (location.pathname !== ALL_FILES_ROUTE) {
+      navigate(ALL_FILES_ROUTE);
+    }
+    if (e.target.value === '') {
+      navigate(-1);
+    }
+    setEnterSearchName(e.target.value);
+    dispatch(setSearchText(e.target.value));
+    dispatch(searchFile(e.target.value)).unwrap();
+  };
 
   return (
     <div className={cx('container')}>
@@ -75,6 +91,8 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
           <div className={cx('containerInputs')}>
             <InputSearch
               full
+              value={searchText ?? enterSearchName}
+              onChange={(e) => searchChangeHandler(e)}
               placeholder={t('headerPanel.placeholder.search')}
               actions={[
                 {
