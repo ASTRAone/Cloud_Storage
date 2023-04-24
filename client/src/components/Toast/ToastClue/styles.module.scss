@@ -1,0 +1,77 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.toast-clue {
+  padding: 6px 58px 13px 0;
+  background: linear-gradient(180deg, #0479F0 0%, #0456A9 100%);
+  border-radius: 30px;
+  width: 300px;
+  display: flex;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  position: relative;
+
+  & .content {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    width: 143px;
+
+    & .title {
+      @include text();
+      @include paragraph-30();
+      font-family: 'Itim', sans-serif;
+      color: $white;
+    }
+
+    & .text {
+      @include text();
+      @include paragraph-12();
+      color: $white;
+    }
+  }
+
+  & .container-icon-result {
+    position: absolute;
+    left: 28px;
+    top: -15px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #005EB5 0%, #003362 100%);
+
+    & .icon {
+      width: 22px;
+      height: 31px;
+      color: $white;
+    }
+  }
+
+  & .container-icon {
+    position: absolute;
+    left: 13px;
+    bottom: -4px;
+
+    & .icon {
+      height: 52px;
+      width: 49px;
+      color: #003F62;
+    }
+  }
+
+  & .container-icon-close {
+    position: absolute;
+    cursor: pointer;
+    right: 19px;
+
+    & .icon {
+      width: 30px;
+      height: 30px;
+      color: $white;
+    }
+  }
+}

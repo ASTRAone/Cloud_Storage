@@ -32,6 +32,11 @@ import {
   RemoveIcon,
   TileIcon,
   ListIcon,
+  QuestionMark,
+  ErrorIcon,
+  SuccessIcon,
+  LoadingIcon,
+  BubblesIcon,
 } from '@assets/icons';
 
 const dictionary = {
@@ -69,6 +74,11 @@ const dictionary = {
   remove: RemoveIcon,
   tile: TileIcon,
   list: ListIcon,
+  'question-mark': QuestionMark,
+  error: ErrorIcon,
+  success: SuccessIcon,
+  loading: LoadingIcon,
+  bubbles: BubblesIcon,
 };
 
 type IconTypes = keyof typeof dictionary;

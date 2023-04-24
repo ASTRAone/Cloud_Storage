@@ -26,7 +26,6 @@ const FOLDERS: Array<Props> = [
 
 export const Cloud: React.FC = () => {
   const cx = useStyles(styles);
-  // const [openMenu, setOpenMenu] = useState(false);
 
   return (
     <div className={cx('page')}>
