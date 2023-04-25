@@ -29,11 +29,19 @@ class FileController {
 
   async getFiles(req, res) {
     try {
-      const files = await File.find({
-        user: req.user.id,
-        parent: req.query.parent,
-      });
-      return res.json(files);
+      if (req.query.parent) {
+        const files = await File.find({
+          user: req.user.id,
+          parent: req.query.parent,
+        });
+        return res.json(files);
+       }
+      if (req.query.search) {
+        let files = await File.find({user: req.user.id});
+        files = files.filter(file => file.name.includes(req.query.search));
+        return res.json(files);
+      }
+      return res.status(500).json({ message: "Wrong api" });
     } catch (error) {
       console.log(error);
       return res.status(500).json({ message: "Can not get files" });
@@ -211,17 +219,6 @@ class FileController {
     }
   }
 
-  async searchFile(req, res) {
-    try {
-      const searchName = req.query.search;
-      let files = await File.find({user: req.user.id});
-      files = files.filter(file => file.name.includes(searchName));
-      return res.json(files);
-    } catch (e) {
-      console.log(e)
-      return res.status(400).json({message: 'Search error'});
-    }
-  }
 }
 
 module.exports = new FileController();
