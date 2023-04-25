@@ -29,6 +29,9 @@ class FileController {
 
   async getFiles(req, res) {
     try {
+      const files = await File.find({
+        user: req.user.id,
+      });
       if (req.query.parent) {
         const files = await File.find({
           user: req.user.id,
@@ -41,7 +44,7 @@ class FileController {
         files = files.filter(file => file.name.includes(req.query.search));
         return res.json(files);
       }
-      return res.status(500).json({ message: "Wrong api" });
+      return res.json(files);
     } catch (error) {
       console.log(error);
       return res.status(500).json({ message: "Can not get files" });
