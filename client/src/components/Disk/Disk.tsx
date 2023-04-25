@@ -21,7 +21,7 @@ import {
 } from '@store/file/data';
 
 import styles from './styles.module.scss';
-import { ModalCreateFile } from './components';
+import { ModalCreate } from './components/ModalCreate/ModalCreate';
 
 export const Disk: React.FC = () => {
   const cx = useStyles(styles);
@@ -109,10 +109,11 @@ export const Disk: React.FC = () => {
         <FileList />
       </div>
       {isOpened && (
-        <ModalCreateFile
+        <ModalCreate
           isOpen={isOpened}
           closeModal={closePopup}
           currentDir={currentDir}
+          title="Enter a name of directory"
         />
       )}
     </>
