@@ -1,3 +1,5 @@
+import { BreadCrumbStack } from '@utils/common';
+
 import { $api } from '@src/http/http';
 
 import { IRestService, RestService } from '../../services/RestService';
@@ -8,6 +10,11 @@ class FileApi {
   static fetchFiles(dirId?: string) {
     const url = `files${dirId ? '?parent=' + dirId : ''}`;
     return $api.get<FileResponse[]>(url);
+  }
+
+  static fetchBreadCrumbs(currentId?: string) {
+    const url = `breadcrumbs?currentId=${currentId}`;
+    return $api.get<BreadCrumbStack[]>(url);
   }
 
   static createFile(data: FileCreateDTO) {
@@ -32,6 +39,11 @@ class FileApi {
   static deleteFile(fileId?: string) {
     const url = `files/delete${fileId ? '?id=' + fileId : ''}`;
     return $api.delete<any>(url);
+  }
+
+  static searchFile(searchName?: string) {
+    const url = `files/search?search=${searchName}`;
+    return $api.get<FileResponse[]>(url);
   }
 
   static fetchRecentlyUploaded() {

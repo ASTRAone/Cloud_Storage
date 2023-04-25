@@ -28,8 +28,8 @@ export const Breadcrumbs: React.FC<Props> = ({ breadcrumbsPath, navDir }) => {
           ) : null}
           <span className={cx('arrow-forward')}>{'>'}</span>
           <span
-            className={cx('btn')}
-            onClick={() => navDir(dirId, index)}
+            className={index + 1 != breadcrumbsPath.length ? cx('btn') : cx('noclickable_btn')}
+            onClick={() => (index + 1 != breadcrumbsPath.length ? navDir(dirId, index) : null)}
           >
             {name}
           </span>

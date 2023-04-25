@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '@utils/contants';
 import { AUTH_HEADER } from '@utils/headers';
+import { ALL_FILES_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from '@utils/contants';
 
 import { StorageService } from '@services/StorageService';
 
@@ -20,6 +20,7 @@ import CloudLogo from '@assets/images/logo.png';
 
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { fetchUserData, getUserData } from '@store/auth/data';
+import { getSearchText, searchFile, setSearchText } from '@store/file/data';
 
 import styles from './styles.module.scss';
 
@@ -28,19 +29,34 @@ const storageService = StorageService.getInstance();
 
 export const HeaderLayout: React.FC = () => {
   const cx = useStyles(styles);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
-  const dispath = useAppDispatch();
   const { userData } = useAppSelector(getUserData);
   const token = storageService.getItem(AUTH_HEADER);
 
   const { name, surname, email } = userData;
+  const { searchText } = useAppSelector(getSearchText);
+  const [enterSearchName, setEnterSearchName] = useState('');
 
   const [selectedTree, setSelectedTree] = useState<(string | number | undefined)[]>([]);
 
   useEffect(() => {
-    dispath(fetchUserData());
+    dispatch(fetchUserData());
   }, []);
+
+  const searchChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (location.pathname !== ALL_FILES_ROUTE) {
+      navigate(ALL_FILES_ROUTE);
+    }
+    if (e.target.value === '') {
+      navigate(-1);
+    }
+    setEnterSearchName(e.target.value);
+    dispatch(setSearchText(e.target.value));
+    dispatch(searchFile(e.target.value)).unwrap();
+  };
 
   return (
     <div className={cx('container')}>
@@ -80,6 +96,8 @@ export const HeaderLayout: React.FC = () => {
           <div className={cx('containerInputs')}>
             <InputSearch
               full
+              value={searchText ?? enterSearchName}
+              onChange={(e) => searchChangeHandler(e)}
               placeholder={t('headerPanel.placeholder.search')}
               actions={[
                 {

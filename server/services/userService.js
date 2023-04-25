@@ -26,13 +26,7 @@ class UserService {
       name,
       surname
     });
-    // console.log('user', user);
     user.save();
-    // await MailService.sendActivationMail(
-    //   email,
-    //   `${process.env.API_URL}/api/activate/${activationLink}`
-    // );
-
     const userDto = new UserDto(user);
     await FileService.createDir(new File({user: user.id, name: ''}));
     const tokens = await TokenService.generateTokens({ ...userDto });

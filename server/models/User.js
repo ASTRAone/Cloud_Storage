@@ -11,7 +11,11 @@ const User = new Schema({
   activationLink: { type: String },
   language: { type: String, default: 'en-US'},
   name: { type: String, required: true, default: false },
-  surname: { type: String, required: true, default: false }
+  surname: { type: String, required: true, default: false },
+  country: { type: String, default: '' },
+  city: { type: String, default: '' },
+  phone: { type: String, default: '' },
+  biography: { type: String, default: '' }
 });
 
 module.exports = model("User", User);

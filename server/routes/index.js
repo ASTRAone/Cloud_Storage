@@ -27,13 +27,16 @@ router.get("/refresh", UserController.refresh);
 //users
 router.get("/users", authMiddleware, UserController.getUsers);
 router.get("/user", authMiddleware, UserController.getUser);
+router.post("/user/update", authMiddleware, UserController.postUser);
 router.post("/changeLanguage", authMiddleware, UserController.postLanguage);
 
 //CRUD files
 router.get("/files", authMiddleware, fileController.getFiles);
+router.get("/breadcrumbs", authMiddleware, fileController.getBreadcrumbs);
 router.get("/paths_files", authMiddleware, fileController.getPathsFiles);
 router.get("/recently_files", authMiddleware, fileController.getRecentlyUpdatedFiles);
 router.get("/files/download", authMiddleware, fileController.downloadFile);
+router.get('/files/search', authMiddleware, fileController.searchFile);
 router.post("/files/upload", authMiddleware, fileController.uploadFile);
 router.delete("/files/delete", authMiddleware, fileController.deleteFile);
 router.post('/files/avatar', authMiddleware, fileController.uploadAvatar);

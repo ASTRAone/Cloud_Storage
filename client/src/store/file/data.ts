@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { BreadCrumbStack, mapToOption, RequestStatus, UUID } from '@src/utility/common';
+import { mapToOption, RequestStatus, UUID } from '@src/utility/common';
 
 import {
   FileCreateDTO,
@@ -20,13 +20,15 @@ type State = {
   dataRecently: FileResponseRecently[];
   foldersPaths: SelectOption<string>[];
   needUpdate: boolean;
+  searchText?: string;
   currentDir?: string;
-  breadCrumbsStack: BreadCrumbStack[];
+  breadCrumbsStack: any;
   status: RequestStatus;
   statusCreate: RequestStatus;
   statusUpload: RequestStatus;
   statusDownload: RequestStatus;
   statusDelete: RequestStatus;
+  statusSearch: RequestStatus;
   statusViewFiles: RequestStatus;
   statusFetchRecently: RequestStatus;
   statusFoldersPath: RequestStatus;
@@ -41,9 +43,11 @@ const initialState: State = {
   currentDir: '',
   breadCrumbsStack: [],
   status: 'idle',
+  searchText: '',
   statusCreate: 'idle',
   statusUpload: 'idle',
   statusDownload: 'idle',
+  statusSearch: 'idle',
   statusViewFiles: 'idle',
   statusDelete: 'idle',
   statusFoldersPath: 'idle',
@@ -57,6 +61,18 @@ const fetchFiles = createAsyncThunk(
     try {
       const response = await FileApi.fetchFiles(dirId);
       return response.data;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
+const fetchBreadCrumbs = createAsyncThunk(
+  'file/breadscrumbs',
+  async (currentId: string, { rejectWithValue }) => {
+    try {
+      const response = await FileApi.fetchBreadCrumbs(currentId);
+      return response.data.reverse();
     } catch (e) {
       return rejectWithValue(e);
     }
@@ -137,6 +153,18 @@ const deleteFile = createAsyncThunk(
   },
 );
 
+const searchFile = createAsyncThunk(
+  'file/search',
+  async (searchName: string, { rejectWithValue }) => {
+    try {
+      const response = await FileApi.searchFile(searchName);
+      return response.data;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
 const fetchRecentlyUploaded = createAsyncThunk(
   'file/fetchRecentlyUploaded',
   async (_, { rejectWithValue }) => {
@@ -169,20 +197,23 @@ const fileDataSlice = createSlice({
     selectedDir: (state, action: PayloadAction<string | undefined>) => {
       state.currentDir = action.payload;
     },
+    setSearchText: (state, action: PayloadAction<string | undefined>) => {
+      state.searchText = action.payload;
+    },
     viewFolder: (state, action: PayloadAction<'list' | 'plate'>) => {
       state.view = action.payload;
     },
-    pushBreadcrumbsStack: (state, action: PayloadAction<BreadCrumbStack>) => {
-      state.breadCrumbsStack = [...state.breadCrumbsStack, action.payload];
-    },
-    popBreadcrumbsStack: (state, action: PayloadAction<any>) => {
-      const spliced = [...state.breadCrumbsStack].splice(
-        action.payload.index + 1,
-        state.breadCrumbsStack.length - action.payload.index,
-      );
-      state.breadCrumbsStack =
-        [...state.breadCrumbsStack].filter((x) => spliced.indexOf(x) === -1) || [];
-    },
+    // pushBreadcrumbsStack: (state, action: PayloadAction<BreadCrumbStack>) => {
+    //   state.breadCrumbsStack = [...state.breadCrumbsStack, action.payload];
+    // },
+    // popBreadcrumbsStack: (state, action: PayloadAction<any>) => {
+    //   const spliced = [...state.breadCrumbsStack].splice(
+    //     action.payload.index + 1,
+    //     state.breadCrumbsStack.length - action.payload.index,
+    //   );
+    //   state.breadCrumbsStack =
+    //     [...state.breadCrumbsStack].filter((x) => spliced.indexOf(x) === -1) || [];
+    // },
     clearBeadcrumbsStack: (state) => {
       state.breadCrumbsStack = [];
       state.currentDir = '';
@@ -258,7 +289,28 @@ const fileDataSlice = createSlice({
         state.needUpdate = false;
         state.statusDelete = 'failed';
       })
-
+      .addCase(searchFile.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(searchFile.fulfilled, (state, action) => {
+        state.file = action.payload;
+        state.status = 'idle';
+        state.needUpdate = false;
+      })
+      .addCase(searchFile.rejected, (state) => {
+        state.status = 'failed';
+      })
+      .addCase(fetchBreadCrumbs.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchBreadCrumbs.fulfilled, (state, action) => {
+        state.breadCrumbsStack = action.payload;
+        state.status = 'idle';
+        state.needUpdate = false;
+      })
+      .addCase(fetchBreadCrumbs.rejected, (state) => {
+        state.status = 'failed';
+      })
       .addCase(fetchRecentlyUploaded.pending, (state) => {
         state.statusFetchRecently = 'loading';
       })
@@ -293,9 +345,10 @@ const getStatus = createSelector(selectSelf, statusFlags);
 const setViewFolders = createSelector(selectSelf, ({ ...view }) => view);
 const getRecentlyUploaded = createSelector(selectSelf, ({ ...dataRecently }) => dataRecently);
 const getFoldersPath = createSelector(selectSelf, ({ ...foldersPath }) => foldersPath);
+const getSearchText = createSelector(selectSelf, ({ ...searchText }) => searchText);
 
 // eslint-disable-next-line prettier/prettier
-export const { selectedDir, popBreadcrumbsStack, clearBeadcrumbsStack, pushBreadcrumbsStack, dropState, viewFolder } =
+export const { selectedDir, setSearchText, clearBeadcrumbsStack, dropState, viewFolder } =
   fileDataSlice.actions;
 
 export {
@@ -308,10 +361,13 @@ export {
   uploadFile,
   downloadFile,
   deleteFile,
+  searchFile,
   setViewFolders,
   fetchRecentlyUploaded,
   getRecentlyUploaded,
   fetchFoldersPath,
   getFoldersPath,
+  getSearchText,
+  fetchBreadCrumbs,
 };
 export default fileDataSlice.reducer;
