@@ -346,6 +346,7 @@ const setViewFolders = createSelector(selectSelf, ({ ...view }) => view);
 const getRecentlyUploaded = createSelector(selectSelf, ({ ...dataRecently }) => dataRecently);
 const getFoldersPath = createSelector(selectSelf, ({ ...foldersPath }) => foldersPath);
 const getSearchText = createSelector(selectSelf, ({ ...searchText }) => searchText);
+const getStatusCreateFile = createSelector(selectSelf, ({ ...statusCreate }) => statusCreate);
 
 // eslint-disable-next-line prettier/prettier
 export const { selectedDir, setSearchText, clearBeadcrumbsStack, dropState, viewFolder } =
@@ -357,6 +358,7 @@ export {
   getStatus,
   getCurrentDir,
   statusCreate,
+  getStatusCreateFile,
   createFile,
   uploadFile,
   downloadFile,
