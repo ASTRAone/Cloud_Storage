@@ -23,13 +23,13 @@ export const ProfileUser: React.FC = () => {
   const cx = useStyles(styles);
   const [activeTab, setActiveTab] = useState(TABS[0]);
 
-  const { user } = useAppSelector(getUserData);
+  const { userData } = useAppSelector(getUserData);
 
   return (
     <div className={cx('page')}>
       <div className={cx('header')}>
-        <h3 className={cx('title')}>{user?.name + ' ' + user?.surname}</h3>
-        <p className={cx('text')}>{user?.email}</p>
+        <h3 className={cx('title')}>{userData?.name + ' ' + userData?.surname}</h3>
+        <p className={cx('text')}>{userData?.email}</p>
       </div>
       <div className={cx('container')}>
         <div className={cx('content-left')}>

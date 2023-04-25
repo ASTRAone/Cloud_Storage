@@ -1,27 +1,20 @@
 type AuthResponse = {
   accessToken: string;
   refreshToken: string;
-  user: {
-    id?: number;
-    email?: string;
-    name?: string;
-    surname?: string;
-    diskSpace?: number;
-    usedSpace?: number;
-    isAuth?: boolean;
-    language: string;
-  };
 };
 // TODO добавить src для аватарки
 type AuthViewDTO = {
   id?: number;
   email?: string;
-  diskSpace?: number;
-  usedSpace?: number;
-  isAuth?: boolean;
-  language: string;
   name?: string;
   surname?: string;
+  diskSpace?: number;
+  usedSpace?: number;
+  language?: string;
+  country?: string;
+  city?: string;
+  phone?: string;
+  biography?: string;
 };
 
 type AuthDTO = {

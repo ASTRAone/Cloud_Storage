@@ -3,6 +3,9 @@ import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '@utils/contants';
+import { AUTH_HEADER } from '@utils/headers';
+
+import { StorageService } from '@services/StorageService';
 
 import { useStyles } from '@hooks/useStyles';
 
@@ -16,25 +19,27 @@ import { SelectTreeNode } from '@components/SelectTreeNode';
 import CloudLogo from '@assets/images/logo.png';
 
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { getUserData, userReload } from '@store/auth/data';
+import { fetchUserData, getUserData } from '@store/auth/data';
 
 import styles from './styles.module.scss';
 
-type Props = {
-  auth?: boolean;
-};
+// TODO сделать получение данных о юзере по новому api
+const storageService = StorageService.getInstance();
 
-export const HeaderLayout: React.FC<Props> = ({ auth }) => {
+export const HeaderLayout: React.FC = () => {
   const cx = useStyles(styles);
   const location = useLocation();
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
-  const { user } = useAppSelector(getUserData);
+  const dispath = useAppDispatch();
+  const { userData } = useAppSelector(getUserData);
+  const token = storageService.getItem(AUTH_HEADER);
+
+  const { name, surname, email } = userData;
 
   const [selectedTree, setSelectedTree] = useState<(string | number | undefined)[]>([]);
 
   useEffect(() => {
-    dispatch(userReload()).unwrap();
+    dispath(fetchUserData());
   }, []);
 
   return (
@@ -48,7 +53,7 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
           mern <span className={cx('span')}>cloud</span>
         </div>
       </div>
-      {!auth ? (
+      {!token ? (
         <div className={cx('containerOptions')}>
           <PopupLocalization />
           <Icon
@@ -110,8 +115,8 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
             <div className={cx('profile')}>
               <MenuProfile
                 src=""
-                name={user?.name + ' ' + user?.surname}
-                email={user?.email}
+                name={`${name ?? '-'} ${surname ?? '-'}`}
+                email={email ?? '-'}
               />
             </div>
           </div>

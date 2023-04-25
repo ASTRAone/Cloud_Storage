@@ -81,7 +81,7 @@ export const EditProfileFormView: React.FC = () => {
 
         <Controller
           control={control}
-          rules={{ required: true, minLength: 2 }}
+          rules={{ minLength: 2 }}
           render={({ field: { onChange, value } }) => (
             <Input
               onChange={onChange}
@@ -102,7 +102,7 @@ export const EditProfileFormView: React.FC = () => {
       <div className={cx('input-block')}>
         <Controller
           control={control}
-          rules={{ required: true, minLength: 2 }}
+          rules={{ minLength: 2 }}
           render={({ field: { onChange, value } }) => (
             <Input
               onChange={onChange}
@@ -121,7 +121,7 @@ export const EditProfileFormView: React.FC = () => {
 
         <Controller
           control={control}
-          rules={{ required: true, minLength: 2 }}
+          rules={{ minLength: 2 }}
           render={({ field: { onChange, value } }) => (
             <Input
               onChange={onChange}
@@ -152,7 +152,7 @@ export const EditProfileFormView: React.FC = () => {
             classNameLabel={cx('textarea')}
           />
         )}
-        name="bio"
+        name="biography"
       />
 
       <Button

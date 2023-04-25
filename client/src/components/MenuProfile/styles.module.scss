@@ -11,6 +11,7 @@
     .half-circle {
       position: absolute;
       top: 0;
+      right: 0;
       z-index: 1;
       width: 11em;
       height: 100px;
@@ -47,7 +48,7 @@
   display: flex;
   justify-content: center;
   top: 20px;
-  left: 30px;
+  left: -30px;
   width: 200px;
   border-radius: 0 0 15px 15px;
     & .dropdown-content .btn-link {

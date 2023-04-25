@@ -30,7 +30,7 @@ class AuthApi {
     return $api.get<AuthResponse>(url);
   }
 
-  static reload() {
+  static userData() {
     const url = 'user';
     return $api.get<AuthViewDTO>(url);
   }
@@ -52,6 +52,11 @@ class AuthApi {
         },
       },
     );
+  }
+
+  static updateProfile(data: any) {
+    const url = 'user/update';
+    return $api.post(url, { ...data });
   }
 }
 
