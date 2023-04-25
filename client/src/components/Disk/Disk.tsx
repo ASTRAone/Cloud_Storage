@@ -16,8 +16,8 @@ import {
   selectedDir,
   viewFolder,
   uploadFile,
-  popBreadcrumbsStack,
   clearBeadcrumbsStack,
+  fetchBreadCrumbs,
 } from '@store/file/data';
 
 import styles from './styles.module.scss';
@@ -49,7 +49,7 @@ export const Disk: React.FC = () => {
     if (index === -1) {
       dispatch(clearBeadcrumbsStack());
     } else {
-      dispatch(popBreadcrumbsStack({ dirId, index }));
+      dispatch(fetchBreadCrumbs(dirId));
     }
   };
 
