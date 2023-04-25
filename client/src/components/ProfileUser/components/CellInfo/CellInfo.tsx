@@ -19,7 +19,7 @@ export const CellInfo: React.FC<Props> = ({
 }) => {
   const cx = useStyles(styles);
 
-  if (!title && value === 0) return null;
+  if (!title && value === undefined) return null;
 
   return (
     <div className={cx('container', type)}>

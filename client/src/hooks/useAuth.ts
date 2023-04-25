@@ -19,6 +19,7 @@ const useAuth = () => {
       $api.defaults.headers.common[AUTH_HEADER] = token;
     } else {
       storageService.removeItem(AUTH_HEADER);
+      storageService.removeItem('activeTabLC');
       navigate(LOGIN_ROUTE);
     }
   }, [token]);

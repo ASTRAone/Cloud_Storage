@@ -47,7 +47,7 @@ export const ModalCreateFile: React.FC<Props> = ({ isOpen, closeModal = () => {}
     }
     try {
       await dispatch(createFile(payload)).unwrap();
-      await dispatch(fetchFiles(currentDir)).unwrap();
+      await dispatch(fetchFiles({ dirId: currentDir })).unwrap();
       closeModal();
     } catch (error) {
       setError(true);

@@ -54,7 +54,7 @@ class AuthApi {
     );
   }
 
-  static updateProfile(data: any) {
+  static updateProfile(data: AuthViewDTO) {
     const url = 'user/update';
     return $api.post(url, { ...data });
   }

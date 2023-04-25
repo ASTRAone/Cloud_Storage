@@ -14,9 +14,21 @@
     display: flex;
     flex-basis: 50%;
     padding: 0 50px;
+    gap: 17px;
 
     & .select-filter {
       width: 217px;
+    }
+
+    & .search {
+      height: 45px;
+      box-sizing: border-box;
+
+      .icon {
+        width: 19px;
+        height: 17px;
+        margin-right: 20px;
+      }
     }
   }
 

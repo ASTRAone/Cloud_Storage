@@ -3,12 +3,21 @@ import { BreadCrumbStack } from '@utils/common';
 import { $api } from '@src/http/http';
 
 import { IRestService, RestService } from '../../services/RestService';
-import { FileCreateDTO, FileResponse, FileResponseRecently, FilesPathsDTO } from './models';
+import {
+  FileCreateDTO,
+  FilePayloadDTO,
+  FileResponse,
+  FileResponseRecently,
+  FilesPathsDTO,
+} from './models';
 class FileApi {
   static restService: IRestService = RestService.getInstance();
-
-  static fetchFiles(dirId?: string) {
-    const url = `files${dirId ? '?parent=' + dirId : ''}`;
+  // TODO переделать на читабельность
+  static fetchFiles(payload: FilePayloadDTO) {
+    const { dirId, searchableText } = payload;
+    const url = `files${dirId ? '?parent=' + dirId : ''}${
+      searchableText ? '?search=' + searchableText : ''
+    }`;
     return $api.get<FileResponse[]>(url);
   }
 

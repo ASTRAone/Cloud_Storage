@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { mapToOption, RequestStatus, UUID } from '@src/utility/common';
+import { mapToOption, RequestStatus } from '@src/utility/common';
 
 import {
   FileCreateDTO,
   FileResponse,
   FileUploadDTO,
   FileResponseRecently,
+  FilePayloadDTO,
 } from '@api/FileApi/models';
 import { FileApi } from '@api/FileApi';
 
@@ -20,7 +21,7 @@ type State = {
   dataRecently: FileResponseRecently[];
   foldersPaths: SelectOption<string>[];
   needUpdate: boolean;
-  searchText?: string;
+  searchableText?: string;
   currentDir?: string;
   breadCrumbsStack: any;
   status: RequestStatus;
@@ -43,7 +44,7 @@ const initialState: State = {
   currentDir: '',
   breadCrumbsStack: [],
   status: 'idle',
-  searchText: '',
+  searchableText: '',
   statusCreate: 'idle',
   statusUpload: 'idle',
   statusDownload: 'idle',
@@ -57,9 +58,9 @@ const initialState: State = {
 
 const fetchFiles = createAsyncThunk(
   'file/fetch',
-  async (dirId: UUID | undefined, { rejectWithValue }) => {
+  async (payload: FilePayloadDTO, { rejectWithValue }) => {
     try {
-      const response = await FileApi.fetchFiles(dirId);
+      const response = await FileApi.fetchFiles(payload);
       return response.data;
     } catch (e) {
       return rejectWithValue(e);
@@ -197,8 +198,8 @@ const fileDataSlice = createSlice({
     selectedDir: (state, action: PayloadAction<string | undefined>) => {
       state.currentDir = action.payload;
     },
-    setSearchText: (state, action: PayloadAction<string | undefined>) => {
-      state.searchText = action.payload;
+    saveSearchText: (state, action: PayloadAction<string | undefined>) => {
+      state.searchableText = action.payload;
     },
     viewFolder: (state, action: PayloadAction<'list' | 'plate'>) => {
       state.view = action.payload;
@@ -345,10 +346,10 @@ const getStatus = createSelector(selectSelf, statusFlags);
 const setViewFolders = createSelector(selectSelf, ({ ...view }) => view);
 const getRecentlyUploaded = createSelector(selectSelf, ({ ...dataRecently }) => dataRecently);
 const getFoldersPath = createSelector(selectSelf, ({ ...foldersPath }) => foldersPath);
-const getSearchText = createSelector(selectSelf, ({ ...searchText }) => searchText);
+const getSearchText = createSelector(selectSelf, ({ ...searchableText }) => searchableText);
 
 // eslint-disable-next-line prettier/prettier
-export const { selectedDir, setSearchText, clearBeadcrumbsStack, dropState, viewFolder } =
+export const { selectedDir, saveSearchText, clearBeadcrumbsStack, dropState, viewFolder } =
   fileDataSlice.actions;
 
 export {

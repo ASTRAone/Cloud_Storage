@@ -16,6 +16,7 @@ type State = {
   statusLogout: RequestStatus;
   statusAuth: RequestStatus;
   statusAvatar: RequestStatus;
+  statusUpdateProfile: RequestStatus;
   needUpdate: boolean;
 };
 
@@ -26,6 +27,7 @@ const initialState: State = {
   statusUserData: 'idle',
   statusReg: 'idle',
   statusLogout: 'idle',
+  statusUpdateProfile: 'idle',
   statusAuth: 'idle',
   statusAvatar: 'idle',
 };
@@ -170,17 +172,17 @@ const userDataSlice = createSlice({
       .addCase(userUploadAvatar.rejected, (state) => {
         state.statusAvatar = 'failed';
       })
-      // TODO заменить статус
+
       .addCase(userUpdateProfile.pending, (state) => {
-        state.statusAvatar = 'loading';
+        state.statusUpdateProfile = 'loading';
       })
       .addCase(userUpdateProfile.fulfilled, (state, action) => {
-        state.statusAvatar = 'idle';
+        state.statusUpdateProfile = 'idle';
         state.needUpdate = true;
         state.userData = action.payload;
       })
       .addCase(userUpdateProfile.rejected, (state) => {
-        state.statusAvatar = 'failed';
+        state.statusUpdateProfile = 'failed';
       });
 
     // .addCase(userLanguage.pending, (state) => {

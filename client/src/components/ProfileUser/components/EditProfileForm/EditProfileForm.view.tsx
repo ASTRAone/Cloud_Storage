@@ -9,7 +9,12 @@ import { Button } from '@components/Button';
 
 import styles from './styles.module.scss';
 
-export const EditProfileFormView: React.FC = () => {
+type Props = {
+  btnDisabled: boolean;
+  isLoading: boolean;
+};
+
+export const EditProfileFormView: React.FC<Props> = ({ btnDisabled, isLoading }) => {
   const cx = useStyles(styles);
 
   const {
@@ -55,14 +60,14 @@ export const EditProfileFormView: React.FC = () => {
               classNameLabel={cx('label')}
             />
           )}
-          name="lastname"
+          name="surname"
         />
       </div>
 
       <div className={cx('input-block')}>
         <Controller
           control={control}
-          rules={{ required: true, minLength: 2 }}
+          rules={{ minLength: 2 }}
           render={({ field: { onChange, value } }) => (
             <Input
               onChange={onChange}
@@ -159,7 +164,9 @@ export const EditProfileFormView: React.FC = () => {
         text="update"
         type="submit"
         color="light-blue"
-        classNameBtn={cx('btn')}
+        classNameContainer={cx('btn')}
+        disabled={btnDisabled}
+        isLoading={isLoading}
       />
     </div>
   );

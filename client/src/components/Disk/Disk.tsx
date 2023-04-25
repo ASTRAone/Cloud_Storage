@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import { usePopupControls } from '@hooks/usePopupControls';
 import { useStyles } from '@hooks/useStyles';
+import { useDebounce } from '@hooks/useDebounce';
 
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
@@ -26,21 +27,23 @@ import { ModalCreateFile } from './components';
 export const Disk: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
-  const { currentDir, breadCrumbsStack, needUpdate } = useAppSelector(getFilesData);
+  const { currentDir, breadCrumbsStack, needUpdate, searchableText } = useAppSelector(getFilesData);
   const { isOpened, openPopup, closePopup } = usePopupControls();
 
+  const debouncedSearchValue = useDebounce(searchableText, 500);
+
   useEffect(() => {
-    dispatch(fetchFiles());
+    dispatch(fetchFiles({}));
     dispatch(clearBeadcrumbsStack());
   }, []);
 
   useEffect(() => {
-    dispatch(fetchFiles(currentDir));
-  }, [currentDir]);
+    dispatch(fetchFiles({ dirId: currentDir, searchableText }));
+  }, [currentDir, debouncedSearchValue]);
 
   useEffect(() => {
     if (needUpdate) {
-      dispatch(fetchFiles(currentDir));
+      dispatch(fetchFiles({ dirId: currentDir }));
     }
   }, [needUpdate]);
 

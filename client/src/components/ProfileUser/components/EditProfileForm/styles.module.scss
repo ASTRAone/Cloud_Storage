@@ -32,8 +32,14 @@
   }
 
   & .btn {
+    box-sizing: border-box;
     @include paragraph-23();
     margin-top: 67px;
     text-transform: uppercase;
+    height: 40px;
+    width: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
