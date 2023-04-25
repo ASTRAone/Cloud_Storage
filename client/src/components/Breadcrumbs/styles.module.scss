@@ -16,6 +16,10 @@
     cursor: pointer;
   }
 
+  & .noclickable_btn {
+    cursor: default;
+  }
+
   & .btn:hover {
     text-decoration: underline;
     color: $light-sweet-100;

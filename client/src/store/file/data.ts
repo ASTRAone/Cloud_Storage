@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { BreadCrumbStack, mapToOption, RequestStatus, UUID } from '@src/utility/common';
+import { mapToOption, RequestStatus, UUID } from '@src/utility/common';
 
 import {
   FileCreateDTO,
@@ -22,7 +22,7 @@ type State = {
   needUpdate: boolean;
   searchText?: string;
   currentDir?: string;
-  breadCrumbsStack: BreadCrumbStack[];
+  breadCrumbsStack: any;
   status: RequestStatus;
   statusCreate: RequestStatus;
   statusUpload: RequestStatus;
@@ -61,6 +61,18 @@ const fetchFiles = createAsyncThunk(
     try {
       const response = await FileApi.fetchFiles(dirId);
       return response.data;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
+const fetchBreadCrumbs = createAsyncThunk(
+  'file/breadscrumbs',
+  async (currentId: string, { rejectWithValue }) => {
+    try {
+      const response = await FileApi.fetchBreadCrumbs(currentId);
+      return response.data.reverse();
     } catch (e) {
       return rejectWithValue(e);
     }
@@ -141,15 +153,6 @@ const deleteFile = createAsyncThunk(
   },
 );
 
-// const searchFile = createAsyncThunk('file/search', async (payload: string, { rejectWithValue }) => {
-//   try {
-//     const response = await FileApi.searchFile(payload);
-//     return response.data;
-//   } catch (e) {
-//     return rejectWithValue(e);
-//   }
-// });
-
 const searchFile = createAsyncThunk(
   'file/search',
   async (searchName: string, { rejectWithValue }) => {
@@ -200,17 +203,17 @@ const fileDataSlice = createSlice({
     viewFolder: (state, action: PayloadAction<'list' | 'plate'>) => {
       state.view = action.payload;
     },
-    pushBreadcrumbsStack: (state, action: PayloadAction<BreadCrumbStack>) => {
-      state.breadCrumbsStack = [...state.breadCrumbsStack, action.payload];
-    },
-    popBreadcrumbsStack: (state, action: PayloadAction<any>) => {
-      const spliced = [...state.breadCrumbsStack].splice(
-        action.payload.index + 1,
-        state.breadCrumbsStack.length - action.payload.index,
-      );
-      state.breadCrumbsStack =
-        [...state.breadCrumbsStack].filter((x) => spliced.indexOf(x) === -1) || [];
-    },
+    // pushBreadcrumbsStack: (state, action: PayloadAction<BreadCrumbStack>) => {
+    //   state.breadCrumbsStack = [...state.breadCrumbsStack, action.payload];
+    // },
+    // popBreadcrumbsStack: (state, action: PayloadAction<any>) => {
+    //   const spliced = [...state.breadCrumbsStack].splice(
+    //     action.payload.index + 1,
+    //     state.breadCrumbsStack.length - action.payload.index,
+    //   );
+    //   state.breadCrumbsStack =
+    //     [...state.breadCrumbsStack].filter((x) => spliced.indexOf(x) === -1) || [];
+    // },
     clearBeadcrumbsStack: (state) => {
       state.breadCrumbsStack = [];
       state.currentDir = '';
@@ -297,6 +300,17 @@ const fileDataSlice = createSlice({
       .addCase(searchFile.rejected, (state) => {
         state.status = 'failed';
       })
+      .addCase(fetchBreadCrumbs.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchBreadCrumbs.fulfilled, (state, action) => {
+        state.breadCrumbsStack = action.payload;
+        state.status = 'idle';
+        state.needUpdate = false;
+      })
+      .addCase(fetchBreadCrumbs.rejected, (state) => {
+        state.status = 'failed';
+      })
       .addCase(fetchRecentlyUploaded.pending, (state) => {
         state.statusFetchRecently = 'loading';
       })
@@ -334,7 +348,7 @@ const getFoldersPath = createSelector(selectSelf, ({ ...foldersPath }) => folder
 const getSearchText = createSelector(selectSelf, ({ ...searchText }) => searchText);
 
 // eslint-disable-next-line prettier/prettier
-export const { selectedDir, setSearchText, popBreadcrumbsStack, clearBeadcrumbsStack, pushBreadcrumbsStack, dropState, viewFolder } =
+export const { selectedDir, setSearchText, clearBeadcrumbsStack, dropState, viewFolder } =
   fileDataSlice.actions;
 
 export {
@@ -354,5 +368,6 @@ export {
   fetchFoldersPath,
   getFoldersPath,
   getSearchText,
+  fetchBreadCrumbs,
 };
 export default fileDataSlice.reducer;

@@ -40,6 +40,45 @@ class FileController {
     }
   }
 
+  async getBreadcrumbs(req, res) {
+    try {
+      let breadcrumbs = [];
+      let preparedPathParent = req.query.currentId;
+
+      const selectedParent = await File.find({
+        user: req.user.id,
+        _id: preparedPathParent,
+      });
+
+      const idSelectedParent = selectedParent.flatMap(item => item.parent);
+      const nameSelectedParent = selectedParent.flatMap(item => item.name);
+
+      breadcrumbs.push({'dirId': idSelectedParent.toString(), 'name': nameSelectedParent.toString()});
+
+      while (preparedPathParent) {
+        let currentParent = await File.find({
+          user: req.user.id,
+          _id: preparedPathParent,
+        });
+
+        let idCurrentParent = currentParent.flatMap(item => item.parent);
+
+        let realParent = await File.find({_id: idCurrentParent});
+        let idRealParent = realParent.flatMap(item => item._id);
+        let nameRealParent = realParent.flatMap(item => item.name);
+
+        preparedPathParent = idRealParent.toString();
+
+        if (idRealParent != '' && nameRealParent != '')
+        breadcrumbs.push({'dirId': idRealParent.toString(), 'name': nameRealParent.toString()});
+      }
+      return res.json(breadcrumbs);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Can not get files" });
+    }
+  }
+
   async getPathsFiles(req, res) {
     try {
       const files = await File.find({

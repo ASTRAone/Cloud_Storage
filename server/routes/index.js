@@ -32,6 +32,7 @@ router.post("/changeLanguage", authMiddleware, UserController.postLanguage);
 
 //CRUD files
 router.get("/files", authMiddleware, fileController.getFiles);
+router.get("/breadcrumbs", authMiddleware, fileController.getBreadcrumbs);
 router.get("/paths_files", authMiddleware, fileController.getPathsFiles);
 router.get("/recently_files", authMiddleware, fileController.getRecentlyUpdatedFiles);
 router.get("/files/download", authMiddleware, fileController.downloadFile);

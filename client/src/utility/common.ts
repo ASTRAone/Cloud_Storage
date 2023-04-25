@@ -18,8 +18,8 @@ export type IconObject = {
 };
 
 export interface BreadCrumbStack {
-  name: string;
   dirId: string;
+  name: string;
 }
 
 export const mapToOption = <T, M = string>(
