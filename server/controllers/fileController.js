@@ -29,18 +29,11 @@ class FileController {
 
   async getFiles(req, res) {
     try {
-      const files = await File.find({
+      let files = await File.find({
         user: req.user.id,
+        parent: req.query.parent,
       });
-      if (req.query.parent) {
-        const files = await File.find({
-          user: req.user.id,
-          parent: req.query.parent,
-        });
-        return res.json(files);
-       }
       if (req.query.search) {
-        let files = await File.find({user: req.user.id});
         files = files.filter(file => file.name.includes(req.query.search));
         return res.json(files);
       }
