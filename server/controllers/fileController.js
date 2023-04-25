@@ -29,10 +29,14 @@ class FileController {
 
   async getFiles(req, res) {
     try {
-      const files = await File.find({
+      let files = await File.find({
         user: req.user.id,
         parent: req.query.parent,
       });
+      if (req.query.search) {
+        files = files.filter(file => file.name.includes(req.query.search));
+        return res.json(files);
+      }
       return res.json(files);
     } catch (error) {
       console.log(error);
@@ -211,17 +215,6 @@ class FileController {
     }
   }
 
-  async searchFile(req, res) {
-    try {
-      const searchName = req.query.search;
-      let files = await File.find({user: req.user.id});
-      files = files.filter(file => file.name.includes(searchName));
-      return res.json(files);
-    } catch (e) {
-      console.log(e)
-      return res.status(400).json({message: 'Search error'});
-    }
-  }
 }
 
 module.exports = new FileController();

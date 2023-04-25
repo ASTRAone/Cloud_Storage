@@ -1,0 +1,89 @@
+import React, { useEffect, useState } from 'react';
+
+import { FileCreateDTO } from '@api/FileApi/models';
+
+import { useStyles } from '@hooks/useStyles';
+
+import { Input } from '@components/Input';
+import { Modal } from '@components/Modal';
+import { Icon } from '@components/icon';
+import { Button } from '@components/Button';
+
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { createFile, getStatusCreateFile } from '@store/file/data';
+
+import styles from './styles.module.scss';
+
+type Props = {
+  isOpen: boolean;
+  closeModal: () => void;
+  currentDir?: string;
+  title: string;
+  text?: string;
+};
+
+export const ModalCreate: React.FC<Props> = ({ isOpen, closeModal, currentDir, title, text }) => {
+  const cx = useStyles(styles);
+  const dispatch = useAppDispatch();
+  const { statusCreate } = useAppSelector(getStatusCreateFile);
+  const [textInput, setTextInput] = useState('');
+  const [errors, setErrors] = useState(false);
+
+  useEffect(() => () => closeModal(), []);
+
+  const handleCreateFile = async (name: string) => {
+    setErrors(false);
+    const payload: FileCreateDTO = {
+      name,
+      type: 'dir',
+    };
+
+    if (currentDir) {
+      payload.parent = currentDir;
+    }
+    try {
+      await dispatch(createFile(payload)).unwrap();
+      closeModal();
+    } catch (error) {
+      console.log(error);
+      setErrors(true);
+    }
+  };
+
+  return (
+    <Modal
+      open={isOpen}
+      classNamePrefix={cx('modal')}
+    >
+      <div className={cx('container')}>
+        <p className={cx('title')}>{title}</p>
+        {text ? (
+          <div className={cx('loaded-container')}>
+            <p className={cx('title')}>{text}</p>
+          </div>
+        ) : null}
+        <Input
+          onChange={(e) => setTextInput(e.target.value)}
+          value={textInput}
+          placeholder="Enter a folder name"
+          errorText={errors ? 'Error creating folder' : ''}
+        />
+        <div className={cx('btn')}>
+          <Button
+            text="Create a folder"
+            isUpperCase
+            type="submit"
+            color="light-blue"
+            onClick={() => handleCreateFile(textInput)}
+            isLoading={statusCreate === 'loading'}
+          />
+        </div>
+        <Icon
+          type="close"
+          className={cx('close')}
+          onClick={closeModal}
+        />
+      </div>
+    </Modal>
+  );
+};

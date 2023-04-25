@@ -16,6 +16,7 @@ type Props = Partial<React.ComponentPropsWithRef<'input'>> & {
   classNameContent?: string;
   variant?: 'blue' | 'dark';
   isUpperCase?: boolean;
+  errorText?: string;
 };
 
 export const Input: React.FC<Props> = ({
@@ -31,6 +32,7 @@ export const Input: React.FC<Props> = ({
   variant,
   isUpperCase = true,
   full = false,
+  errorText,
   ...rest
 }) => {
   const cx = useStyles(styles);
@@ -56,7 +58,15 @@ export const Input: React.FC<Props> = ({
           {label}
         </label>
       )}
-      <div className={cx('content', variant, classNameContent, isError ? 'error' : '')}>
+      <div
+        className={cx(
+          errorText ? 'error' : '',
+          'content',
+          variant,
+          classNameContent,
+          isError ? 'error' : '',
+        )}
+      >
         {actionsLeft}
         <div className={cx('controller-input')}>
           <input
@@ -69,6 +79,7 @@ export const Input: React.FC<Props> = ({
         </div>
         {actionsRight}
       </div>
+      <span className={cx('error')}>{errorText}</span>
     </div>
   );
 };
