@@ -18,7 +18,7 @@ export const LayoutPage: React.FC<Props> = ({ children, isBgProfile = false }) =
   return (
     <div className={cx('wrapper')}>
       <div className={cx('header')}>
-        <HeaderLayout auth />
+        <HeaderLayout />
       </div>
       <div className={cx('content', isBgProfile ? 'bg-profile' : '')}>
         <div className={cx('sidepanel')}>

@@ -9,19 +9,25 @@ import { statusFlags } from '@store/selectors';
 import { RootState } from '@store/root';
 
 type State = {
-  user: AuthViewDTO | null;
+  userData: AuthViewDTO;
   status: RequestStatus;
   statusReg: RequestStatus;
+  statusUserData: RequestStatus;
   statusLogout: RequestStatus;
   statusAuth: RequestStatus;
   statusAvatar: RequestStatus;
+  statusUpdateProfile: RequestStatus;
+  needUpdate: boolean;
 };
 
 const initialState: State = {
-  user: null,
+  userData: {},
+  needUpdate: false,
   status: 'idle',
+  statusUserData: 'idle',
   statusReg: 'idle',
   statusLogout: 'idle',
+  statusUpdateProfile: 'idle',
   statusAuth: 'idle',
   statusAvatar: 'idle',
 };
@@ -59,15 +65,6 @@ const userRegistration = createAsyncThunk(
   },
 );
 
-const userReload = createAsyncThunk('user/refresh', async (_, { rejectWithValue }) => {
-  try {
-    const response = await AuthApi.reload();
-    return response.data;
-  } catch (e) {
-    return rejectWithValue(e);
-  }
-});
-
 const userLogout = createAsyncThunk('user/logout', async (_, { rejectWithValue }) => {
   try {
     const response = await AuthApi.logout();
@@ -91,6 +88,28 @@ const userUploadAvatar = createAsyncThunk(
   },
 );
 
+const userUpdateProfile = createAsyncThunk(
+  'user/userUpdateProfile',
+  async (payload: any, { rejectWithValue }) => {
+    try {
+      const response = await AuthApi.updateProfile(payload);
+      return response.data;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
+const fetchUserData = createAsyncThunk('user/userData', async (_, { rejectWithValue }) => {
+  try {
+    const response = await AuthApi.userData();
+    return response.data;
+  } catch (e) {
+    return rejectWithValue(e);
+  }
+});
+
+// TODO добавить апи на получение данных о юзере
 const userDataSlice = createSlice({
   name: 'userDataSlice',
   initialState,
@@ -99,19 +118,29 @@ const userDataSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
+      .addCase(fetchUserData.pending, (state) => {
+        state.statusUserData = 'loading';
+      })
+      .addCase(fetchUserData.fulfilled, (state, action) => {
+        state.statusUserData = 'idle';
+        state.needUpdate = false;
+        state.userData = action.payload;
+      })
+      .addCase(fetchUserData.rejected, (state) => {
+        state.statusUserData = 'failed';
+      })
+
       .addCase(userLogin.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(userLogin.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        if (state.user) {
-          state.user.isAuth = true;
-        }
+      .addCase(userLogin.fulfilled, (state) => {
         state.status = 'idle';
       })
       .addCase(userLogin.rejected, (state) => {
         state.status = 'failed';
       })
+
       .addCase(userRegistration.pending, (state) => {
         state.statusReg = 'loading';
       })
@@ -122,35 +151,15 @@ const userDataSlice = createSlice({
         state.statusReg = 'failed';
       })
 
-      .addCase(userReload.pending, (state) => {
-        state.statusAuth = 'loading';
-      })
-      .addCase(userReload.fulfilled, (state, action) => {
-        state.user = action.payload;
-        if (state.user) {
-          state.user.isAuth = true;
-        }
-        state.statusAuth = 'idle';
-      })
-      .addCase(userReload.rejected, (state) => {
-        if (state.user?.isAuth) {
-          state.user.isAuth = false;
-        }
-        state.statusAuth = 'failed';
-      })
-
       .addCase(userLogout.pending, (state) => {
         state.statusLogout = 'loading';
       })
       .addCase(userLogout.fulfilled, (state) => {
         state.statusLogout = 'idle';
-        state.user = null;
+        state.userData = {};
       })
       .addCase(userLogout.rejected, (state) => {
         state.statusLogout = 'failed';
-        if (state.user?.isAuth) {
-          state.user.isAuth = false;
-        }
       })
 
       .addCase(userUploadAvatar.pending, (state) => {
@@ -158,10 +167,24 @@ const userDataSlice = createSlice({
       })
       .addCase(userUploadAvatar.fulfilled, (state) => {
         state.statusAvatar = 'idle';
+        state.needUpdate = true;
       })
       .addCase(userUploadAvatar.rejected, (state) => {
         state.statusAvatar = 'failed';
+      })
+
+      .addCase(userUpdateProfile.pending, (state) => {
+        state.statusUpdateProfile = 'loading';
+      })
+      .addCase(userUpdateProfile.fulfilled, (state, action) => {
+        state.statusUpdateProfile = 'idle';
+        state.needUpdate = true;
+        state.userData = action.payload;
+      })
+      .addCase(userUpdateProfile.rejected, (state) => {
+        state.statusUpdateProfile = 'failed';
       });
+
     // .addCase(userLanguage.pending, (state) => {
     //   state.status = 'loading';
     // })
@@ -190,9 +213,10 @@ export {
   getUserData,
   getStatus,
   userLogin,
-  userReload,
   userRegistration,
   userLogout,
   userUploadAvatar,
+  userUpdateProfile,
+  fetchUserData,
 };
 export default userDataSlice.reducer;

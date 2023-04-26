@@ -22,7 +22,7 @@ export type MenuItemType = {
   disabled?: boolean;
 };
 
-const menu: Array<MenuItemType> = [
+export const menu: Array<MenuItemType> = [
   { link: 'dashboard' },
   { link: 'files' },
   { link: 'favorites' },

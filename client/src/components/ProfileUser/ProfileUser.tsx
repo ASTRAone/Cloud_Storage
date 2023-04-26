@@ -16,20 +16,18 @@ import { EditProfileForm } from './components/EditProfileForm';
 
 const TABS = ['Editing Profile', 'Settings', 'Premium'];
 
-// TODO доделать форму авторизации по label
-// TODO поправить все цвета
-
 export const ProfileUser: React.FC = () => {
   const cx = useStyles(styles);
   const [activeTab, setActiveTab] = useState(TABS[0]);
 
-  const { user } = useAppSelector(getUserData);
+  const { userData, statusUpdateProfile } = useAppSelector(getUserData);
+  const { name, surname, email, diskSpace, usedSpace } = userData;
 
   return (
     <div className={cx('page')}>
       <div className={cx('header')}>
-        <h3 className={cx('title')}>{user?.name + ' ' + user?.surname}</h3>
-        <p className={cx('text')}>{user?.email}</p>
+        <h3 className={cx('title')}>{`${name ?? '-'} ${surname ?? '-'}`}</h3>
+        <p className={cx('text')}>{email ?? '-'}</p>
       </div>
       <div className={cx('container')}>
         <div className={cx('content-left')}>
@@ -42,16 +40,17 @@ export const ProfileUser: React.FC = () => {
             />
             <CellInfo
               title="disk used"
-              value={0.2}
+              value={usedSpace}
               isGb
               type="blue"
             />
 
             <div style={{ width: 192, height: 125 }} />
 
+            {/* TODO перевести в gb */}
             <CellInfo
               title="disk spased"
-              value={20}
+              value={diskSpace}
             />
             <CellInfo
               title="shared users with"
@@ -76,7 +75,10 @@ export const ProfileUser: React.FC = () => {
               value="Editing Profile"
               currentValue={activeTab}
             >
-              <EditProfileForm />
+              <EditProfileForm
+                data={userData}
+                isLoading={statusUpdateProfile === 'loading'}
+              />
             </TabPanel>
             <TabPanel
               value="Settings"

@@ -42,6 +42,11 @@ type FilesPathsDTO = {
   _id: UUID;
 };
 
+type FilePayloadDTO = {
+  dirId?: string;
+  searchableText?: string;
+};
+
 export type {
   FileResponse,
   FileCreateDTO,
@@ -49,4 +54,5 @@ export type {
   FileDownloadDTO,
   FileResponseRecently,
   FilesPathsDTO,
+  FilePayloadDTO,
 };

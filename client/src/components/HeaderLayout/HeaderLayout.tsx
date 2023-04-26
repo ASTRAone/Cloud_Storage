@@ -1,56 +1,60 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+import { AUTH_HEADER } from '@utils/headers';
 import { ALL_FILES_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from '@utils/contants';
+
+import { StorageService } from '@services/StorageService';
 
 import { useStyles } from '@hooks/useStyles';
 
 import { Icon } from '@components/icon';
 import { ButtonLink } from '@components/ButtonLink';
 import { MenuProfile } from '@components/MenuProfile';
-import { InputSearch } from '@components/InputSearch';
 import { PopupLocalization } from '@components/PopupLocalization';
 import { SelectTreeNode } from '@components/SelectTreeNode';
+import { Input } from '@components/Input';
 
 import CloudLogo from '@assets/images/logo.png';
 
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { getUserData, userReload } from '@store/auth/data';
-import { getSearchText, searchFile, setSearchText } from '@store/file/data';
+import { fetchUserData, getUserData } from '@store/auth/data';
+import { getSearchText, saveSearchText } from '@store/file/data';
 
 import styles from './styles.module.scss';
 
-type Props = {
-  auth?: boolean;
-};
+const storageService = StorageService.getInstance();
 
-export const HeaderLayout: React.FC<Props> = ({ auth }) => {
+export const HeaderLayout: React.FC = () => {
   const cx = useStyles(styles);
+  const dispatch = useAppDispatch();
   const location = useLocation();
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const { user } = useAppSelector(getUserData);
-  const { searchText } = useAppSelector(getSearchText);
-  const [enterSearchName, setEnterSearchName] = useState('');
+  const { userData, needUpdate } = useAppSelector(getUserData);
+  const token = storageService.getItem(AUTH_HEADER);
 
+  const { name, surname, email } = userData;
+  const { searchableText } = useAppSelector(getSearchText);
+
+  const [searchText, setSearchText] = useState(searchableText);
   const [selectedTree, setSelectedTree] = useState<(string | number | undefined)[]>([]);
 
   useEffect(() => {
-    dispatch(userReload()).unwrap();
+    dispatch(fetchUserData());
   }, []);
 
-  const searchChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (location.pathname !== ALL_FILES_ROUTE) {
-      navigate(ALL_FILES_ROUTE);
-    }
-    if (e.target.value === '') {
-      navigate(-1);
-    }
-    setEnterSearchName(e.target.value);
-    dispatch(setSearchText(e.target.value));
-    dispatch(searchFile(e.target.value)).unwrap();
+  useEffect(() => {
+    needUpdate && dispatch(fetchUserData());
+  }, [needUpdate]);
+
+  useEffect(() => {
+    dispatch(saveSearchText(searchText));
+  }, [searchText]);
+
+  const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchText(value);
   };
 
   return (
@@ -64,7 +68,7 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
           mern <span className={cx('span')}>cloud</span>
         </div>
       </div>
-      {!auth ? (
+      {!token ? (
         <div className={cx('containerOptions')}>
           <PopupLocalization />
           <Icon
@@ -88,33 +92,37 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
         </div>
       ) : (
         <>
-          <div className={cx('containerInputs')}>
-            <InputSearch
-              full
-              value={searchText ?? enterSearchName}
-              onChange={(e) => searchChangeHandler(e)}
-              placeholder={t('headerPanel.placeholder.search')}
-              actions={[
-                {
-                  icon: (
-                    <Icon
-                      type="magnifier"
-                      className={cx('icon')}
-                    />
-                  ),
-                  align: 'left',
-                },
-              ]}
-            />
-            <SelectTreeNode
-              iconAnimation
-              icon="right"
-              multiple
-              checkStrictly
-              value={selectedTree}
-              onChangeSelected={setSelectedTree}
-            />
-          </div>
+          {location.pathname === ALL_FILES_ROUTE && (
+            <div className={cx('containerInputs')}>
+              <Input
+                value={searchText}
+                onChange={onChangeSearch}
+                full
+                classNameContent={cx('search')}
+                placeholder={t('headerPanel.placeholder.search')}
+                actions={[
+                  {
+                    icon: (
+                      <Icon
+                        type="magnifier"
+                        className={cx('icon')}
+                      />
+                    ),
+                    align: 'left',
+                  },
+                ]}
+              />
+              <SelectTreeNode
+                iconAnimation
+                icon="right"
+                multiple
+                checkStrictly
+                value={selectedTree}
+                onChangeSelected={setSelectedTree}
+              />
+            </div>
+          )}
+
           <div className={cx('containerOptions')}>
             <PopupLocalization />
             <Icon
@@ -128,8 +136,8 @@ export const HeaderLayout: React.FC<Props> = ({ auth }) => {
             <div className={cx('profile')}>
               <MenuProfile
                 src=""
-                name={user?.name + ' ' + user?.surname}
-                email={user?.email}
+                name={`${name ?? '-'} ${surname ?? '-'}`}
+                email={email ?? '-'}
               />
             </div>
           </div>
