@@ -340,6 +340,7 @@ const selectSelf = (state: RootState) => state.file.data;
 
 const getFilesData = createSelector(selectSelf, ({ ...fileData }) => fileData);
 const statusCreate = createSelector(selectSelf, ({ statusCreate }) => statusCreate);
+const getStatusDelete = createSelector(selectSelf, ({ ...statusDelete }) => statusDelete);
 const getCurrentDir = createSelector(selectSelf, ({ currentDir }) => currentDir);
 const getStatus = createSelector(selectSelf, statusFlags);
 const setViewFolders = createSelector(selectSelf, ({ ...view }) => view);
@@ -363,6 +364,7 @@ export {
   uploadFile,
   downloadFile,
   deleteFile,
+  getStatusDelete,
   searchFile,
   setViewFolders,
   fetchRecentlyUploaded,

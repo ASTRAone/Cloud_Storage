@@ -1,0 +1,57 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.dialog {
+  width: 50rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+
+  & .title {
+    @include text();
+    @include paragraph-19();
+    color: $primary-800;
+    text-align: center;
+  }
+
+  & .text {
+    @include text();
+    @include paragraph-16();
+    color: $primary-800;
+    text-align: center;
+  }
+
+  & .dialog-container {
+    & .title {
+      @include text();
+      @include paragraph-19();
+      color: $primary-800;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+  }
+
+  & .btn {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  & .close {
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    top: -16px;
+    right: -18px;
+    cursor: pointer;
+  }
+}
+
+.value > input {
+  position: absolute!important;
+}
