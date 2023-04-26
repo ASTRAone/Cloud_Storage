@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { AUTH_HEADER } from '@utils/headers';
@@ -15,7 +15,6 @@ import { MenuProfile } from '@components/MenuProfile';
 import { PopupLocalization } from '@components/PopupLocalization';
 import { SelectTreeNode } from '@components/SelectTreeNode';
 import { Input } from '@components/Input';
-import { menu } from '@components/SidePanel/SidePanel';
 
 import CloudLogo from '@assets/images/logo.png';
 
@@ -26,12 +25,10 @@ import { getSearchText, saveSearchText } from '@store/file/data';
 import styles from './styles.module.scss';
 
 const storageService = StorageService.getInstance();
-const ACTIVE_SEARCH_TAB = menu[1].link;
 
 export const HeaderLayout: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
   const { userData, needUpdate } = useAppSelector(getUserData);
@@ -52,10 +49,6 @@ export const HeaderLayout: React.FC = () => {
   }, [needUpdate]);
 
   useEffect(() => {
-    if (searchText && location.pathname !== ALL_FILES_ROUTE) {
-      navigate(ALL_FILES_ROUTE);
-      storageService.setItem('activeTabLC', ACTIVE_SEARCH_TAB);
-    }
     dispatch(saveSearchText(searchText));
   }, [searchText]);
 
@@ -99,34 +92,37 @@ export const HeaderLayout: React.FC = () => {
         </div>
       ) : (
         <>
-          <div className={cx('containerInputs')}>
-            <Input
-              value={searchText}
-              onChange={onChangeSearch}
-              full
-              classNameContent={cx('search')}
-              placeholder={t('headerPanel.placeholder.search')}
-              actions={[
-                {
-                  icon: (
-                    <Icon
-                      type="magnifier"
-                      className={cx('icon')}
-                    />
-                  ),
-                  align: 'left',
-                },
-              ]}
-            />
-            <SelectTreeNode
-              iconAnimation
-              icon="right"
-              multiple
-              checkStrictly
-              value={selectedTree}
-              onChangeSelected={setSelectedTree}
-            />
-          </div>
+          {location.pathname === ALL_FILES_ROUTE && (
+            <div className={cx('containerInputs')}>
+              <Input
+                value={searchText}
+                onChange={onChangeSearch}
+                full
+                classNameContent={cx('search')}
+                placeholder={t('headerPanel.placeholder.search')}
+                actions={[
+                  {
+                    icon: (
+                      <Icon
+                        type="magnifier"
+                        className={cx('icon')}
+                      />
+                    ),
+                    align: 'left',
+                  },
+                ]}
+              />
+              <SelectTreeNode
+                iconAnimation
+                icon="right"
+                multiple
+                checkStrictly
+                value={selectedTree}
+                onChangeSelected={setSelectedTree}
+              />
+            </div>
+          )}
+
           <div className={cx('containerOptions')}>
             <PopupLocalization />
             <Icon
