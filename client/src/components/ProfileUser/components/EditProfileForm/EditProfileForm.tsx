@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { ErrorUtils } from '@utils/ErrorUtils';
+
 import { AuthViewDTO } from '@api/AuthApi/models';
+
+import { useToast } from '@hooks/useToast';
 
 import { Form } from '@components/Form';
 
@@ -18,6 +22,7 @@ type Props = {
 export const EditProfileForm: React.FC<Props> = ({ data, isLoading }) => {
   const { name, surname, email, city, country, phone, biography } = data;
   const dispatch = useAppDispatch();
+  const toast = useToast();
   const [btnDisabled, setBtnDisabled] = useState(false);
 
   const defaultValues: AuthViewDTO = {
@@ -37,9 +42,11 @@ export const EditProfileForm: React.FC<Props> = ({ data, isLoading }) => {
     try {
       await dispatch(userUpdateProfile(payload)).unwrap();
       setBtnDisabled(false);
+      toast.success({ title: 'Данные обновлены' });
     } catch (error) {
+      const errorMsg = ErrorUtils.handleApiError(error);
       setBtnDisabled(false);
-      console.log(error);
+      toast.error({ title: 'Ошибка обновления данных', text: errorMsg });
     }
   };
 

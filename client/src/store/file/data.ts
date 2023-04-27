@@ -226,8 +226,8 @@ const fileDataSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchFiles.fulfilled, (state, action) => {
-        state.file = action.payload;
         state.status = 'idle';
+        state.file = action.payload;
         state.needUpdate = false;
       })
       .addCase(fetchFiles.rejected, (state) => {
@@ -260,7 +260,6 @@ const fileDataSlice = createSlice({
       })
       .addCase(uploadFile.fulfilled, (state) => {
         state.statusUpload = 'idle';
-        state.needUpdate = true;
         state.needUpdate = true;
       })
       .addCase(uploadFile.rejected, (state) => {

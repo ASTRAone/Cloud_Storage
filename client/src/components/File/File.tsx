@@ -1,14 +1,18 @@
 import React from 'react';
 
+import { ErrorUtils } from '@utils/ErrorUtils';
+
 import { customDate } from '@src/utility/customDate';
 
 import { FileResponse } from '@api/FileApi/models';
 
 import { useStyles } from '@hooks/useStyles';
 import { usePopupControls } from '@hooks/usePopupControls';
+import { useToast } from '@hooks/useToast';
 
 import { Icon } from '@components/icon';
 import { Dialog } from '@components/Dialog';
+import { TextShorter } from '@components/TextShorter';
 
 import { downloadFile, deleteFile, getStatusDelete } from '@store/file/data';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
@@ -22,11 +26,15 @@ type Props = {
 };
 
 export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} }) => {
-  const dispatch = useAppDispatch();
-  const { name, size, type, date } = file;
   const cx = useStyles(styles);
+  const dispatch = useAppDispatch();
   const { isOpened, openPopup, closePopup } = usePopupControls();
+  const toast = useToast();
   const { statusDelete } = useAppSelector(getStatusDelete);
+  const { name, size, type, date } = file;
+
+  // TODO при удалении файла или папки дизейблить кнопку удаления
+  // TODO сделать сохранение отображения папок: плитка/лист
 
   const openDeletePopup = async (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -38,8 +46,14 @@ export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} 
   };
 
   const deleteClickHandler = async () => {
-    await dispatch(deleteFile(file)).unwrap();
-    closePopup();
+    try {
+      await dispatch(deleteFile(file)).unwrap();
+      closePopup();
+      toast.success({ title: 'Успешно удалено' });
+    } catch (error) {
+      const errorMsg = ErrorUtils.handleApiError(error);
+      toast.error({ title: 'Ошибка авторизации', text: errorMsg });
+    }
   };
   return (
     <>
@@ -52,7 +66,12 @@ export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} 
           className={cx('icon')}
           size="xl"
         />
-        <div className={cx('file-name')}>{name}</div>
+        <TextShorter
+          tooltip
+          className={cx('file-name', view)}
+        >
+          <>{name}</>
+        </TextShorter>
         <div className={cx('file-date')}>{customDate(date).fullDate}</div>
         <div className={cx('file-size')}>{size}</div>
         <div

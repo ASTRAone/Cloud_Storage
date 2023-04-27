@@ -12,6 +12,7 @@ const storageService = StorageService.getInstance();
 
 const useAuth = () => {
   const token = storageService.getItem(AUTH_HEADER);
+  console.log(token);
   const navigate = useNavigate();
 
   useEffect(() => {

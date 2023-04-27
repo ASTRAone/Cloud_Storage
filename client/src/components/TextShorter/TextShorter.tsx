@@ -1,5 +1,5 @@
 import React, { ReactNode, useMemo, useState } from 'react';
-import { EventType } from 'reactjs-popup/dist/types';
+import { EventType, PopupPosition } from 'reactjs-popup/dist/types';
 
 import { useStyles } from '@hooks/useStyles';
 
@@ -12,11 +12,12 @@ type Props = {
   tooltip?: boolean;
   clickEvent?: boolean;
   children?: ReactNode;
+  position?: PopupPosition[];
 };
 
 const TT_EVENTS: EventType[] = ['focus', 'hover'];
 
-const TextShorter: React.FC<Props> = ({ tooltip, className, children, clickEvent }) => {
+const TextShorter: React.FC<Props> = ({ tooltip, className, children, clickEvent, position }) => {
   const cx = useStyles(styles);
   const tooltipContent = <>{children}</>;
 
@@ -42,6 +43,7 @@ const TextShorter: React.FC<Props> = ({ tooltip, className, children, clickEvent
           place="bottom"
           events={tooltipEvents}
           text={tooltipContent}
+          position={position}
         >
           <div
             className={cx('content')}

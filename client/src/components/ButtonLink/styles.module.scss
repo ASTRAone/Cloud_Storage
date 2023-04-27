@@ -3,6 +3,10 @@
     text-decoration: none;
     color: gray;
 
+    &:focus-visible {
+      outline: none;
+    }
+
     &.upperCase {
       text-transform: uppercase;
     }

@@ -1,5 +1,7 @@
 import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form';
 
+import { AxiosError } from 'axios';
+
 import { SelectOption } from '@components/Select/Select';
 
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
@@ -28,4 +30,14 @@ export const mapToOption = <T, M = string>(
   meta?: M,
 ): SelectOption<T, M> => {
   return { label, value, meta };
+};
+
+export type ApiError =
+  | string[]
+  | {
+      message: string;
+    };
+
+export const isApiError = (error: unknown): error is AxiosError<ApiError> => {
+  return !!(error as AxiosError<ApiError>)?.response?.data;
 };

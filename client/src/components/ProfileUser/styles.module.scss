@@ -11,18 +11,21 @@
   & .header {
     margin-left: 48px;
     margin-bottom: 35px;
+    max-width: 520px;
 
     & .title {
       @include text();
       @include heading-39();
       color: $white;
       text-transform: uppercase;
+      cursor: pointer;
     }
 
     & .text {
       @include text();
       @include paragraph-19();
       color: $white;
+      cursor: pointer;
     }
   }
 

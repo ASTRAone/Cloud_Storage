@@ -7,7 +7,6 @@ import { Icon } from '@components/icon';
 import { Button } from '@components/Button';
 
 import styles from './styles.module.scss';
-
 type Props = {
   isOpen: boolean;
   closeModal: () => void;

@@ -36,7 +36,7 @@ export const AvatarUser: React.FC<Porps> = ({ src = '' }) => {
       <div className={cx('content')}>
         <img
           className={cx('img')}
-          src={src ? src : DefaultAvatar}
+          src={src || DefaultAvatar}
           alt="avatar"
         />
         <label

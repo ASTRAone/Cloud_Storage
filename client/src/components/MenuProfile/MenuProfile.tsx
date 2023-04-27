@@ -8,6 +8,7 @@ import { useStyles } from '@hooks/useStyles';
 import { Popup } from '@components/Popup';
 import { IconTypes } from '@components/icon/IconDictionary';
 import { MenuItem } from '@components/MenuIteim';
+import { TextShorter } from '@components/TextShorter';
 
 import DefaultAvatar from '@assets/images/default-avatar.png';
 
@@ -34,15 +35,16 @@ export const MenuProfile: React.FC<Props> = ({ name, email, src }) => {
   const { t } = useTranslation();
   const dispath = useAppDispatch();
   const menu: Array<MenuItemType> = [
-    { url: '/profile', iconType: 'profile', linkName: t('profileMenu.menu.account') },
-    { url: '/mydisk', iconType: 'disk', linkName: t('profileMenu.menu.mydisk') },
-    { url: '/settings', iconType: 'settings', linkName: t('profileMenu.menu.settings') },
-    { url: '/logout', iconType: 'logout', linkName: t('profileMenu.menu.logout') },
+    { url: 'profile', iconType: 'profile', linkName: t('profileMenu.menu.account') },
+    { url: 'mydisk', iconType: 'disk', linkName: t('profileMenu.menu.mydisk') },
+    { url: 'settings', iconType: 'settings', linkName: t('profileMenu.menu.settings') },
+    { url: 'logout', iconType: 'logout', linkName: t('profileMenu.menu.logout') },
   ];
 
   const logout = async () => {
     storageService.removeItem('Authorization');
     storageService.removeItem('activeTabLC');
+    storageService.removeItem('activeLocationLC');
     await dispath(userLogout()).unwrap();
   };
 
@@ -61,8 +63,20 @@ export const MenuProfile: React.FC<Props> = ({ name, email, src }) => {
                 className={cx('avatar')}
               />
               <div className={cx('information')}>
-                <div className={cx('name')}>{name}</div>
-                <div className={cx('email')}>{email}</div>
+                <TextShorter
+                  tooltip
+                  position={['left top']}
+                  className={cx('name')}
+                >
+                  <>{name}</>
+                </TextShorter>
+                <TextShorter
+                  tooltip
+                  position={['left top']}
+                  className={cx('email')}
+                >
+                  <>{email}</>
+                </TextShorter>
               </div>
             </div>
           </>
@@ -83,7 +97,7 @@ export const MenuProfile: React.FC<Props> = ({ name, email, src }) => {
                     iconType={iconType}
                     title={linkName}
                     className={cx('btn-link')}
-                    onClick={url === '/logout' ? logout : undefined}
+                    onClick={url === 'logout' ? logout : undefined}
                   />
                 </div>
               );
