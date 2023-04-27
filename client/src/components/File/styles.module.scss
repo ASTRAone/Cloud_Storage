@@ -59,4 +59,10 @@
   & .icon {
     color: $light-sweet-100;
   }
+
+  & .file-name  {
+    &.plate {
+      max-width: 150px;
+    }
+  }
 }

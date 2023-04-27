@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
+import { ErrorUtils } from '@utils/ErrorUtils';
+
 import { FileCreateDTO } from '@api/FileApi/models';
 
 import { useStyles } from '@hooks/useStyles';
+import { useToast } from '@hooks/useToast';
 
 import { Input } from '@components/Input';
 import { Modal } from '@components/Modal';
@@ -25,6 +28,7 @@ type Props = {
 export const ModalCreate: React.FC<Props> = ({ isOpen, closeModal, currentDir, title, text }) => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
+  const toast = useToast();
   const { statusCreate } = useAppSelector(getStatusCreateFile);
   const [textInput, setTextInput] = useState('');
   const [errors, setErrors] = useState(false);
@@ -43,9 +47,11 @@ export const ModalCreate: React.FC<Props> = ({ isOpen, closeModal, currentDir, t
     }
     try {
       await dispatch(createFile(payload)).unwrap();
+      toast.success({ title: 'Папка успешно создана' });
       closeModal();
     } catch (error) {
-      console.log(error);
+      const errorMsg = ErrorUtils.handleApiError(error);
+      toast.error({ title: 'Ошибка создания папки', text: errorMsg });
       setErrors(true);
     }
   };

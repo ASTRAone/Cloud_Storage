@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const Toast: React.FC<Props> = ({ position = 'top-center', containerClassName }) => {
-  const duration = 250000;
+  const duration = 2500;
   const defaultToatOptions: DefaultToastOptions = {
     duration,
   };

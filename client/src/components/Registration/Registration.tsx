@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { ErrorUtils } from '@utils/ErrorUtils';
+
 import { LOGIN_ROUTE } from '@src/utility/contants';
 
 import { AuthRegDTO } from '@api/AuthApi/models';
+
+import { useToast } from '@hooks/useToast';
 
 import { Form } from '@components/Form';
 
@@ -15,6 +19,7 @@ import { RegistrationView } from './Registration.view';
 export const Registration: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const toast = useToast();
   const { statusReg } = useAppSelector(getUserData);
   const [errorRes, setErrorRes] = useState(false);
   const [btnDisabled, setBtnDisabled] = useState(false);
@@ -24,10 +29,12 @@ export const Registration: React.FC = () => {
     try {
       await dispatch(userRegistration({ ...data, language: 'en-US' })).unwrap();
       navigate(LOGIN_ROUTE);
+      toast.success({ title: 'Регистрация прошла успешно' });
     } catch (error) {
+      const errorMsg = ErrorUtils.handleApiError(error);
       setErrorRes(true);
       setBtnDisabled(false);
-      console.log(error);
+      toast.error({ title: 'Ошибка регистрации', text: errorMsg });
     }
   };
 

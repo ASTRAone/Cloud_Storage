@@ -14,6 +14,8 @@
 
 .tooltip {
   display: inline-block;
+  position: relative;
+  z-index: 9999;
   max-width: 300px;
   border-radius: 5px;
   padding: 11px 5px;

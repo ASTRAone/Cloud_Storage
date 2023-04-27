@@ -5,6 +5,7 @@ import { useStyles } from '@hooks/useStyles';
 import { TabList } from '@components/Tab/TabList';
 import { Tab } from '@components/Tab';
 import { TabPanel } from '@components/Tab/TabPanel';
+import { TextShorter } from '@components/TextShorter';
 
 import { useAppSelector } from '@store/hooks';
 import { getUserData } from '@store/auth/data';
@@ -23,11 +24,24 @@ export const ProfileUser: React.FC = () => {
   const { userData, statusUpdateProfile } = useAppSelector(getUserData);
   const { name, surname, email, diskSpace, usedSpace } = userData;
 
+  const userName = name ?? '-';
+  const userSurname = surname ?? '-';
+
   return (
     <div className={cx('page')}>
       <div className={cx('header')}>
-        <h3 className={cx('title')}>{`${name ?? '-'} ${surname ?? '-'}`}</h3>
-        <p className={cx('text')}>{email ?? '-'}</p>
+        <TextShorter
+          tooltip
+          className={cx('title')}
+        >
+          <>{userName + userSurname}</>
+        </TextShorter>
+        <TextShorter
+          tooltip
+          className={cx('text')}
+        >
+          <>{email ?? '-'}</>
+        </TextShorter>
       </div>
       <div className={cx('container')}>
         <div className={cx('content-left')}>
