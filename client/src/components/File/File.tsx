@@ -107,7 +107,7 @@ export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} 
           title="Do you want to delete this file?"
           text={name}
           onSubmit={deleteClickHandler}
-          loading={statusDelete == 'loading'}
+          loading={statusDelete === 'loading'}
         />
       ) : null}
     </>

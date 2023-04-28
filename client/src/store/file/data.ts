@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { mapToOption, RequestStatus } from '@src/utility/common';
+import { FolderView, mapToOption, RequestStatus } from '@src/utility/common';
 
 import {
   FileCreateDTO,
@@ -11,10 +11,14 @@ import {
 } from '@api/FileApi/models';
 import { FileApi } from '@api/FileApi';
 
+import { StorageService } from '@services/StorageService';
+
 import { SelectOption } from '@components/Select/Select';
 
 import { statusFlags } from '@store/selectors';
 import { RootState } from '@store/root';
+
+// TODO сделать стор для userSetting и вынести настройки туда
 
 type State = {
   file: FileResponse[] | [];
@@ -33,8 +37,12 @@ type State = {
   statusViewFiles: RequestStatus;
   statusFetchRecently: RequestStatus;
   statusFoldersPath: RequestStatus;
-  view: 'list' | 'plate';
+  view: FolderView;
 };
+
+const storageService = StorageService.getInstance();
+
+const folderVariant: FolderView = storageService.getItem('viewFolder') ?? 'list';
 
 const initialState: State = {
   file: [],
@@ -53,7 +61,7 @@ const initialState: State = {
   statusDelete: 'idle',
   statusFoldersPath: 'idle',
   statusFetchRecently: 'idle',
-  view: 'list',
+  view: folderVariant,
 };
 
 const fetchFiles = createAsyncThunk(
@@ -201,7 +209,7 @@ const fileDataSlice = createSlice({
     saveSearchText: (state, action: PayloadAction<string | undefined>) => {
       state.searchableText = action.payload;
     },
-    viewFolder: (state, action: PayloadAction<'list' | 'plate'>) => {
+    viewFolder: (state, action: PayloadAction<FolderView>) => {
       state.view = action.payload;
     },
     // pushBreadcrumbsStack: (state, action: PayloadAction<BreadCrumbStack>) => {

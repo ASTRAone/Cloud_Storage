@@ -1,7 +1,5 @@
 import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form';
 
-import { AxiosError } from 'axios';
-
 import { SelectOption } from '@components/Select/Select';
 
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
@@ -18,6 +16,8 @@ export type IconObject = {
   icon: JSX.Element;
   align: 'left' | 'right';
 };
+
+export type FolderView = 'list' | 'plate';
 
 export interface BreadCrumbStack {
   dirId: string;
@@ -37,7 +37,3 @@ export type ApiError =
   | {
       message: string;
     };
-
-export const isApiError = (error: unknown): error is AxiosError<ApiError> => {
-  return !!(error as AxiosError<ApiError>)?.response?.data;
-};
