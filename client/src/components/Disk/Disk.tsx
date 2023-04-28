@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react';
 
+import { FolderView } from '@utils/common';
+
+import { StorageService } from '@services/StorageService';
+
 import { usePopupControls } from '@hooks/usePopupControls';
 import { useStyles } from '@hooks/useStyles';
 import { useDebounce } from '@hooks/useDebounce';
@@ -23,6 +27,8 @@ import {
 
 import styles from './styles.module.scss';
 import { ModalCreate } from './components/ModalCreate/ModalCreate';
+
+const storageService = StorageService.getInstance();
 
 export const Disk: React.FC = () => {
   const cx = useStyles(styles);
@@ -63,6 +69,11 @@ export const Disk: React.FC = () => {
     });
   };
 
+  const changeViewFolders = (view: FolderView) => {
+    dispatch(viewFolder(view));
+    storageService.setItem('viewFolder', view);
+  };
+
   return (
     <>
       <div className={cx('container')}>
@@ -95,13 +106,13 @@ export const Disk: React.FC = () => {
               type="tile"
               className={cx('icon')}
               size="xl"
-              onClick={() => dispatch(viewFolder('plate'))}
+              onClick={() => changeViewFolders('plate')}
             />
             <Icon
               type="list"
               className={cx('icon')}
               size="xl"
-              onClick={() => dispatch(viewFolder('list'))}
+              onClick={() => changeViewFolders('list')}
             />
           </div>
         </div>

@@ -1,4 +1,6 @@
-import { isApiError } from '@utils/common';
+import { AxiosError } from 'axios';
+
+import { ApiError } from './common';
 
 class ErrorUtils {
   static FORM_KEY_SEPARATOR = '|>';
@@ -20,3 +22,7 @@ class ErrorUtils {
 }
 
 export { ErrorUtils };
+
+export const isApiError = (error: unknown): error is AxiosError<ApiError> => {
+  return !!(error as AxiosError<ApiError>)?.response?.data;
+};
