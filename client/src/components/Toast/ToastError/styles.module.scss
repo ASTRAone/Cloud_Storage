@@ -2,7 +2,7 @@
 @import '@assets/styles/variables/text-style';
 @import '@assets/styles/variables/reset';
 
-.toast-error {
+.toast-loading {
   padding: 6px 58px 13px 0;
   background: linear-gradient(180deg, #E45E5E 0%, #C04C4C 100%);
   border-radius: 30px;
@@ -45,9 +45,9 @@
     justify-content: center;
     background: linear-gradient(180deg, #990000 0%, #8A0000 100%);
 
-    & .icon {
-      width: 30px;
-      height: 30px;
+    & .loader {
+      width: 31px;
+      height: 31px;
       color: $white;
     }
   }

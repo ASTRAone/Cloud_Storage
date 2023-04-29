@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { ErrorUtils } from '@utils/ErrorUtils';
@@ -16,28 +16,43 @@ import { EditProfileFormView } from './EditProfileForm.view';
 
 type Props = {
   data: AuthViewDTO;
-  isLoading: boolean;
+  isLoadingUpdate: boolean;
+  isLoadingData?: boolean;
 };
 
-export const EditProfileForm: React.FC<Props> = ({ data, isLoading }) => {
+export const EditProfileForm: React.FC<Props> = ({ data = {}, isLoadingUpdate }) => {
   const { name, surname, email, city, country, phone, biography } = data;
   const dispatch = useAppDispatch();
   const toast = useToast();
   const [btnDisabled, setBtnDisabled] = useState(false);
 
-  console.log('defaultValues', data);
+  // if (Object.keys(data).length) return null;
 
-  const defaultValues: AuthViewDTO = {
-    email,
-    name,
-    surname,
-    country,
-    city,
-    phone,
-    biography,
-  };
+  const defaultValues: AuthViewDTO = useMemo(
+    () => ({
+      email,
+      name,
+      surname,
+      country,
+      city,
+      phone,
+      biography,
+    }),
+    [data, isLoadingUpdate],
+  );
 
   const formMethods = useForm<AuthViewDTO>({ defaultValues });
+
+  console.log('defaultValues', data);
+
+  // TODO сделать подтверждение на сохранение данных
+  // const fieldsChanged = Object.keys(dirtyFields);
+  // const formChanged = fieldsChanged.some((item) => {
+  //   if (item === 'user') return;
+  //   return (
+  //     dataEdit[item as keyof AuthViewDTO] !== defaultValues[item as keyof AuthViewDTO].toString()
+  //   );
+  // });
 
   const submit = async (payload: AuthViewDTO) => {
     setBtnDisabled(true);
@@ -59,7 +74,7 @@ export const EditProfileForm: React.FC<Props> = ({ data, isLoading }) => {
     >
       <EditProfileFormView
         btnDisabled={btnDisabled}
-        isLoading={isLoading}
+        isLoading={isLoadingUpdate}
       />
     </Form>
   );

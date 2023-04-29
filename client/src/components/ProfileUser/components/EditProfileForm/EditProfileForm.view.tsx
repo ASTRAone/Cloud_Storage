@@ -14,7 +14,7 @@ type Props = {
   isLoading: boolean;
 };
 
-export const EditProfileFormView: React.FC<Props> = ({ btnDisabled, isLoading }) => {
+const EditProfileFormComponentView: React.FC<Props> = ({ btnDisabled, isLoading }) => {
   const cx = useStyles(styles);
 
   const {
@@ -171,3 +171,7 @@ export const EditProfileFormView: React.FC<Props> = ({ btnDisabled, isLoading })
     </div>
   );
 };
+
+const EditProfileFormView = React.memo(EditProfileFormComponentView);
+
+export { EditProfileFormView };

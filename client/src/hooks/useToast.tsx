@@ -42,30 +42,78 @@ export const useToast = (): ReturnValue => {
   };
 
   const error = (props: ToastErrorProps & ToastOptions) => {
-    toast((tItem) => (
-      <ToastError
-        {...props}
-        toastItem={tItem}
-      />
-    ));
+    const {
+      position,
+      autoClose,
+      hideProgressBar,
+      closeOnClick,
+      pauseOnHover,
+      closeButton,
+      draggable,
+      progress,
+      theme,
+    } = props;
+    toast(<ToastError {...props} />, {
+      position: position ?? DEFAULT_POSITION,
+      autoClose: autoClose ?? 2500,
+      hideProgressBar: hideProgressBar ?? true,
+      closeOnClick: closeOnClick ?? true,
+      pauseOnHover: pauseOnHover ?? true,
+      closeButton: closeButton ?? false,
+      draggable: draggable ?? true,
+      progress: progress ?? undefined,
+      theme: theme ?? DEFAULT_THEME,
+    });
   };
 
   const clue = (props: ToastClueProps & ToastOptions) => {
-    toast((tItem) => (
-      <ToastClue
-        {...props}
-        toastItem={tItem}
-      />
-    ));
+    const {
+      position,
+      autoClose,
+      hideProgressBar,
+      closeOnClick,
+      pauseOnHover,
+      closeButton,
+      draggable,
+      progress,
+      theme,
+    } = props;
+    toast(<ToastClue {...props} />, {
+      position: position ?? DEFAULT_POSITION,
+      autoClose: autoClose ?? 2500,
+      hideProgressBar: hideProgressBar ?? true,
+      closeOnClick: closeOnClick ?? true,
+      pauseOnHover: pauseOnHover ?? true,
+      closeButton: closeButton ?? false,
+      draggable: draggable ?? true,
+      progress: progress ?? undefined,
+      theme: theme ?? DEFAULT_THEME,
+    });
   };
 
   const loading = (props: ToastLoadingProps & ToastOptions) => {
-    toast((tItem) => (
-      <ToastLoading
-        {...props}
-        toastItem={tItem}
-      />
-    ));
+    const {
+      position,
+      autoClose,
+      hideProgressBar,
+      closeOnClick,
+      pauseOnHover,
+      closeButton,
+      draggable,
+      progress,
+      theme,
+    } = props;
+    toast(<ToastLoading {...props} />, {
+      position: position ?? DEFAULT_POSITION,
+      autoClose: autoClose ?? 2500,
+      hideProgressBar: hideProgressBar ?? true,
+      closeOnClick: closeOnClick ?? true,
+      pauseOnHover: pauseOnHover ?? true,
+      closeButton: closeButton ?? false,
+      draggable: draggable ?? true,
+      progress: progress ?? undefined,
+      theme: theme ?? DEFAULT_THEME,
+    });
   };
 
   return { success, error, clue, loading };
