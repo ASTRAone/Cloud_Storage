@@ -9,6 +9,7 @@ import { App } from './App';
 import { EnvProvider } from './EnvProvider/EnvProvider';
 
 import './i18next';
+import 'react-toastify/dist/ReactToastify.css';
 import './styles.module.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);

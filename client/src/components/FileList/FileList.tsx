@@ -14,6 +14,8 @@ import { fetchBreadCrumbs, getFilesData, selectedDir } from '@store/file/data';
 
 import styles from './styles.module.scss';
 
+// TODO сделать скелетон на loading
+
 export const FileList: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();

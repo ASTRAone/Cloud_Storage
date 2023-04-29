@@ -3,10 +3,9 @@
 @import '@assets/styles/variables/reset';
 
 .toast-success {
-  padding: 6px 58px 13px 0;
+  padding: 4px 17px 13px 0;
   background: linear-gradient(180deg, #62B365 0%, #3D7846 100%);
-  border-radius: 30px;
-  min-width: 300px;
+  border-radius: 5px;
   display: flex;
   justify-content: flex-end;
   box-sizing: border-box;
@@ -15,21 +14,22 @@
   & .content {
     display: flex;
     flex-direction: column;
-    gap: 9px;
-    min-width: 143px;
-    margin-left: 108px;
+    gap: 1px;
+    max-width: 160px;
 
     & .title {
       @include text();
       @include paragraph-30();
       font-family: 'Itim', sans-serif;
       color: $white;
+      font-weight: 400;
     }
 
     & .text {
       @include text();
       @include paragraph-12();
       color: $white;
+      font-weight: 400;
     }
   }
 
@@ -67,11 +67,12 @@
   & .container-icon-close {
     position: absolute;
     cursor: pointer;
-    right: 19px;
+    right: 5px;
+    top: 5px;
 
     & .icon {
-      width: 30px;
-      height: 30px;
+      width: 18px;
+      height: 18px;
       color: $white;
     }
   }

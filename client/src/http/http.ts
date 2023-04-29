@@ -1,12 +1,8 @@
-// import { useNavigate } from 'react-router-dom';
-
 import axios from 'axios';
 import { AUTH_HEADER } from '@utils/headers';
+import { LOGIN_ROUTE } from '@utils/contants';
 
 import { StorageService } from '@services/StorageService';
-// import { LOGIN_ROUTE } from '@utils/contants';
-
-// import { AuthApi } from '@api/AuthApi';
 
 const storageService = StorageService.getInstance();
 
@@ -28,45 +24,78 @@ $api.interceptors.request.use(
   },
 );
 
-// TODO вынести все отдельно
 $api.interceptors.response.use(
   (res) => {
     return res;
   },
   async (err) => {
     const originalConfig = err.config;
-    // const navigate = useNavigate();
-    console.log('originalConfig', originalConfig);
-    console.log('err.response', err.response);
 
-    if (err.response) {
-      // Access Token was expired
-      if (err.response.status === 401) {
+    if (originalConfig.url !== LOGIN_ROUTE) {
+      // if (err.response.status == 401 && originalConfig && originalConfig._retry === undefined) {
+      //   storageService.removeItem(AUTH_HEADER);
+      // }
+
+      if (err.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;
 
         try {
           // const rs = await AuthApi.refresh();
+
           // const { accessToken } = rs.data;
-          // localStorage.setItem(AUTH_HEADER, `Bearer ${accessToken}`);
           // $api.defaults.headers.common[AUTH_HEADER] = `Bearer ${accessToken}`;
           storageService.removeItem(AUTH_HEADER);
-          // navigate(LOGIN_ROUTE);
 
-          // return $api(originalConfig);
-        } catch (_error: any) {
-          if (_error.response && _error.response.data) {
-            return Promise.reject(_error.response.data);
-          }
-
+          return $api(originalConfig);
+        } catch (_error) {
           return Promise.reject(_error);
         }
-      }
-
-      if (err.response.status === 403 && err.response.data) {
-        return Promise.reject(err.response.data);
       }
     }
 
     return Promise.reject(err);
   },
 );
+
+// TODO вынести все отдельно
+// $api.interceptors.response.use(
+//   (res) => {
+//     return res;
+//   },
+//   async (err) => {
+//     const originalConfig = err.config;
+//     // const navigate = useNavigate();
+//     console.log('originalConfig', originalConfig);
+//     console.log('err.response', err.response);
+
+//     if (err.response) {
+//       // Access Token was expired
+//       if (err.response.status === 401) {
+//         originalConfig._retry = true;
+
+//         try {
+//           // const rs = await AuthApi.refresh();
+//           // const { accessToken } = rs.data;
+//           // localStorage.setItem(AUTH_HEADER, `Bearer ${accessToken}`);
+//           // $api.defaults.headers.common[AUTH_HEADER] = `Bearer ${accessToken}`;
+//           storageService.removeItem(AUTH_HEADER);
+//           // navigate(LOGIN_ROUTE);
+
+//           // return $api(originalConfig);
+//         } catch (_error: any) {
+//           if (_error.response && _error.response.data) {
+//             return Promise.reject(_error.response.data);
+//           }
+
+//           return Promise.reject(_error);
+//         }
+//       }
+
+//       if (err.response.status === 403 && err.response.data) {
+//         return Promise.reject(err.response.data);
+//       }
+//     }
+
+//     return Promise.reject(err);
+//   },
+// );

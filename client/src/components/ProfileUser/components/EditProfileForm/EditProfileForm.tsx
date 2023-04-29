@@ -25,6 +25,8 @@ export const EditProfileForm: React.FC<Props> = ({ data, isLoading }) => {
   const toast = useToast();
   const [btnDisabled, setBtnDisabled] = useState(false);
 
+  console.log('defaultValues', data);
+
   const defaultValues: AuthViewDTO = {
     email,
     name,
@@ -44,8 +46,8 @@ export const EditProfileForm: React.FC<Props> = ({ data, isLoading }) => {
       setBtnDisabled(false);
       toast.success({ title: 'Данные обновлены' });
     } catch (error) {
-      const errorMsg = ErrorUtils.handleApiError(error);
       setBtnDisabled(false);
+      const errorMsg = ErrorUtils.handleApiError(error);
       toast.error({ title: 'Ошибка обновления данных', text: errorMsg });
     }
   };

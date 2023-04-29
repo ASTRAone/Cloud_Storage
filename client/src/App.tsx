@@ -12,7 +12,7 @@ export const App: React.FC = () => {
   return (
     <>
       <AppRouter />
-      <Toast />
+      <Toast position="top-right" />
     </>
   );
 };
