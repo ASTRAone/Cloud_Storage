@@ -7,7 +7,6 @@ import { customDate } from '@src/utility/customDate';
 import { FileResponse } from '@api/FileApi/models';
 
 import { useStyles } from '@hooks/useStyles';
-import { usePopupControls } from '@hooks/usePopupControls';
 import { useToast } from '@hooks/useToast';
 import { useDialog } from '@hooks/useDialog';
 
@@ -29,11 +28,10 @@ type Props = {
 export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} }) => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
-  const { isOpened, openPopup, closePopup } = usePopupControls();
   const toast = useToast();
   const { statusDelete } = useAppSelector(getStatusDelete);
   const { name, size, type, date } = file;
-  const dialog = useDialog();
+  const { Dialog, openPopup, closePopup } = useDialog();
 
   // TODO при удалении файла или папки дизейблить кнопку удаления
   // TODO сделать сохранение отображения папок: плитка/лист
@@ -56,6 +54,10 @@ export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} 
       const errorMsg = ErrorUtils.handleApiError(error);
       toast.error({ title: 'Ошибка авторизации', text: errorMsg });
     }
+  };
+
+  const closeDialog = async () => {
+    closePopup();
   };
   return (
     <>
@@ -100,14 +102,12 @@ export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} 
           </div>
         )}
       </div>
-      {dialog.openDialog({
-        isOpen: isOpened,
-        closeModal: closePopup,
-        onSubmit: deleteClickHandler,
-        loading: statusDelete == 'loading',
-        title: 'Do you want to delete this file?',
-        type: 'delete',
-      })}
+      <Dialog
+        onConfirm={deleteClickHandler}
+        loading={statusDelete == 'loading'}
+        title="Do you want to delete this file?"
+        closeDialog={closeDialog}
+      />
     </>
   );
 };

@@ -7,8 +7,8 @@ import { Button } from '@components/Button';
 
 import styles from './styles.module.scss';
 export type DialogProps = {
-  isOpen: boolean;
-  closeModal: () => void;
+  isOpen?: boolean;
+  closeModal?: () => void;
   onSubmit?: () => void;
   id?: string;
   title: string;
@@ -20,13 +20,14 @@ export type DialogProps = {
 };
 
 export const Dialog: React.FC<DialogProps> = ({
-  closeModal,
+  closeModal = () => {},
   title,
   text,
   btnOkText = 'OK',
   btnCancelText = 'Cancel',
   onSubmit,
   loading = false,
+  type = 'delete',
 }) => {
   const cx = useStyles(styles);
 
@@ -41,7 +42,7 @@ export const Dialog: React.FC<DialogProps> = ({
         </div>
       ) : null}
       <div className={cx('btn')}>
-        {btnOkText && onSubmit ? (
+        {btnOkText && onSubmit && type == 'delete' ? (
           <Button
             text={btnOkText}
             isUpperCase
