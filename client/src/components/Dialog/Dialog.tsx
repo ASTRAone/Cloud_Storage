@@ -2,12 +2,11 @@ import React, { useEffect } from 'react';
 
 import { useStyles } from '@hooks/useStyles';
 
-import { Modal } from '@components/Modal';
 import { Icon } from '@components/icon';
 import { Button } from '@components/Button';
 
 import styles from './styles.module.scss';
-type Props = {
+export type DialogProps = {
   isOpen: boolean;
   closeModal: () => void;
   onSubmit?: () => void;
@@ -17,15 +16,15 @@ type Props = {
   btnOkText?: string;
   btnCancelText?: string;
   loading?: boolean;
+  type?: 'delete' | 'edit' | 'warning' | 'info';
 };
 
-export const Dialog: React.FC<Props> = ({
-  isOpen,
+export const Dialog: React.FC<DialogProps> = ({
   closeModal,
   title,
   text,
-  btnOkText,
-  btnCancelText,
+  btnOkText = 'OK',
+  btnCancelText = 'Cancel',
   onSubmit,
   loading = false,
 }) => {
@@ -34,44 +33,39 @@ export const Dialog: React.FC<Props> = ({
   useEffect(() => () => closeModal(), []);
 
   return (
-    <Modal
-      open={isOpen}
-      classNamePrefix={cx('dialog')}
-    >
-      <div className={cx('container')}>
-        <p className={cx('title')}>{title}</p>
-        {text ? (
-          <div className={cx('dialog-container')}>
-            <p className={cx('text')}>{text}</p>
-          </div>
-        ) : null}
-        <div className={cx('btn')}>
-          {btnOkText ? (
-            <Button
-              text={btnOkText}
-              isUpperCase
-              type="submit"
-              color="light-blue"
-              onClick={onSubmit}
-              isLoading={loading}
-            />
-          ) : null}
-          {btnCancelText ? (
-            <Button
-              text={btnCancelText}
-              isUpperCase
-              type="submit"
-              color="white"
-              onClick={closeModal}
-            />
-          ) : null}
+    <div className={cx('container')}>
+      <p className={cx('title')}>{title}</p>
+      {text ? (
+        <div className={cx('dialog-container')}>
+          <p className={cx('text')}>{text}</p>
         </div>
-        <Icon
-          type="close"
-          className={cx('close')}
-          onClick={closeModal}
-        />
+      ) : null}
+      <div className={cx('btn')}>
+        {btnOkText && onSubmit ? (
+          <Button
+            text={btnOkText}
+            isUpperCase
+            type="submit"
+            color="light-blue"
+            onClick={onSubmit}
+            isLoading={loading}
+          />
+        ) : null}
+        {btnCancelText ? (
+          <Button
+            text={btnCancelText}
+            isUpperCase
+            type="submit"
+            color="white"
+            onClick={closeModal}
+          />
+        ) : null}
       </div>
-    </Modal>
+      <Icon
+        type="close"
+        className={cx('close')}
+        onClick={closeModal}
+      />
+    </div>
   );
 };
