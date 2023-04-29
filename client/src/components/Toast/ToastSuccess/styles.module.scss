@@ -3,7 +3,7 @@
 @import '@assets/styles/variables/reset';
 
 .toast-success {
-  padding: 6px 58px 13px 0;
+  padding: 24px 58px 13px 0;
   background: linear-gradient(180deg, #62B365 0%, #3D7846 100%);
   border-radius: 30px;
   min-width: 300px;
@@ -21,7 +21,7 @@
 
     & .title {
       @include text();
-      @include paragraph-30();
+      @include paragraph-16();
       font-family: 'Itim', sans-serif;
       color: $white;
     }

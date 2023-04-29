@@ -21,7 +21,7 @@
 
     & .title {
       @include text();
-      @include paragraph-30();
+      @include paragraph-16();
       font-family: 'Itim', sans-serif;
       color: $white;
     }

@@ -9,13 +9,14 @@ import { FileResponse } from '@api/FileApi/models';
 import { useStyles } from '@hooks/useStyles';
 import { usePopupControls } from '@hooks/usePopupControls';
 import { useToast } from '@hooks/useToast';
+import { useDialog } from '@hooks/useDialog';
 
 import { Icon } from '@components/icon';
-import { Dialog } from '@components/Dialog';
 import { TextShorter } from '@components/TextShorter';
 
+import { useAppSelector } from '@store/hooks';
 import { downloadFile, deleteFile, getStatusDelete } from '@store/file/data';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { useAppDispatch } from '@store/hooks';
 
 import styles from './styles.module.scss';
 
@@ -32,6 +33,7 @@ export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} 
   const toast = useToast();
   const { statusDelete } = useAppSelector(getStatusDelete);
   const { name, size, type, date } = file;
+  const dialog = useDialog();
 
   // TODO при удалении файла или папки дизейблить кнопку удаления
   // TODO сделать сохранение отображения папок: плитка/лист
@@ -98,18 +100,14 @@ export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} 
           </div>
         )}
       </div>
-      {isOpened ? (
-        <Dialog
-          isOpen
-          btnOkText="Delete"
-          btnCancelText="Cancel"
-          closeModal={closePopup}
-          title="Do you want to delete this file?"
-          text={name}
-          onSubmit={deleteClickHandler}
-          loading={statusDelete === 'loading'}
-        />
-      ) : null}
+      {dialog.openDialog({
+        isOpen: isOpened,
+        closeModal: closePopup,
+        onSubmit: deleteClickHandler,
+        loading: statusDelete == 'loading',
+        title: 'Do you want to delete this file?',
+        type: 'delete',
+      })}
     </>
   );
 };
