@@ -6,6 +6,7 @@ import { ErrorUtils } from '@utils/ErrorUtils';
 import { AuthViewDTO } from '@api/AuthApi/models';
 
 import { useToast } from '@hooks/useToast';
+import { useDialog } from '@hooks/useDialog';
 
 import { Form } from '@components/Form';
 
@@ -25,8 +26,7 @@ export const EditProfileForm: React.FC<Props> = ({ data = {}, isLoadingUpdate })
   const dispatch = useAppDispatch();
   const toast = useToast();
   const [btnDisabled, setBtnDisabled] = useState(false);
-
-  // if (Object.keys(data).length) return null;
+  const {} = useDialog();
 
   const defaultValues: AuthViewDTO = useMemo(
     () => ({
@@ -42,6 +42,9 @@ export const EditProfileForm: React.FC<Props> = ({ data = {}, isLoadingUpdate })
   );
 
   const formMethods = useForm<AuthViewDTO>({ defaultValues });
+  // const {
+  //   formState: { dirtyFields },
+  // } = formMethods;
 
   console.log('defaultValues', data);
 
@@ -59,7 +62,7 @@ export const EditProfileForm: React.FC<Props> = ({ data = {}, isLoadingUpdate })
     try {
       await dispatch(userUpdateProfile(payload)).unwrap();
       setBtnDisabled(false);
-      toast.success({ title: 'Данные обновлены' });
+      toast.success({ title: 'Well done!', text: 'Your message has been sent successfully.' });
     } catch (error) {
       setBtnDisabled(false);
       const errorMsg = ErrorUtils.handleApiError(error);
@@ -68,14 +71,16 @@ export const EditProfileForm: React.FC<Props> = ({ data = {}, isLoadingUpdate })
   };
 
   return (
-    <Form
-      onSubmit={submit}
-      formMethods={formMethods}
-    >
-      <EditProfileFormView
-        btnDisabled={btnDisabled}
-        isLoading={isLoadingUpdate}
-      />
-    </Form>
+    <>
+      <Form
+        onSubmit={submit}
+        formMethods={formMethods}
+      >
+        <EditProfileFormView
+          btnDisabled={btnDisabled}
+          isLoading={isLoadingUpdate}
+        />
+      </Form>
+    </>
   );
 };
