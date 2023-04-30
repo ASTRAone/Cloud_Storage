@@ -54,7 +54,7 @@ export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} 
       toast.success({ title: 'Успешно удалено' });
     } catch (error) {
       const errorMsg = ErrorUtils.handleApiError(error);
-      toast.error({ title: 'Ошибка авторизации', text: errorMsg });
+      toast.error({ title: 'Ошибка удаления', text: errorMsg });
     }
   };
   return (

@@ -89,10 +89,14 @@ export const ProfileUser: React.FC = () => {
               value="Editing Profile"
               currentValue={activeTab}
             >
-              <EditProfileForm
-                data={userData}
-                isLoading={statusUpdateProfile === 'loading'}
-              />
+              <>
+                {!!Object.keys(userData).length ? (
+                  <EditProfileForm
+                    data={userData}
+                    isLoadingUpdate={statusUpdateProfile === 'loading'}
+                  />
+                ) : null}
+              </>
             </TabPanel>
             <TabPanel
               value="Settings"

@@ -2,7 +2,7 @@
 @import '@assets/styles/variables/text-style';
 @import '@assets/styles/variables/reset';
 
-.toast-clue {
+.toast-loading {
   padding: 6px 58px 13px 0;
   background: linear-gradient(180deg, #0479F0 0%, #0456A9 100%);
   border-radius: 30px;
@@ -45,8 +45,8 @@
     justify-content: center;
     background: linear-gradient(180deg, #005EB5 0%, #003362 100%);
 
-    & .icon {
-      width: 22px;
+    & .loader {
+      width: 31px;
       height: 31px;
       color: $white;
     }

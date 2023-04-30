@@ -1,5 +1,5 @@
 import React from 'react';
-import toast, { Toast } from 'react-hot-toast';
+import { toast } from 'react-toastify';
 
 import { useStyles } from '@hooks/useStyles';
 
@@ -12,7 +12,7 @@ type Props = {
   title?: string;
   text?: string;
   hasClose?: boolean;
-  toastItem?: Toast;
+  toastItem?: any;
   // size?: 'md' | 'lg';
 };
 

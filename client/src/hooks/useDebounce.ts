@@ -8,9 +8,7 @@ export const useDebounce = (value: string | number | undefined, delay: number) =
       setDebouncedValue(value);
     }, delay);
 
-    return () => {
-      clearTimeout(handler);
-    };
+    return () => clearTimeout(handler);
   }, [value]);
 
   return debouncedValue;

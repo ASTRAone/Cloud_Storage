@@ -1,5 +1,6 @@
 import React from 'react';
-import toast, { Toast } from 'react-hot-toast';
+// import { toast } from 'react-toastify';
+import { Toast } from 'react-toastify/dist/types';
 
 import { useStyles } from '@hooks/useStyles';
 
@@ -16,9 +17,9 @@ type Props = {
   // size?: 'md' | 'lg';
 };
 
-export const ToastSuccess: React.FC<Props> = ({ title, text, hasClose = true, toastItem }) => {
+export const ToastSuccess: React.FC<Props> = ({ title, text, hasClose = false }) => {
   const cx = useStyles(styles);
-  const onClose = () => toast.dismiss(toastItem?.id);
+  // const onClose = () => toast.dismiss(toastItem?);
   return (
     <div className={cx('toast-success')}>
       <div className={cx('content')}>
@@ -43,7 +44,7 @@ export const ToastSuccess: React.FC<Props> = ({ title, text, hasClose = true, to
           <Icon
             type="close"
             className={cx('icon')}
-            onClick={onClose}
+            // onClick={onClose}
           />
         </div>
       )}

@@ -123,9 +123,9 @@ const userDataSlice = createSlice({
         state.statusUserData = 'loading';
       })
       .addCase(fetchUserData.fulfilled, (state, action) => {
-        state.statusUserData = 'idle';
         state.needUpdate = false;
         state.userData = action.payload;
+        state.statusUserData = 'idle';
       })
       .addCase(fetchUserData.rejected, (state) => {
         state.statusUserData = 'failed';
@@ -177,9 +177,9 @@ const userDataSlice = createSlice({
         state.statusUpdateProfile = 'loading';
       })
       .addCase(userUpdateProfile.fulfilled, (state, action) => {
-        state.statusUpdateProfile = 'idle';
         state.needUpdate = true;
         state.userData = action.payload;
+        state.statusUpdateProfile = 'idle';
       })
       .addCase(userUpdateProfile.rejected, (state) => {
         state.statusUpdateProfile = 'failed';
