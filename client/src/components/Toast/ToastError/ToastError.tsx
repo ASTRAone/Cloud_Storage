@@ -1,5 +1,4 @@
 import React from 'react';
-import { toast } from 'react-toastify';
 
 import { useStyles } from '@hooks/useStyles';
 
@@ -16,9 +15,9 @@ type Props = {
   // size?: 'md' | 'lg';
 };
 
-export const ToastError: React.FC<Props> = ({ title, text, hasClose = true, toastItem }) => {
+export const ToastError: React.FC<Props> = ({ title, text }) => {
   const cx = useStyles(styles);
-  const onClose = () => toast.dismiss(toastItem?.id);
+
   return (
     <div className={cx('toast-error')}>
       <div className={cx('content')}>
@@ -38,15 +37,6 @@ export const ToastError: React.FC<Props> = ({ title, text, hasClose = true, toas
           className={cx('icon')}
         />
       </div>
-      {hasClose && (
-        <div className={cx('container-icon-close')}>
-          <Icon
-            type="close"
-            className={cx('icon')}
-            onClick={onClose}
-          />
-        </div>
-      )}
     </div>
   );
 };

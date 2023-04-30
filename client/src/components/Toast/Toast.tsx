@@ -21,6 +21,8 @@ export const Toast: React.FC<Props> = ({
   draggable = false,
   pauseOnHover = true,
   theme = 'light',
+  classNameContainer,
+  toastContentClassName,
   ...restProps
 }) => {
   const cx = useStyles(styles);
@@ -37,8 +39,8 @@ export const Toast: React.FC<Props> = ({
       draggable={draggable}
       pauseOnHover={pauseOnHover}
       theme={theme}
-      className={cx('toast')}
-      toastClassName={cx('toast-body')}
+      className={cx('toast', classNameContainer)}
+      toastClassName={cx('toast-body', toastContentClassName)}
     />
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { useStyles } from '@hooks/useStyles';
 
@@ -28,8 +28,6 @@ export const Dialog: React.FC<DialogProps> = ({
   loading = false,
 }) => {
   const cx = useStyles(styles);
-
-  useEffect(() => () => closeModal(), []);
 
   return (
     <div className={cx('container')}>

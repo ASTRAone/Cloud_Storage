@@ -2,13 +2,11 @@
 @import '@assets/styles/variables/text-style';
 @import '@assets/styles/variables/reset';
 
-.toast-loading {
-  padding: 6px 58px 13px 0;
-  background: linear-gradient(180deg, #0479F0 0%, #0456A9 100%);
-  border-radius: 30px;
-  min-width: 300px;
+.toast-clue {
+  padding: 4px 17px 13px 0;
+  background: linear-gradient(180deg, #0479f0 0%, #0456a9 100%);
+  border-radius: 5px;
   display: flex;
-  justify-content: flex-end;
   box-sizing: border-box;
   position: relative;
 
@@ -16,20 +14,22 @@
     display: flex;
     flex-direction: column;
     gap: 9px;
-    min-width: 143px;
-    margin-left: 108px;
+    max-width: 160px;
+    margin-left: 75px;
 
     & .title {
       @include text();
       @include paragraph-16();
       font-family: 'Itim', sans-serif;
       color: $white;
+      font-weight: 400;
     }
 
     & .text {
       @include text();
       @include paragraph-12();
       color: $white;
+      font-weight: 400;
     }
   }
 
@@ -37,17 +37,17 @@
     position: absolute;
     left: 28px;
     top: -15px;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(180deg, #005EB5 0%, #003362 100%);
+    background: linear-gradient(180deg, #005eb5 0%, #003362 100%);
 
-    & .loader {
-      width: 31px;
-      height: 31px;
+    & .icon {
+      width: 13px;
+      height: 18px;
       color: $white;
     }
   }
@@ -58,20 +58,21 @@
     bottom: -4px;
 
     & .icon {
-      height: 52px;
-      width: 49px;
-      color: #003F62;
+      height: 42px;
+      width: 39px;
+      color: #003f62;
     }
   }
 
   & .container-icon-close {
     position: absolute;
     cursor: pointer;
-    right: 19px;
+    right: 5px;
+    top: 5px;
 
     & .icon {
-      width: 30px;
-      height: 30px;
+      width: 18px;
+      height: 18px;
       color: $white;
     }
   }
