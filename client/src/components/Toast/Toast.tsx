@@ -13,7 +13,7 @@ type Props = ToastContainerProps & {
 
 export const Toast: React.FC<Props> = ({
   position = 'top-right',
-  autoClose = 25000000,
+  autoClose = 2500,
   hideProgressBar = false,
   newestOnTop = false,
   rtl = false,
