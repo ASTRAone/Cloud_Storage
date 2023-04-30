@@ -100,7 +100,7 @@ export const useToast = (): ReturnValue => {
       pauseOnHover,
       closeButton,
       draggable,
-      progress,
+      progress = 1,
       theme,
     } = props;
     toast(<ToastLoading {...props} />, {

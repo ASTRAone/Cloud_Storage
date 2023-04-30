@@ -34,7 +34,6 @@ export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} 
   const { Dialog, openPopup, closePopup } = useDialog();
 
   // TODO при удалении файла или папки дизейблить кнопку удаления
-  // TODO сделать сохранение отображения папок: плитка/лист
 
   const openDeletePopup = async (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -49,12 +48,13 @@ export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} 
     try {
       await dispatch(deleteFile(file)).unwrap();
       closePopup();
-      toast.success({ title: 'Успешно удалено' });
+      toast.success({ title: 'Well done!', text: 'Your message has been sent successfully.' });
     } catch (error) {
       const errorMsg = ErrorUtils.handleApiError(error);
-      toast.error({ title: 'Ошибка удаления', text: errorMsg });
+      toast.error({ title: 'Error!', text: errorMsg });
     }
   };
+
   return (
     <>
       <div
@@ -101,7 +101,7 @@ export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} 
       <Dialog
         closeDialog={closePopup}
         onConfirm={deleteClickHandler}
-        loading={statusDelete == 'loading'}
+        loading={statusDelete === 'loading'}
         title="Do you want to delete this file?"
       />
     </>

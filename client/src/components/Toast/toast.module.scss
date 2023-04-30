@@ -1,9 +1,11 @@
 .toast {
   width: auto;
-  max-width: 700px;
+  max-width: 300px;
 }
 
 .toast-body {
+  box-sizing: border-box  ;
   background: transparent!important;
   box-shadow: none!important;
+  min-height: 53px;
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-// import { toast } from 'react-toastify';
 import { Toast } from 'react-toastify/dist/types';
 
 import { useStyles } from '@hooks/useStyles';
@@ -17,9 +16,9 @@ type Props = {
   // size?: 'md' | 'lg';
 };
 
-export const ToastSuccess: React.FC<Props> = ({ title, text, hasClose = false }) => {
+export const ToastSuccess: React.FC<Props> = ({ title, text }) => {
   const cx = useStyles(styles);
-  // const onClose = () => toast.dismiss(toastItem?);
+
   return (
     <div className={cx('toast-success')}>
       <div className={cx('content')}>
@@ -39,15 +38,6 @@ export const ToastSuccess: React.FC<Props> = ({ title, text, hasClose = false })
           className={cx('icon')}
         />
       </div>
-      {hasClose && (
-        <div className={cx('container-icon-close')}>
-          <Icon
-            type="close"
-            className={cx('icon')}
-            // onClick={onClose}
-          />
-        </div>
-      )}
     </div>
   );
 };

@@ -32,6 +32,7 @@ const useDialog = (): ReturnValue => {
       <Modal
         open={isOpened}
         onClose={onClose}
+        closeOnDocumentClick={false}
       >
         <Dialog
           {...props}

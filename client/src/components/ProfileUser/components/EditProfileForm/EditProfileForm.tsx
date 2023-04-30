@@ -26,7 +26,9 @@ export const EditProfileForm: React.FC<Props> = ({ data = {}, isLoadingUpdate })
   const dispatch = useAppDispatch();
   const toast = useToast();
   const [btnDisabled, setBtnDisabled] = useState(false);
-  const {} = useDialog();
+  const [dataEdit, setDataEdit] = useState<AuthViewDTO>({});
+
+  const { Dialog, openPopup, closePopup } = useDialog();
 
   const defaultValues: AuthViewDTO = useMemo(
     () => ({
@@ -38,42 +40,53 @@ export const EditProfileForm: React.FC<Props> = ({ data = {}, isLoadingUpdate })
       phone,
       biography,
     }),
-    [data, isLoadingUpdate],
+    [data],
   );
 
   const formMethods = useForm<AuthViewDTO>({ defaultValues });
-  // const {
-  //   formState: { dirtyFields },
-  // } = formMethods;
+  const {
+    formState: { dirtyFields },
+  } = formMethods;
 
-  console.log('defaultValues', data);
+  const onSubmit = async () => {
+    const fieldsChanged = Object.keys(dirtyFields);
+    const formChanged = fieldsChanged.some((item) => {
+      return (
+        dataEdit[item as keyof AuthViewDTO] !==
+        (defaultValues[item as keyof AuthViewDTO] as string).toString()
+      );
+    });
 
-  // TODO сделать подтверждение на сохранение данных
-  // const fieldsChanged = Object.keys(dirtyFields);
-  // const formChanged = fieldsChanged.some((item) => {
-  //   if (item === 'user') return;
-  //   return (
-  //     dataEdit[item as keyof AuthViewDTO] !== defaultValues[item as keyof AuthViewDTO].toString()
-  //   );
-  // });
-
-  const submit = async (payload: AuthViewDTO) => {
-    setBtnDisabled(true);
     try {
-      await dispatch(userUpdateProfile(payload)).unwrap();
-      setBtnDisabled(false);
-      toast.success({ title: 'Well done!', text: 'Your message has been sent successfully.' });
+      if (formChanged) {
+        setBtnDisabled(true);
+        await dispatch(userUpdateProfile(dataEdit)).unwrap();
+        setBtnDisabled(false);
+        toast.success({ title: 'Well done!', text: 'Your message has been sent successfully.' });
+      } else {
+        toast.clue({ title: 'Hi There!', text: 'No data changed' });
+      }
     } catch (error) {
       setBtnDisabled(false);
       const errorMsg = ErrorUtils.handleApiError(error);
-      toast.error({ title: 'Ошибка обновления данных', text: errorMsg });
+      toast.error({ title: 'Error!', text: errorMsg });
     }
+  };
+
+  const openDialogEdit = (payload: AuthViewDTO) => {
+    setDataEdit(payload);
+    openPopup();
+  };
+
+  const handleSubmitEdit = () => {
+    onSubmit();
+    closePopup();
   };
 
   return (
     <>
       <Form
-        onSubmit={submit}
+        onSubmit={openDialogEdit}
         formMethods={formMethods}
       >
         <EditProfileFormView
@@ -81,6 +94,11 @@ export const EditProfileForm: React.FC<Props> = ({ data = {}, isLoadingUpdate })
           isLoading={isLoadingUpdate}
         />
       </Form>
+      <Dialog
+        title="Are you sure you want to update profile?"
+        closeDialog={closePopup}
+        onConfirm={handleSubmitEdit}
+      />
     </>
   );
 };
