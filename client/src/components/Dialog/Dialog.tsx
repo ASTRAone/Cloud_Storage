@@ -7,7 +7,6 @@ import { Button } from '@components/Button';
 
 import styles from './styles.module.scss';
 export type DialogProps = {
-  isOpen: boolean;
   closeModal: () => void;
   onSubmit?: () => void;
   id?: string;
@@ -20,7 +19,7 @@ export type DialogProps = {
 };
 
 export const Dialog: React.FC<DialogProps> = ({
-  closeModal,
+  closeModal = () => {},
   title,
   text,
   btnOkText = 'OK',
