@@ -14,6 +14,7 @@ import styles from './styles.module.scss';
 import { CellInfo, SettingsProfileUser } from './components';
 import { AvatarUser } from './components';
 import { EditProfileForm } from './components/EditProfileForm';
+import { EditProfileFormSkeleton } from './components/EditProfileFormSkeleton';
 
 const TABS = ['Editing Profile', 'Settings', 'Premium'];
 
@@ -95,7 +96,9 @@ export const ProfileUser: React.FC = () => {
                     data={userData}
                     isLoadingUpdate={statusUpdateProfile === 'loading'}
                   />
-                ) : null}
+                ) : (
+                  <EditProfileFormSkeleton />
+                )}
               </>
             </TabPanel>
             <TabPanel

@@ -76,7 +76,7 @@ const userLogout = createAsyncThunk('user/logout', async (_, { rejectWithValue }
 
 const userUploadAvatar = createAsyncThunk(
   'user/uploadAvatar',
-  async (file: any, { rejectWithValue }) => {
+  async (file: File, { rejectWithValue }) => {
     const formData = new FormData();
     formData.append('file', file);
     try {

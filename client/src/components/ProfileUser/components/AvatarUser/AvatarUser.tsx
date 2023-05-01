@@ -12,6 +12,8 @@ import { userUploadAvatar } from '@store/auth/data';
 
 import styles from './styles.module.scss';
 
+// TODO добавить toast
+
 type Porps = {
   src?: string;
 };
