@@ -25,10 +25,9 @@ export const EditProfileForm: React.FC<Props> = ({ data = {}, isLoadingUpdate })
   const { name, surname, email, city, country, phone, biography } = data;
   const dispatch = useAppDispatch();
   const toast = useToast();
+  const { Dialog, openPopup, closePopup } = useDialog();
   const [btnDisabled, setBtnDisabled] = useState(false);
   const [dataEdit, setDataEdit] = useState<AuthViewDTO>({});
-
-  const { Dialog, openPopup, closePopup } = useDialog();
 
   const defaultValues: AuthViewDTO = useMemo(
     () => ({
