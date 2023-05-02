@@ -3,16 +3,18 @@
 @import '@assets/styles/variables/reset';
 
 .container {
-  cursor: pointer;
-  width: 100%;
-  min-height: 224px;
-  border: 2px dashed $light-sweet-100;
-  border-radius: 12px;
-  background: #dcecff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 32px;
+  & .upload {
+    gap: 32px;
+    cursor: pointer;
+    width: 100%;
+    min-height: 224px;
+    border: 2px dashed $light-sweet-100;
+    border-radius: 12px;
+    background: #dcecff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   & .icon {
     width: 72px;
@@ -32,4 +34,8 @@
   &:hover .icon, &:hover .text {
     color: $light-sweet-100;
   }
+}
+
+.input-upload {
+  display: none;
 }
