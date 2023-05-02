@@ -1,12 +1,12 @@
 @import '@assets/styles/variables/colors';
 
-.page {
+.page { 
   width: 100%;
   margin-top: 22px;
   padding-right: 70px;
   padding-bottom: 66px;
-  // max-height: 718px;
-  // overflow-y: auto;
+  max-height: 700px;
+  overflow-y: auto;
   overflow-x: hidden;
 
   & .container {

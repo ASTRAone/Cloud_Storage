@@ -92,7 +92,7 @@ export const HeaderLayout: React.FC = () => {
         </div>
       ) : (
         <>
-          {location.pathname === ALL_FILES_ROUTE && (
+          {location.pathname === ALL_FILES_ROUTE ? (
             <div className={cx('containerInputs')}>
               <Input
                 value={searchText}
@@ -121,7 +121,7 @@ export const HeaderLayout: React.FC = () => {
                 onChangeSelected={setSelectedTree}
               />
             </div>
-          )}
+          ) : null}
 
           <div className={cx('containerOptions')}>
             <PopupLocalization />

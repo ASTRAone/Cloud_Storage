@@ -28,7 +28,7 @@ const EditProfileFormComponentView: React.FC<Props> = ({ btnDisabled, isLoading 
         <Controller
           control={control}
           rules={{ required: true, minLength: 2 }}
-          render={({ field: { onChange, value } }) => (
+          render={({ field: { onChange, value = '' } }) => (
             <Input
               onChange={onChange}
               value={value}
@@ -47,7 +47,7 @@ const EditProfileFormComponentView: React.FC<Props> = ({ btnDisabled, isLoading 
         <Controller
           control={control}
           rules={{ required: true, minLength: 2 }}
-          render={({ field: { onChange, value } }) => (
+          render={({ field: { onChange, value = '' } }) => (
             <Input
               onChange={onChange}
               value={value}
@@ -68,7 +68,7 @@ const EditProfileFormComponentView: React.FC<Props> = ({ btnDisabled, isLoading 
         <Controller
           control={control}
           rules={{ minLength: 2 }}
-          render={({ field: { onChange, value } }) => (
+          render={({ field: { onChange, value = '' } }) => (
             <Input
               onChange={onChange}
               value={value}
@@ -87,7 +87,7 @@ const EditProfileFormComponentView: React.FC<Props> = ({ btnDisabled, isLoading 
         <Controller
           control={control}
           rules={{ minLength: 2 }}
-          render={({ field: { onChange, value } }) => (
+          render={({ field: { onChange, value = '' } }) => (
             <Input
               onChange={onChange}
               value={value}
@@ -108,7 +108,7 @@ const EditProfileFormComponentView: React.FC<Props> = ({ btnDisabled, isLoading 
         <Controller
           control={control}
           rules={{ minLength: 2 }}
-          render={({ field: { onChange, value } }) => (
+          render={({ field: { onChange, value = '' } }) => (
             <Input
               onChange={onChange}
               value={value}
@@ -127,7 +127,7 @@ const EditProfileFormComponentView: React.FC<Props> = ({ btnDisabled, isLoading 
         <Controller
           control={control}
           rules={{ minLength: 2 }}
-          render={({ field: { onChange, value } }) => (
+          render={({ field: { onChange, value = '' } }) => (
             <Input
               onChange={onChange}
               value={value}
@@ -146,7 +146,7 @@ const EditProfileFormComponentView: React.FC<Props> = ({ btnDisabled, isLoading 
 
       <Controller
         control={control}
-        render={({ field: { onChange, value } }) => (
+        render={({ field: { onChange, value = '' } }) => (
           <Textarea
             onChange={onChange}
             value={value}
