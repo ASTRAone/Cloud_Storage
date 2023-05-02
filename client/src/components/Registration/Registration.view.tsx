@@ -47,7 +47,7 @@ export const RegistrationView: React.FC<Props> = ({ loading, isError, isDisabled
       <Controller
         control={control}
         rules={{ required: true }}
-        render={({ field: { onChange, value } }) => (
+        render={({ field: { onChange, value = '' } }) => (
           <Input
             onChange={onChange}
             value={value}
@@ -74,7 +74,7 @@ export const RegistrationView: React.FC<Props> = ({ loading, isError, isDisabled
       <Controller
         control={control}
         rules={{ required: true }}
-        render={({ field: { onChange, value } }) => (
+        render={({ field: { onChange, value = '' } }) => (
           <Input
             onChange={onChange}
             value={value}
@@ -101,7 +101,7 @@ export const RegistrationView: React.FC<Props> = ({ loading, isError, isDisabled
       <Controller
         control={control}
         rules={{ required: true, pattern: REGEXP_DICTIONARY.email }}
-        render={({ field: { onChange, value } }) => (
+        render={({ field: { onChange, value = '' } }) => (
           <Input
             onChange={onChange}
             value={value}
@@ -128,7 +128,7 @@ export const RegistrationView: React.FC<Props> = ({ loading, isError, isDisabled
       <Controller
         control={control}
         rules={{ required: true, minLength: 3 }}
-        render={({ field: { onChange, value } }) => (
+        render={({ field: { onChange, value = '' } }) => (
           <InputPass
             onChange={onChange}
             value={value}

@@ -5,16 +5,14 @@ import { usePopupControls } from '@hooks/usePopupControls';
 
 import { Icon } from '@components/icon';
 import { ModalUpload } from '@components/Cloud/ModalUpload';
+import { Input } from '@components/Input';
 
-// import { useAppDispatch } from '@store/hooks';
-// import { uploadFile } from '@store/file/data';
 import styles from './styles.module.scss';
 
 export const DrageComponent: React.FC = () => {
   const cx = useStyles(styles);
   const { isOpened, openPopup, closePopup } = usePopupControls();
   const [uploadsFiles, setUploadsFiles] = useState<any>();
-  // const dispatch = useAppDispatch();
 
   const handleDragEnter = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -32,13 +30,12 @@ export const DrageComponent: React.FC = () => {
     const files = [...(event.dataTransfer.files as any)];
     setUploadsFiles(files);
     openPopup();
-    // try {
-    //   files.forEach((file) => {
-    //     dispatch(uploadFile({ file }));
-    //   });
-    // } catch (error) {
-    //   console.log(error);
-    // }
+  };
+
+  const handleUploadFileExplorer = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = [...(event.target.files as any)];
+    setUploadsFiles(files);
+    openPopup();
   };
 
   return (
@@ -50,12 +47,24 @@ export const DrageComponent: React.FC = () => {
         onDragOver={handleDragEnter}
         onDrop={handleDrop}
       >
-        <Icon
-          type="drage"
-          className={cx('icon')}
-        />
-        <p className={cx('text')}>drag files to upload</p>
+        <label
+          htmlFor="upload"
+          className={cx('upload')}
+        >
+          <Icon
+            type="drage"
+            className={cx('icon')}
+          />
+          <p className={cx('text')}>drag files to upload</p>
+        </label>
       </div>
+      <Input
+        type="file"
+        id="upload"
+        className={cx('input-upload')}
+        onChange={handleUploadFileExplorer}
+        multiple
+      />
       {isOpened && (
         <ModalUpload
           isOpen={isOpened}
