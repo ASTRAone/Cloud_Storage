@@ -2,6 +2,9 @@
   width: 100%;
   margin-top: 22px;
   padding-right: 70px;
+  max-height: 700px;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   & .container {
     display: grid;

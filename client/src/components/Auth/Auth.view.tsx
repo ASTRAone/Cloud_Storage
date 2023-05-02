@@ -46,10 +46,10 @@ export const AuthView: React.FC<Props> = ({ loading, isError, isDisabled, setErr
       <Controller
         control={control}
         rules={{ required: true, pattern: REGEXP_DICTIONARY.email }}
-        render={({ field: { onChange, value } }) => (
+        render={({ field: { onChange, value = '' } }) => (
           <Input
-            onChange={onChange}
             value={value}
+            onChange={onChange}
             full
             placeholder={t('authorization.placeholder.email')}
             error={errors.email || isError}
@@ -73,7 +73,7 @@ export const AuthView: React.FC<Props> = ({ loading, isError, isDisabled, setErr
       <Controller
         control={control}
         rules={{ required: true, minLength: 3 }}
-        render={({ field: { onChange, value } }) => (
+        render={({ field: { onChange, value = '' } }) => (
           <InputPass
             onChange={onChange}
             value={value}
