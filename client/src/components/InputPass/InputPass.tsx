@@ -31,11 +31,11 @@ export const InputPass: React.FC<InputProps> = ({ placeholder, error, actions = 
 
   return (
     <Input
+      {...rest}
       error={error}
       type={show ? 'text' : 'password'}
       placeholder={placeholder}
       actions={arrIcons}
-      {...rest}
     />
   );
 };

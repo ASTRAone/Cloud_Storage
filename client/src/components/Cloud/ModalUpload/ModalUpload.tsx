@@ -21,6 +21,8 @@ type Props = {
   uploadsFiles: any[];
 };
 
+// TODO добавить toast
+
 const DEFAULT_VALUE = {
   label: '/',
   value: '',
@@ -82,6 +84,7 @@ export const ModalUpload: React.FC<Props> = ({ isOpen, closeModal, uploadsFiles 
           components={innerComponent}
           isSearchable={false}
           maxMenuHeight={115}
+          portal
           isLoading={statusFoldersPath === 'loading'}
         />
         <div className={cx('loaded-container')}>
