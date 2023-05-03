@@ -39,6 +39,7 @@ export const InputSearch: React.FC<Props> = ({
     const onClick = (e: MouseEvent) =>
       (rootEl.current && rootEl.current.contains(e.target as Node)) || setIsInFocus(false);
     document.addEventListener('click', onClick);
+
     return () => document.removeEventListener('click', onClick);
   }, []);
 
