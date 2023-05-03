@@ -56,6 +56,11 @@ export const InputSearch: React.FC<Props> = ({
     }, 500);
   }, [search]);
 
+  const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    onChangeSearch(value);
+  };
+
   return (
     <div
       className={cx('container')}
@@ -65,7 +70,7 @@ export const InputSearch: React.FC<Props> = ({
         {...rest}
         error={error}
         value={search}
-        onChange={(e) => onChangeSearch(e.target.value)}
+        onChange={handleChangeSearch}
         type="text"
         placeholder={placeholder}
         actions={actions}

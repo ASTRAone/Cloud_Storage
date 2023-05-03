@@ -20,7 +20,7 @@ import CloudLogo from '@assets/images/logo.png';
 
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { fetchUserData, getUserData } from '@store/auth/data';
-import { fetchFoldersPath, getFoldersPath, getSearchText, saveSearchText } from '@store/file/data';
+import { fetchFoldersPath, getFoldersPath, saveSearchText } from '@store/file/data';
 
 import styles from './styles.module.scss';
 
@@ -35,14 +35,13 @@ export const HeaderLayout: React.FC = () => {
   const token = storageService.getItem(AUTH_HEADER);
 
   const { name, surname, email } = userData;
-  const { searchableText } = useAppSelector(getSearchText);
   const {
     foldersPaths,
     statusFoldersPath,
     needUpdate: updatePath,
   } = useAppSelector(getFoldersPath);
 
-  const [searchText, setSearchText] = useState<string | undefined>(searchableText);
+  const [searchText, setSearchText] = useState<string | undefined>('');
   const [selectedTree, setSelectedTree] = useState<(string | number | undefined)[]>([]);
 
   useEffect(() => {

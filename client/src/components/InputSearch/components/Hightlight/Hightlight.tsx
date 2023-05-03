@@ -9,6 +9,8 @@ type Props = {
   str?: string;
 };
 
+// TODO исправить any в returnValues
+
 export const Hightlight: React.FC<Props> = ({ filter, str }): any => {
   const cx = useStyles(styles);
 
@@ -19,22 +21,22 @@ export const Hightlight: React.FC<Props> = ({ filter, str }): any => {
   const matchValue = str.match(regexp);
 
   if (matchValue) {
-    return str.split(regexp).map((s, index, array) => {
+    return str.split(regexp).map((strSplit, index, array) => {
       if (index < array.length - 1) {
-        const c = matchValue.shift();
+        const strLater = matchValue.shift();
         return (
-          <span key={index}>
-            {s}
-            <span className={cx('hightlight-copy')}>{c}</span>
+          <span key={strLater}>
+            {strSplit}
+            <span className={cx('hightlight-copy')}>{strLater}</span>
           </span>
         );
       }
       return (
         <span
           className={cx('hightlight-str')}
-          key={index}
+          key={strSplit}
         >
-          {s}
+          {strSplit}
         </span>
       );
     });

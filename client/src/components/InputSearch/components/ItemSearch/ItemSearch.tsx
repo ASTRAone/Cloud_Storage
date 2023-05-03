@@ -16,7 +16,7 @@ export const ItemSearch: React.FC<Props> = ({ filter, str, onChange }) => {
   if (!filter) return null;
 
   const handleChangeSearch = (value: string | undefined) => {
-    if (value) onChange(value);
+    value && onChange(value);
   };
 
   return (
@@ -24,10 +24,12 @@ export const ItemSearch: React.FC<Props> = ({ filter, str, onChange }) => {
       className={cx('item')}
       onClick={() => handleChangeSearch(str)}
     >
-      <Hightlight
-        filter={filter}
-        str={str}
-      />
+      <>
+        <Hightlight
+          filter={filter}
+          str={str}
+        />
+      </>
     </div>
   );
 };
