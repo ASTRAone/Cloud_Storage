@@ -30,7 +30,7 @@ export const InputFilter: React.FC<Props> = ({
   const actionsLeft: Array<JSX.Element> = [];
   const actionsRight: Array<JSX.Element> = [];
 
-  // TODO: Дополнить логику в зависимости от бека
+  // TODO: Дополнить логику в зависимости от бека и поменять тип на соответсвующий
   const onSubmitFilter = async (data: unknown) => {
     try {
       console.log(data);

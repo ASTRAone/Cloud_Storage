@@ -1,4 +1,4 @@
-import React, { DragEvent, useState } from 'react';
+import React, { DragEvent, useState, useEffect } from 'react';
 
 import { useStyles } from '@hooks/useStyles';
 import { usePopupControls } from '@hooks/usePopupControls';
@@ -9,10 +9,16 @@ import { Input } from '@components/Input';
 
 import styles from './styles.module.scss';
 
+// TODO поменять типы
+
 export const DrageComponent: React.FC = () => {
   const cx = useStyles(styles);
   const { isOpened, openPopup, closePopup } = usePopupControls();
-  const [uploadsFiles, setUploadsFiles] = useState<any>();
+  const [uploadsFiles, setUploadsFiles] = useState<File[]>([]);
+
+  useEffect(() => {
+    if (!uploadsFiles.length) closePopup();
+  }, [uploadsFiles]);
 
   const handleDragEnter = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -27,15 +33,20 @@ export const DrageComponent: React.FC = () => {
   const handleDrop = async (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.stopPropagation();
-    const files = [...(event.dataTransfer.files as any)];
+    const files = [...(event.dataTransfer.files as unknown as Array<File>)];
     setUploadsFiles(files);
     openPopup();
   };
 
   const handleUploadFileExplorer = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = [...(event.target.files as any)];
+    const files = [...(event.target.files as unknown as Array<File>)];
     setUploadsFiles(files);
     openPopup();
+  };
+
+  const handleRemoveUploadFile = (removeFileName: string) => {
+    const newUploadList = uploadsFiles.filter(({ name }) => name !== removeFileName);
+    setUploadsFiles(newUploadList);
   };
 
   return (
@@ -70,6 +81,7 @@ export const DrageComponent: React.FC = () => {
           isOpen={isOpened}
           closeModal={closePopup}
           uploadsFiles={uploadsFiles}
+          removeUploadFile={handleRemoveUploadFile}
         />
       )}
     </>

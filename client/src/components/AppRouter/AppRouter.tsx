@@ -5,6 +5,8 @@ import { NOT_FOUND_ROUTE } from '@utils/contants';
 
 import { routes } from '@src/routes';
 
+// TODO сделать роут на превью
+
 export const AppRouter: React.FC = () => {
   return (
     <Routes>

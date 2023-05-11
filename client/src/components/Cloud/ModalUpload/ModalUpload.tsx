@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { SelectComponents } from 'react-select/dist/declarations/src/components';
 import { GroupBase } from 'react-select';
 
+import { ErrorUtils } from '@utils/ErrorUtils';
+import { getFileExtension } from '@utils/data';
+
 import { useStyles } from '@hooks/useStyles';
+import { useToast } from '@hooks/useToast';
 
 import { Modal } from '@components/Modal';
 import { Icon } from '@components/icon';
@@ -18,21 +22,29 @@ import styles from './styles.module.scss';
 type Props = {
   isOpen: boolean;
   closeModal: () => void;
-  uploadsFiles: any[];
+  uploadsFiles: File[];
+  removeUploadFile: (fileName: string) => void;
 };
-
-// TODO добавить toast
 
 const DEFAULT_VALUE = {
   label: '/',
   value: '',
 };
-export const ModalUpload: React.FC<Props> = ({ isOpen, closeModal, uploadsFiles }) => {
+
+export const ModalUpload: React.FC<Props> = ({
+  isOpen,
+  closeModal,
+  uploadsFiles,
+  removeUploadFile,
+}) => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
+  const toast = useToast();
 
   const { foldersPaths, statusFoldersPath, statusUpload } = useAppSelector(getFoldersPath);
   const [selectValue, setSelectValue] = useState(DEFAULT_VALUE);
+
+  console.log('uploadsFiles', uploadsFiles);
 
   useEffect(() => () => closeModal(), []);
 
@@ -51,8 +63,10 @@ export const ModalUpload: React.FC<Props> = ({ isOpen, closeModal, uploadsFiles 
           }),
         ).unwrap();
       });
+      toast.success({ title: 'Well done!', text: 'Your message has been sent successfully.' });
     } catch (error) {
-      console.log(error);
+      const errorMsg = ErrorUtils.handleApiError(error);
+      toast.error({ title: 'Error!', text: errorMsg });
     }
   };
 
@@ -91,18 +105,28 @@ export const ModalUpload: React.FC<Props> = ({ isOpen, closeModal, uploadsFiles 
           <p className={cx('title')}>Loaded files:</p>
           <div className={cx('loaded-files')}>
             <div className={cx('loaded-files-content')}>
-              {uploadsFiles.map((item, index) => (
-                <div
-                  className={cx('loaded-file')}
-                  key={index}
-                >
-                  <Icon
-                    type="file"
-                    className={cx('icon')}
-                  />
-                  <p className={cx('text')}>{item.name}</p>
-                </div>
-              ))}
+              {uploadsFiles.map((item, index) => {
+                const type = getFileExtension(item.name);
+                // TODO допилить типы иконок
+                console.log('type', type);
+                return (
+                  <div
+                    className={cx('loaded-file')}
+                    key={index}
+                  >
+                    <Icon
+                      type="file"
+                      className={cx('icon')}
+                    />
+                    <p className={cx('text')}>{item.name}</p>
+                    <Icon
+                      type="close"
+                      className={cx('icon-close')}
+                      onClick={() => removeUploadFile(item.name)}
+                    />
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

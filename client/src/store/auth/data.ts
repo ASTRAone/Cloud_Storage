@@ -90,7 +90,7 @@ const userUploadAvatar = createAsyncThunk(
 
 const userUpdateProfile = createAsyncThunk(
   'user/userUpdateProfile',
-  async (payload: any, { rejectWithValue }) => {
+  async (payload: AuthViewDTO, { rejectWithValue }) => {
     try {
       const response = await AuthApi.updateProfile(payload);
       return response.data;

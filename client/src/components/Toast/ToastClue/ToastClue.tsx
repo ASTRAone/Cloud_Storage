@@ -1,5 +1,4 @@
 import React from 'react';
-import { Toast } from 'react-toastify/dist/types';
 
 import { useStyles } from '@hooks/useStyles';
 
@@ -7,13 +6,9 @@ import { Icon } from '@components/icon';
 
 import styles from './styles.module.scss';
 
-// TODO подумать над size
 type Props = {
   title?: string;
   text?: string;
-  hasClose?: boolean;
-  toastItem?: Toast;
-  // size?: 'md' | 'lg';
 };
 
 export const ToastClue: React.FC<Props> = ({ title, text }) => {

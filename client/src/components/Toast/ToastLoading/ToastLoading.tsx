@@ -7,13 +7,9 @@ import { Loader } from '@components/Loader';
 
 import styles from './styles.module.scss';
 
-// TODO подумать над size
 type Props = {
   title?: string;
   text?: string;
-  hasClose?: boolean;
-  toastItem?: any;
-  // size?: 'md' | 'lg';
 };
 
 export const ToastLoading: React.FC<Props> = ({ title, text }) => {

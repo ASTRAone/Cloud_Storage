@@ -62,8 +62,9 @@ export const Disk: React.FC = () => {
     }
   };
 
-  const submitUploadFile = async (data: any) => {
-    const files = [...data];
+  const submitUploadFile = async (data: FileList | null) => {
+    if (data === null) return;
+    const files = [...(data as unknown as Array<File>)];
     files.forEach((file) => {
       dispatch(uploadFile({ file, parent: currentDir }));
     });
