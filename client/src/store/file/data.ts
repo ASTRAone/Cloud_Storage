@@ -336,6 +336,7 @@ const fileDataSlice = createSlice({
       })
       .addCase(fetchFoldersPath.fulfilled, (state, action) => {
         state.statusFoldersPath = 'idle';
+        state.needUpdate = true;
         state.foldersPaths = action.payload.map(({ path, _id }) => mapToOption(_id, path));
       })
       .addCase(fetchFoldersPath.rejected, (state) => {

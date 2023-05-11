@@ -19,12 +19,12 @@ type FileCreateDTO = {
 
 type FileUploadDTO = {
   parent?: UUID;
-  file: any;
+  file: File;
 };
 
 type FileDownloadDTO = {
   parent?: UUID;
-  file: any;
+  file: File;
 };
 
 type FileResponseRecently = {

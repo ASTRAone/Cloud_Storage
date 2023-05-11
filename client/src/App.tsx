@@ -9,6 +9,7 @@ import { Toast } from '@components/Toast/Toast';
 export const App: React.FC = () => {
   useInitialization();
   useAuth();
+
   return (
     <>
       <AppRouter />

@@ -41,15 +41,24 @@
           align-items: center;
           gap: 14px;
           cursor: pointer;
-          width: fit-content;
+          width: 100%;
+          position: relative;
 
           & .icon {
+            color: $primary-800;
+          }
+
+          & .icon-close {
+            position: absolute;
+            right: 25px;
+            color: $primary-800;
           }
 
           & .text {
             @include text();
             @include paragraph-12();
             color: $primary-800;
+            max-width: 170px;
           }
         }
       }

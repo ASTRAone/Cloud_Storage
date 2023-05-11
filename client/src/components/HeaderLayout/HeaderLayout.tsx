@@ -14,13 +14,13 @@ import { ButtonLink } from '@components/ButtonLink';
 import { MenuProfile } from '@components/MenuProfile';
 import { PopupLocalization } from '@components/PopupLocalization';
 import { SelectTreeNode } from '@components/SelectTreeNode';
-import { Input } from '@components/Input';
+import { InputSearch } from '@components/InputSearch';
 
 import CloudLogo from '@assets/images/logo.png';
 
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { fetchUserData, getUserData } from '@store/auth/data';
-import { getSearchText, saveSearchText } from '@store/file/data';
+import { fetchFoldersPath, getFoldersPath, saveSearchText } from '@store/file/data';
 
 import styles from './styles.module.scss';
 
@@ -35,9 +35,13 @@ export const HeaderLayout: React.FC = () => {
   const token = storageService.getItem(AUTH_HEADER);
 
   const { name, surname, email } = userData;
-  const { searchableText } = useAppSelector(getSearchText);
+  const {
+    foldersPaths,
+    statusFoldersPath,
+    needUpdate: updatePath,
+  } = useAppSelector(getFoldersPath);
 
-  const [searchText, setSearchText] = useState(searchableText);
+  const [searchText, setSearchText] = useState<string | undefined>('');
   const [selectedTree, setSelectedTree] = useState<(string | number | undefined)[]>([]);
 
   useEffect(() => {
@@ -52,8 +56,15 @@ export const HeaderLayout: React.FC = () => {
     dispatch(saveSearchText(searchText));
   }, [searchText]);
 
-  const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+  useEffect(() => {
+    dispatch(fetchFoldersPath());
+  }, []);
+
+  useEffect(() => {
+    updatePath && dispatch(fetchFoldersPath());
+  }, [updatePath]);
+
+  const onChangeSearch = (value: string) => {
     setSearchText(value);
   };
 
@@ -94,10 +105,12 @@ export const HeaderLayout: React.FC = () => {
         <>
           {location.pathname === ALL_FILES_ROUTE ? (
             <div className={cx('containerInputs')}>
-              <Input
-                value={searchText}
-                onChange={onChangeSearch}
+              <InputSearch
+                search={searchText}
+                onChangeSearch={onChangeSearch}
                 full
+                dataPath={foldersPaths}
+                loading={statusFoldersPath === 'loading'}
                 classNameContent={cx('search')}
                 placeholder={t('headerPanel.placeholder.search')}
                 actions={[

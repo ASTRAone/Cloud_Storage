@@ -6,13 +6,9 @@ import { Icon } from '@components/icon';
 
 import styles from './styles.module.scss';
 
-// TODO подумать над size
 type Props = {
   title?: string;
   text?: string;
-  hasClose?: boolean;
-  toastItem?: any;
-  // size?: 'md' | 'lg';
 };
 
 export const ToastError: React.FC<Props> = ({ title, text }) => {

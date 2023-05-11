@@ -4,6 +4,8 @@ import { FormError, IconObject } from '@utils/common';
 
 import { useStyles } from '@hooks/useStyles';
 
+import { Loader } from '@components/Loader';
+
 import styles from './styles.module.scss';
 
 type Props = Partial<React.ComponentPropsWithRef<'input'>> & {
@@ -17,6 +19,7 @@ type Props = Partial<React.ComponentPropsWithRef<'input'>> & {
   variant?: 'blue' | 'dark';
   isUpperCase?: boolean;
   errorText?: string;
+  loading?: boolean;
 };
 
 export const Input: React.FC<Props> = ({
@@ -33,6 +36,7 @@ export const Input: React.FC<Props> = ({
   isUpperCase = true,
   full = false,
   errorText,
+  loading,
   ...rest
 }) => {
   const cx = useStyles(styles);
@@ -70,14 +74,15 @@ export const Input: React.FC<Props> = ({
         {actionsLeft}
         <div className={cx('controller-input')}>
           <input
+            {...rest}
             type={type}
             className={cx('input')}
             value={value}
             placeholder={placeholder}
-            {...rest}
           />
         </div>
         {actionsRight}
+        {loading && <Loader className={cx('icon')} />}
       </div>
       <span className={cx('error')}>{errorText}</span>
     </div>

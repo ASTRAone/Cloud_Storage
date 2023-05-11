@@ -74,7 +74,6 @@ export const Tooltip: React.FC<Props> = ({
 
   const updateArrowPosition = () => {
     const arrowSvg = document.querySelector(CONTENT_CLASS);
-
     if (!arrowSvg) {
       return;
     }
