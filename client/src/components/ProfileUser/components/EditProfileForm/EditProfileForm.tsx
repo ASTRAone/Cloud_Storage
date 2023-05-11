@@ -93,6 +93,7 @@ export const EditProfileForm: React.FC<Props> = ({ data = {}, isLoadingUpdate })
           isLoading={isLoadingUpdate}
         />
       </Form>
+
       <Dialog
         title="Are you sure you want to update profile?"
         closeDialog={closePopup}
