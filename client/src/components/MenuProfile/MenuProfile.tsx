@@ -44,7 +44,6 @@ export const MenuProfile: React.FC<Props> = ({ name, email, src }) => {
   const logout = async () => {
     storageService.removeItem('Authorization');
     storageService.removeItem('activeTabLC');
-    storageService.removeItem('activeLocationLC');
     await dispath(userLogout()).unwrap();
   };
 

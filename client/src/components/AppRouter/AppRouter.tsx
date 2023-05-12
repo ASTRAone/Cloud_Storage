@@ -5,9 +5,16 @@ import { NOT_FOUND_ROUTE } from '@utils/contants';
 
 import { routes } from '@src/routes';
 
-// TODO сделать роут на превью
+import { StorageService } from '@services/StorageService';
+
+const storageService = StorageService.getInstance();
 
 export const AppRouter: React.FC = () => {
+  const isPreviewChecked: boolean =
+    (JSON.parse(storageService.getItem('previewCheck') as string) as boolean) || false;
+
+  console.log('isPreviewChecked', isPreviewChecked);
+
   return (
     <Routes>
       {routes.map(({ path, Element }) => (

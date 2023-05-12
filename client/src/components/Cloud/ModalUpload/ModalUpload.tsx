@@ -44,8 +44,6 @@ export const ModalUpload: React.FC<Props> = ({
   const { foldersPaths, statusFoldersPath, statusUpload } = useAppSelector(getFoldersPath);
   const [selectValue, setSelectValue] = useState(DEFAULT_VALUE);
 
-  console.log('uploadsFiles', uploadsFiles);
-
   useEffect(() => () => closeModal(), []);
 
   useEffect(() => {

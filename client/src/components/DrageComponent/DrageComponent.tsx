@@ -9,8 +9,6 @@ import { Input } from '@components/Input';
 
 import styles from './styles.module.scss';
 
-// TODO поменять типы
-
 export const DrageComponent: React.FC = () => {
   const cx = useStyles(styles);
   const { isOpened, openPopup, closePopup } = usePopupControls();
