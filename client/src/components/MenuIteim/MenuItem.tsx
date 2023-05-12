@@ -36,8 +36,7 @@ export const MenuItem: React.FC<Props> = ({
     if (onClick !== undefined) {
       onClick();
     }
-    storageService.setItem('activeLocationLC', url);
-    storageService.removeItem('activeTabLC');
+    storageService.setItem('activeTabLC', url);
   };
 
   return (
@@ -51,7 +50,7 @@ export const MenuItem: React.FC<Props> = ({
         />
       ) : (
         <ButtonLink
-          to={`/${url}` || ''}
+          to={`/${url}`}
           className={cx('link', className)}
           onClick={onClickActiveLocation}
         >

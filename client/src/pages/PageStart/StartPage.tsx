@@ -4,6 +4,8 @@ import { REGISTRATION_ROUTE } from '@utils/contants';
 
 import { LayoutStartPage } from '@src/layout/LayoutStartPage';
 
+import { StorageService } from '@services/StorageService';
+
 import { useStyles } from '@hooks/useStyles';
 
 import { Button } from '@components/Button';
@@ -13,8 +15,12 @@ import { Icon } from '@components/icon';
 import styles from './styles.module.scss';
 import { Card } from './components/Card';
 
+const storageService = StorageService.getInstance();
+
 export const StartPage: React.FC = () => {
   const cx = useStyles(styles);
+  const handlePreviewCheck = () => storageService.setItem('previewCheck', true);
+
   return (
     <LayoutStartPage>
       <div className={cx('page')}>
@@ -45,6 +51,7 @@ export const StartPage: React.FC = () => {
               text="sign up"
               isUpperCase
               className={cx('btn')}
+              onClick={handlePreviewCheck}
             />
           </div>
           <div className={cx('circle')} />
