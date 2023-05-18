@@ -1,9 +1,12 @@
+import { FoldersViewed } from './common';
+
 export const LOGIN_ROUTE = '/login';
 export const REGISTRATION_ROUTE = '/registration';
 export const CLOUD_ROUTE = '/dashboard';
 export const PROFILE_USER_ROUTE = '/profile';
 export const START_ROUTE = '/';
 export const ALL_FILES_ROUTE = '/files';
+export const FAVORITES_ROUTE = '/favorites';
 export const NOT_FOUND_ROUTE = '404';
 
 export enum ColorFolder {
@@ -26,4 +29,19 @@ export const mounths = [
   'Sept',
   'Oct',
   'Nov',
+];
+
+export const FOLDERS_VIEWED: FoldersViewed[] = [
+  {
+    type: 'list',
+    title: 'list',
+  },
+  {
+    type: 'tile',
+    title: 'TILES',
+  },
+  {
+    type: 'big-tile',
+    title: 'BIG TILES',
+  },
 ];

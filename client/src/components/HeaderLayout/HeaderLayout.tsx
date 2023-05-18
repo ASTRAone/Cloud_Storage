@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { AUTH_HEADER } from '@utils/headers';
-import { ALL_FILES_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from '@utils/contants';
+import { CLOUD_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from '@utils/contants';
 
 import { StorageService } from '@services/StorageService';
 
@@ -53,10 +53,6 @@ export const HeaderLayout: React.FC = () => {
   }, [needUpdate]);
 
   useEffect(() => {
-    dispatch(saveSearchText(searchText));
-  }, [searchText]);
-
-  useEffect(() => {
     dispatch(fetchFoldersPath());
   }, []);
 
@@ -66,6 +62,7 @@ export const HeaderLayout: React.FC = () => {
 
   const onChangeSearch = (value: string) => {
     setSearchText(value);
+    dispatch(saveSearchText(searchText));
   };
 
   return (
@@ -103,7 +100,7 @@ export const HeaderLayout: React.FC = () => {
         </div>
       ) : (
         <>
-          {location.pathname === ALL_FILES_ROUTE ? (
+          {location.pathname !== CLOUD_ROUTE ? (
             <div className={cx('containerInputs')}>
               <InputSearch
                 search={searchText}

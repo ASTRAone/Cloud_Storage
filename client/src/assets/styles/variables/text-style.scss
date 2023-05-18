@@ -43,6 +43,14 @@
   line-height: 47px;
 }
 
+@mixin paragraph-36 {
+  font-family: $itim;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 43px;
+}
+
 @mixin paragraph-33 {
   font-family: $itim;
   font-style: normal;

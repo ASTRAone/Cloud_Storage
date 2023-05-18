@@ -26,7 +26,7 @@ export const RecentlyUploaded: React.FC = () => {
     <div className={cx('container')}>
       <p className={cx('title')}>Recently Uploaded</p>
       <div className={cx('content')}>
-        {statusFetchRecently === 'loading' && <RecentlySkeleton />}
+        {statusFetchRecently === 'loading' && dataRecently.length === 0 && <RecentlySkeleton />}
         {dataRecently.length > 0
           ? dataRecently.map((item, index) => (
               <RecentlyUploadedItem

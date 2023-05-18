@@ -25,6 +25,11 @@ ul, li {
 
 ::-webkit-scrollbar-thumb {
   background-color: #3F82B7;    /* цвет бегунка */
-  // border-radius: 20px;       /* округлось бегунка */
   border: 2px solid #3F82B7;  /* отступ вокруг бегунка */
+}
+
+// Для FireFox
+* {
+  scrollbar-color: #3F82B7 #ECECEC; /*Цвет скролла, цвет ползунка*/
+  scrollbar-width: thin; /*Толщина скролла thin, auto*/
 }

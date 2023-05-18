@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { sortedData } from '@src/utility/data';
+import { FolderView, UUID } from '@utils/common';
 
 import { FileResponse } from '@api/FileApi/models';
 
@@ -8,29 +8,30 @@ import { useStyles } from '@hooks/useStyles';
 
 import { File } from '@components/File/File';
 import { EmptyComponent } from '@components/EmptyComponent';
-
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { fetchBreadCrumbs, getFilesData, selectedDir } from '@store/file/data';
+import { SkeletonLoadingFiles } from '@components/SkeletonLoadingFiles';
 
 import styles from './styles.module.scss';
 
-// TODO сделать скелетон на loading
+type Props = {
+  data: FileResponse[];
+  view: FolderView;
+  isLoading: boolean;
+  customEmptyComponent?: JSX.Element;
+  onClick?: (value: UUID) => void;
+};
 
-export const FileList: React.FC = () => {
+export const FileList: React.FC<Props> = ({
+  data,
+  view,
+  isLoading,
+  customEmptyComponent,
+  onClick = () => {},
+}) => {
   const cx = useStyles(styles);
-  const dispatch = useAppDispatch();
-  const { file, view } = useAppSelector(getFilesData);
-  const fileData = sortedData(file) as FileResponse[];
-
-  const openFile = (currentDir: string) => {
-    dispatch(selectedDir(currentDir));
-    dispatch(fetchBreadCrumbs(currentDir));
-    // dispatch(pushBreadcrumbsStack({ dirId, name }));
-  };
 
   return (
     <div className={cx(view === 'list' ? 'container' : 'container-plate')}>
-      {view === 'list' && file.length > 0 && (
+      {view === 'list' && data.length > 0 && (
         <div className={cx('header')}>
           <div className={cx('sort-name')}>Name</div>
           <div className={cx('sort-date')}>Date</div>
@@ -39,18 +40,20 @@ export const FileList: React.FC = () => {
           <div className={cx('sort-download')}>Download</div>
         </div>
       )}
-
-      {fileData.length > 0 ? (
-        fileData?.map((item) => (
+      {isLoading ? (
+        <SkeletonLoadingFiles />
+      ) : data.length > 0 ? (
+        data?.map((item) => (
           <File
             view={view}
             file={item}
             key={item._id}
-            onClick={item.type === 'dir' ? () => openFile(item._id) : undefined}
+            isFavorite={item.isFavorite}
+            onClick={item.type === 'dir' ? () => onClick(item._id) : undefined}
           />
         ))
       ) : (
-        <EmptyComponent />
+        customEmptyComponent ?? <EmptyComponent />
       )}
     </div>
   );

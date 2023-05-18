@@ -9,6 +9,7 @@ type FileResponse = {
   size: number;
   type: TypeFile;
   user: UUID;
+  isFavorite?: boolean;
 };
 
 type FileCreateDTO = {

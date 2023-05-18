@@ -13,6 +13,7 @@ import { Icon } from '@components/icon';
 import { Button } from '@components/Button';
 import { Select } from '@components/Select';
 import { ValueContainer } from '@components/Select/ValueContainer';
+import { TextShorter } from '@components/TextShorter';
 
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { fetchFoldersPath, getFoldersPath, uploadFile } from '@store/file/data';
@@ -85,6 +86,7 @@ export const ModalUpload: React.FC<Props> = ({
   return (
     <Modal
       open={isOpen}
+      onClose={closeModal}
       classNamePrefix={cx('modal')}
     >
       <div className={cx('container')}>
@@ -116,7 +118,12 @@ export const ModalUpload: React.FC<Props> = ({
                       type="file"
                       className={cx('icon')}
                     />
-                    <p className={cx('text')}>{item.name}</p>
+                    <TextShorter
+                      tooltip
+                      className={cx('text')}
+                    >
+                      {item.name}
+                    </TextShorter>
                     <Icon
                       type="close"
                       className={cx('icon-close')}

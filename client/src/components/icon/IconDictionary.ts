@@ -30,13 +30,16 @@ import {
   DownloadIcon,
   BigFolderIcon,
   RemoveIcon,
-  TileIcon,
+  BigTileIcon,
   ListIcon,
   QuestionMark,
   ErrorIcon,
   SuccessIcon,
   LoadingIcon,
   BubblesIcon,
+  LikeIcon,
+  TileIcon,
+  EmptyIcon,
 } from '@assets/icons';
 
 const dictionary = {
@@ -72,13 +75,16 @@ const dictionary = {
   bigfolder: BigFolderIcon,
   download: DownloadIcon,
   remove: RemoveIcon,
-  tile: TileIcon,
+  'big-tile': BigTileIcon,
   list: ListIcon,
+  tile: TileIcon,
   'question-mark': QuestionMark,
   error: ErrorIcon,
   success: SuccessIcon,
   loading: LoadingIcon,
   bubbles: BubblesIcon,
+  like: LikeIcon,
+  empty: EmptyIcon,
 };
 
 type IconTypes = keyof typeof dictionary;

@@ -1,0 +1,1 @@
+export { FoldersViewed } from './FoldersViewed';

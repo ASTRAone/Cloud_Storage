@@ -1,4 +1,4 @@
-import React, { AnimationEventHandler } from 'react';
+import React, { AnimationEventHandler, useLayoutEffect } from 'react';
 import ReactPopup from 'reactjs-popup';
 import { PopupProps } from 'reactjs-popup/dist/types';
 
@@ -28,11 +28,23 @@ const Modal: React.FC<Props> = ({
   closeOnDocumentClick = false,
   closeOnEscape = false,
   onAnimationEnd,
+  onClose,
   // lockBodyScroll = true,
   open,
   ...rest
 }) => {
   const cx = useStyles(styles);
+
+  useLayoutEffect(() => {
+    const close = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose && onClose();
+      }
+    };
+    window.addEventListener('keydown', close);
+
+    return () => window.removeEventListener('keydown', close);
+  }, []);
 
   return (
     <ReactPopup
@@ -41,6 +53,7 @@ const Modal: React.FC<Props> = ({
       closeOnDocumentClick={closeOnDocumentClick}
       closeOnEscape={closeOnEscape}
       open={open}
+      onClose={onClose}
       {...rest}
       {...{ overlayStyle }}
     >
