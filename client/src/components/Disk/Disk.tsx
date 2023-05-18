@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 
 import { FolderView } from '@utils/common';
+import { sortedData } from '@utils/data';
+
+import { FileResponse } from '@api/FileApi/models';
 
 import { StorageService } from '@services/StorageService';
 
@@ -33,8 +36,10 @@ const storageService = StorageService.getInstance();
 export const Disk: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
-  const { currentDir, breadCrumbsStack, needUpdate, searchableText } = useAppSelector(getFilesData);
+  const { currentDir, breadCrumbsStack, needUpdate, searchableText, file, view, status } =
+    useAppSelector(getFilesData);
   const { isOpened, openPopup, closePopup } = usePopupControls();
+  const fileData = sortedData(file) as FileResponse[];
 
   const debouncedSearchValue = useDebounce(searchableText, 500);
 
@@ -68,6 +73,12 @@ export const Disk: React.FC = () => {
     files.forEach((file) => {
       dispatch(uploadFile({ file, parent: currentDir }));
     });
+  };
+
+  const openFile = (currentDir: string) => {
+    dispatch(selectedDir(currentDir));
+    dispatch(fetchBreadCrumbs(currentDir));
+    // dispatch(pushBreadcrumbsStack({ dirId, name }));
   };
 
   const changeViewFolders = (view: FolderView) => {
@@ -104,10 +115,10 @@ export const Disk: React.FC = () => {
           </div>
           <div className={cx('btns_right')}>
             <Icon
-              type="tile"
+              type="big-tile"
               className={cx('icon')}
               size="xl"
-              onClick={() => changeViewFolders('plate')}
+              onClick={() => changeViewFolders('big-tile')}
             />
             <Icon
               type="list"
@@ -121,7 +132,12 @@ export const Disk: React.FC = () => {
           breadcrumbsPath={breadCrumbsStack ?? []}
           navDir={handlerBreadcrumbs}
         />
-        <FileList />
+        <FileList
+          data={fileData}
+          view={view}
+          isLoading={status === 'loading' && fileData.length === 0}
+          onClick={openFile}
+        />
       </div>
       {isOpened && (
         <ModalCreate

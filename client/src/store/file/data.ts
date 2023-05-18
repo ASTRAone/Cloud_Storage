@@ -88,16 +88,14 @@ const fetchBreadCrumbs = createAsyncThunk(
   },
 );
 
-const viewFiles = createAsyncThunk(
-  'file/view',
-  async (view: 'list' | 'plate', { rejectWithValue }) => {
-    try {
-      return view;
-    } catch (e) {
-      return rejectWithValue(e);
-    }
-  },
-);
+// TODO зачем?
+const viewFiles = createAsyncThunk('file/view', async (view: FolderView, { rejectWithValue }) => {
+  try {
+    return view;
+  } catch (e) {
+    return rejectWithValue(e);
+  }
+});
 
 const createFile = createAsyncThunk(
   'file/create',

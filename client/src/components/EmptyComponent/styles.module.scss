@@ -1,7 +1,40 @@
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+@import '@assets/styles/variables/colors';
+
 .container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 25px;
+  width: fit-content;
+  text-align: center;
+
+  & .title {
+    @include text();
+    @include paragraph-36();
+    color: $primary-800;
+    margin-bottom: 5px
+  }
+
+  & .text {
+    @include text();
+    @include paragraph-16();
+    color: $primary-500;
+  }
+
+  & .container-icon {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+
+    & .icon {
+      width: 137px;
+      height: 144px;
+      color: $primary-800;
+    }
+  }
+
+  
 }

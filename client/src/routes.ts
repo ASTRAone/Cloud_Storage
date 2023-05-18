@@ -8,11 +8,13 @@ import {
   ALL_FILES_ROUTE,
   START_ROUTE,
   NOT_FOUND_ROUTE,
+  FAVORITES_ROUTE,
 } from './utility/contants';
 import { ProfileUserPage } from './pages/ProfileUserPage';
 import { StartPage } from './pages/PageStart';
 import { FilesPage } from './pages/FilesPage';
 import { PageNotFound } from './pages/PageNotFound';
+import { FavoritesPage } from './pages/FavoritesPage';
 
 export const routes = [
   {
@@ -38,6 +40,10 @@ export const routes = [
   {
     path: START_ROUTE,
     Element: StartPage,
+  },
+  {
+    path: FAVORITES_ROUTE,
+    Element: FavoritesPage,
   },
   {
     path: NOT_FOUND_ROUTE,

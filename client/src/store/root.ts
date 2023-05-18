@@ -3,11 +3,13 @@ import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import { RequestStatus } from '../utility/common';
 import user from './auth';
 import file from './file';
+import favorites from './favorites';
 
 export const store = configureStore({
   reducer: {
     user,
     file,
+    favorites,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

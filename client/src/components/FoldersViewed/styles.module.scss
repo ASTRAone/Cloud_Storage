@@ -1,0 +1,57 @@
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+@import '@assets/styles/variables/colors';
+
+.container-popup {
+  cursor: pointer;
+
+  & .icon-popup {
+    width: 25px;
+    height: 25px;
+    color: $primary-500;
+  }
+}
+
+.content-popup {
+  padding: 0 4px;
+  background-color: $white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  min-width: 112px;
+  box-sizing: border-box;
+  top: 7px;
+
+  & .item-popup {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 9px 5px 8px 5px;
+    cursor: pointer;
+
+    &:hover {
+      background: #f3fcfd;
+    }
+
+    &.active {
+      background: #f3fcfd;
+    }
+
+    & .title-popup {
+      @include text();
+      @include paragraph-12();
+      text-transform: uppercase;
+      color: $primary-500;
+      border-radius: 5px;
+    }
+
+    & .icon {
+      width: 22px;
+      height: auto;
+      color: $primary-500;
+    }
+  }
+}

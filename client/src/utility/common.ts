@@ -1,6 +1,7 @@
 import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form';
 
 import { SelectOption } from '@components/Select/Select';
+import { IconTypes } from '@components/icon/IconDictionary';
 
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
 export type RequestStatus = 'idle' | 'loading' | 'failed';
@@ -17,7 +18,7 @@ export type IconObject = {
   align: 'left' | 'right';
 };
 
-export type FolderView = 'list' | 'plate';
+export type FolderView = 'list' | 'tile' | 'big-tile';
 
 export interface BreadCrumbStack {
   dirId: string;
@@ -37,3 +38,8 @@ export type ApiError =
   | {
       message: string;
     };
+
+export type FoldersViewed = {
+  type: IconTypes;
+  title: string;
+};

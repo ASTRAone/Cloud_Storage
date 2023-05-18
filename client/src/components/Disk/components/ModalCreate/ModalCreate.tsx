@@ -59,6 +59,7 @@ export const ModalCreate: React.FC<Props> = ({ isOpen, closeModal, currentDir, t
   return (
     <Modal
       open={isOpen}
+      onClose={closeModal}
       classNamePrefix={cx('modal')}
     >
       <div className={cx('container')}>

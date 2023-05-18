@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ErrorUtils } from '@utils/ErrorUtils';
+import { FolderView } from '@utils/common';
 
 import { customDate } from '@src/utility/customDate';
 
@@ -21,11 +22,17 @@ import styles from './styles.module.scss';
 
 type Props = {
   file: FileResponse;
-  view: 'list' | 'plate';
+  view: FolderView;
   onClick?: () => void;
+  isFavorite?: boolean;
 };
 
-export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} }) => {
+export const File: React.FC<Props> = ({
+  file,
+  view = 'list',
+  onClick = () => {},
+  isFavorite = false,
+}) => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
   const toast = useToast();
@@ -34,6 +41,7 @@ export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} 
   const { Dialog, openPopup, closePopup } = useDialog();
 
   // TODO при удалении файла или папки дизейблить кнопку удаления
+  // TODO переписать компонент: разделить его на 2 вида папок
 
   const openDeletePopup = async (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -96,6 +104,12 @@ export const File: React.FC<Props> = ({ file, view = 'list', onClick = () => {} 
               size="xl"
             />
           </div>
+        )}
+        {isFavorite && (
+          <Icon
+            type="like"
+            className={cx('icon-like')}
+          />
         )}
       </div>
       <Dialog
