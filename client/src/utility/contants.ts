@@ -7,6 +7,9 @@ export const PROFILE_USER_ROUTE = '/profile';
 export const START_ROUTE = '/';
 export const ALL_FILES_ROUTE = '/files';
 export const FAVORITES_ROUTE = '/favorites';
+export const SHARED_ROUTE = '/shared';
+export const PICTURES_ROUTE = '/pictures';
+export const HISTORY_ROUTE = '/history';
 export const NOT_FOUND_ROUTE = '404';
 
 export enum ColorFolder {

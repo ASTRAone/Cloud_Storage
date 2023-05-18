@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const RequestIcon: React.FC = () => {
+export const HistoryIcon: React.FC = () => {
   return (
     <svg
       viewBox="0 0 24 24"

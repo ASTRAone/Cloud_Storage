@@ -6,32 +6,32 @@ import { StorageService } from '@services/StorageService';
 
 import { useStyles } from '@hooks/useStyles';
 
-import { FileList } from '@components/FileList';
 import { FoldersViewed } from '@components/FoldersViewed';
+import { FileList } from '@components/FileList';
 
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { getFilesData, viewFolder } from '@store/favorites/data';
+import { getFilesData, viewFolder } from '@store/history/data';
 
 import styles from './styles.module.scss';
 
 const storageService = StorageService.getInstance();
 
-export const Favorites: React.FC = () => {
+export const History: React.FC = () => {
   const cx = useStyles(styles);
   const dispatch = useAppDispatch();
-  const { view, favoritesData, status } = useAppSelector(getFilesData);
-  console.log(status);
+
+  const { historyData, view, status } = useAppSelector(getFilesData);
 
   const onChangeFolderViewed = (view: FolderView) => {
-    storageService.setItem('viewFolderFavorites', view);
+    storageService.setItem('viewFolderHistory', view);
     dispatch(viewFolder(view));
   };
 
   return (
     <div className={cx('page')}>
       <div className={cx('header')}>
-        <h3 className={cx('title')}>Favorites folders</h3>
-        {!!favoritesData.length && (
+        <h3 className={cx('title')}>History</h3>
+        {!!historyData.length && (
           <FoldersViewed
             view={view}
             onChange={onChangeFolderViewed}
