@@ -2,7 +2,7 @@
 
 import { IconTypes } from '@components/icon/IconDictionary';
 
-type LinkTypes = 'dashboard' | 'files' | 'favorites' | 'shared' | 'pictures' | 'request';
+type LinkTypes = 'dashboard' | 'files' | 'favorites' | 'shared' | 'pictures' | 'history';
 
 // const { t } = useTranslation();
 
@@ -12,7 +12,7 @@ export const linkTitles: Record<LinkTypes, string> = {
   favorites: 'Favorites',
   shared: 'Shared',
   pictures: 'Pictures',
-  request: 'Request',
+  history: 'History',
 };
 
 export const linkIcons: Record<LinkTypes, IconTypes> = {
@@ -21,5 +21,5 @@ export const linkIcons: Record<LinkTypes, IconTypes> = {
   files: 'stockholm',
   pictures: 'heart',
   favorites: 'shape',
-  request: 'request',
+  history: 'history',
 };

@@ -9,12 +9,18 @@ import {
   START_ROUTE,
   NOT_FOUND_ROUTE,
   FAVORITES_ROUTE,
+  SHARED_ROUTE,
+  PICTURES_ROUTE,
+  HISTORY_ROUTE,
 } from './utility/contants';
 import { ProfileUserPage } from './pages/ProfileUserPage';
 import { StartPage } from './pages/PageStart';
 import { FilesPage } from './pages/FilesPage';
 import { PageNotFound } from './pages/PageNotFound';
 import { FavoritesPage } from './pages/FavoritesPage';
+import { SharedPage } from './pages/SharedPage';
+import { PicturesPage } from './pages/PicturesPage';
+import { HistoryPage } from './pages/HistoryPage';
 
 export const routes = [
   {
@@ -44,6 +50,18 @@ export const routes = [
   {
     path: FAVORITES_ROUTE,
     Element: FavoritesPage,
+  },
+  {
+    path: SHARED_ROUTE,
+    Element: SharedPage,
+  },
+  {
+    path: PICTURES_ROUTE,
+    Element: PicturesPage,
+  },
+  {
+    path: HISTORY_ROUTE,
+    Element: HistoryPage,
   },
   {
     path: NOT_FOUND_ROUTE,

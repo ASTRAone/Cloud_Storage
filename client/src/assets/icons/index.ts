@@ -13,7 +13,7 @@ export { StockholmIcon } from './StockholmIcon';
 export { ShapeIcon } from './ShapeIcon';
 export { SharedIcon } from './SharedIcon';
 export { HeartIcon } from './HeartIcon';
-export { RequestIcon } from './RequestIcon';
+export { HistoryIcon } from './HistoryIcon';
 export { ArrowIcon } from './ArrowIcon';
 export { BellIcon } from './BellIcon';
 export { MagnifierIcon } from './MagnifierIcon';

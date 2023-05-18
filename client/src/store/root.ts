@@ -4,12 +4,18 @@ import { RequestStatus } from '../utility/common';
 import user from './auth';
 import file from './file';
 import favorites from './favorites';
+import shared from './shared';
+import pictures from './pictures';
+import history from './history';
 
 export const store = configureStore({
   reducer: {
     user,
     file,
     favorites,
+    shared,
+    pictures,
+    history,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

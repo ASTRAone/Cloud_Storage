@@ -15,7 +15,7 @@ import { Icon } from '@components/icon';
 import styles from './styles.module.scss';
 import { SidePanelItem } from './SidePanelItem';
 
-export type LinkTypes = 'dashboard' | 'files' | 'favorites' | 'shared' | 'pictures' | 'request';
+export type LinkTypes = 'dashboard' | 'files' | 'favorites' | 'shared' | 'pictures' | 'history';
 
 export type MenuItemType = {
   link: LinkTypes;
@@ -28,7 +28,7 @@ export const menu: Array<MenuItemType> = [
   { link: 'favorites' },
   { link: 'shared' },
   { link: 'pictures' },
-  { link: 'request' },
+  { link: 'history' },
 ];
 
 const storageService = StorageService.getInstance();

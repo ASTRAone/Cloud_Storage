@@ -1,0 +1,44 @@
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+@import '@assets/styles/variables/colors';
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 25px;
+  width: fit-content;
+  text-align: center;
+
+  & .title {
+    @include text();
+    @include paragraph-36();
+    color: $primary-800;
+    margin-bottom: 5px
+  }
+
+  & .text {
+    @include text();
+    @include paragraph-16();
+    color: $primary-500;
+  }
+
+  & .btn {
+    @include text();
+    @include paragraph-15();
+  }
+
+  // TODO исправить
+  & .btn-content {
+    color: $primary-800!important;
+  }
+
+  & .btn-container {
+    max-width: 188px;
+    padding: 7px 18px;
+    margin-top: 22px;
+  }
+
+  
+}

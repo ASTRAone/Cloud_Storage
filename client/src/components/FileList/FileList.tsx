@@ -12,6 +12,7 @@ import { SkeletonLoadingFiles } from '@components/SkeletonLoadingFiles';
 
 import styles from './styles.module.scss';
 
+// TODO сделать алиас на пропс data
 type Props = {
   data: FileResponse[];
   view: FolderView;
