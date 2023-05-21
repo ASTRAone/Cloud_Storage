@@ -7,6 +7,7 @@ import favorites from './favorites';
 import shared from './shared';
 import pictures from './pictures';
 import history from './history';
+import settings from './settings';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     shared,
     pictures,
     history,
+    settings,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

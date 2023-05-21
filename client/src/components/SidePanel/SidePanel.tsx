@@ -12,6 +12,8 @@ import { PanelInfoUsed } from '@components/PanelInfoUsed';
 import { Button } from '@components/Button';
 import { Icon } from '@components/icon';
 
+import { useAppSelector } from '@store/hooks';
+
 import styles from './styles.module.scss';
 import { SidePanelItem } from './SidePanelItem';
 
@@ -36,6 +38,9 @@ const storageService = StorageService.getInstance();
 export const SidePanel: React.FC = () => {
   const cx = useStyles(styles);
   const { t } = useTranslation();
+  const { settings } = useAppSelector((state) => state.settings.data);
+  const isSettingHideMenuManually = settings.autoHideSidepanel;
+
   const [activeTab, setActiveTab] = useState<LinkTypes>(
     (storageService.getItem('activeTabLC') as LinkTypes) || menu[0].link,
   );
@@ -54,8 +59,26 @@ export const SidePanel: React.FC = () => {
     setActiveTab(tab);
   };
 
+  const handleOpenMenuAuto = () => {
+    if (!isSettingHideMenuManually) {
+      setOpen(true);
+      storageService.setItem('openPanel', JSON.stringify(true));
+    }
+  };
+
+  const handleCloseMenuAuto = () => {
+    if (!isSettingHideMenuManually) {
+      setOpen(false);
+      storageService.setItem('openPanel', JSON.stringify(false));
+    }
+  };
+
   return (
-    <aside className={cx('container', open ? 'open' : '')}>
+    <aside
+      className={cx('container', open ? 'open' : '')}
+      onMouseEnter={handleOpenMenuAuto}
+      onMouseLeave={handleCloseMenuAuto}
+    >
       <nav className={cx('menu')}>
         {menu.map(({ link }) => {
           const iconType: IconTypes = linkIcons[link];
@@ -79,18 +102,19 @@ export const SidePanel: React.FC = () => {
             classNameBtn={cx('btn', !open ? 'hide' : '')}
           />
         </>
-
-        <div
-          className={cx('containerArrow')}
-          onClick={handleToggleSidePanel}
-        >
-          <Icon
-            type="arrow"
-            className={cx('arrow', open ? 'open' : '')}
-          />
-        </div>
+        {settings.autoHideSidepanel && (
+          <div
+            className={cx('containerArrow')}
+            onClick={handleToggleSidePanel}
+          >
+            <Icon
+              type="arrow"
+              className={cx('arrow', open ? 'open' : '')}
+            />
+          </div>
+        )}
       </nav>
-      <div className={cx('arrow-bg')} />
+      <div className={cx(isSettingHideMenuManually ? 'arrow-bg' : '')} />
       <div className={cx('aside-bg-left')} />
       <div className={cx('aside-bg-right')} />
     </aside>

@@ -37,9 +37,4 @@
       }
     }
   }
-
-  & .btn {
-    @include paragraph-23();
-    text-transform: uppercase;
-  }
 }
