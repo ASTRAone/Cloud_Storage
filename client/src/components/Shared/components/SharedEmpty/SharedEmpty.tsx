@@ -6,7 +6,11 @@ import { Button } from '@components/Button';
 
 import styles from './styles.module.scss';
 
-export const SharedEmpty: React.FC = () => {
+type Props = {
+  onClick?: () => void;
+};
+
+export const SharedEmpty: React.FC<Props> = ({ onClick = () => {} }) => {
   const cx = useStyles(styles);
   return (
     <div className={cx('container')}>
@@ -16,6 +20,7 @@ export const SharedEmpty: React.FC = () => {
       </p>
       <Button
         color="white"
+        onClick={onClick}
         text="Create shared folder"
         classNameBtn={cx('btn')}
         className={cx('btn-content')}

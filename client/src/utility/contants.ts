@@ -48,3 +48,5 @@ export const FOLDERS_VIEWED: FoldersViewed[] = [
     title: 'BIG TILES',
   },
 ];
+
+export const DEFAULT_VIEW_FOLDERS = 'list';
