@@ -40,6 +40,7 @@ import {
   LikeIcon,
   TileIcon,
   EmptyIcon,
+  SharedFolderIcon,
 } from '@assets/icons';
 
 const dictionary = {
@@ -85,6 +86,7 @@ const dictionary = {
   bubbles: BubblesIcon,
   like: LikeIcon,
   empty: EmptyIcon,
+  'shared-folder': SharedFolderIcon,
 };
 
 type IconTypes = keyof typeof dictionary;
