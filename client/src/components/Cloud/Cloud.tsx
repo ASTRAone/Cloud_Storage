@@ -5,6 +5,7 @@ import { useStyles } from '@hooks/useStyles';
 import { DrageComponent } from '@components/DrageComponent';
 import { FolderComponent } from '@components/FolderComponent';
 import { RecentlyUploaded } from '@components/RecentlyUploaded';
+import { SharedFolders } from '@components/SharedFolders';
 
 import styles from './styles.module.scss';
 
@@ -43,6 +44,7 @@ export const Cloud: React.FC = () => {
       </div>
       <div className={cx('info-panel')}>
         <RecentlyUploaded />
+        <SharedFolders />
       </div>
     </div>
   );

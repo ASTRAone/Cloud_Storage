@@ -39,3 +39,4 @@ export { BubblesIcon } from './BubblesIcon';
 export { LikeIcon } from './LikeIcon';
 export { TileIcon } from './TileIcon';
 export { EmptyIcon } from './EmptyIcon';
+export { SharedFolderIcon } from './SharedFolderIcon';

@@ -1,0 +1,22 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.container {
+  min-height: 273px;
+  width: 310px;
+
+  & .title {
+    @include text();
+    @include paragraph-18();
+    color: $dark-gray-100;
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  & .content {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+  }
+}

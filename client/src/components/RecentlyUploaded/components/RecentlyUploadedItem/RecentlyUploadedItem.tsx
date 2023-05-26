@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { customDate, customTime } from '@utils/customDate';
+import { customDate } from '@utils/customDate';
 
 import { FileResponseRecently } from '@api/FileApi/models';
 
@@ -19,8 +19,7 @@ export const RecentlyUploadedItem: React.FC<Props> = ({ data }) => {
   const cx = useStyles(styles);
 
   const { date, size, type, name } = data;
-  const { day, mounth } = customDate(date);
-  const time = customTime(date);
+  const { day, mounth, time } = customDate(date);
 
   return (
     <div className={cx('container')}>

@@ -23,6 +23,7 @@ import { RootState } from '@store/root';
 type State = {
   file: FileResponse[] | [];
   dataRecently: FileResponseRecently[];
+  dataShared: [];
   foldersPaths: SelectOption<string>[];
   needUpdate: boolean;
   searchableText?: string;
@@ -47,6 +48,7 @@ const folderVariant: FolderView = storageService.getItem('viewFolder') ?? 'list'
 const initialState: State = {
   file: [],
   dataRecently: [],
+  dataShared: [],
   foldersPaths: [],
   needUpdate: false,
   currentDir: '',

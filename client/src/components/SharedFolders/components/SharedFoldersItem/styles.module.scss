@@ -1,0 +1,47 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  & .content-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    & .container-icon {
+      padding: 10px;
+      background-color: #dee1e6;
+      border-radius: 10px;
+
+      & .icon {
+      }
+    }
+
+    & .container-text {
+      @include text();
+      & .title {
+        @include paragraph-13();
+        color: $dark-gray-100;
+      }
+
+      & .text {
+        @include paragraph-10();
+        color: $dark-gray-50;
+      }
+    }
+  }
+
+  & .content-right {
+    @include text();
+    @include paragraph-10();
+    color: $dark-gray-50;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+  }
+}

@@ -7,9 +7,6 @@ export const customDate = (date: string) => {
     fullDate: moment(date).format('DD.MM.YYYY'),
     day: moment(date).format('DD'),
     mounth: mounths[moment(date).month() + 1],
+    time: moment(date).format('HH:MM'),
   };
-};
-
-export const customTime = (date: string) => {
-  return moment(date).format('HH:MM');
 };
