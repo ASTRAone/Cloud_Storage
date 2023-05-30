@@ -4,7 +4,18 @@
 
 .container {
   min-height: 273px;
-  width: 310px;
+  width: 100%;
+  position: relative;
+  padding: 20px 10px;
+  border-radius: 25px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background: rgba(45, 168, 240, 0.1);
+    border-color: #DEE1E6;
+  }
 
   & .title {
     @include text();
@@ -17,6 +28,6 @@
   & .content {
     display: flex;
     flex-direction: column;
-    gap: 17px;
+    gap: 30px;;
   }
 }

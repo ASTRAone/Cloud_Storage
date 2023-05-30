@@ -9,10 +9,12 @@ import styles from './styles.module.scss';
 import { RecentlyUploadedItem } from './components/RecentlyUploadedItem';
 import { RecentlySkeleton } from './components/RecentlySkeleton';
 
+// TODO: сделать тултип для размера файлов
+
 export const RecentlyUploaded: React.FC = () => {
   const cx = useStyles(styles);
   const dispath = useAppDispatch();
-  const { dataRecently, statusFetchRecently, needUpdate } = useAppSelector(getRecentlyUploaded);
+  const { statusFetchRecently, dataRecently, needUpdate } = useAppSelector(getRecentlyUploaded);
 
   useEffect(() => {
     dispath(fetchRecentlyUploaded());
@@ -26,15 +28,16 @@ export const RecentlyUploaded: React.FC = () => {
     <div className={cx('container')}>
       <p className={cx('title')}>Recently Uploaded</p>
       <div className={cx('content')}>
-        {statusFetchRecently === 'loading' && dataRecently.length === 0 && <RecentlySkeleton />}
-        {dataRecently.length > 0
-          ? dataRecently.map((item, index) => (
-              <RecentlyUploadedItem
-                data={item}
-                key={index}
-              />
-            ))
-          : null}
+        {statusFetchRecently === 'loading' ? (
+          <RecentlySkeleton />
+        ) : dataRecently.length > 0 ? (
+          dataRecently.map((item, index) => (
+            <RecentlyUploadedItem
+              data={item}
+              key={index}
+            />
+          ))
+        ) : null}
       </div>
     </div>
   );
