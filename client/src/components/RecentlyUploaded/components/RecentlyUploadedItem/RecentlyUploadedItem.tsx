@@ -38,7 +38,7 @@ export const RecentlyUploadedItem: React.FC<Props> = ({ data }) => {
         </div>
         <div className={cx('date-our')}>
           <p className={cx('text')}>
-            {day} {mounth}
+            {day} {mounth},
           </p>
           <p className={cx('text')}>{time}pm</p>
         </div>

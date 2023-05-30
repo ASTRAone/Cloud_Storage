@@ -20,18 +20,29 @@ export type MenuItemType = {
   name: string;
 };
 
-// TODO провести рефакторинг
+const MENU: Array<MenuItemType> = [
+  { name: 'Open' },
+  { name: 'Change' },
+  { name: 'Move' },
+  { name: 'Delete' },
+];
 
 export const FolderComponent: React.FC<Props> = ({ type, title, files, gb }) => {
   const cx = useStyles(styles);
   const color = dictionaryColorFolder[type];
 
-  const menu: Array<MenuItemType> = [
-    { name: 'Open' },
-    { name: 'Change' },
-    { name: 'Move' },
-    { name: 'Delete' },
-  ];
+  const subitemsNode = MENU.map(({ name }, index) => (
+    <div
+      key={index}
+      className={cx('item')}
+    >
+      <MenuItem
+        button
+        title={name}
+        className={cx('btn')}
+      />
+    </div>
+  ));
 
   return (
     <div className={cx('container')}>
@@ -53,22 +64,7 @@ export const FolderComponent: React.FC<Props> = ({ type, title, files, gb }) => 
             on="click"
           >
             <div className={cx('dropdown-context')}>
-              <div className={cx('dropdown-content')}>
-                {menu.map(({ name }) => {
-                  return (
-                    <div
-                      key={name}
-                      className={cx('item')}
-                    >
-                      <MenuItem
-                        button
-                        title={name}
-                        className={cx('btn')}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
+              <div className={cx('dropdown-content')}>{subitemsNode}</div>
             </div>
           </Popup>
         </div>

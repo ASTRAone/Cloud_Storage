@@ -35,8 +35,8 @@ export const SharedFolders: React.FC = () => {
       >
         Shared Folders
       </ButtonLink>
-
       <div className={cx('content')}>
+        <SharedFoldersItem />
         <SharedFoldersItem />
       </div>
     </div>

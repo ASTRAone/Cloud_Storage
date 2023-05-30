@@ -5,7 +5,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  max-width: 228px;
+  width: 100%;
   min-height: 319px;
 
   & .title {
@@ -19,6 +19,7 @@
   & .content {
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: 24px;
     flex: 1;
   }
