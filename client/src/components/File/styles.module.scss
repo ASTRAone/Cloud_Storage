@@ -25,14 +25,20 @@
   justify-content: center;
 }
 
-.file-date {
+.file-public {
   grid-column-start: 5;
   text-align: center;
   justify-content: center;
 }
 
-.file-size {
+.file-date {
   grid-column-start: 6;
+  text-align: center;
+  justify-content: center;
+}
+
+.file-size {
+  grid-column-start: 7;
   text-align: center;
   justify-content: center;
 }

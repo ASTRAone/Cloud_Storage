@@ -35,12 +35,12 @@ export const Auth: React.FC = () => {
       const { accessToken } = await dispatch(userLogin(data)).unwrap();
       storageService.setItem(AUTH_HEADER, `Bearer ${accessToken}`);
       navigate(CLOUD_ROUTE);
-      toast.success({ title: 'Авторизация прошла успешна' });
+      toast.success({ title: 'Authorization is succeeded' });
     } catch (error) {
       const errorMsg = ErrorUtils.handleApiError(error);
       setErrorRes(true);
       setBtnDisabled(false);
-      toast.error({ title: 'Ошибка авторизации', text: errorMsg });
+      toast.error({ title: 'Authorization error', text: errorMsg });
     }
   };
 

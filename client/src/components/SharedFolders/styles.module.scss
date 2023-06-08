@@ -12,6 +12,10 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 
+  & .title {
+    padding-left: 7px;
+  }
+
   &:hover {
     background: rgba(45, 168, 240, 0.1);
     border-color: #DEE1E6;

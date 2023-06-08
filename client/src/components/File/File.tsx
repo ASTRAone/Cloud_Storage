@@ -38,15 +38,15 @@ export const File: React.FC<Props> = ({
   const toast = useToast();
   const { statusDelete } = useAppSelector(getStatusDelete);
   const { name, size, type, date } = file;
-  const { Dialog, openPopup, closePopup } = useDialog();
+  const { Dialog, closePopup } = useDialog();
 
   // TODO при удалении файла или папки дизейблить кнопку удаления
   // TODO переписать компонент: разделить его на 2 вида папок
 
-  const openDeletePopup = async (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    openPopup();
-  };
+  // const openDeletePopup = async (e: React.MouseEvent<HTMLDivElement>) => {
+  //   e.stopPropagation();
+  //   openPopup();
+  // };
 
   const downloadClickHandler = async () => {
     await dispatch(downloadFile(file)).unwrap();
@@ -80,9 +80,10 @@ export const File: React.FC<Props> = ({
         >
           <>{name}</>
         </TextShorter>
+        <div className={cx('file-public')}>{customDate(date).fullDate}</div>
         <div className={cx('file-date')}>{customDate(date).fullDate}</div>
         <div className={cx('file-size')}>{size}</div>
-        <div
+        {/* <div
           className={cx('file-delete')}
           onClick={openDeletePopup}
         >
@@ -92,7 +93,7 @@ export const File: React.FC<Props> = ({
               className={type === 'dir' ? cx('folder_icon') : cx('icon')}
             />
           )}
-        </div>
+        </div> */}
         {file.type !== 'dir' && view === 'list' && (
           <div
             onClick={() => downloadClickHandler()}

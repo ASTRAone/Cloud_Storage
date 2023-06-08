@@ -14,8 +14,8 @@ import { useDebounce } from '@hooks/useDebounce';
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
 import { FileList } from '@components/FileList';
-import { Icon } from '@components/icon';
 import { Breadcrumbs } from '@components/Breadcrumbs';
+import { FoldersViewed } from '@components/FoldersViewed';
 
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import {
@@ -81,7 +81,7 @@ export const Disk: React.FC = () => {
     // dispatch(pushBreadcrumbsStack({ dirId, name }));
   };
 
-  const changeViewFolders = (view: FolderView) => {
+  const onChangeFolderViewed = (view: FolderView) => {
     dispatch(viewFolder(view));
     storageService.setItem('viewFolder', view);
   };
@@ -90,42 +90,34 @@ export const Disk: React.FC = () => {
     <>
       <div className={cx('container')}>
         <div className={cx('btns')}>
-          <div className={cx('btns_left')}>
+          <div className={cx('btns_left')} />
+          <div className={cx('btns_right')}>
+            <FoldersViewed
+              view={view}
+              onChange={onChangeFolderViewed}
+            />
             <Button
               variant="outline"
               onClick={openPopup}
-              className={cx('create')}
-              text="Create a folder"
+              classNameBtn={cx('create')}
+              text="Create directory"
+              typeIcon="small-folder"
             />
-          </div>
-          <div className={cx('upload')}>
-            <label
-              htmlFor="upload"
-              className={cx('label')}
-            >
-              Load a file
-            </label>
-            <Input
-              multiple
-              onChange={(e) => submitUploadFile(e.target.files)}
-              type="file"
-              id="upload"
-              className={cx('input')}
-            />
-          </div>
-          <div className={cx('btns_right')}>
-            <Icon
-              type="big-tile"
-              className={cx('icon')}
-              size="xl"
-              onClick={() => changeViewFolders('big-tile')}
-            />
-            <Icon
-              type="list"
-              className={cx('icon')}
-              size="xl"
-              onClick={() => changeViewFolders('list')}
-            />
+            <div className={cx('upload')}>
+              <label
+                htmlFor="upload"
+                className={cx('label')}
+              >
+                Load files
+              </label>
+              <Input
+                multiple
+                onChange={(e) => submitUploadFile(e.target.files)}
+                type="file"
+                id="upload"
+                className={cx('input')}
+              />
+            </div>
           </div>
         </div>
         <Breadcrumbs

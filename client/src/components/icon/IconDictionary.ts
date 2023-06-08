@@ -41,6 +41,7 @@ import {
   TileIcon,
   EmptyIcon,
   SharedFolderIcon,
+  SmallFolderIcon,
 } from '@assets/icons';
 
 const dictionary = {
@@ -79,6 +80,7 @@ const dictionary = {
   'big-tile': BigTileIcon,
   list: ListIcon,
   tile: TileIcon,
+  'small-folder': SmallFolderIcon,
   'question-mark': QuestionMark,
   error: ErrorIcon,
   success: SuccessIcon,

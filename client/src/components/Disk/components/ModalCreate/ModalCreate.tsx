@@ -52,11 +52,11 @@ export const ModalCreate: React.FC<Props> = ({ isOpen, closeModal, currentDir, t
     }
     try {
       await dispatch(createFile(payload)).unwrap();
-      toast.success({ title: 'Папка успешно создана' });
+      toast.success({ title: 'A folder is created successfully' });
       closeModal();
     } catch (error) {
       const errorMsg = ErrorUtils.handleApiError(error);
-      toast.error({ title: 'Ошибка создания папки', text: errorMsg });
+      toast.error({ title: 'Creating folder error', text: errorMsg });
       setErrors(true);
     }
   };
@@ -85,7 +85,7 @@ export const ModalCreate: React.FC<Props> = ({ isOpen, closeModal, currentDir, t
             text="Create a folder"
             isUpperCase
             type="submit"
-            color="light-blue"
+            color="blue"
             onClick={() => handleCreateFile(textInput)}
             disabled={!textInput}
             isLoading={statusCreate === 'loading'}

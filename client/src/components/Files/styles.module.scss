@@ -1,3 +1,7 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
 .page {
   width: 100%;
   margin-top: 22px;
@@ -6,21 +10,17 @@
   overflow-y: auto;
   overflow-x: hidden;
 
-  & .container {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 50px;
+  & .header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ededed;
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
 
-    @media (max-width: 1600px) {
-      & { grid-template-columns: repeat(5, 1fr); }
-    }
-    @media (max-width: 1500px) {
-      & { grid-template-columns: repeat(4, 1fr); }
-    }
-    @media (max-width: 1300px) {
-      & { grid-template-columns: repeat(3, 1fr); }
+    & .title {
+      @include text();
+      @include paragraph-22();
+      color: $dark-gray-100;
     }
   }
 }

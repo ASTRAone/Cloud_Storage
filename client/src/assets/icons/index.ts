@@ -36,6 +36,7 @@ export { ErrorIcon } from './ErrorIcon';
 export { SuccessIcon } from './SuccessIcon';
 export { LoadingIcon } from './LoadingIcon';
 export { BubblesIcon } from './BubblesIcon';
+export { SmallFolderIcon } from './SmallFolderIcon';
 export { LikeIcon } from './LikeIcon';
 export { TileIcon } from './TileIcon';
 export { EmptyIcon } from './EmptyIcon';

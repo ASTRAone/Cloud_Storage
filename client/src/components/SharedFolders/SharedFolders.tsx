@@ -33,7 +33,7 @@ export const SharedFolders: React.FC = () => {
         onClick={getNavigatePageShared}
         className={cx('title')}
       >
-        Shared Folders
+        <span className={cx('title')}>Shared Folders</span>
       </ButtonLink>
       <div className={cx('content')}>
         <SharedFoldersItem />
