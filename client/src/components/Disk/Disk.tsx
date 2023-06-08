@@ -90,7 +90,12 @@ export const Disk: React.FC = () => {
     <>
       <div className={cx('container')}>
         <div className={cx('btns')}>
-          <div className={cx('btns_left')} />
+          <div className={cx('btns_left')}>
+            <Breadcrumbs
+              breadcrumbsPath={breadCrumbsStack ?? []}
+              navDir={handlerBreadcrumbs}
+            />
+          </div>
           <div className={cx('btns_right')}>
             <FoldersViewed
               view={view}
@@ -120,10 +125,6 @@ export const Disk: React.FC = () => {
             </div>
           </div>
         </div>
-        <Breadcrumbs
-          breadcrumbsPath={breadCrumbsStack ?? []}
-          navDir={handlerBreadcrumbs}
-        />
         <FileList
           data={fileData}
           view={view}

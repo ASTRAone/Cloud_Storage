@@ -42,6 +42,8 @@ import {
   EmptyIcon,
   SharedFolderIcon,
   SmallFolderIcon,
+  ArrowBreadCrumbsIcon,
+  ThreeDotsIcon,
 } from '@assets/icons';
 
 const dictionary = {
@@ -89,6 +91,8 @@ const dictionary = {
   like: LikeIcon,
   empty: EmptyIcon,
   'shared-folder': SharedFolderIcon,
+  'arrow-breadcrumbs': ArrowBreadCrumbsIcon,
+  'three-dots': ThreeDotsIcon,
 };
 
 type IconTypes = keyof typeof dictionary;

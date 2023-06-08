@@ -14,7 +14,7 @@ type Props = {
 };
 
 const FOLDERS: Array<Props> = [
-  { type: 'music', title: 'Music', files: '12', gb: '54' },
+  { type: 'music', title: 'Music', files: '122', gb: '54' },
   { type: 'images', title: 'Images', files: '41', gb: '622' },
   { type: 'films', title: 'Films', files: '41', gb: '2' },
   { type: 'documents', title: 'Documents', files: '121', gb: '252' },

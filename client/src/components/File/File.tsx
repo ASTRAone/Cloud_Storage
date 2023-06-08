@@ -11,12 +11,15 @@ import { useStyles } from '@hooks/useStyles';
 import { useToast } from '@hooks/useToast';
 import { useDialog } from '@hooks/useDialog';
 
+import { Popup } from '@components/Popup';
 import { Icon } from '@components/icon';
 import { TextShorter } from '@components/TextShorter';
+// import { downloadFile, deleteFile, getStatusDelete } from '@store/file/data';
+import { MenuItem } from '@components/MenuIteim';
 
-import { useAppSelector } from '@store/hooks';
-import { downloadFile, deleteFile, getStatusDelete } from '@store/file/data';
+import { deleteFile, getStatusDelete } from '@store/file/data';
 import { useAppDispatch } from '@store/hooks';
+import { useAppSelector } from '@store/hooks';
 
 import styles from './styles.module.scss';
 
@@ -40,6 +43,25 @@ export const File: React.FC<Props> = ({
   const { name, size, type, date } = file;
   const { Dialog, closePopup } = useDialog();
 
+  type MenuItemType = {
+    name: string;
+  };
+
+  const MENU: Array<MenuItemType> = [{ name: 'Rename' }, { name: 'Download' }, { name: 'Delete' }];
+
+  const subitemsNode = MENU.map(({ name }, index) => (
+    <div
+      key={index}
+      className={cx('item')}
+    >
+      <MenuItem
+        button
+        title={name}
+        className={cx('btn')}
+      />
+    </div>
+  ));
+
   // TODO при удалении файла или папки дизейблить кнопку удаления
   // TODO переписать компонент: разделить его на 2 вида папок
 
@@ -48,9 +70,9 @@ export const File: React.FC<Props> = ({
   //   openPopup();
   // };
 
-  const downloadClickHandler = async () => {
-    await dispatch(downloadFile(file)).unwrap();
-  };
+  // const downloadClickHandler = async () => {
+  //   await dispatch(downloadFile(file)).unwrap();
+  // };
 
   const deleteClickHandler = async () => {
     try {
@@ -80,9 +102,26 @@ export const File: React.FC<Props> = ({
         >
           <>{name}</>
         </TextShorter>
-        <div className={cx('file-public')}>{customDate(date).fullDate}</div>
-        <div className={cx('file-date')}>{customDate(date).fullDate}</div>
+        <div className={cx('file-sharing')}>PUBLIC</div>
         <div className={cx('file-size')}>{size}</div>
+        {/* <div className={cx('file-date')}>{customDate(date).fullDate}</div> */}
+        <div className={cx('file-date')}>{customDate(date).fullDate}</div>
+        <div className={cx('context-menu')}>
+          <Popup
+            trigger={
+              <Icon
+                type="three-dots"
+                className={cx('horizontal-dots')}
+              />
+            }
+            position="left center"
+            on="click"
+          >
+            <div className={cx('dropdown-context')}>
+              <div className={cx('dropdown-content')}>{subitemsNode}</div>
+            </div>
+          </Popup>
+        </div>
         {/* <div
           className={cx('file-delete')}
           onClick={openDeletePopup}
@@ -94,7 +133,7 @@ export const File: React.FC<Props> = ({
             />
           )}
         </div> */}
-        {file.type !== 'dir' && view === 'list' && (
+        {/* {file.type !== 'dir' && view === 'list' && (
           <div
             onClick={() => downloadClickHandler()}
             className={cx('file-download')}
@@ -105,7 +144,7 @@ export const File: React.FC<Props> = ({
               size="xl"
             />
           </div>
-        )}
+        )} */}
         {isFavorite && (
           <Icon
             type="like"

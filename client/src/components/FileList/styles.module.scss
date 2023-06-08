@@ -1,3 +1,6 @@
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/colors';
+
 .container {
   margin: 20px 0;
 }
@@ -9,14 +12,20 @@
 }
 
 .header {
+  @include paragraph-18();
+  color: #004B75;
   display: grid;
   grid-template-columns: 1fr 6fr repeat(6, 1fr);
+  border: solid #d8d7d7 1px;
+  border-radius: 5px;
+  padding: 10px;
+  background: #fcfcfc;
 
   & .sort-name {
-    grid-column-start: 2;
+    grid-column-start: 1;
   }
-
-  & .sort-date {
+  
+  & .sort-sharing {
     grid-column-start: 5;
     justify-content: center;
     text-align: center;
@@ -28,15 +37,29 @@
     text-align: center;
   }
 
-  & .sort-delete {
+    & .sort-date {
     grid-column-start: 7;
+    display: flex;
     justify-content: center;
     text-align: center;
+
+    & .context-menu {
+      grid-column-start: 8;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+    }
   }
 
-  & .sort-download {
-    grid-column-start: 8;
-    justify-content: center;
-    text-align: center;
-  }
+  // & .sort-delete {
+  //   grid-column-start: 7;
+  //   justify-content: center;
+  //   text-align: center;
+  // }
+
+  // & .sort-download {
+  //   grid-column-start: 8;
+  //   justify-content: center;
+  //   text-align: center;
+  // }
 }

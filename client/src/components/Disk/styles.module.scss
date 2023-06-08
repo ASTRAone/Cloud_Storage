@@ -11,6 +11,11 @@
     align-items: center;
     gap: 10px;
     justify-content: space-between;
+
+    // & .btns_left {
+    //   display: flex;
+    //   align-items: baseline;
+    // }
     
     & .btns_right {
       display: flex;
