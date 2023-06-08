@@ -87,7 +87,7 @@ export const ModalUpload: React.FC<Props> = ({
     <Modal
       open={isOpen}
       onClose={closeModal}
-      classNamePrefix={cx('modal')}
+      classNameContainer={cx('modal')}
     >
       <div className={cx('container')}>
         <p className={cx('title')}>Choose a path for loading:</p>
@@ -98,8 +98,8 @@ export const ModalUpload: React.FC<Props> = ({
           components={innerComponent}
           isSearchable={false}
           maxMenuHeight={115}
-          portal
           isLoading={statusFoldersPath === 'loading'}
+          className={cx('select')}
         />
         <div className={cx('loaded-container')}>
           <p className={cx('title')}>Loaded files:</p>

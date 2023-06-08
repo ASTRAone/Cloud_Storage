@@ -1,6 +1,4 @@
 import React, { AnimationEventHandler, useLayoutEffect } from 'react';
-import ReactPopup from 'reactjs-popup';
-import { PopupProps } from 'reactjs-popup/dist/types';
 
 import { Size } from '@utils/common';
 
@@ -10,52 +8,46 @@ import { InputStub } from '@components/Popup/InputStub';
 
 import styles from './styles.module.scss';
 
-type Props = PopupProps & {
+type Props = React.ComponentPropsWithRef<'div'> & {
   size?: Extract<Size, 'sm' | 'md' | 'lg'>;
-  classNamePrefix?: string;
+  classNameContainer?: string;
+  closeOnDocumentClick?: boolean;
+  closeOnEscape?: boolean;
+  open: boolean;
+  onClose?: () => void;
   onAnimationEnd?: AnimationEventHandler<HTMLDivElement>;
-  // lockBodyScroll?: boolean;
+  children: JSX.Element;
 };
 
-const DEFAULT_OVERLAY_STYLES = { background: 'rgba(26, 32, 36, 0.5)' };
-
 const Modal: React.FC<Props> = ({
-  children,
-  overlayStyle = DEFAULT_OVERLAY_STYLES,
   size = 'sm',
   className,
-  classNamePrefix,
-  closeOnDocumentClick = false,
-  closeOnEscape = false,
+  classNameContainer,
+  open = false,
+  closeOnDocumentClick,
+  closeOnEscape = true,
   onAnimationEnd,
-  onClose,
-  // lockBodyScroll = true,
-  open,
+  onClose = () => {},
+  children,
   ...rest
 }) => {
   const cx = useStyles(styles);
 
   useLayoutEffect(() => {
     const close = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' && closeOnEscape) {
         onClose && onClose();
       }
     };
-    window.addEventListener('keydown', close);
 
+    window.addEventListener('keydown', close);
     return () => window.removeEventListener('keydown', close);
   }, []);
 
-  return (
-    <ReactPopup
-      modal
-      className={classNamePrefix}
-      closeOnDocumentClick={closeOnDocumentClick}
-      closeOnEscape={closeOnEscape}
-      open={open}
-      onClose={onClose}
+  return open ? (
+    <div
+      className={cx('container', classNameContainer)}
       {...rest}
-      {...{ overlayStyle }}
     >
       <InputStub />
       <div
@@ -64,8 +56,8 @@ const Modal: React.FC<Props> = ({
       >
         {children}
       </div>
-    </ReactPopup>
-  );
+    </div>
+  ) : null;
 };
 
 export { Modal };

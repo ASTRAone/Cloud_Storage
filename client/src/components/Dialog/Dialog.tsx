@@ -6,6 +6,7 @@ import { Icon } from '@components/icon';
 import { Button } from '@components/Button';
 
 import styles from './styles.module.scss';
+
 export type DialogProps = {
   closeModal: () => void;
   onSubmit?: () => void;
@@ -20,11 +21,11 @@ export type DialogProps = {
 
 export const Dialog: React.FC<DialogProps> = ({
   closeModal = () => {},
+  onSubmit = () => {},
   title,
   text,
   btnOkText = 'OK',
   btnCancelText = 'Cancel',
-  onSubmit,
   loading = false,
 }) => {
   const cx = useStyles(styles);

@@ -24,6 +24,11 @@
       text-align: center;
     }
 
+    & .select {
+      position: relative;
+      z-index: 999;
+    }
+
     & .loaded-files {
       padding: 9px 14px 9px 19px;
       border: 1px solid $primary-500;

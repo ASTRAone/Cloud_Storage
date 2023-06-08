@@ -35,6 +35,11 @@ export const ModalCreate: React.FC<Props> = ({ isOpen, closeModal, currentDir, t
 
   useEffect(() => () => closeModal(), []);
 
+  const handleChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setTextInput(value);
+  };
+
   const handleCreateFile = async (name: string) => {
     setErrors(false);
     const payload: FileCreateDTO = {
@@ -60,7 +65,7 @@ export const ModalCreate: React.FC<Props> = ({ isOpen, closeModal, currentDir, t
     <Modal
       open={isOpen}
       onClose={closeModal}
-      classNamePrefix={cx('modal')}
+      classNameContainer={cx('modal')}
     >
       <div className={cx('container')}>
         <p className={cx('title')}>{title}</p>
@@ -70,7 +75,7 @@ export const ModalCreate: React.FC<Props> = ({ isOpen, closeModal, currentDir, t
           </div>
         ) : null}
         <Input
-          onChange={(e) => setTextInput(e.target.value)}
+          onChange={handleChangeText}
           value={textInput}
           placeholder="Enter a folder name"
           errorText={errors ? 'Error creating folder' : ''}
@@ -82,6 +87,7 @@ export const ModalCreate: React.FC<Props> = ({ isOpen, closeModal, currentDir, t
             type="submit"
             color="light-blue"
             onClick={() => handleCreateFile(textInput)}
+            disabled={!textInput}
             isLoading={statusCreate === 'loading'}
           />
         </div>
