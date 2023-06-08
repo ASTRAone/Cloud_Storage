@@ -2,27 +2,40 @@
 
 :global {
   .modal-content {
-    margin-top: 154px!important;
+    margin-top: 154px !important;
     overflow: overlay;
   }
 }
 
-.modal {
-  box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid $primary-500;
-  border-radius: 20px;
-  padding: 29px 36px 19px;
-}
+.container {
+  background-color: rgba(26, 32, 36, 0.5);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-.sm {
-  width: 400px;
-}
+  .modal {
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid $primary-500;
+    border-radius: 20px;
+    padding: 29px 36px 19px;
+  }
 
-.md {
-  width: 160rem;
-}
+  .sm {
+    width: 400px;
+  }
 
-.lg {
-  width: 250rem;
+  .md {
+    width: 640px;
+  }
+
+  .lg {
+    width: 1000px;
+  }
 }

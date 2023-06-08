@@ -6,6 +6,7 @@ import { usePopupControls } from '@hooks/usePopupControls';
 import { Icon } from '@components/icon';
 import { ModalUpload } from '@components/Cloud/ModalUpload';
 import { Input } from '@components/Input';
+import { AnimationBlock } from '@components/AnimationBlock';
 
 import styles from './styles.module.scss';
 
@@ -74,14 +75,21 @@ export const DrageComponent: React.FC = () => {
         onChange={handleUploadFileExplorer}
         multiple
       />
-      {isOpened && (
+      <AnimationBlock
+        isVisible={isOpened}
+        animationProps={{
+          initial: { opacity: 0 },
+          animate: { opacity: 1 },
+          exit: { opacity: 0 },
+        }}
+      >
         <ModalUpload
           isOpen={isOpened}
           closeModal={closePopup}
           uploadsFiles={uploadsFiles}
           removeUploadFile={handleRemoveUploadFile}
         />
-      )}
+      </AnimationBlock>
     </>
   );
 };
