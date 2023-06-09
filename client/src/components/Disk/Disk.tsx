@@ -16,7 +16,6 @@ import { Input } from '@components/Input';
 import { FileList } from '@components/FileList';
 import { Icon } from '@components/icon';
 import { Breadcrumbs } from '@components/Breadcrumbs';
-import { AnimationBlock } from '@components/AnimationBlock';
 
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import {
@@ -140,21 +139,14 @@ export const Disk: React.FC = () => {
           onClick={openFile}
         />
       </div>
-      <AnimationBlock
-        isVisible={isOpened}
-        animationProps={{
-          initial: { opacity: 0 },
-          animate: { opacity: 1 },
-          exit: { opacity: 0 },
-        }}
-      >
+      {isOpened && (
         <ModalCreate
           isOpen={isOpened}
           closeModal={closePopup}
           currentDir={currentDir}
           title="Enter a name of directory"
         />
-      </AnimationBlock>
+      )}
     </>
   );
 };

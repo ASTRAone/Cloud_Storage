@@ -85,7 +85,7 @@ export const ModalUpload: React.FC<Props> = ({
 
   return (
     <Modal
-      open={isOpen}
+      opened={isOpen}
       onClose={closeModal}
       classNameContainer={cx('modal')}
     >
