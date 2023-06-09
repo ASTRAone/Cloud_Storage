@@ -44,7 +44,7 @@ export const Dialog: React.FC<DialogProps> = ({
             text={btnOkText}
             isUpperCase
             type="submit"
-            color="light-blue"
+            color="blue"
             onClick={onSubmit}
             isLoading={loading}
           />

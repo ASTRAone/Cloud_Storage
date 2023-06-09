@@ -1,4 +1,6 @@
 @import "../../utility/colors.scss";
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
 
 .container {
   margin-top: 20px;
@@ -10,14 +12,40 @@
     gap: 10px;
     justify-content: space-between;
 
-    & .btns_left {
-      display: flex;
-      gap: 10px;
-    }
+    // & .btns_left {
+    //   display: flex;
+    //   align-items: baseline;
+    // }
     
     & .btns_right {
       display: flex;
       gap: 10px;
+      align-items: center;
+
+      & .create {
+        @include paragraph-15();
+        font-weight: 400;
+        cursor: pointer;
+        & > * {
+          background: $primary-500;
+          text-transform: uppercase;
+        }
+      }
+  
+      & .upload {
+        @include paragraph-15();
+        font-weight: 400;
+        cursor: pointer;
+        border-radius: 3px;
+        & > * {
+          border: 1px solid #004B75;
+          border-radius: 6px;
+          background: $primary-500;
+          text-transform: uppercase;
+          padding: 7px 40px;
+          color: $white;
+        }
+      }
 
       & .icon {
         display: flex;
@@ -28,21 +56,6 @@
 
       & .icon:hover {
         color: $light-gray;
-      }
-    }
-
-    & .create {
-      cursor: pointer;
-      & > * {
-        background:$light;
-      }
-    }
-
-    & .upload {
-      cursor: pointer;
-      border-radius: 3px;
-      & > * {
-        border-radius: 6px;
       }
     }
   }

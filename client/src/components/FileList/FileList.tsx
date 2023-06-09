@@ -35,10 +35,10 @@ export const FileList: React.FC<Props> = ({
       {view === 'list' && data.length > 0 && (
         <div className={cx('header')}>
           <div className={cx('sort-name')}>Name</div>
-          <div className={cx('sort-date')}>Date</div>
+          <div className={cx('sort-sharing')}>Sharing</div>
           <div className={cx('sort-size')}>Size</div>
-          <div className={cx('sort-delete')}>Delete</div>
-          <div className={cx('sort-download')}>Download</div>
+          <div className={cx('sort-date')}>Date/Time</div>
+          {/* <div className={cx('sort-download')}>Download</div> */}
         </div>
       )}
       {isLoading ? (

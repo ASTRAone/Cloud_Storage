@@ -1,25 +1,16 @@
 import React from 'react';
 
 import cn from 'classnames';
-import { ColorFolder } from '@utils/contants';
 
 import { Size } from '@src/utility/common';
 
 import styles from './Icon.module.scss';
-import { dictionary, IconTypes } from './IconDictionary';
+import { dictionaryFormat, IconFormatTypes } from './IconFormatDictionary';
 
 type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
-  type: IconTypes;
+  type: IconFormatTypes;
   size?: Size;
   color?: string;
-};
-
-export const dictionaryColorFolder: Record<string, ColorFolder> = {
-  music: ColorFolder.music,
-  documents: ColorFolder.documents,
-  films: ColorFolder.films,
-  images: ColorFolder.images,
-  bigfolder: ColorFolder.music,
 };
 
 const iconSizesDictionary: Record<Size, string> = {
@@ -32,8 +23,8 @@ const iconSizesDictionary: Record<Size, string> = {
   xxxl: styles.icon_xxxl,
 };
 
-export const Icon: React.FC<Props> = ({ type, size = 'lg', className, ...rest }) => {
-  const Icon = dictionary[type];
+export const IconFormat: React.FC<Props> = ({ type, size = 'lg', className, ...rest }) => {
+  const Icon = dictionaryFormat[type];
 
   if (!Icon) return null;
 

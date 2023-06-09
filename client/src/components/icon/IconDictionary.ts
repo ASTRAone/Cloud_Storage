@@ -41,6 +41,9 @@ import {
   TileIcon,
   EmptyIcon,
   SharedFolderIcon,
+  SmallFolderIcon,
+  ArrowBreadCrumbsIcon,
+  ThreeDotsIcon,
 } from '@assets/icons';
 
 const dictionary = {
@@ -79,6 +82,7 @@ const dictionary = {
   'big-tile': BigTileIcon,
   list: ListIcon,
   tile: TileIcon,
+  'small-folder': SmallFolderIcon,
   'question-mark': QuestionMark,
   error: ErrorIcon,
   success: SuccessIcon,
@@ -87,6 +91,8 @@ const dictionary = {
   like: LikeIcon,
   empty: EmptyIcon,
   'shared-folder': SharedFolderIcon,
+  'arrow-breadcrumbs': ArrowBreadCrumbsIcon,
+  'three-dots': ThreeDotsIcon,
 };
 
 type IconTypes = keyof typeof dictionary;

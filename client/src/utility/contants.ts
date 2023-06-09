@@ -13,7 +13,7 @@ export const HISTORY_ROUTE = '/history';
 export const NOT_FOUND_ROUTE = '404';
 
 export enum ColorFolder {
-  music = '#327BD1',
+  music = '#3F82B7',
   documents = '#2FE6C8',
   films = '#FDBC64',
   images = '#FF7F5C',

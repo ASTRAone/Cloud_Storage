@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const FileIcon: React.FC = () => {
+export const DefaultFileIcon: React.FC = () => {
   return (
     <svg
       width="34"

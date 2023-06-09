@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const BigFolderIcon: React.FC = () => {
+export const FolderIcon: React.FC = () => {
   return (
     <svg
       width="42"
