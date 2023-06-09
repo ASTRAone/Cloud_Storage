@@ -20,14 +20,7 @@ type Props = React.ComponentPropsWithRef<'div'> & {
   children: JSX.Element;
 };
 
-const overlayAnimation = {
-  enter: styles.overlayEnter,
-  enterActive: styles.overlayEnterActive,
-  exit: styles.overlayExit,
-  exitActive: styles.overlayExitActive,
-};
-
-const contentAnimation = {
+const CONTENT_ANIMATION = {
   enter: styles.contentEnter,
   enterActive: styles.contentEnterActive,
   exit: styles.contentExit,
@@ -82,7 +75,6 @@ const Modal: React.FC<Props> = ({
         timeout={ANIMATION_TIME}
         mountOnEnter
         unmountOnExit
-        classNames={overlayAnimation}
       >
         <div
           ref={overlayRef}
@@ -96,7 +88,7 @@ const Modal: React.FC<Props> = ({
         timeout={ANIMATION_TIME}
         mountOnEnter
         unmountOnExit
-        classNames={contentAnimation}
+        classNames={CONTENT_ANIMATION}
       >
         <div
           ref={contentRef}
