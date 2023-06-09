@@ -19,6 +19,7 @@ export const dictionaryColorFolder: Record<string, ColorFolder> = {
   documents: ColorFolder.documents,
   films: ColorFolder.films,
   images: ColorFolder.images,
+  bigfolder: ColorFolder.music,
 };
 
 const iconSizesDictionary: Record<Size, string> = {

@@ -27,6 +27,11 @@
   justify-content: center;
 }
 
+.file-name {
+  @include paragraph-16();
+  color: #004B75;
+}
+
 .file-sharing {
   @include paragraph-14();
   color: #004B75;
@@ -52,6 +57,7 @@
   justify-content: center;
 }
 
+
 .context-menu {
   grid-column-start: 8;
   display: flex;
@@ -62,45 +68,6 @@
     align-items: center;
     justify-content: center;
   }
-  // & .block-dots {
-  //   padding: 0 10px;
-  //   position: relative;
-  //   left: 10px;
-  //   & .dots::before {
-  //     content:'';
-  //     height: 4px;
-  //     width: 4px;
-  //     background-color: $dark-blue-100;
-  //     border-radius: 50%;
-  //     display: inline-block;
-  //     margin: 15px;
-  //     position: absolute;
-  //     left: -15px;
-  //     top: -22px;
-  //   }
-    
-  //   & .dots::after {
-  //     content:'';
-  //     height: 4px;
-  //     width: 4px;
-  //     background-color: $dark-blue-100;
-  //     border-radius: 50%;
-  //     display: inline-block;
-  //     margin: 15px;
-  //     position: absolute;
-  //     left: -15px;
-  //     top: -8px;
-  //   }
-  //   & .dots {
-  //     margin-top: 15px;
-  //     height: 4px;
-  //     width: 4px;
-  //     background-color: $dark-blue-100;
-  //     border-radius: 50%;
-  //     display: inline-block;
-  //     position: relative;
-  //   }
-  // }
 }
 
 .file-download,
@@ -151,12 +118,21 @@
   justify-content: center;
   top: 10px;
   left: 0px;
-  width: 160px;
-  height: 130px;
-  border-radius: 12px;
+  width: 100px;
+  height: 80px;
   box-shadow: 2px 2px 20px 1px rgba(0, 0, 55, .2);
     & .dropdown-content .btn {
       background: $white;
+      padding: 10px;
+      border: none;
+      border-bottom: 1px solid rgb(240, 240, 240);
+    }
+    & .dropdown-content .btn:hover {
+      background: $primary-50;
+      border-radius: 0;
+      & > * {
+        background: $primary-50;
+      }
     }
     & .dropdown-content .btn > * {
       @include paragraph-16();
@@ -167,6 +143,7 @@
       cursor: pointer;
       color: $dark-blue-100;
       border: none;
+      padding: 2px 0;
     }
     & .dropdown-content {
       background-color: $white;
@@ -175,19 +152,12 @@
     }
     & .dropdown-content .item {
       cursor: pointer;
-      margin-top: 5px;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 0px 8px;
       cursor: pointer;
       background-color: $white;
     }
-    & .dropdown-content .item:hover .btn > * {
-      background: $light-blue-40;
-      border-radius: 4px;
-    }
-
     & .dropdown-content .item:hover > .container > * {
       color: $light-blue-40;
       background: $light-blue-40;

@@ -109,12 +109,21 @@
   justify-content: center;
   top: 10px;
   left: 0px;
-  width: 185px;
-  height: 170px;
-  border-radius: 12px;
+  width: 100px;
+  height: 80px;
   box-shadow: 2px 2px 20px 1px rgba(0, 0, 55, .2);
     & .dropdown-content .btn {
       background: $white;
+      padding: 10px;
+      border: none;
+      border-bottom: 1px solid rgb(240, 240, 240);
+    }
+    & .dropdown-content .btn:hover {
+      background: $primary-50;
+      border-radius: 0;
+      & > * {
+        background: $primary-50;
+      }
     }
     & .dropdown-content .btn > * {
       @include paragraph-16();
@@ -124,6 +133,8 @@
       text-align: center;
       cursor: pointer;
       color: $dark-blue-100;
+      border: none;
+      padding: 2px 0;
     }
     & .dropdown-content {
       background-color: $white;
@@ -132,22 +143,15 @@
     }
     & .dropdown-content .item {
       cursor: pointer;
-      margin-top: 5px;
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 1px solid transparent;
-      padding: 0px 8px;
       cursor: pointer;
       background-color: $white;
     }
-    & .dropdown-content .item:hover .btn > * {
-      background: $light-blue-40;
-      border-radius: 4px;
-    }
-
     & .dropdown-content .item:hover > .container > * {
       color: $light-blue-40;
       background: $light-blue-40;
+      border: none;
     }
   }

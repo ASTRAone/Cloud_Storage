@@ -16,6 +16,7 @@ import { Icon } from '@components/icon';
 import { TextShorter } from '@components/TextShorter';
 // import { downloadFile, deleteFile, getStatusDelete } from '@store/file/data';
 import { MenuItem } from '@components/MenuIteim';
+import { dictionaryColorFolder } from '@components/icon/Icon';
 
 import { deleteFile, getStatusDelete } from '@store/file/data';
 import { useAppDispatch } from '@store/hooks';
@@ -42,12 +43,19 @@ export const File: React.FC<Props> = ({
   const { statusDelete } = useAppSelector(getStatusDelete);
   const { name, size, type, date } = file;
   const { Dialog, closePopup } = useDialog();
+  const currentType = type === 'dir' ? 'bigfolder' : 'file';
+  const color = dictionaryColorFolder[currentType];
 
   type MenuItemType = {
     name: string;
   };
 
-  const MENU: Array<MenuItemType> = [{ name: 'Rename' }, { name: 'Download' }, { name: 'Delete' }];
+  const MENU: Array<MenuItemType> = [
+    { name: 'Rename' },
+    { name: 'Download' },
+    { name: 'Favorite' },
+    { name: 'Delete' },
+  ];
 
   const subitemsNode = MENU.map(({ name }, index) => (
     <div
@@ -63,7 +71,7 @@ export const File: React.FC<Props> = ({
   ));
 
   // TODO при удалении файла или папки дизейблить кнопку удаления
-  // TODO переписать компонент: разделить его на 2 вида папок
+  // TODO переписать компонент: разделить его на 3 вида папок
 
   // const openDeletePopup = async (e: React.MouseEvent<HTMLDivElement>) => {
   //   e.stopPropagation();
@@ -92,9 +100,10 @@ export const File: React.FC<Props> = ({
         onClick={onClick}
       >
         <Icon
-          type={type === 'dir' ? 'bigfolder' : 'file'}
+          type={currentType}
           className={cx('icon')}
           size="xl"
+          style={{ color }}
         />
         <TextShorter
           tooltip
@@ -114,7 +123,7 @@ export const File: React.FC<Props> = ({
                 className={cx('horizontal-dots')}
               />
             }
-            position="left center"
+            position="center center"
             on="click"
           >
             <div className={cx('dropdown-context')}>

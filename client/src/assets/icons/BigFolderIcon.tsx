@@ -6,7 +6,7 @@ export const BigFolderIcon: React.FC = () => {
       width="42"
       height="36"
       viewBox="0 0 42 36"
-      fill="currentColor"
+      fill="black"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
