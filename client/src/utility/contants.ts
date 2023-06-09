@@ -50,3 +50,5 @@ export const FOLDERS_VIEWED: FoldersViewed[] = [
 ];
 
 export const DEFAULT_VIEW_FOLDERS = 'list';
+
+export const ANIMATION_TIME = 300;
