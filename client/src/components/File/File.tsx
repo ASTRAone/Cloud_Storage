@@ -17,6 +17,7 @@ import { TextShorter } from '@components/TextShorter';
 // import { downloadFile, deleteFile, getStatusDelete } from '@store/file/data';
 import { MenuItem } from '@components/MenuIteim';
 import { dictionaryColorFolder } from '@components/icon/Icon';
+import { IconFormat } from '@components/icon/IconFormat';
 
 import { deleteFile, getStatusDelete } from '@store/file/data';
 import { useAppDispatch } from '@store/hooks';
@@ -99,8 +100,8 @@ export const File: React.FC<Props> = ({
         className={cx(view === 'list' ? 'container' : 'container-plate')}
         onClick={onClick}
       >
-        <Icon
-          type={currentType}
+        <IconFormat
+          type={type == 'dir' ? 'dir' : 'pdf'}
           className={cx('icon')}
           size="xl"
           style={{ color }}

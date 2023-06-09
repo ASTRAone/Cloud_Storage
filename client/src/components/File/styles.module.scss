@@ -84,13 +84,16 @@
 }
 
 .container-plate {
-  width: 150px;
+  width: 110px;
   max-height: 150px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
+  margin-bottom: 25px;
+  padding: 7px 0;
+
 
   & .icon {
     color: $light-sweet-100;
@@ -101,6 +104,20 @@
       max-width: 150px;
     }
   }
+
+  & .file-date, .file-delete, .file-size, .file-sharing, .context-menu {
+    display: none;
+  }
+
+  & .file-name {
+    width: 95%;
+    text-align: center;
+  }
+}
+
+.container-plate:hover {
+  background: rgb(224, 242, 248);
+  border-radius: 10px;
 }
 
 .icon-like {
