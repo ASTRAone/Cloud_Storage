@@ -1,17 +1,40 @@
-  .container {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 50px;
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.container {
+  min-height: 154px;
+
+  & .title {
+    @include text();
+    @include paragraph-18();
+    color: $dark-gray-100;
+    padding: 15px 0 15px 20px;
+  }
+
+  & .content {
+    width: calc(100% - 30px);
+    padding-left: 15px;
 
     @media (max-width: 1600px) {
-      & { grid-template-columns: repeat(5, 1fr); }
+      & {
+        grid-template-columns: repeat(5, 1fr);
+      }
     }
     @media (max-width: 1500px) {
-      & { grid-template-columns: repeat(4, 1fr); }
+      & {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
     @media (max-width: 1300px) {
-      & { grid-template-columns: repeat(3, 1fr); }
+      & {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
   }
+
+  & .folder-item {
+    width: fit-content !important;
+    height: fit-content !important;
+  }
+}

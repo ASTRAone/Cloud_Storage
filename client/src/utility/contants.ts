@@ -1,3 +1,5 @@
+import { PropsFolders } from '@components/FoldersBrightRaw/FoldersBrightRaw';
+
 import { FoldersViewed } from './common';
 
 export const LOGIN_ROUTE = '/login';
@@ -52,3 +54,12 @@ export const FOLDERS_VIEWED: FoldersViewed[] = [
 export const DEFAULT_VIEW_FOLDERS = 'list';
 
 export const ANIMATION_TIME = 300;
+
+export const FOLDERS: Array<PropsFolders> = [
+  { key: 1, type: 'music', title: 'Music', files: '122', gb: '54' },
+  { key: 2, type: 'images', title: 'Images', files: '41', gb: '622' },
+  { key: 3, type: 'films', title: 'Films', files: '41', gb: '2' },
+  { key: 4, type: 'documents', title: 'Documents', files: '121', gb: '252' },
+  { key: 5, type: 'music', title: 'Music', files: '5', gb: '232' },
+  { key: 6, type: 'films', title: 'Films', files: '15', gb: '532' },
+];

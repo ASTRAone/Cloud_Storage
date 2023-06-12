@@ -29,6 +29,8 @@
     "react-app-rewired": "^2.1.11",
     "react-app-rewired-eslint": "^0.2.4",
     "react-dom": "^18.2.0",
+    "react-gesture-responder": "^2.1.0",
+    "react-grid-dnd": "^2.1.2",
     "react-hook-form": "^7.24.2",
     "react-hot-toast": "^2.4.0",
     "react-i18next": "^12.2.0",

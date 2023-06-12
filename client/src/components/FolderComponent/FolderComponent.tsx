@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { useStyles } from '@hooks/useStyles';
 
@@ -27,7 +27,7 @@ const MENU: Array<MenuItemType> = [
   { name: 'Delete' },
 ];
 
-export const FolderComponent: React.FC<Props> = ({ type, title, files, gb }) => {
+const FolderComponent: React.FC<Props> = ({ type, title, files, gb }) => {
   const cx = useStyles(styles);
   const color = dictionaryColorFolder[type];
 
@@ -77,3 +77,5 @@ export const FolderComponent: React.FC<Props> = ({ type, title, files, gb }) => 
     </div>
   );
 };
+
+export default memo(FolderComponent);
