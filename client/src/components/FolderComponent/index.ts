@@ -1,1 +1,1 @@
-export { FolderComponent } from './FolderComponent';
+export { default as FolderComponent } from './FolderComponent';
