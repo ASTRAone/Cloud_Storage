@@ -19,6 +19,7 @@ export type IconObject = {
 };
 
 export type FolderView = 'list' | 'tile' | 'big-tile';
+export type Language = 'en-US' | 'ru-RU';
 
 export interface BreadCrumbStack {
   dirId: string;

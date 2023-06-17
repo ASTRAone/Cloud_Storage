@@ -1,7 +1,26 @@
-.container-child-buttonlink {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 0 40px;
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.menuItem {
+  // padding: 1rem 5rem;
+  cursor: pointer;
+  // color: colors.$dark-gray-150;
+
+  &.danger {
+    // color: colors.$red-70;
+  }
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &:hover {
+    // background-color: colors.$light-gray-10;
+  }
+
+  // & .active {
+  //   background-color: red($color: #000000)
+  // }
 }

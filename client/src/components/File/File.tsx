@@ -63,11 +63,11 @@ export const File: React.FC<Props> = ({
       key={index}
       className={cx('item')}
     >
-      <MenuItem
+      {/* <MenuItem
         button
         title={name}
         className={cx('btn')}
-      />
+      /> */}
     </div>
   ));
 

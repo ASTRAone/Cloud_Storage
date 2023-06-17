@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { useAuth } from '@hooks/useAuth';
 import { useInitialization } from '@hooks/useInitialization';
@@ -7,17 +7,20 @@ import { useInitialization } from '@hooks/useInitialization';
 import { AppRouter } from '@components/AppRouter';
 import { Toast } from '@components/Toast/Toast';
 
+import { useAppSelector } from '@store/hooks';
+import { getSelectedLanguage } from '@store/settings/data';
+
 export const App: React.FC = () => {
-  const location = useLocation();
+  const { i18n } = useTranslation();
+  const language = useAppSelector(getSelectedLanguage);
+  console.log(language);
+
   useInitialization();
   useAuth();
 
   useEffect(() => {
-    const body = document.body;
-    if (location.pathname === '/') {
-      body.style.overflowY = 'auto';
-    } else body.style.overflowY = 'hidden';
-  }, [location]);
+    i18n.changeLanguage(language);
+  }, [language]);
 
   return (
     <>

@@ -31,7 +31,7 @@
     background: $white;
 
     &.error {
-      border: 1px solid $error-100;
+      border-color: $error-100!important;
     }
     // TODO сделать для всех браузеров
     &.dark {

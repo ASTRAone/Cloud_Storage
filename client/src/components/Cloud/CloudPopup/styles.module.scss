@@ -1,0 +1,41 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.setting {
+  & .icon {
+    color: $primary-500;
+    cursor: pointer;
+  }
+}
+
+.content {
+  margin-top: 10px;
+  background: $white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+.contentMenu {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 5px;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #f3fcfd;
+  }
+
+  & .iconMenu {
+    color: $primary-500;
+  }
+
+  & .menuItemText {
+    @include text();
+    @include paragraph-12();
+    color: $primary-500;
+    text-transform: uppercase;
+  }
+}

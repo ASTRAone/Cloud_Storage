@@ -32,7 +32,7 @@ export const Input: React.FC<Props> = ({
   className,
   classNameLabel,
   classNameContent,
-  variant,
+  variant = 'blue',
   isUpperCase = true,
   full = false,
   errorText,

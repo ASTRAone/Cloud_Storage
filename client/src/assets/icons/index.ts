@@ -43,3 +43,4 @@ export { EmptyIcon } from './EmptyIcon';
 export { SharedFolderIcon } from './SharedFolderIcon';
 export { ArrowBreadCrumbsIcon } from './ArrowBreadCrumbsIcon';
 export { ThreeDotsIcon } from './ThreeDotsIcon';
+export { PencilIcon } from './PencilIcon';

@@ -36,11 +36,11 @@ const FolderComponent: React.FC<Props> = ({ type, title, files, gb }) => {
       key={index}
       className={cx('item')}
     >
-      <MenuItem
+      {/* <MenuItem
         button
         title={name}
         className={cx('btn')}
-      />
+      /> */}
     </div>
   ));
 

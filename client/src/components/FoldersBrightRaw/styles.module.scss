@@ -5,12 +5,20 @@
 .container {
   min-height: 154px;
 
-  & .title {
-    @include text();
-    @include paragraph-18();
-    color: $dark-gray-100;
-    padding: 15px 0 15px 20px;
+  & .top-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & .title {
+      @include text();
+      @include paragraph-18();
+      color: $dark-gray-100;
+      padding: 15px 0 15px 20px;
+    }
   }
+
+  
 
   & .content {
     width: calc(100% - 30px);

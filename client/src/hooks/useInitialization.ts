@@ -1,24 +1,14 @@
-// import { useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
-
-// import { LOGIN_ROUTE } from '@utils/contants';
-// import { AUTH_HEADER } from '@utils/headers';
-
-// import { StorageService } from '@services/StorageService';
-
-// const storageService = StorageService.getInstance();
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const useInitialization = () => {
-  // const navigate = useNavigate();
-  // const activeLocationTab = storageService.getItem('activeTabLC');
-  // useEffect(() => {
-  //   if (activeLocationTab) {
-  //     navigate(`/${activeLocationTab}`);
-  //   } else {
-  //     navigate(LOGIN_ROUTE);
-  //     storageService.removeItem(AUTH_HEADER);
-  //   }
-  // }, []);
+  const location = useLocation();
+  useEffect(() => {
+    const body = document.body;
+    if (location.pathname === '/') {
+      body.style.overflowY = 'auto';
+    } else body.style.overflowY = 'hidden';
+  }, [location]);
 };
 
 export { useInitialization };
