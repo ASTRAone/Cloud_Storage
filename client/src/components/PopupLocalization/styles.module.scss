@@ -14,21 +14,34 @@
     border-radius: 5px;
   }
 }
-.dropdown-language {
-  position: absolute;
+
+.dropdownLanguage {
+  margin-top: 16px;
   background-color: $primary-800;
-  display: flex;
-  justify-content: center;
-  top: 27px;
-  left: -50px;
-  border-radius: 0 0 15px 15px;
-  & .dropdown-content-language {
-    padding: 8px 12px;
-    & .btn {
-      min-width: auto;
-      &:hover {
-        background-color: #327bd1;
-      }
+  padding: 8px 12px;
+  border-radius: 0px 0px 7px 7px;
+
+  & .contentMenu {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    padding: 8px 5px;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+    min-width: 118px;
+
+    &.active {
+      background-color: $light-sweet-100;
+    }
+
+    &:hover {
+      background-color: $light-sweet-100;
+    }
+
+    & .menuItemText {
+      @include text();
+      @include paragraph-14();
+      color: $white;
     }
   }
 }

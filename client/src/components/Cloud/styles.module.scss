@@ -27,6 +27,12 @@
     }
   }
 
+  & .top-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   & .info-panel {
     margin-top: 66px;
     display: flex;

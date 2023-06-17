@@ -1,0 +1,23 @@
+@import '@assets/styles/variables/colors';
+@import '@assets/styles/variables/text-style';
+@import '@assets/styles/variables/reset';
+
+.modal {
+  & .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 17px;
+
+    & .title {
+      @include text();
+      @include paragraph-19();
+      color: $primary-800;
+    }
+
+    & .icon {
+      margin-right: 17px;
+      color: $light-sweet-100;
+    }
+  }
+}
